@@ -7,6 +7,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
+    
 //created new Service
     func observeMedicines() {
         medicineRepository.fetchMedicines()

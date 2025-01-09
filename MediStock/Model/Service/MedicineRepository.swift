@@ -11,27 +11,22 @@ import FirebaseFirestore
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
-    @Published var medicines: [Medicine]
-    @Published var aisles: [String]
     
-    init(medicines: [Medicine], aisles: [String]) {
-        self.medicines = medicines
-        self.aisles = aisles
-    }
-    
-    func fetchMedicines() {
+    func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-                self.medicines = querySnapshot?.documents.compactMap { document in
+                let medicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
                 } ?? []
+                completion(medicines)
             }
         }
     }
     
-    func fetchAisles() {
+    func fetchAisles(aisles : [String]) {
+        var aisles = aisles
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -39,7 +34,7 @@ class MedicineRepository: ObservableObject {
                 let allMedicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
                 } ?? []
-                self.aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+              aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
             }
         }
     }
