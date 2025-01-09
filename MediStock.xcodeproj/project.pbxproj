@@ -95,6 +95,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23F6C9962D2FBCF700CD0A42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +125,7 @@
 		53E0D8952C06084700DE1134 /* MediStock */ = {
 			isa = PBXGroup;
 			children = (
+				23F6C9962D2FBCF700CD0A42 /* Model */,
 				53E0D8E32C0660FD00DE1134 /* GoogleService-Info.plist */,
 				53E0D8962C06084700DE1134 /* MediStockApp.swift */,
 				53E0D8982C06084700DE1134 /* ContentView.swift */,
@@ -254,7 +262,6 @@
 			);
 			mainGroup = 53E0D88A2C06084700DE1134;
 			packageReferences = (
-				23F6C9912D2FB91F00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 53E0D8942C06084700DE1134 /* Products */;
 			projectDirPath = "";
@@ -641,17 +648,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		23F6C9912D2FB91F00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 53E0D88B2C06084700DE1134 /* Project object */;
 }
