@@ -9,5 +9,6 @@ import Foundation
 import Firebase
 
 class MedicineRepository: ObservableObject {
-    
+    private var db = Firestore.firestore()
+
 }
