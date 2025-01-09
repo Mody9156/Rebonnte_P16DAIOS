@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import Firebase
+
+class MedicineRepository: ObservableObject {
+    
+}
