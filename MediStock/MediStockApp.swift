@@ -7,24 +7,6 @@
 
 import SwiftUI
 
-import FirebaseCore
-content_copy
-
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    
-    func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
-        FirebaseApp.configure()
-        content_copy
-        
-        return true
-        
-    }
-    
-}
-
-
 @main
 struct MediStockApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
