@@ -124,9 +124,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		237E0A852D3008C800EEC056 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		23F6C9962D2FBCF700CD0A42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				237E0A852D3008C800EEC056 /* Service */,
 				53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */,
 				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 				53E0D8DB2C06099C00DE1134 /* Medicine.swift */,
