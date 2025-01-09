@@ -11,8 +11,14 @@ import FirebaseFirestore
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
-    @Published var medicines: [Medicine] = []
-
+    @Published var medicines: [Medicine]
+    @Published var aisles: [String]
+    
+    init(medicines: [Medicine], aisles: [String]) {
+        self.medicines = medicines
+        self.aisles = aisles
+    }
+    
     func fetchMedicines() {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
