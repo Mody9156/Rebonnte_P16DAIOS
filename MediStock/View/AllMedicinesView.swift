@@ -48,7 +48,7 @@ struct AllMedicinesView: View {
             }
         }
         .onAppear {
-            viewModel.fetchMedicines()
+            viewModel.observeMedicines()
         }
     }
     

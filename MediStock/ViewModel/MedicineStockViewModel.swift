@@ -7,7 +7,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     private var db = Firestore.firestore()
 //created new Service
-    func fetchMedicines() {
+    func observeMedicines() {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
