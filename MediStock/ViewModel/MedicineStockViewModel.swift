@@ -22,14 +22,7 @@ class MedicineStockViewModel: ObservableObject {
     }
     //created new Service
     func addRandomMedicine(user: String) {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
-        } catch let error {
-            print("Error adding document: \(error)")
-        }
+        medicineRepository.setData(user: user)
     }
     //created new Service
     func deleteMedicines(at offsets: IndexSet) {
