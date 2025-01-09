@@ -40,7 +40,24 @@ class MedicineRepository: ObservableObject {
         }
     }
 
-    func setData(){
-        
+    func setData(user: String){
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
+        do {
+            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+            
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+        } catch let error {
+            print("Error adding document: \(error)")
+        }
+    }
+    
+    
+    private func addHistory(action: String, user: String, medicineId: String, details: String) {
+        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
+        do {
+            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
+        } catch let error {
+            print("Error adding history: \(error)")
+        }
     }
 }
