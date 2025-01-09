@@ -18,8 +18,8 @@ class AuthViewModel : ObservableObject {
         session.signIn(email: email, password: password)
     }
     
-    func createdNewUser(){
-        
+    func createdNewUser(email: String, password: String){
+        session.signUp(email: email, password: password)
     }
     
     
