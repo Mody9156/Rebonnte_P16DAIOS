@@ -20,7 +20,7 @@ struct AisleListView: View {
             })
         }
         .onAppear {
-            viewModel.fetchAisles()
+            viewModel.observeAisles()
         }
     }
 }
