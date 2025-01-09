@@ -13,5 +13,11 @@ class AuthViewModel : ObservableObject {
     init(session : SessionStore = SessionStore()){
         self.session = session
     }
-
+    
+    func login(email:String, password:String){
+        
+    }
+    
+    
+    
 }
