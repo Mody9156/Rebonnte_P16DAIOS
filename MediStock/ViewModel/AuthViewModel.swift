@@ -8,5 +8,10 @@
 import Foundation
 
 class AuthViewModel : ObservableObject {
+    @Published var session: SessionStore
     
+    init(session : SessionStore = SessionStore()){
+        self.session = session
+    }
+
 }
