@@ -51,7 +51,4 @@ class SessionStore: ObservableObject {
     }
 }
 
-struct User {
-    var uid: String
-    var email: String?
-}
+
