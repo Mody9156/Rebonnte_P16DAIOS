@@ -8,33 +8,24 @@ class MedicineStockViewModel: ObservableObject {
     private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
     
-    //created new Service
     func observeMedicines() {
         medicineRepository.fetchMedicines{ medicines in
             self.medicines = medicines
         }
     }
-    //created new Service
+    
     func observeAisles() {
         medicineRepository.fetchAisles { aisles in
             self.aisles = aisles
         }
     }
-    //created new Service
+
     func addRandomMedicine(user: String) {
         medicineRepository.setData(user: user)
     }
-    //created new Service
+    
     func deleteMedicines(at offsets: IndexSet) {
-        offsets.map { medicines[$0] }.forEach { medicine in
-            if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    }
-                }
-            }
-        }
+        medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
     func increaseStock(_ medicine: Medicine, user: String) {
@@ -44,7 +35,7 @@ class MedicineStockViewModel: ObservableObject {
     func decreaseStock(_ medicine: Medicine, user: String) {
         updateStock(medicine, by: -1, user: user)
     }
-    //created new Service
+    
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
         guard let id = medicine.id else { return }
         let newStock = medicine.stock + amount
