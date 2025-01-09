@@ -69,6 +69,7 @@ extension MedicineDetailView {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
                 .frame(width: 100)
+                
                 Button(action: {
                     viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
                 }) {

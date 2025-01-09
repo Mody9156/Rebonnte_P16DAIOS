@@ -50,5 +50,3 @@ class SessionStore: ObservableObject {
         }
     }
 }
-
-
