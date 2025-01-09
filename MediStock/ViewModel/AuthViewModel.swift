@@ -15,7 +15,7 @@ class AuthViewModel : ObservableObject {
     }
     
     func login(email:String, password:String){
-        
+        session.signIn(email: email, password: password)
     }
     
     
