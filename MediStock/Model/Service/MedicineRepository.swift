@@ -25,8 +25,7 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func fetchAisles(aisles : [String]) {
-        var aisles = aisles
+    func fetchAisles(completion:@escaping( [String])->Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -34,7 +33,8 @@ class MedicineRepository: ObservableObject {
                 let allMedicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
                 } ?? []
-              aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+                completion(aisles)
             }
         }
     }
