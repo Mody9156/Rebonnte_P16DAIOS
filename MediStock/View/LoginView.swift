@@ -15,12 +15,12 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Button(action: {
-                session.signIn(email: email, password: password)
+                authViewModel.login(email: email, password: password)
             }) {
                 Text("Login")
             }
             Button(action: {
-                session.signUp(email: email, password: password)
+                authViewModel.createdNewUser(email: email, password: password)
             }) {
                 Text("Sign Up")
             }
