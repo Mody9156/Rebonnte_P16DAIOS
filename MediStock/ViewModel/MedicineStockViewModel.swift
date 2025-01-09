@@ -6,6 +6,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     private var db = Firestore.firestore()
+    @Published var medicineRepository = MedicineRepository()
 //created new Service
     func observeMedicines() {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
