@@ -18,6 +18,7 @@
 		237E0A802D2FFE4600EEC056 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A7F2D2FFE4600EEC056 /* FirebaseFirestore */; };
 		237E0A822D2FFE4600EEC056 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A812D2FFE4600EEC056 /* FirebaseFirestoreCombine-Community */; };
 		237E0A842D2FFE4600EEC056 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A832D2FFE4600EEC056 /* FirebaseFirestoreSwift */; };
+		237E0A872D300A4F00EEC056 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A862D300A4F00EEC056 /* User.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* ContentView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		53E0D8932C06084700DE1134 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		237E0A852D3008C800EEC056 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -136,8 +139,8 @@
 			children = (
 				237E0A852D3008C800EEC056 /* Service */,
 				53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */,
-				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 				53E0D8DB2C06099C00DE1134 /* Medicine.swift */,
+				237E0A862D300A4F00EEC056 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				53E0D8992C06084700DE1134 /* ContentView.swift in Sources */,
+				237E0A872D300A4F00EEC056 /* User.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
 				53E0D8DA2C06098F00DE1134 /* MedicineListView.swift in Sources */,
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
