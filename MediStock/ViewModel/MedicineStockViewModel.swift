@@ -8,26 +8,19 @@ class MedicineStockViewModel: ObservableObject {
     private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
     
-//created new Service
+    //created new Service
     func observeMedicines() {
         medicineRepository.fetchMedicines{ medicines in
             self.medicines = medicines
         }
     }
-//created new Service
+    //created new Service
     func observeAisles() {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let allMedicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                self.aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
-            }
+        medicineRepository.fetchAisles { aisles in
+            self.aisles = aisles
         }
     }
-//created new Service
+    //created new Service
     func addRandomMedicine(user: String) {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
@@ -37,7 +30,7 @@ class MedicineStockViewModel: ObservableObject {
             print("Error adding document: \(error)")
         }
     }
-//created new Service
+    //created new Service
     func deleteMedicines(at offsets: IndexSet) {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
@@ -49,15 +42,15 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-
+    
     func increaseStock(_ medicine: Medicine, user: String) {
         updateStock(medicine, by: 1, user: user)
     }
-
+    
     func decreaseStock(_ medicine: Medicine, user: String) {
         updateStock(medicine, by: -1, user: user)
     }
-//created new Service
+    //created new Service
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
         guard let id = medicine.id else { return }
         let newStock = medicine.stock + amount
@@ -74,7 +67,7 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-//created new Service
+    //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
         guard let id = medicine.id else { return }
         do {
@@ -84,7 +77,7 @@ class MedicineStockViewModel: ObservableObject {
             print("Error updating document: \(error)")
         }
     }
-//created new Service
+    //created new Service
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
@@ -93,7 +86,7 @@ class MedicineStockViewModel: ObservableObject {
             print("Error adding history: \(error)")
         }
     }
-//created new Service
+    //created new Service
     func fetchHistory(for medicine: Medicine) {
         guard let medicineId = medicine.id else { return }
         db.collection("history").whereField("medicineId", isEqualTo: medicineId).addSnapshotListener { (querySnapshot, error) in
