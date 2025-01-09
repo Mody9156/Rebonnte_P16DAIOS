@@ -109,6 +109,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		23F6C9982D2FBD3000CD0A42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +139,7 @@
 		53E0D8952C06084700DE1134 /* MediStock */ = {
 			isa = PBXGroup;
 			children = (
+				23F6C9982D2FBD3000CD0A42 /* View */,
 				23F6C9972D2FBD1300CD0A42 /* ViewModel */,
 				23F6C9962D2FBCF700CD0A42 /* Model */,
 				53E0D8E32C0660FD00DE1134 /* GoogleService-Info.plist */,
