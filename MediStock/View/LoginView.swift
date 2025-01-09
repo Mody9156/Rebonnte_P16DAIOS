@@ -4,7 +4,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var session: SessionStore
-
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some View {
         VStack {
             TextField("Email", text: $email)
