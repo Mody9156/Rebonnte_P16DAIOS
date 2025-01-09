@@ -12,6 +12,7 @@ import FirebaseFirestore
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
     
+    
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -39,4 +40,7 @@ class MedicineRepository: ObservableObject {
         }
     }
 
+    func setData(){
+        
+    }
 }
