@@ -9,15 +9,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var medicineRepository = MedicineRepository()
 //created new Service
     func observeMedicines() {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                self.medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-            }
-        }
+        medicineRepository.fetchMedicines()
     }
 //created new Service
     func fetchAisles() {
