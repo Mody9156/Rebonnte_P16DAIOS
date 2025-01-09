@@ -10,7 +10,9 @@ class MedicineStockViewModel: ObservableObject {
     
 //created new Service
     func observeMedicines() {
-        medicineRepository.fetchMedicines()
+        medicineRepository.fetchMedicines{ medicines in
+            self.medicines = medicines
+        }
     }
 //created new Service
     func observeAisles() {
