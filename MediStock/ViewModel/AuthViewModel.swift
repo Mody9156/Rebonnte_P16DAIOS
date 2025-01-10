@@ -25,5 +25,8 @@ class AuthViewModel : ObservableObject {
         self.messageError = session.messageError
     }
     
+    func changeStatus(){
+        session.listen()
+    }
     
 }
