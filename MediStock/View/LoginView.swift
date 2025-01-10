@@ -27,7 +27,10 @@ struct LoginView: View {
             Text(authViewModel.messageError)
                 .foregroundColor(.red)
                 .font(.title2)
-        }
+        }.onAppear
+        {
+            authViewModel.changeStatus()
+    }
         .padding()
     }
 }

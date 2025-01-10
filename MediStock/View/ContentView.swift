@@ -5,8 +5,9 @@ struct ContentView: View {
     @StateObject var authViewModel = AuthViewModel()
     var body: some View {
         VStack {
+        
             Group {
-                if authViewModel.session != nil {
+                if authViewModel.session.session != nil {
                     MainTabView()
                 } else {
                     LoginView()
@@ -14,8 +15,10 @@ struct ContentView: View {
             }
             .onAppear
             {
-                authViewModel.changeStatus()
-        }
+                Task{
+                    await  authViewModel.changeStatus()
+                }
+            }
         }
     }
 }
