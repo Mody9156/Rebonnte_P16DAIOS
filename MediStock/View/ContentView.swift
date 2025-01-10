@@ -2,18 +2,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var session: SessionStore
-
+    @StateObject var authViewModel = AuthViewModel({})
     var body: some View {
-        Group {
-            if session.session != nil {
-                MainTabView()
-            } else {
-                LoginView()
+        VStack {
+            Group {
+                if  authViewModel.isAuthenticated {
+                    MainTabView()
+                } else {
+                    LoginView()
+                }
             }
-        }
-        .onAppear {
-            session.listen()
-        }
+         }
     }
 }
 

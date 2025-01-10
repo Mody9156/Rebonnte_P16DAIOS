@@ -1,36 +1,59 @@
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class SessionStore: ObservableObject {
     @Published var session: User?
+    @Published var messageError = ""
     var handle: AuthStateDidChangeListenerHandle?
 
-    func listen() {
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let user = user {
-                self.session = User(uid: user.uid, email: user.email)
-            } else {
-                self.session = nil
-            }
-        }
-    }
+//    func listen(completion:@escaping(User?) -> Void) {
+//        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if let user = user {
+//                self.session = User(uid: user.uid, email: user.email)
+//                self.messageError = ""
+//                print("\(String(describing: self.session))")
+//                completion(self.session)
+//            } else {
+//                self.session = nil
+//                self.messageError = "Session invalid"
+//            }
+//        }
+//    }
 
-    func signUp(email: String, password: String) {
+    func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
+                self.messageError = "Impossible de créer un compte. Vérifiez vos informations et réessayez."
+                print("\(String(describing: self.session))")
                 print("Error creating user: \(error.localizedDescription) \(error)")
-            } else {
-                self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
+                completion(.failure(error))
+            } else if let user = result?.user {
+                let customUser = User(uid: user.uid , email: user.email)
+                self.messageError = ""
+                completion(.success(customUser))
+            }else {
+                let unknownError = NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown error occurred during sign-up"])
+                completion(.failure(unknownError))
             }
         }
     }
 
-    func signIn(email: String, password: String) {
+    func signIn(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
+                self.messageError = "Error signing in: \(error.localizedDescription)"
                 print("Error signing in: \(error.localizedDescription)")
-            } else {
-                self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
+                print("\(String(describing: self.session))")
+                completion(.failure(error))
+            } else if let user = result?.user {
+                let customUser = User(uid: user.uid, email: user.email )
+                self.messageError = ""
+                completion(.success(customUser))
+            }else {
+                let unknownError = NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown error occurred during sign-up"])
+                completion(.failure(unknownError))
             }
         }
     }
@@ -40,7 +63,7 @@ class SessionStore: ObservableObject {
             try Auth.auth().signOut()
             self.session = nil
         } catch let error {
-            print("Error signing out: \(error.localizedDescription)")
+            self.messageError = "Error signing out: \(error.localizedDescription)"
         }
     }
 
