@@ -21,15 +21,22 @@ class SessionStore: ObservableObject {
         }
     }
 
-    func signUp(email: String, password: String){
+    func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 self.messageError = "Error creating user: \(error.localizedDescription) \(error)"
                 print("\(String(describing: self.session))")
                 print("Error creating user: \(error.localizedDescription) \(error)")
-            } else {
-                self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
+                completion(.failure(error))
+            } else if let user = result?.user {
+                let customUser = User(uid: user.uid , email: user.email)
+                self.session = customUser
                 self.messageError = ""
+                completion(.success(customUser))
+            }else {
+                let unknownError = NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown error occurred during sign-up"])
+                completion(.failure(unknownError))
             }
         }
     }
