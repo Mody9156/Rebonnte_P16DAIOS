@@ -14,7 +14,7 @@ struct ContentView: View {
             }
             .onAppear
             {
-                session.listen()
+                authViewModel.changeStatus()
         }
         }
     }
