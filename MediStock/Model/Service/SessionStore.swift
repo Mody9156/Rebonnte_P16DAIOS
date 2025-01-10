@@ -3,6 +3,7 @@ import Firebase
 
 class SessionStore: ObservableObject {
     @Published var session: User?
+    @Published var messageError = ""
     var handle: AuthStateDidChangeListenerHandle?
 
     func listen() {
@@ -15,10 +16,10 @@ class SessionStore: ObservableObject {
         }
     }
 
-    func signUp(email: String, password: String) {
+    func signUp(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print("Error creating user: \(error.localizedDescription) \(error)")
+                self.messageError = "Error creating user: \(error.localizedDescription) \(error)"
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
             }
@@ -28,7 +29,7 @@ class SessionStore: ObservableObject {
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print("Error signing in: \(error.localizedDescription)")
+                self.messageError = "Error signing in: \(error.localizedDescription)"
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
             }
@@ -40,7 +41,7 @@ class SessionStore: ObservableObject {
             try Auth.auth().signOut()
             self.session = nil
         } catch let error {
-            print("Error signing out: \(error.localizedDescription)")
+            self.messageError = "Error signing out: \(error.localizedDescription)"
         }
     }
 
