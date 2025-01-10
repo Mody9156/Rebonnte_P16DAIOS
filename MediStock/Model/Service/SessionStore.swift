@@ -7,12 +7,13 @@ class SessionStore: ObservableObject {
     @Published var messageError = ""
     var handle: AuthStateDidChangeListenerHandle?
 
-    func listen(completion:@escaping(Result<User,Error>) -> Void) {
+    func listen(completion:@escaping(User?) -> Void) {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 self.session = User(uid: user.uid, email: user.email)
                 self.messageError = ""
                 print("\(String(describing: self.session))")
+                completion(self.session)
             } else {
                 self.session = nil
                 self.messageError = "Session invalid"

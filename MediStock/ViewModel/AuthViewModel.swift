@@ -29,7 +29,9 @@ class AuthViewModel : ObservableObject {
     }
     
     func changeStatus() {
-        session.listen()
+        session.listen { result, error  in 
+            
+        }
     }
     
 }
