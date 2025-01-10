@@ -22,6 +22,7 @@ class AuthViewModel : ObservableObject {
     
     func createdNewUser(email: String, password: String){
         session.signUp(email: email, password: password)
+        self.messageError = session.messageError
     }
     
     

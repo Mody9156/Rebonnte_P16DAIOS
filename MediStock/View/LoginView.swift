@@ -23,6 +23,10 @@ struct LoginView: View {
             }) {
                 Text("Sign Up")
             }
+            
+            Text(authViewModel.messageError)
+                .foregroundColor(.red)
+                .font(.title2)
         }
         .padding()
     }
