@@ -9,6 +9,7 @@ import Foundation
 
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
+    @Published var messageError : String = ""
     
     init(session : SessionStore = SessionStore()){
         self.session = session
@@ -16,6 +17,7 @@ class AuthViewModel : ObservableObject {
     
     func login(email:String, password:String){
         session.signIn(email: email, password: password)
+        self.messageError = session.messageError
     }
     
     func createdNewUser(email: String, password: String){
