@@ -7,7 +7,7 @@ class SessionStore: ObservableObject {
     @Published var messageError = ""
     var handle: AuthStateDidChangeListenerHandle?
 
-    func listen() async {
+    func listen(completion:@escaping(Result<User,Error>) -> Void) {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 self.session = User(uid: user.uid, email: user.email)

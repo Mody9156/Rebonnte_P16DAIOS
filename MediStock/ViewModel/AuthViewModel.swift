@@ -10,11 +10,12 @@ import Foundation
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
     @Published var messageError : String = ""
-    @Published var user: User?
+    @Published private var user: User?
 
 
-    init(session : SessionStore = SessionStore(), user: User? = SessionStore().session){
+    init(session : SessionStore = SessionStore(), user: User? ){
         self.session = session
+        self.user = user
     }
     
     func login(email:String, password:String){
@@ -27,8 +28,8 @@ class AuthViewModel : ObservableObject {
         self.messageError = session.messageError
     }
     
-    func changeStatus() async {
-       await session.listen()
+    func changeStatus() {
+        session.listen()
     }
     
 }
