@@ -12,6 +12,7 @@ class SessionStore: ObservableObject {
             if let user = user {
                 self.session = User(uid: user.uid, email: user.email)
                 self.messageError = ""
+                print("\(String(describing: self.session))")
             } else {
                 self.session = nil
                 self.messageError = "Session invalid"
@@ -23,6 +24,7 @@ class SessionStore: ObservableObject {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 self.messageError = "Error creating user: \(error.localizedDescription) \(error)"
+                print("\(String(describing: self.session))")
                 print("Error creating user: \(error.localizedDescription) \(error)")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
@@ -36,6 +38,7 @@ class SessionStore: ObservableObject {
             if let error = error {
                 self.messageError = "Error signing in: \(error.localizedDescription)"
                 print("Error signing in: \(error.localizedDescription)")
+                print("\(String(describing: self.session))")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
                 self.messageError = ""

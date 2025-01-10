@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Group {
-                if authViewModel.session.session != nil {
+                if authViewModel.session != nil {
                     MainTabView()
                 } else {
                     LoginView()
