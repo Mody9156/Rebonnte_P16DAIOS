@@ -24,6 +24,7 @@ class SessionStore: ObservableObject {
                 print("Error creating user: \(error.localizedDescription) \(error)")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
+                self.messageError = ""
             }
         }
     }
@@ -35,6 +36,7 @@ class SessionStore: ObservableObject {
                 print("Error signing in: \(error.localizedDescription)")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
+                self.messageError = ""
             }
         }
     }

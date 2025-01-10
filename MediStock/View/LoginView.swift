@@ -3,7 +3,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @StateObject var authViewModel : AuthViewModel
+    @StateObject var authViewModel = AuthViewModel()
     
     var body: some View {
         VStack {
@@ -34,6 +34,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(authViewModel: AuthViewModel(user: User(uid: "info"))).environmentObject(SessionStore())
+        LoginView().environmentObject(SessionStore())
     }
 }
