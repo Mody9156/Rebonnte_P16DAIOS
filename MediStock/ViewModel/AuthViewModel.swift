@@ -12,9 +12,10 @@ class AuthViewModel : ObservableObject {
     @Published var messageError : String = ""
     @Published var id : String? = nil
     @Published var onLoginSucceed : (()->())
-    
+    @Published var isAuthenticated : Bool = false
 
-    init(session : SessionStore = SessionStore(), _ callback: @escaping (()->())){
+
+    init(session : SessionStore = SessionStore(), _ callback: @escaping ()->()){
         self.session = session
         self.onLoginSucceed = callback
     }
@@ -25,7 +26,9 @@ class AuthViewModel : ObservableObject {
             case .success(let user):
                 print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
                 self.onLoginSucceed()
+                self.isAuthenticated = true
             case .failure(let error):
+                self.isAuthenticated = false
                 self.messageError = self.session.messageError
                 print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
 
