@@ -18,13 +18,30 @@ class AuthViewModel : ObservableObject {
     }
     
     func login(email:String, password:String){
-        session.signIn(email: email, password: password)
-        self.messageError = session.messageError
+        session.signIn(email: email, password: password){ result in
+            switch result {
+            case .success(let user):
+                print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
+            case .failure(let error):
+                self.messageError = self.session.messageError
+                print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
+
+            }
+        }
+        
     }
     
     func createdNewUser(email: String, password: String){
-        session.signUp(email: email, password: password)
-        self.messageError = session.messageError
+        session.signUp(email: email, password: password){ result in
+            switch result {
+            case .success(let user):
+                print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
+            case .failure(let error):
+                self.messageError = self.session.messageError
+                print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
+
+            }
+        }
     }
     
     func changeStatus() {
