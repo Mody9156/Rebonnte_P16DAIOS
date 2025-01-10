@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class SessionStore: ObservableObject {
     @Published var session: User?
@@ -20,6 +21,7 @@ class SessionStore: ObservableObject {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 self.messageError = "Error creating user: \(error.localizedDescription) \(error)"
+                print("Error creating user: \(error.localizedDescription) \(error)")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
             }
@@ -30,6 +32,7 @@ class SessionStore: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 self.messageError = "Error signing in: \(error.localizedDescription)"
+                print("Error signing in: \(error.localizedDescription)")
             } else {
                 self.session = User(uid: result?.user.uid ?? "", email: result?.user.email ?? "")
             }

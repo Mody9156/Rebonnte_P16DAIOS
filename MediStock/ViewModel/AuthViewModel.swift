@@ -10,8 +10,9 @@ import Foundation
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
     @Published var messageError : String = ""
-    
-    init(session : SessionStore = SessionStore()){
+    @Published var user: User?
+
+    init(session : SessionStore = SessionStore(), user: User? =  SessionStore().session){
         self.session = session
     }
     
