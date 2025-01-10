@@ -12,11 +12,7 @@ struct ContentView: View {
                     LoginView()
                 }
             }
-            .onAppear
-            {
-                authViewModel.changeStatus()
-            }
-        }
+         }
     }
 }
 

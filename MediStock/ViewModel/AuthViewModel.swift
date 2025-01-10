@@ -11,10 +11,12 @@ class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
     @Published var messageError : String = ""
     @Published var id : String? = nil
+    @Published var onLoginSucceed : (()->())
+    
 
-
-    init(session : SessionStore = SessionStore() ){
+    init(session : SessionStore = SessionStore(), _ callback: @escaping (()->())){
         self.session = session
+        self.onLoginSucceed = callback
     }
     
     func login(email:String, password:String){
@@ -22,6 +24,7 @@ class AuthViewModel : ObservableObject {
             switch result {
             case .success(let user):
                 print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
+                self.onLoginSucceed()
             case .failure(let error):
                 self.messageError = self.session.messageError
                 print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
@@ -43,11 +46,11 @@ class AuthViewModel : ObservableObject {
             }
         }
     }
-    
-    func changeStatus() {
-        session.listen { result in
-            self.id =  result?.uid
-        }
-    }
+//    
+//    func changeStatus() {
+//        session.listen { result in
+//            self.id =  result?.uid
+//        }
+//    }
     
 }
