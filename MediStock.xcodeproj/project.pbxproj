@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2362D1AD2D330CD600A40CFD /* ViewModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362D1AC2D330CD600A40CFD /* ViewModelManager.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
 		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
 		237E0A742D2FFE4500EEC056 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A732D2FFE4500EEC056 /* FirebaseAnalyticsSwift */; };
@@ -61,7 +60,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2362D1AC2D330CD600A40CFD /* ViewModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelManager.swift; sourceTree = "<group>"; };
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 			children = (
 				53E0D8DD2C0609A800DE1134 /* MedicineStockViewModel.swift */,
 				237E0A882D300FBB00EEC056 /* AuthViewModel.swift */,
-				2362D1AC2D330CD600A40CFD /* ViewModelManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -388,7 +385,6 @@
 				237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */,
 				53E0D8D82C06097900DE1134 /* LoginView.swift in Sources */,
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
-				2362D1AD2D330CD600A40CFD /* ViewModelManager.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */,
