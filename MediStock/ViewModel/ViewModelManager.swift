@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+class ViewModelManager:ObservableObject {
+    @Published var isAuthenticated : Bool
+
+    init(){
+        self.isAuthenticated = false
+    }
+    
+    var authViewModel : AuthViewModel {
+        return AuthViewModel { [weak self] in
+            self?.isAuthenticated = true
+        }
+    }
+    
+}
