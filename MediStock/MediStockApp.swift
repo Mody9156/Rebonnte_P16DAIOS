@@ -11,11 +11,24 @@ import SwiftUI
 struct MediStockApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var sessionStore = SessionStore()
+    @StateObject var viewModelManager = ViewModelManager()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(sessionStore)
+            VStack {
+                Group {
+                    if viewModelManager.isAuthenticated {
+                        MainTabView()
+                    } else {
+                        LoginView()
+                    }
+                }
+                
+            }
+            //
+            //
+            //            ContentView()
+            //                .environmentObject(sessionStore)
         }
     }
 }
