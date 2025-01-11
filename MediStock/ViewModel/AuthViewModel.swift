@@ -10,50 +10,54 @@ import Foundation
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
     @Published var messageError : String = ""
-    @Published var id : String? = nil
-    @Published var onLoginSucceed : (()->())
+    @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
 
 
-    init(session : SessionStore = SessionStore(), _ callback: @escaping ()->()){
+    init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
-        self.onLoginSucceed = callback
+        self.onLoginSucceed = onLoginSucceed
+        
+        session.$session
+            .map { $0 != nil }
+            .assign(to: &$isAuthenticated)
     }
     
     func login(email:String, password:String){
         session.signIn(email: email, password: password){ result in
+            DispatchQueue.main.async {
             switch result {
             case .success(let user):
-                print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
-                self.onLoginSucceed()
-                self.isAuthenticated = true
+                self.messageError = ""
+                print("isAuthenticated : \(self.isAuthenticated)")
+                print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
+                self.onLoginSucceed?()
             case .failure(let error):
-                self.isAuthenticated = false
-                self.messageError = self.session.messageError
-                print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
-
+                self.messageError = "\(String(describing: self.session.error))"
+                print("Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)")
+                
             }
         }
-        
+        }
     }
     
     func createdNewUser(email: String, password: String){
         session.signUp(email: email, password: password){ result in
+            DispatchQueue.main.async {
             switch result {
             case .success(let user):
+                self.messageError = ""
                 print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
             case .failure(let error):
-                self.messageError = self.session.messageError
+                self.messageError = error.localizedDescription
                 print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
-
             }
         }
+        }
     }
-//    
-//    func changeStatus() {
-//        session.listen { result in
-//            self.id =  result?.uid
-//        }
-//    }
+    
+    func changeStatus() {
+        session.listen()
+    }
     
 }
