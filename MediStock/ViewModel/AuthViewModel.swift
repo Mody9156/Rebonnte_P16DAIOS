@@ -24,9 +24,9 @@ class AuthViewModel : ObservableObject {
         session.signIn(email: email, password: password){ result in
             switch result {
             case .success(let user):
-                print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
                 self.isAuthenticated = true
                 self.onLoginSucceed()
+                print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
             case .failure(let error):
                 self.isAuthenticated = false
                 self.messageError = self.session.messageError
