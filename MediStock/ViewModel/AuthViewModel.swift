@@ -24,17 +24,15 @@ class AuthViewModel : ObservableObject {
         session.signIn(email: email, password: password){ result in
             switch result {
             case .success(let user):
-                print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
-                self.onLoginSucceed()
+                print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
                 self.isAuthenticated = true
+                self.onLoginSucceed()
             case .failure(let error):
                 self.isAuthenticated = false
                 self.messageError = self.session.messageError
-                print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
-
+                print("Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)")
             }
         }
-        
     }
     
     func createdNewUser(email: String, password: String){
@@ -49,11 +47,9 @@ class AuthViewModel : ObservableObject {
             }
         }
     }
-//    
-//    func changeStatus() {
-//        session.listen { result in
-//            self.id =  result?.uid
-//        }
-//    }
+    
+    func changeStatus() {
+        session.listen()
+    }
     
 }

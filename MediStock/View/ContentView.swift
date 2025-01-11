@@ -6,11 +6,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Group {
-                if  authViewModel.isAuthenticated {
+                if authViewModel.isAuthenticated {
                     MainTabView()
                 } else {
                     LoginView()
                 }
+            }
+            .onAppear{
+                authViewModel.changeStatus()
             }
          }
     }
