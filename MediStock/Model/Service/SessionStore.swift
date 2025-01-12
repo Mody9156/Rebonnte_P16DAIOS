@@ -1,6 +1,8 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseCore
 
 class SessionStore: ObservableObject {
     @Published var session: User?
@@ -11,6 +13,7 @@ class SessionStore: ObservableObject {
         session != nil
     }
     func listen() {
+        self.clearUserData()
             handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
                 DispatchQueue.main.async {
                     if let user = user {
@@ -27,10 +30,12 @@ class SessionStore: ObservableObject {
     func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     self.handleAuthResult(result, error, completion: completion)
+                   
                 }
     }
 
     func signIn(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void) {
+
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
                    self.handleAuthResult(result, error, completion: completion)
                }
@@ -60,11 +65,26 @@ class SessionStore: ObservableObject {
                 } else if let user = result?.user {
                     let customUser = User(uid: user.uid, email: user.email)
                     completion(.success(customUser))
+                    self.saveUserData(customUser)
                 } else {
                     completion(.failure(AuthError.unknown))
                 }
             }
         }
+    
+    private func saveUserData(_ user: User) {
+          // Sauvegarder les informations de l'utilisateur dans UserDefaults
+          UserDefaults.standard.set(user.uid, forKey: "userUid")
+          UserDefaults.standard.set(user.email, forKey: "userEmail")
+   
+      }
+
+      private func clearUserData() {
+          // Réinitialiser les données utilisateur précédentes dans UserDefaults
+          UserDefaults.standard.removeObject(forKey: "userUid")
+          UserDefaults.standard.removeObject(forKey: "userEmail")
+       
+      }
 }
 
 enum AuthError: LocalizedError {
