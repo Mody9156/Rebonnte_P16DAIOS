@@ -13,7 +13,6 @@ class SessionStore: ObservableObject {
         session != nil
     }
     func listen() {
-        self.clearUserData()
             handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
                 DispatchQueue.main.async {
                     if let user = user {
