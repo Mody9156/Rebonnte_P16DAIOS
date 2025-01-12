@@ -14,6 +14,8 @@ struct ContentView: View {
             }
             .onAppear{
                 authViewModel.changeStatus()
+                authViewModel.signOut()
+
             }
          }
     }

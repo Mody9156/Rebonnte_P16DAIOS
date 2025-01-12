@@ -59,7 +59,7 @@ class AuthViewModel : ObservableObject {
         session.listen()
     }
     func signOut(){
-        session.signOut()
+        session.disableAutoLogin()
     }
     
 }

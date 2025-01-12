@@ -12,8 +12,19 @@ class SessionStore: ObservableObject {
     var isAuthenticated : Bool {
         session != nil
     }
+    
+    func disableAutoLogin() {
+        if Auth.auth().currentUser != nil {
+            do {
+                try Auth.auth().signOut()
+                print("Déconnexion réussie pour désactiver la persistance.")
+            } catch let error {
+                print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+            }
+        }
+    }
+
     func listen() {
-        self.clearUserData()
             handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
                 DispatchQueue.main.async {
                     if let user = user {
@@ -27,6 +38,8 @@ class SessionStore: ObservableObject {
             }
         }
 
+ 
+    
     func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     self.handleAuthResult(result, error, completion: completion)
@@ -44,6 +57,7 @@ class SessionStore: ObservableObject {
     func signOut() {
             do {
                 try Auth.auth().signOut()
+                self.clearUserData()
                 self.session = nil
             } catch {
                 DispatchQueue.main.async {
@@ -55,6 +69,7 @@ class SessionStore: ObservableObject {
     func unbind() {
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
+            self.handle = nil
         }
     }
     
@@ -65,7 +80,6 @@ class SessionStore: ObservableObject {
                 } else if let user = result?.user {
                     let customUser = User(uid: user.uid, email: user.email)
                     completion(.success(customUser))
-                    self.saveUserData(customUser)
                 } else {
                     completion(.failure(AuthError.unknown))
                 }
