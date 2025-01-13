@@ -52,6 +52,7 @@ class SessionStore: ObservableObject {
             completion(.failure(AuthError.invalidCredentials))
             return
         }
+        self.clearUserData()
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             self.handleAuthResult(result, error, completion: completion)
         }
