@@ -33,7 +33,7 @@ class AuthViewModel : ObservableObject {
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
                     self.onLoginSucceed?()
                 case .failure(let error):
-                    self.messageError = "Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)"
+                    self.messageError = "Erreur lors de la connection de l'utilisateur"
                     print("Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)")
                 }
             }
@@ -48,7 +48,7 @@ class AuthViewModel : ObservableObject {
                     self.messageError = ""
                     print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
                 case .failure(let error):
-                    self.messageError = "Erreur lors de la création de l'utilisateur : \(error.localizedDescription)"
+                    self.messageError = "Erreur lors de la création de l'utilisateur"
                     print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
                 }
             }
