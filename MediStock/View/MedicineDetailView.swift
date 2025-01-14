@@ -140,6 +140,6 @@ struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
         let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel, history: [HistoryEntry(medicineId: "good line", user: "Unknow", action: "right", details: "", timestamp: Date.now)]).environmentObject(SessionStore())
     }
 }
