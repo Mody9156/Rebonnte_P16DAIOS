@@ -49,13 +49,11 @@ class MedicineStockViewModel: ObservableObject {
             self.medicineRepository.updateStock(medicine, by: amount, user: user)
         }
     }
-    //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.updateMedicine(medicine, user: user)
         }
     }
-//    //created new Service
 //    private func addHistory(action: String, user: String, medicineId: String, details: String) {
 //        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
 //        do {
@@ -64,7 +62,6 @@ class MedicineStockViewModel: ObservableObject {
 //            print("Error adding history: \(error)")
 //        }
 //    }
-    //created new Service
     func fetchHistory(for medicine: Medicine) {
         self.medicineRepository.fetchHistory(for: medicine)
     }

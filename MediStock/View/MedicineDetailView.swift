@@ -24,15 +24,19 @@ struct MedicineDetailView: View {
 
                 // History Section
                 historySection
+                
+                Button("Registre") {
+                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
+                .foregroundColor(.white)
+                .frame(width: 100,height: 50)
+                .background(Color.blue)
             }
             .padding(.vertical)
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear {
             viewModel.fetchHistory(for: medicine)
-        }
-        .onChange(of: medicine) { _ in
-            viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
         }
     }
 }
