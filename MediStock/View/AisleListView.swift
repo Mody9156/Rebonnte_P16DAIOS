@@ -25,8 +25,8 @@ struct AisleListView: View {
     }
 }
 
-struct AisleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AisleListView()
-    }
-}
+//struct AisleListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AisleListView()
+//    }
+//}

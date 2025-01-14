@@ -17,9 +17,9 @@ struct MainTabView: View {
         }
     }
 }
-
-struct MainTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTabView()
-    }
-}
+//
+//struct MainTabView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainTabView(medicines: Medicine()
+//    }
+//}
