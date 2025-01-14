@@ -58,8 +58,10 @@ class MedicineStockViewModel: ObservableObject {
     func updateMedicine(_ medicine: Medicine, user: String) {
         guard let id = medicine.id else { return }
         do {
-            try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            DispatchQueue.global(qos:.background).async{
+                try db.collection("medicines").document(id).setData(from: medicine)
+                addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            }
         } catch let error {
             print("Error updating document: \(error)")
         }
