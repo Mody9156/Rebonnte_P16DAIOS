@@ -46,9 +46,8 @@ extension MedicineDetailView {
             TextField("Name", text: $medicine.name)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
-            .onAppear{
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-            }
+           
+            
         }
         .padding(.horizontal)
     }
