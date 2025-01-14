@@ -32,16 +32,9 @@ class MedicineStockViewModel: ObservableObject {
         medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
-    func updateStock(_ medicine: Medicine, user: String, stocks:Int) {
+    func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)
-        }
-    }
-    
-    func decreaseStock(_ medicine: Medicine, user: String) {
-        DispatchQueue.global(qos:.background).async{
-            self.updateStock(medicine, by: -1, user: user)
-            print("user: \(user)")
         }
     }
     
@@ -56,14 +49,7 @@ class MedicineStockViewModel: ObservableObject {
             print("super utilisation de updateMedicine")
         }
     }
-//    private func addHistory(action: String, user: String, medicineId: String, details: String) {
-//        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
-//        do {
-//            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-//        } catch let error {
-//            print("Error adding history: \(error)")
-//        }
-//    }
+
     func fetchHistory(for medicine: Medicine) {
         self.medicineRepository.fetchHistory(for: medicine)
     }
