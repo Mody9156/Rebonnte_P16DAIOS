@@ -109,8 +109,7 @@ class MedicineRepository: ObservableObject {
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
-                self.his    @Published var history: [HistoryEntry] = []
-tory = querySnapshot?.documents.compactMap { document in
+                self.history = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
                 } ?? []
             }
