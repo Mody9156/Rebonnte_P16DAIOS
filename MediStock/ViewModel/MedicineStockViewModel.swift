@@ -2,11 +2,15 @@ import Foundation
 import Firebase
 
 class MedicineStockViewModel: ObservableObject {
-    @Published var medicines: [Medicine] = []
+    @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
+    
+    init(medicines: [Medicine] = MedicineRepository().medicines) {
+        self.medicines = medicines
+    }
     
     func observeMedicines() {
         medicineRepository.fetchMedicines{ medicines in
