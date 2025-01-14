@@ -29,7 +29,7 @@ struct MedicineDetailView: View {
                     Spacer()
                     
                     Button("Registre") {
-                        
+                        viewModel.fetchHistory(for: medicine)
                         viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
@@ -130,9 +130,7 @@ extension MedicineDetailView {
             }
         }
         .padding(.horizontal)
-        .onChange(of: medicine, perform: { _ in
-            viewModel.fetchHistory(for: medicine)
-        }) 
+         
     }
 }
 

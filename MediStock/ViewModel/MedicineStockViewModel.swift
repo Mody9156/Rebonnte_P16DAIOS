@@ -4,12 +4,11 @@ import Firebase
 class MedicineStockViewModel: ObservableObject {
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
-    @Published var history: [HistoryEntry]
+    @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
     
-    init(medicines: [Medicine] = MedicineRepository().medicines, history: [HistoryEntry] = MedicineRepository().historyEntry) {
+    init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
-        self.history = history
     }
     
     func observeMedicines() {
@@ -52,6 +51,8 @@ class MedicineStockViewModel: ObservableObject {
     }
 
     func fetchHistory(for medicine: Medicine) {
-        self.medicineRepository.fetchHistory(for: medicine)
+        self.medicineRepository.fetchHistory(for: medicine){ history in
+            self.history = [history]
+        }
     }
 }
