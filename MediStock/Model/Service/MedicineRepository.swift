@@ -12,7 +12,8 @@ import FirebaseFirestore
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
     @Published var medicines: [Medicine] = []
-    
+    @Published var history: [HistoryEntry] = []
+
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -108,7 +109,8 @@ class MedicineRepository: ObservableObject {
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
-                self.history = querySnapshot?.documents.compactMap { document in
+                self.his    @Published var history: [HistoryEntry] = []
+tory = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
                 } ?? []
             }
