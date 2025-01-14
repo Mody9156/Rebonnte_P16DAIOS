@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
+    @Published var medicines: [Medicine] = []
     
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
@@ -83,4 +84,21 @@ class MedicineRepository: ObservableObject {
             print("Error updating document: \(error)")
         }
     }
+    
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
+       guard let id = medicine.id else { return }
+       let newStock = medicine.stock + amount
+       db.collection("medicines").document(id).updateData([
+           "stock": newStock
+       ]) { error in
+           if let error = error {
+               print("Error updating stock: \(error)")
+           } else {
+               if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                   self.medicines[index].stock = newStock
+               }
+               self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: id, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+           }
+       }
+   }
 }
