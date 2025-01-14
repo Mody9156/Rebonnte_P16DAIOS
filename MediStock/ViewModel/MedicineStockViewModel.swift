@@ -56,8 +56,9 @@ class MedicineStockViewModel: ObservableObject {
     }
     //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
-        
-        medicineRepository.updateMedicine(medicine, user: user)
+        DispatchQueue.global(qos:.background).async{
+            medicineRepository.updateMedicine(medicine, user: user)
+        }
     }
     //created new Service
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
