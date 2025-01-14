@@ -25,12 +25,15 @@ struct MedicineDetailView: View {
                 // History Section
                 historySection
                 
-                Button("Registre") {
-                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                }
-                .foregroundColor(.white)
-                .frame(width: 100,height: 50)
+                HStack {
+                    Spacer()
+                    Button("Registre") {
+                        viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 100,height: 50)
                 .background(Color.blue)
+                }
             }
             .padding(.vertical)
         }
