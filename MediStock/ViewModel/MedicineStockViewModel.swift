@@ -7,7 +7,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry]
     @Published var medicineRepository = MedicineRepository()
     
-    init(medicines: [Medicine] = MedicineRepository().medicines, history: [HistoryEntry] = MedicineRepository().history) {
+    init(medicines: [Medicine] = MedicineRepository().medicines, history: [HistoryEntry] = MedicineRepository().historyEntry) {
         self.medicines = medicines
         self.history = history
     }
@@ -35,6 +35,7 @@ class MedicineStockViewModel: ObservableObject {
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)
+            print("super utilisation de changeStock")
         }
     }
     
