@@ -33,6 +33,7 @@ struct MedicineDetailView: View {
         }
         .onChange(of: medicine) { _ in
             viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+            print("")
         }
     }
 }
@@ -42,11 +43,12 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text("Name")
                 .font(.headline)
-            TextField("Name", text: $medicine.name, onCommit: {
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-            })
+            TextField("Name", text: $medicine.name)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
+            .onAppear{
+                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+            }
         }
         .padding(.horizontal)
     }
@@ -63,6 +65,7 @@ extension MedicineDetailView {
                         .font(.title)
                         .foregroundColor(.red)
                 }
+                
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 })
