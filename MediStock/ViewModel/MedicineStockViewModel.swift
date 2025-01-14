@@ -5,7 +5,6 @@ class MedicineStockViewModel: ObservableObject {
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
-    private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
@@ -53,15 +52,15 @@ class MedicineStockViewModel: ObservableObject {
             self.medicineRepository.updateMedicine(medicine, user: user)
         }
     }
-    //created new Service
-    private func addHistory(action: String, user: String, medicineId: String, details: String) {
-        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
-        do {
-            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-        } catch let error {
-            print("Error adding history: \(error)")
-        }
-    }
+//    //created new Service
+//    private func addHistory(action: String, user: String, medicineId: String, details: String) {
+//        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
+//        do {
+//            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
+//        } catch let error {
+//            print("Error adding history: \(error)")
+//        }
+//    }
     //created new Service
     func fetchHistory(for medicine: Medicine) {
         guard let medicineId = medicine.id else { return }
