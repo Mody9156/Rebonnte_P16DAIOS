@@ -67,7 +67,8 @@ extension MedicineDetailView {
                 .font(.headline)
             HStack {
                 Button(action: {
-                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+//                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+                    medicine.stock -= 1
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
@@ -82,7 +83,8 @@ extension MedicineDetailView {
                 .frame(width: 100)
                 
                 Button(action: {
-                    viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
+//                    viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
+                    medicine.stock += 1
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
