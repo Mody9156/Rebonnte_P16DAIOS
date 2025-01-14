@@ -42,9 +42,7 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text("Name")
                 .font(.headline)
-            TextField("Name", text: $medicine.name, onCommit: {
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-            })
+            TextField("Name", text: $medicine.name)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
             
