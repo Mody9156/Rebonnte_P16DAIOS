@@ -57,7 +57,7 @@ class MedicineStockViewModel: ObservableObject {
     //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
-            medicineRepository.updateMedicine(medicine, user: user)
+            self.medicineRepository.updateMedicine(medicine, user: user)
         }
     }
     //created new Service
