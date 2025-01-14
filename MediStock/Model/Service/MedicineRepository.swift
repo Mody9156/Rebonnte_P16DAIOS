@@ -69,6 +69,7 @@ class MedicineRepository: ObservableObject {
         self.historyEntry.append(history)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
+            print("history : \(history)")
         } catch let error {
             print("Error adding history: \(error)")
         }
