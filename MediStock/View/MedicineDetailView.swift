@@ -29,7 +29,7 @@ struct MedicineDetailView: View {
                     Spacer()
                     
                     Button("Registre") {
-                      
+                        
                         viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
@@ -70,17 +70,14 @@ extension MedicineDetailView {
                 .font(.headline)
             HStack {
                 Button(action: {
-//                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+                
                     medicine.stock -= 1
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
                         .foregroundColor(.red)
                 }
-//                .onChange(of: medicine, perform: { _ in
-//                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
-//                })
-                
+          
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 })
@@ -89,7 +86,6 @@ extension MedicineDetailView {
                 .frame(width: 100)
                 
                 Button(action: {
-//                    viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
                     medicine.stock += 1
                 }) {
                     Image(systemName: "plus.circle")
