@@ -29,8 +29,8 @@ struct MedicineDetailView: View {
                     Spacer()
                     
                     Button("Registre") {
-                        viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
-                        viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
+                      
+                        viewModel.updateStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     }
                     .foregroundColor(.white)
