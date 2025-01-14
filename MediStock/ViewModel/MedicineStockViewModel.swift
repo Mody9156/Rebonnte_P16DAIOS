@@ -57,14 +57,7 @@ class MedicineStockViewModel: ObservableObject {
     //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
         
-        guard let id = medicine.id else { return }
-        do {
-                try db.collection("medicines").document(id).setData(from: medicine)
-                addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
-            
-        } catch let error {
-            print("Error updating document: \(error)")
-        }
+        medicineRepository.updateMedicine(medicine, user: user)
     }
     //created new Service
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
