@@ -4,7 +4,6 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @ObservedObject var viewModel = MedicineStockViewModel()
     @EnvironmentObject var session: SessionStore
-    @State var history: [HistoryEntry]
     
     var body: some View {
         ScrollView {
@@ -115,7 +114,7 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ForEach(history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
+            ForEach(viewModel.history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
                 VStack(alignment: .leading, spacing: 5) {
                     Text(entry.action)
                         .font(.headline)
@@ -140,6 +139,6 @@ struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
         let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel, history: [HistoryEntry(medicineId: "good line", user: "Unknow", action: "right", details: "", timestamp: Date.now)]).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
     }
 }
