@@ -88,7 +88,7 @@ class MedicineRepository: ObservableObject {
     
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
        guard let id = medicine.id else { return }
-       let newStock = medicine.stock + amount
+       let newStock = amount
        db.collection("medicines").document(id).updateData([
            "stock": newStock
        ]) { error in

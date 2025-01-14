@@ -29,6 +29,8 @@ struct MedicineDetailView: View {
                     Spacer()
                     
                     Button("Registre") {
+                        viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+                        viewModel.increaseStock(medicine, user: session.session?.uid ?? "")
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     }
                     .foregroundColor(.white)
@@ -74,9 +76,9 @@ extension MedicineDetailView {
                         .font(.title)
                         .foregroundColor(.red)
                 }
-                .onAppear{
-                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
-                }
+//                .onChange(of: medicine, perform: { _ in
+//                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+//                })
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")

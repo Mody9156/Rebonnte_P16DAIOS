@@ -32,9 +32,9 @@ class MedicineStockViewModel: ObservableObject {
         medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
-    func increaseStock(_ medicine: Medicine, user: String) {
+    func increaseStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
-            self.updateStock(medicine, by: 1, user: user)
+            self.updateStock(medicine, by: stocks, user: user)
         }
     }
     
