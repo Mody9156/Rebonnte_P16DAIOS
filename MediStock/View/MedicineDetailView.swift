@@ -74,6 +74,9 @@ extension MedicineDetailView {
                         .font(.title)
                         .foregroundColor(.red)
                 }
+                .onAppear{
+                    viewModel.decreaseStock(medicine, user: session.session?.uid ?? "")
+                }
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
