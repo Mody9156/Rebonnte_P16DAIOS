@@ -4,6 +4,7 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @ObservedObject var viewModel = MedicineStockViewModel()
     @EnvironmentObject var session: SessionStore
+    @State var history: [HistoryEntry]
     
     var body: some View {
         ScrollView {
@@ -114,7 +115,7 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ForEach(viewModel.history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
+            ForEach(history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
                 VStack(alignment: .leading, spacing: 5) {
                     Text(entry.action)
                         .font(.headline)
