@@ -4,7 +4,7 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @ObservedObject var viewModel = MedicineStockViewModel()
     @EnvironmentObject var session: SessionStore
-
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -12,16 +12,16 @@ struct MedicineDetailView: View {
                 Text(medicine.name)
                     .font(.largeTitle)
                     .padding(.top, 20)
-
+                
                 // Medicine Name
                 medicineNameSection
-
+                
                 // Medicine Stock
                 medicineStockSection
-
+                
                 // Medicine Aisle
                 medicineAisleSection
-
+                
                 // History Section
                 historySection
                 
@@ -32,7 +32,8 @@ struct MedicineDetailView: View {
                     }
                     .foregroundColor(.white)
                     .frame(width: 100,height: 50)
-                .background(Color.blue)
+                    .background(Color.blue)
+                    Spacer()
                 }
             }
             .padding(.vertical)
@@ -50,13 +51,13 @@ extension MedicineDetailView {
             Text("Name")
                 .font(.headline)
             TextField("Name", text: $medicine.name)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding(.bottom, 10)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.bottom, 10)
             
         }
         .padding(.horizontal)
     }
-
+    
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
             Text("Stock")
@@ -89,7 +90,7 @@ extension MedicineDetailView {
         }
         .padding(.horizontal)
     }
-
+    
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
             Text("Aisle")
@@ -102,7 +103,7 @@ extension MedicineDetailView {
         }
         .padding(.horizontal)
     }
-
+    
     private var historySection: some View {
         VStack(alignment: .leading) {
             Text("History")
