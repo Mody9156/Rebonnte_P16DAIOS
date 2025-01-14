@@ -45,9 +45,7 @@ struct MedicineDetailView: View {
             .padding(.vertical)
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
-        .onAppear {
-            viewModel.fetchHistory(for: medicine)
-        }
+        
     }
 }
 
@@ -132,6 +130,9 @@ extension MedicineDetailView {
             }
         }
         .padding(.horizontal)
+        .onChange(of: medicine, perform: { _ in
+            viewModel.fetchHistory(for: medicine)
+        }) 
     }
 }
 

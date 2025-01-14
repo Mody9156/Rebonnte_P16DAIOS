@@ -66,7 +66,6 @@ class MedicineRepository: ObservableObject {
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
-        self.historyEntry.append(history)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
             print("history : \(history)")
@@ -104,15 +103,22 @@ class MedicineRepository: ObservableObject {
        }
    }
     
-    func fetchHistory(for medicine: Medicine) {
+    func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
         guard let medicineId = medicine.id else { return }
         db.collection("history").whereField("medicineId", isEqualTo: medicineId).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
                 self.historyEntry = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: HistoryEntry.self)
+                    guard let  let history =  try? document.data(as: HistoryEntry.self) else {
+                        return
+                    }
+                    completion(history)
+                    
+                    return history
                 } ?? []
+               
+                print("historyEntry : \(self.historyEntry)")
             }
         }
     }
