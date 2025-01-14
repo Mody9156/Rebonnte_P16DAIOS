@@ -27,12 +27,19 @@ struct MedicineDetailView: View {
                 
                 HStack {
                     Spacer()
-                    Button("Registre") {
+                    
+                    Button {
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: 100,height: 50)
-                    .background(Color.blue)
+                    } label: {
+                        Text("Registre")
+                            .fontWeight(.bold)
+                            .font(.title3)
+                        
+                    }.foregroundColor(.white)
+                        .frame(width: 100,height: 50)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+
                     Spacer()
                 }
             }
