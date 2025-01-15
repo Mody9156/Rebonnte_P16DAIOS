@@ -26,7 +26,7 @@ struct Profile: View {
                 }
             }
             .foregroundColor(.white)
-            .frame(width: 100, height: 50)
+            .frame(height: 50)
             .background(Color.blue)
             .cornerRadius(12)
         }
