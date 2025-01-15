@@ -13,6 +13,9 @@ struct Profile: View {
         VStack {
             Text("Profile")
             Button("Sign Out") {
+                Task{
+                    try await  authViewModel.disableAutoLogin()
+                }
             }
         }
     }
