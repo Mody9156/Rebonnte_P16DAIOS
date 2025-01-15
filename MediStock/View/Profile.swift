@@ -15,8 +15,8 @@ struct Profile: View {
             Text("Hello")
                 .font(.largeTitle)
             
-            HStack {
-                Text("Email")
+            HStack{
+                Text("Email : ")
                 if let email = authViewModel.session.session?.email{
                     Text(email)
                 }
