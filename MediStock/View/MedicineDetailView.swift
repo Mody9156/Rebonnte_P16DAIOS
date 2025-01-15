@@ -29,7 +29,7 @@ struct MedicineDetailView: View {
                     Spacer()
                     
                     Button("Registre") {
-                        viewModel.fetchHistory(for: medicine)
+                        
                         viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
@@ -43,6 +43,9 @@ struct MedicineDetailView: View {
                 }
             }
             .padding(.vertical)
+            .onChange(of: medicine) { _ in
+                viewModel.fetchHistory(for: medicine)
+            }
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         
