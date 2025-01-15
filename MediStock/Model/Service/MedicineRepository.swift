@@ -46,7 +46,7 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+            try await addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")
         }
