@@ -18,7 +18,11 @@ struct AllMedicinesView: View {
 
                     Picker("Sort by", selection: $viewModel.filterOption) {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
-                            
+                            Button(index.rawValue){
+                                Task{
+                                    try await viewModel.trieElements(option: index)
+                                }
+                            }
                         }
                         Text("None").tag(MedicineStockViewModel.FilterOption.noFilter)
                         Text("Name").tag(MedicineStockViewModel.FilterOption.name)
