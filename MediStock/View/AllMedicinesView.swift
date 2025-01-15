@@ -16,7 +16,7 @@ struct AllMedicinesView: View {
                     
                     Spacer()
 
-                    Picker("Sort by", selection: $viewModel.filterOption) {
+                    Menu("Sort by") {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
                                 Task{
