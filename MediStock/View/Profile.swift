@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct Profile: View {
-    @StateObject var medicineStockViewModel : MedicineStockViewModel
+    @StateObject var authViewModel : AuthViewModel
     var body: some View {
         VStack {
             Text("Profile")
             Button("Sign Out") {
-                <#code#>
             }
         }
     }
@@ -21,6 +20,6 @@ struct Profile: View {
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile(medicineStockViewModel: MedicineStockViewModel())
+        Profile(authViewModel : AuthViewModel())
     }
 }
