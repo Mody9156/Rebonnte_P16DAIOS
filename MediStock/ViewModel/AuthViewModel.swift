@@ -31,7 +31,7 @@ class AuthViewModel : ObservableObject {
                     self.messageError = ""
                     print("isAuthenticated : \(self.isAuthenticated)")
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
-                    self.email = user.email
+                    self.email = user.email ?? "inconnu"
                     self.onLoginSucceed?()
                 case .failure(let error):
                     self.messageError = "Erreur lors de la connection de l'utilisateur"
