@@ -20,6 +20,8 @@ struct Profile: View {
                 }
             }
             
+            Spacer()
+            
             Button("Sign Out") {
                 Task{
                     try await  authViewModel.disableAutoLogin()
@@ -27,7 +29,7 @@ struct Profile: View {
             }
             .foregroundColor(.white)
             .frame(width:100, height: 50)
-            .background(Color.blue)
+            .background(Color.red)
             .cornerRadius(12)
         }
         .padding()
