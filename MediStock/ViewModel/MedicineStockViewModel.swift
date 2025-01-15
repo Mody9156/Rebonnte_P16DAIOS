@@ -59,7 +59,11 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    func tri(){
+    func trieByName(){
+        
+    }
+    
+    func triByStock(){
         
     }
 }
