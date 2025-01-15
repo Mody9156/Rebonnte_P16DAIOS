@@ -35,7 +35,7 @@ struct AllMedicinesView: View {
                 
                 // Liste des Médicaments
                 List {
-                    ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
+                    ForEach(viewModel.medicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
