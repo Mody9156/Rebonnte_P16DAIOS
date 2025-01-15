@@ -9,11 +9,15 @@ import SwiftUI
 
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
+    var use : User
     var body: some View {
         VStack {
             Text("Profile")
             HStack {
                 Text("Email")
+                if let email = use.emalil{
+                    Text(email)
+                }
             }
             
             Button("Sign Out") {
