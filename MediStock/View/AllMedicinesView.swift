@@ -24,9 +24,7 @@ struct AllMedicinesView: View {
                                 }
                             }
                         }
-                        Text("None").tag(MedicineStockViewModel.FilterOption.noFilter)
-                        Text("Name").tag(MedicineStockViewModel.FilterOption.name)
-                        Text("Stock").tag(MedicineStockViewModel.FilterOption.stock)
+                       
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)
