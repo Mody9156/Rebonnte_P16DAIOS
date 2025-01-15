@@ -11,7 +11,9 @@ struct Profile: View {
     var body: some View {
         VStack {
             Text("Profile")
-            
+            Button("Sign Out") {
+                <#code#>
+            }
         }
     }
 }
