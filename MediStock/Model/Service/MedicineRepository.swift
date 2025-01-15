@@ -52,19 +52,20 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func delete(medicines:[Medicine] ,at offsets: IndexSet){
-        offsets.map { medicines[$0] }.forEach { medicine in
-            if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
-                    if let error = error {
-                        print("Error removing document: \(error)")
+    func delete(medicines:[Medicine] ,at offsets: IndexSet)  {
+            offsets.map { medicines[$0] }.forEach { medicine in
+                if let id = medicine.id {
+                    db.collection("medicines").document(id).delete { error in
+                        if let error = error {
+                            print("Error removing document: \(error)")
+                        }
                     }
                 }
             }
-        }
+        
     }
     
-    private func addHistory(action: String, user: String, medicineId: String, details: String) {
+    private func addHistory(action: String, user: String, medicineId: String, details: String) async throws {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
@@ -156,6 +157,18 @@ class MedicineRepository: ObservableObject {
                 } ?? []
                 completion(medicines)
             }
+        }
+    }
+}
+
+
+enum MedicineError: LocalizedError {
+    case invalidDelete
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidDelete:
+            return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
         }
     }
 }
