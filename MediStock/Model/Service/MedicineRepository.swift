@@ -99,7 +99,7 @@ class MedicineRepository: ObservableObject {
                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
                    self.medicines[index].stock = newStock
                }
-               self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: id, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+               self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
            }
        }
    }
@@ -117,8 +117,6 @@ class MedicineRepository: ObservableObject {
                     }
                     return history
                 } ?? []
-               
-                print("historyEntry : \(self.historyEntry)")
             }
         }
     }

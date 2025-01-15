@@ -33,6 +33,8 @@ struct MedicineDetailView: View {
                         viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        
+                        viewModel.fetchHistory(for: medicine)
                     }
                     .foregroundColor(.white)
                     .frame(width: 100,height: 50)
@@ -116,20 +118,22 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             ForEach(viewModel.history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(entry.action)
-                        .font(.headline)
-                    Text("User: \(entry.user)")
-                        .font(.subheadline)
-                    Text("Date: \(entry.timestamp.formatted())")
-                        .font(.subheadline)
-                    Text("Details: \(entry.details)")
-                        .font(.subheadline)
-                }
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(entry.action)
+                            .font(.headline)
+                        Text("User: \(entry.user)")
+                            .font(.subheadline)
+                        Text("Date: \(entry.timestamp.formatted())")
+                            .font(.subheadline)
+                        Text("Details: \(entry.details)")
+                            .font(.subheadline)
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
                 .padding(.bottom, 5)
+                }
             }
         }
         .padding(.horizontal)
