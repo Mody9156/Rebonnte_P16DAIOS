@@ -86,22 +86,26 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws {
         guard let id = medicine.id else { return }
         let newStock = amount
         let oldStocks = medicine.stock
-        db.collection("medicines").document(id).updateData([
-            "stock": newStock
-        ]) { error in
-            if let error = error {
-                print("Error updating stock: \(error)")
-            } else {
-                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                    self.medicines[index].stock = newStock
-                }
-                self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
+        
+        do {
+            try await addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
+            
+            try await db.collection("medicines").document(id).updateData([
+                "stock": newStock
+            ])
+            
+            if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                self.medicines[index].stock = newStock
             }
+        }catch{
+            print("Error updating stock: \(error)")
+
         }
+         
     }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
