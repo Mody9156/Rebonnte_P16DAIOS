@@ -58,7 +58,7 @@ class SessionStore: ObservableObject {
         }
     }
     
-    func signOut() {
+    func signOut() async throws  {
         do {
             try Auth.auth().signOut()
             self.clearUserData()
