@@ -13,7 +13,7 @@ class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
-
+    
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -40,8 +40,8 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-
-    func setData(user: String){
+    
+    func setData(user: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
@@ -77,8 +77,8 @@ class MedicineRepository: ObservableObject {
         
         guard let id = medicine.id else { return }
         do {
-                try db.collection("medicines").document(id).setData(from: medicine)
-                addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            try db.collection("medicines").document(id).setData(from: medicine)
+            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
             
         } catch let error {
             print("Error updating document: \(error)")
@@ -86,22 +86,22 @@ class MedicineRepository: ObservableObject {
     }
     
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-       guard let id = medicine.id else { return }
-       let newStock = amount
-       let oldStocks = medicine.stock
-       db.collection("medicines").document(id).updateData([
-           "stock": newStock
-       ]) { error in
-           if let error = error {
-               print("Error updating stock: \(error)")
-           } else {
-               if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                   self.medicines[index].stock = newStock
-               }
-               self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
-           }
-       }
-   }
+        guard let id = medicine.id else { return }
+        let newStock = amount
+        let oldStocks = medicine.stock
+        db.collection("medicines").document(id).updateData([
+            "stock": newStock
+        ]) { error in
+            if let error = error {
+                print("Error updating stock: \(error)")
+            } else {
+                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                    self.medicines[index].stock = newStock
+                }
+                self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
+            }
+        }
+    }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
         guard let medicineId = medicine.id else { return }
@@ -110,7 +110,7 @@ class MedicineRepository: ObservableObject {
                 print("Error getting history: \(error)")
             } else {
                 self.historyEntry = querySnapshot?.documents.compactMap { document in
-                   let history =  try? document.data(as: HistoryEntry.self)
+                    let history =  try? document.data(as: HistoryEntry.self)
                     if let history {
                         completion(history)
                     }

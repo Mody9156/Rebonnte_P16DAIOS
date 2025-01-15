@@ -52,7 +52,7 @@ class SessionStore: ObservableObject {
             completion(.failure(AuthError.invalidCredentials))
             return
         }
-      
+        
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             self.handleAuthResult(result, error, completion: completion)
         }
@@ -61,7 +61,7 @@ class SessionStore: ObservableObject {
     func signOut() async throws  {
         do {
             try Auth.auth().signOut()
-          
+            
             self.session = nil
         } catch {
             DispatchQueue.main.async {
