@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()
+    @Published var medicines: [Medicine] = []
+    @Published var historyEntry: [HistoryEntry] = []
     
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
@@ -38,8 +40,8 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-
-    func setData(user: String){
+    
+    func setData(user: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
@@ -50,7 +52,7 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func delete(medicines:[Medicine] ,at offsets: IndexSet){
+    func delete(medicines:[Medicine] ,at offsets: IndexSet)  {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
                 db.collection("medicines").document(id).delete { error in
@@ -60,8 +62,8 @@ class MedicineRepository: ObservableObject {
                 }
             }
         }
+        
     }
-   
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
@@ -69,6 +71,104 @@ class MedicineRepository: ObservableObject {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
         } catch let error {
             print("Error adding history: \(error)")
+        }
+    }
+    
+    func updateMedicine(_ medicine: Medicine, user: String){
+        
+        guard let id = medicine.id else { return }
+        do {
+            try db.collection("medicines").document(id).setData(from: medicine)
+            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            
+        } catch let error {
+            print("Error updating document: \(error)")
+        }
+    }
+    
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String)  {
+        guard let id = medicine.id else { return }
+        let newStock = amount
+        let oldStocks = medicine.stock
+        db.collection("medicines").document(id).updateData([
+            "stock": newStock
+        ]) { error in
+            if let error = error {
+                print("Error updating stock: \(error)")
+            } else {
+                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                    self.medicines[index].stock = newStock
+                }
+                self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
+            }
+        }
+    }
+    
+    func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
+        guard let medicineId = medicine.id else { return }
+        db.collection("history").whereField("medicineId", isEqualTo: medicineId).addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting history: \(error)")
+            } else {
+                self.historyEntry = querySnapshot?.documents.compactMap { document in
+                    let history =  try? document.data(as: HistoryEntry.self)
+                    if let history {
+                        completion(history)
+                    }
+                    return history
+                } ?? []
+            }
+        }
+    }
+    
+    func trieByName(completion:@escaping([Medicine]) ->Void)  {
+        db.collection("medicines").order(by: "name", descending: true).addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let medicines = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: Medicine.self)
+                } ?? []
+                completion(medicines)
+            }
+        }
+    }
+    
+    func trieByStock(completion:@escaping([Medicine]) ->Void){
+        db.collection("medicines").order(by: "stock", descending: true).addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let medicines = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: Medicine.self)
+                } ?? []
+                completion(medicines)
+            }
+        }
+    }
+    
+    func getAllElements(completion:@escaping([Medicine]) -> Void) {
+        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let medicines = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: Medicine.self)
+                } ?? []
+                completion(medicines)
+            }
+        }
+    }
+}
+
+
+enum MedicineError: LocalizedError {
+    case invalidDelete
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidDelete:
+            return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
         }
     }
 }

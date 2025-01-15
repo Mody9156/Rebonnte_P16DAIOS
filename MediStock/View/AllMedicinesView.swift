@@ -3,8 +3,7 @@ import SwiftUI
 struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
-    @State private var sortOption: SortOption = .none
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -15,11 +14,16 @@ struct AllMedicinesView: View {
                         .padding(.leading, 10)
                     
                     Spacer()
-
-                    Picker("Sort by", selection: $sortOption) {
-                        Text("None").tag(SortOption.none)
-                        Text("Name").tag(SortOption.name)
-                        Text("Stock").tag(SortOption.stock)
+                    
+                    Menu("Sort by") {
+                        ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
+                            Button(index.rawValue){
+                                Task{
+                                    try await viewModel.trieElements(option: index)
+                                }
+                            }
+                        }
+                        
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)
@@ -28,7 +32,7 @@ struct AllMedicinesView: View {
                 
                 // Liste des Médicaments
                 List {
-                    ForEach(filteredAndSortedMedicines, id: \.id) { medicine in
+                    ForEach(viewModel.medicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
@@ -41,7 +45,10 @@ struct AllMedicinesView: View {
                 }
                 .navigationBarTitle("All Medicines")
                 .navigationBarItems(trailing: Button(action: {
-                    viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                    Task{
+                     try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                    }
+                   
                 }) {
                     Image(systemName: "plus")
                 })
@@ -52,34 +59,6 @@ struct AllMedicinesView: View {
         }
     }
     
-    var filteredAndSortedMedicines: [Medicine] {
-        var medicines = viewModel.medicines
-
-        // Filtrage
-        if !filterText.isEmpty {
-            medicines = medicines.filter { $0.name.lowercased().contains(filterText.lowercased()) }
-        }
-
-        // Tri
-        switch sortOption {
-        case .name:
-            medicines.sort { $0.name.lowercased() < $1.name.lowercased() }
-        case .stock:
-            medicines.sort { $0.stock < $1.stock }
-        case .none:
-            break
-        }
-
-        return medicines
-    }
-}
-
-enum SortOption: String, CaseIterable, Identifiable {
-    case none
-    case name
-    case stock
-
-    var id: String { self.rawValue }
 }
 
 struct AllMedicinesView_Previews: PreviewProvider {

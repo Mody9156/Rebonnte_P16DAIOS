@@ -13,7 +13,6 @@ class AuthViewModel : ObservableObject {
     @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
     
-    
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
@@ -31,9 +30,10 @@ class AuthViewModel : ObservableObject {
                     self.messageError = ""
                     print("isAuthenticated : \(self.isAuthenticated)")
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
+                    UserDefaults.standard.set(user.email, forKey: "email")
                     self.onLoginSucceed?()
                 case .failure(let error):
-                    self.messageError = "\(String(describing: self.session.error))"
+                    self.messageError = "Erreur lors de la connection de l'utilisateur"
                     print("Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)")
                 }
             }
@@ -48,7 +48,7 @@ class AuthViewModel : ObservableObject {
                     self.messageError = ""
                     print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
                 case .failure(let error):
-                    self.messageError = error.localizedDescription
+                    self.messageError = "Erreur lors de la création de l'utilisateur"
                     print("Erreur lors de la création de l'utilisateur : \(error.localizedDescription)")
                 }
             }
@@ -58,8 +58,8 @@ class AuthViewModel : ObservableObject {
     func changeStatus() {
         session.listen()
     }
-    func signOut(){
-        session.disableAutoLogin()
+    func disableAutoLogin() async throws {
+      try await session.disableAutoLogin()
     }
     
 }

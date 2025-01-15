@@ -2,11 +2,22 @@ import Foundation
 import Firebase
 
 class MedicineStockViewModel: ObservableObject {
-    @Published var medicines: [Medicine] = []
+    enum FilterOption: String, CaseIterable {
+        case noFilter
+        case name
+        case stock
+    }
+    
+    @Published var filterOption : FilterOption? = .noFilter
+    @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
-    private var db = Firestore.firestore()
     @Published var medicineRepository = MedicineRepository()
+    
+    
+    init(medicines: [Medicine] = MedicineRepository().medicines) {
+        self.medicines = medicines
+    }
     
     func observeMedicines() {
         medicineRepository.fetchMedicines{ medicines in
@@ -19,69 +30,68 @@ class MedicineStockViewModel: ObservableObject {
             self.aisles = aisles
         }
     }
-
-    func addRandomMedicine(user: String) {
-        medicineRepository.setData(user: user)
+    
+    func addRandomMedicine(user: String) async throws {
+        try await medicineRepository.setData(user: user)
     }
     
     func deleteMedicines(at offsets: IndexSet) {
         medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
-    func increaseStock(_ medicine: Medicine, user: String) {
-        updateStock(medicine, by: 1, user: user)
-    }
-    
-    func decreaseStock(_ medicine: Medicine, user: String) {
-        updateStock(medicine, by: -1, user: user)
+    func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
+        DispatchQueue.global(qos:.background).async{
+            self.updateStock(medicine, by: stocks, user: user)
+            print("super utilisation de changeStock")
+        }
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-        guard let id = medicine.id else { return }
-        let newStock = medicine.stock + amount
-        db.collection("medicines").document(id).updateData([
-            "stock": newStock
-        ]) { error in
-            if let error = error {
-                print("Error updating stock: \(error)")
-            } else {
-                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                    self.medicines[index].stock = newStock
-                }
-                self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: id, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
-            }
+        DispatchQueue.global(qos:.background).async{
+            self.medicineRepository.updateStock(medicine, by: amount, user: user)
         }
     }
-    //created new Service
     func updateMedicine(_ medicine: Medicine, user: String) {
-        guard let id = medicine.id else { return }
-        do {
-            try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
-        } catch let error {
-            print("Error updating document: \(error)")
+        DispatchQueue.global(qos:.background).async{
+            self.medicineRepository.updateMedicine(medicine, user: user)
+            print("super utilisation de updateMedicine")
         }
     }
-    //created new Service
-    private func addHistory(action: String, user: String, medicineId: String, details: String) {
-        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
-        do {
-            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-        } catch let error {
-            print("Error adding history: \(error)")
-        }
-    }
-    //created new Service
+    
     func fetchHistory(for medicine: Medicine) {
-        guard let medicineId = medicine.id else { return }
-        db.collection("history").whereField("medicineId", isEqualTo: medicineId).addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting history: \(error)")
-            } else {
-                self.history = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: HistoryEntry.self)
-                } ?? []
+        DispatchQueue.global(qos:.background).async{
+            self.medicineRepository.fetchHistory(for: medicine){ history in
+                self.history = [history]
+                print("history : \(self.history)")
             }
         }
     }
+    
+    @MainActor
+    func trieElements(option:FilterOption) async throws {
+        
+        self.filterOption = option
+        
+        switch option{
+        case .noFilter :
+            medicineRepository.getAllElements{ medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        case .name :
+            medicineRepository.trieByName { medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        case .stock :
+            medicineRepository.trieByStock { medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        }
+    }
+    
 }
