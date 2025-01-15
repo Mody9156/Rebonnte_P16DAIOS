@@ -12,9 +12,10 @@ struct Profile: View {
     var use : User
     var body: some View {
         VStack (alignment: .center){
+            Spacer()
             Text("Hello")
                 .font(.largeTitle)
-            Spacer()
+            
             HStack{
                 Text("Email : ")
                 if let email = authViewModel.session.session?.email{
@@ -34,6 +35,7 @@ struct Profile: View {
             .frame(width:100, height: 50)
             .background(Color.red)
             .cornerRadius(12)
+            Spacer()
         }
         .padding()
     }
