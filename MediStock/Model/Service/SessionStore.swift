@@ -52,7 +52,7 @@ class SessionStore: ObservableObject {
             completion(.failure(AuthError.invalidCredentials))
             return
         }
-        self.clearUserData()
+      
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             self.handleAuthResult(result, error, completion: completion)
         }
@@ -61,7 +61,7 @@ class SessionStore: ObservableObject {
     func signOut() async throws  {
         do {
             try Auth.auth().signOut()
-            self.clearUserData()
+          
             self.session = nil
         } catch {
             DispatchQueue.main.async {
@@ -88,20 +88,6 @@ class SessionStore: ObservableObject {
                 completion(.failure(AuthError.unknown))
             }
         }
-    }
-    
-    private func saveUserData(_ user: User) {
-        // Sauvegarder les informations de l'utilisateur dans UserDefaults
-        UserDefaults.standard.set(user.uid, forKey: "userUid")
-        UserDefaults.standard.set(user.email, forKey: "userEmail")
-        
-    }
-    
-    private func clearUserData() {
-        // Réinitialiser les données utilisateur précédentes dans UserDefaults
-        UserDefaults.standard.removeObject(forKey: "userUid")
-        UserDefaults.standard.removeObject(forKey: "userEmail")
-        
     }
 }
 
