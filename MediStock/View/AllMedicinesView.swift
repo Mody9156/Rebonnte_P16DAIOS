@@ -22,7 +22,7 @@ struct AllMedicinesView: View {
                                 Task{
                                     try await viewModel.trieElements(option: index)
                                 }
-                            }
+                            }.tag(index.rawValue)
                         }
                        
                     }
