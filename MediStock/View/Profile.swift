@@ -19,6 +19,7 @@ struct Profile: View {
             HStack{
                 Text("Email : ")
                 Text(authViewModel.email)
+                    .foregroundColor(.red)
             }
             .padding()
             

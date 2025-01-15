@@ -12,7 +12,6 @@ class AuthViewModel : ObservableObject {
     @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
-    @Published var email : String  = ""
     
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
@@ -31,7 +30,7 @@ class AuthViewModel : ObservableObject {
                     self.messageError = ""
                     print("isAuthenticated : \(self.isAuthenticated)")
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
-                    self.email = user.email ?? "inconnu"
+                    UserDefaults.standard.set(user.email, forKey: "email")
                     self.onLoginSucceed?()
                 case .failure(let error):
                     self.messageError = "Erreur lors de la connection de l'utilisateur"
