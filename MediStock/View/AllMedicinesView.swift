@@ -16,10 +16,13 @@ struct AllMedicinesView: View {
                     
                     Spacer()
 
-                    Picker("Sort by", selection: $sortOption) {
-                        Text("None").tag(SortOption.none)
-                        Text("Name").tag(SortOption.name)
-                        Text("Stock").tag(SortOption.stock)
+                    Picker("Sort by", selection: $viewModel.filterOption) {
+                        ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
+                            
+                        }
+                        Text("None").tag(MedicineStockViewModel.FilterOption.noFilter)
+                        Text("Name").tag(MedicineStockViewModel.FilterOption.name)
+                        Text("Stock").tag(MedicineStockViewModel.FilterOption.stock)
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)

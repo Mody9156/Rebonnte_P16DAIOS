@@ -90,6 +90,6 @@ class MedicineStockViewModel: ObservableObject {
                 print("Données : \(self.medicines)")  // Affiche les données récupérées
             }
         }
-        
+    }
     
 }
