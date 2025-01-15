@@ -14,7 +14,6 @@ struct MediStockApp: App {
     
     var body: some Scene {
         WindowGroup {
-
             ContentView()
                 .environmentObject(sessionStore)
         }

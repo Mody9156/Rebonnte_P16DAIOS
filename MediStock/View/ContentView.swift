@@ -13,9 +13,10 @@ struct ContentView: View {
                 }
             }
             .onAppear{
-                authViewModel.changeStatus()
-                authViewModel.disableAutoLogin()
-
+                Task{
+                    authViewModel.changeStatus()
+                try await  authViewModel.disableAutoLogin()
+                }
             }
          }
     }

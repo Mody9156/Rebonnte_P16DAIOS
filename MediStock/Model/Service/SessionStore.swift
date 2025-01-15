@@ -13,7 +13,7 @@ class SessionStore: ObservableObject {
         session != nil
     }
     
-    func disableAutoLogin() {
+    func disableAutoLogin() async throws {
         if Auth.auth().currentUser != nil {
             do {
                 try Auth.auth().signOut()

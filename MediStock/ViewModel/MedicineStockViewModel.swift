@@ -66,10 +66,12 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    
+    @MainActor
     func trieElements(option:FilterOption) async throws {
-        self.filterOption = option
         
+            self.filterOption = option
+      
+               
         switch option{
         case .noFilter :
             medicineRepository.getAllElements{ medicines in

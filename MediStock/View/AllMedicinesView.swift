@@ -3,7 +3,7 @@ import SwiftUI
 struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -14,7 +14,7 @@ struct AllMedicinesView: View {
                         .padding(.leading, 10)
                     
                     Spacer()
-
+                    
                     Menu("Sort by") {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
@@ -23,7 +23,7 @@ struct AllMedicinesView: View {
                                 }
                             }
                         }
-                       
+                        
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)
@@ -55,7 +55,7 @@ struct AllMedicinesView: View {
             viewModel.observeMedicines()
         }
     }
-  
+    
 }
 
 struct AllMedicinesView_Previews: PreviewProvider {
