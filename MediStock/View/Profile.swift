@@ -30,6 +30,7 @@ struct Profile: View {
             .background(Color.blue)
             .cornerRadius(12)
         }
+        .padding()
     }
 }
 
