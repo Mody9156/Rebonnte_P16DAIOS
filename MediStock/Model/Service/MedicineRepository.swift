@@ -145,4 +145,17 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+    
+    func getAllElements(completion:@escaping([Medicine]) -> Void) {
+        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let medicines = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: Medicine.self)
+                } ?? []
+                completion(medicines)
+            }
+        }
+    }
 }

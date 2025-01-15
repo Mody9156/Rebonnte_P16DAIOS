@@ -7,7 +7,8 @@ class MedicineStockViewModel: ObservableObject {
         case name
         case stock
     }
-    
+    @Published
+    var filterOption : FilterOption? = .noFilter
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
@@ -65,11 +66,9 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    func trieByName(){
+    func trieElements(option:FilterOption) async throws {
+        self.filterOption = option
         
-    }
+        
     
-    func triByStock(){
-        
-    }
 }
