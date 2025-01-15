@@ -13,7 +13,6 @@ class AuthViewModel : ObservableObject {
     @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
     
-    
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed

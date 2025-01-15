@@ -7,13 +7,13 @@ class MedicineStockViewModel: ObservableObject {
         case name
         case stock
     }
-    @Published
-    var filterOption : FilterOption? = .noFilter
+    
+    @Published var filterOption : FilterOption? = .noFilter
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
-
+    
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
@@ -30,9 +30,9 @@ class MedicineStockViewModel: ObservableObject {
             self.aisles = aisles
         }
     }
-
+    
     func addRandomMedicine(user: String) async throws {
-      try await medicineRepository.setData(user: user)
+        try await medicineRepository.setData(user: user)
     }
     
     func deleteMedicines(at offsets: IndexSet) {
@@ -57,7 +57,7 @@ class MedicineStockViewModel: ObservableObject {
             print("super utilisation de updateMedicine")
         }
     }
-
+    
     func fetchHistory(for medicine: Medicine) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
@@ -66,12 +66,12 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
+    
     @MainActor
     func trieElements(option:FilterOption) async throws {
         
-            self.filterOption = option
-      
-               
+        self.filterOption = option
+        
         switch option{
         case .noFilter :
             medicineRepository.getAllElements{ medicines in

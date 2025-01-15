@@ -46,26 +46,26 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             
-            try await addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")
         }
     }
     
     func delete(medicines:[Medicine] ,at offsets: IndexSet)  {
-            offsets.map { medicines[$0] }.forEach { medicine in
-                if let id = medicine.id {
-                    db.collection("medicines").document(id).delete { error in
-                        if let error = error {
-                            print("Error removing document: \(error)")
-                        }
+        offsets.map { medicines[$0] }.forEach { medicine in
+            if let id = medicine.id {
+                db.collection("medicines").document(id).delete { error in
+                    if let error = error {
+                        print("Error removing document: \(error)")
                     }
                 }
             }
+        }
         
     }
     
-    private func addHistory(action: String, user: String, medicineId: String, details: String) async throws {
+    private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
@@ -74,38 +74,34 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String) async throws {
+    func updateMedicine(_ medicine: Medicine, user: String){
         
         guard let id = medicine.id else { return }
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
-            try await addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
             
         } catch let error {
             print("Error updating document: \(error)")
         }
     }
     
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws {
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String)  {
         guard let id = medicine.id else { return }
         let newStock = amount
         let oldStocks = medicine.stock
-        
-        do {
-            try await addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
-            
-            try await db.collection("medicines").document(id).updateData([
-                "stock": newStock
-            ])
-            
-            if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                self.medicines[index].stock = newStock
+        db.collection("medicines").document(id).updateData([
+            "stock": newStock
+        ]) { error in
+            if let error = error {
+                print("Error updating stock: \(error)")
+            } else {
+                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                    self.medicines[index].stock = newStock
+                }
+                self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
             }
-        }catch{
-            print("Error updating stock: \(error)")
-
         }
-         
     }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
