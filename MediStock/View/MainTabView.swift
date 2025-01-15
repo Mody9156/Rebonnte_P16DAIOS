@@ -14,6 +14,12 @@ struct MainTabView: View {
                     Image(systemName: "square.grid.2x2")
                     Text("All Medicines")
                 }
+            
+            Profile(authViewModel: AuthViewModel(), use: User(uid: ""))
+                .tabItem {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+                }
         }
     }
 }
