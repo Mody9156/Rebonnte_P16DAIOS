@@ -2,6 +2,12 @@ import Foundation
 import Firebase
 
 class MedicineStockViewModel: ObservableObject {
+    enum FilterOption: String, CaseIterable {
+        case noFilter
+        case name
+        case stock
+    }
+    
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
