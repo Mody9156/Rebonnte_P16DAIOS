@@ -68,7 +68,6 @@ class MedicineRepository: ObservableObject {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-            print("history : \(history)")
         } catch let error {
             print("Error adding history: \(error)")
         }
@@ -120,4 +119,9 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+    
+    func triByName() -> [Medicine]{
+        db.collection("medicines").order(by: "name",descending: true)
+    }
+    
 }

@@ -58,4 +58,8 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
+    
+    func tri(){
+        
+    }
 }
