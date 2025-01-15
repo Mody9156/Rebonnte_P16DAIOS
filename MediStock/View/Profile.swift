@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Profile: View {
+    @StateObject var medicineStockViewModel : MedicineStockViewModel
     var body: some View {
         VStack {
             Text("Profile")
