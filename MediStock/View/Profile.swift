@@ -15,7 +15,7 @@ struct Profile: View {
             Text("Profile")
             HStack {
                 Text("Email")
-                if let email = use.emalil{
+                if let email = use.email{
                     Text(email)
                 }
             }
@@ -25,12 +25,16 @@ struct Profile: View {
                     try await  authViewModel.disableAutoLogin()
                 }
             }
+            .foregroundColor(.white)
+            .frame(width: 100, height: 50)
+            .background(Color.blue)
+            .cornerRadius(12)
         }
     }
 }
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile(authViewModel : AuthViewModel())
+        Profile(authViewModel : AuthViewModel(), use: User(uid: "f4d6s"))
     }
 }
