@@ -13,6 +13,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
+
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
@@ -69,6 +70,26 @@ class MedicineStockViewModel: ObservableObject {
     func trieElements(option:FilterOption) async throws {
         self.filterOption = option
         
+        switch option{
+        case .noFilter :
+            medicineRepository.getAllElements{ medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        case .name :
+            medicineRepository.trieByName { medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        case .stock :
+            medicineRepository.trieByStock { medicines in
+                self.medicines = medicines
+                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
+                print("Données : \(self.medicines)")  // Affiche les données récupérées
+            }
+        }
         
     
 }
