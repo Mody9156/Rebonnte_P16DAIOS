@@ -51,8 +51,10 @@ class MedicineStockViewModel: ObservableObject {
     }
 
     func fetchHistory(for medicine: Medicine) {
-        self.medicineRepository.fetchHistory(for: medicine){ history in
-            self.history = [history]
+        DispatchQueue.global(qos:.background).async{
+            self.medicineRepository.fetchHistory(for: medicine){ history in
+                self.history = [history]
+            }
         }
     }
 }
