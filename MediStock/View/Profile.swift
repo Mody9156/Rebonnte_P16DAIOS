@@ -12,6 +12,10 @@ struct Profile: View {
     var body: some View {
         VStack {
             Text("Profile")
+            HStack {
+                Text("Email")
+            }
+            
             Button("Sign Out") {
                 Task{
                     try await  authViewModel.disableAutoLogin()
