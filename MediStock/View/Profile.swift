@@ -11,15 +11,17 @@ struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
     var use : User
     var body: some View {
-        VStack (alignment: .leading){
+        VStack (alignment: .center){
             Text("Hello")
                 .font(.largeTitle)
+            
             HStack {
                 Text("Email")
                 if let email = authViewModel.session.session?.email{
                     Text(email)
                 }
             }
+            .padding()
             
             Spacer()
             
