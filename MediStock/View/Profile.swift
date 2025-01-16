@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
-    @State var email = UserDefaults.standard.data(forKey: "email")
+    @State private var email = UserDefaults.standard.string(forKey: "email")
     var use : User
     var body: some View {
         VStack (alignment: .center){
@@ -20,7 +20,7 @@ struct Profile: View {
             HStack{
                 Text("Email : ")
                 if let email = email {
-                    Text("\(email)")
+                    Text(email)
                         .foregroundColor(.red)
                 }
                 
