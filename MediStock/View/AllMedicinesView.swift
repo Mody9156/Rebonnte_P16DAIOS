@@ -60,6 +60,15 @@ struct AllMedicinesView: View {
         .searchable(text: $filterText)
     }
     
+    var searchResult : [Medicine] {
+        if filterText.isEmpty {
+            return viewModel.medicines
+        }else{
+            return viewModel.medicines.filter{ $0.name == filterText
+            }
+        }
+    }
+    
 }
 
 struct AllMedicinesView_Previews: PreviewProvider {
