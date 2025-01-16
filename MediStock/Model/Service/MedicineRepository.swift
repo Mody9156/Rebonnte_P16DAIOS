@@ -28,7 +28,7 @@ class MedicineRepository: ObservableObject {
     }
     
     func fetchAisles(completion:@escaping( [String])->Void) {
-        db.collection("medicines").order(by: "aisle", descending: true).addSnapshotListener { (querySnapshot, error) in
+        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
