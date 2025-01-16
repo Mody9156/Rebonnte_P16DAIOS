@@ -67,14 +67,14 @@ class MedicineRepository: ObservableObject {
     }
     
     func deleteAisle(medicines:[Medicine] ,at offsets: IndexSet){
-        offsets.map { medicines[$0].aisle }.forEach { medicine in
-            if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
+        offsets.map { medicines[$0]  }.forEach { medicine in
+           
+            db.collection("medicines").document(medicine.aisleit ).delete { error in
                     if let error = error {
                         print("Error removing document: \(error)")
                     }
                 }
-            }
+            
         }
     }
     
