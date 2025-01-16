@@ -46,19 +46,14 @@ struct AllMedicinesView: View {
                     }
                 }
                 .navigationBarTitle("All Medicines")
-                .navigationBarItems(trailing:
-                HStack {
-                    Button("Edit"){
-                        
-                    }
-                    Button(action: {
+                .navigationBarItems(trailing: Button(action: {
                         Task{
                             try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
                         }
                     }) {
                         Image(systemName: "plus")
                     }
-                })
+                )
             }
         }
         .onAppear {
