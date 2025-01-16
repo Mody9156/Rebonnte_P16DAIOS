@@ -57,7 +57,7 @@ struct AllMedicinesView: View {
         .onAppear {
             viewModel.observeMedicines()
         }
-        .searchable(text: $filterText)
+        
     }
     
     var searchResult : [Medicine] {
