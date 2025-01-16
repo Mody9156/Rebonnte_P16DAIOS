@@ -3,7 +3,8 @@ import SwiftUI
 struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
-    
+    @State private var email = UserDefaults.standard.string(forKey: "email")
+
     var body: some View {
         NavigationView {
             VStack {
