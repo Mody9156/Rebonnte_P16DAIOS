@@ -34,18 +34,23 @@ struct AllMedicinesView: View {
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
-                            VStack(alignment: .leading) {
-                                Text(medicine.name)
-                                    .font(.headline)
-                                Text("Stock: \(medicine.stock)")
-                                    .font(.subheadline)
+                            NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
+                                    VStack(alignment: .leading) {
+                                        Text(medicine.name)
+                                            .font(.headline)
+                                        Text("Stock: \(medicine.stock)")
+                                            .font(.subheadline)
+                                        
+                                        
+                                    }
                             }
+                          
                         }
                     }
                 }
                 .navigationBarTitle("All Medicines")
-                .navigationBarItems(trailing: Button(action: {
+                .navigationBarItems(trailing:
+                Button(action: {
                     Task{
                         
                         try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
