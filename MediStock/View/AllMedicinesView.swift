@@ -43,6 +43,8 @@ struct AllMedicinesView: View {
                                     .font(.subheadline)
                             }
                         }
+                    }.onDelete { IndexSet in
+                        viewModel.deleteMedicines(at: IndexSet)
                     }
                 }
                 .navigationBarTitle("All Medicines")
