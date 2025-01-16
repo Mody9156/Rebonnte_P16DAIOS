@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
-    @State var email = UserDefaults.standard.data(forKey: "email")
+    @State private var email = UserDefaults.standard.data(forKey: "email")
     var use : User
     var body: some View {
         VStack (alignment: .center){
