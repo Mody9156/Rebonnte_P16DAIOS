@@ -17,7 +17,7 @@ struct AisleListView: View {
                         Text(aisle)
                     }
                 }.onDelete { IndexSet in
-                    viewModel.deleteMedicines(at: IndexSet)
+                    viewModel.deleteAisle(at: IndexSet)
                 }
             }
             .navigationBarTitle("Aisles")
