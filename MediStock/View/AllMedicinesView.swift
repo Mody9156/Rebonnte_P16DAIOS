@@ -32,7 +32,7 @@ struct AllMedicinesView: View {
                 
                 // Liste des Médicaments
                 List {
-                    ForEach(viewModel.medicines, id: \.id) { medicine in
+                    ForEach(searchResult, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
@@ -64,8 +64,7 @@ struct AllMedicinesView: View {
         if filterText.isEmpty {
             return viewModel.medicines
         }else{
-            return viewModel.medicines.filter{ $0.name == filterText
-            }
+            return viewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
     
