@@ -22,8 +22,9 @@ struct AisleListView: View {
             .navigationBarItems(trailing:
              Button(action: {
                 Task{
-                    guard let uid = uid else {return}
-                    try await viewModel.addRandomMedicine(user: uid) // Remplacez par l'utilisateur actuel
+                    guard let email = email else{return}
+//                    guard let uid = uid else {return}
+                    try await viewModel.addRandomMedicine(user: email) // Remplacez par l'utilisateur actuel
                 }
             }) {
                 Image(systemName: "plus")
