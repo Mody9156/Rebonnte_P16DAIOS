@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 
 class MedicineRepository: ObservableObject {
-    private var db = Firestore.firestore()
+    private var db = Firestore.firestore()//1
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
     
