@@ -4,7 +4,7 @@ struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
     @State private var email = UserDefaults.standard.string(forKey: "email")
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -34,30 +34,30 @@ struct AllMedicinesView: View {
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                            NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
-                                    VStack(alignment: .leading) {
-                                        Text(medicine.name)
-                                            .font(.headline)
-                                        Text("Stock: \(medicine.stock)")
-                                            .font(.subheadline)
-                                        
-                                        
-                                    }
+                        
+                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
+                            VStack(alignment: .leading) {
+                                Text(medicine.name)
+                                    .font(.headline)
+                                Text("Stock: \(medicine.stock)")
+                                    .font(.subheadline)
                             }
-                          
                         }
                     }
                 }
                 .navigationBarTitle("All Medicines")
                 .navigationBarItems(trailing:
-                Button(action: {
-                    Task{
+                HStack {
+                    Button("Edit"){
                         
-                        try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
                     }
-                    
-                }) {
-                    Image(systemName: "plus")
+                    Button(action: {
+                        Task{
+                            try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                        }
+                    }) {
+                        Image(systemName: "plus")
+                    }
                 })
             }
         }
