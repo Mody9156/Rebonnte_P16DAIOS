@@ -52,6 +52,8 @@ class MedicineRepository: ObservableObject {
         }
     }
     
+    
+    
     func delete(medicines:[Medicine] ,at offsets: IndexSet)  {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
