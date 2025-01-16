@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AisleListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
+    @State private var email = UserDefaults.standard.string(forKey: "email")
 
     var body: some View {
         NavigationView {
@@ -15,8 +16,8 @@ struct AisleListView: View {
             .navigationBarTitle("Aisles")
             .navigationBarItems(trailing: Button(action: {
                 Task{
-                    try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
-
+                    guard let email = email else{return}
+                    try await viewModel.addRandomMedicine(user: email) // Remplacez par l'utilisateur actuel
                 }
             }) {
                 Image(systemName: "plus")

@@ -28,14 +28,14 @@ class MedicineRepository: ObservableObject {
     }
     
     func fetchAisles(completion:@escaping( [String])->Void) {
-        db.collection("medicines").order(by: "name", descending: true).addSnapshotListener { (querySnapshot, error) in
+        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 let allMedicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
                 } ?? []
-                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted(by: <)
                 completion(aisles)
             }
         }
