@@ -14,7 +14,6 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
     
-    
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
@@ -37,6 +36,10 @@ class MedicineStockViewModel: ObservableObject {
     
     func deleteMedicines(at offsets: IndexSet) {
         medicineRepository.delete(medicines: medicines, at: offsets)
+    }
+    
+    func deleteAisle(at offsets: IndexSet){
+        medicineRepository.deleteAisle(medicines: medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -64,6 +67,11 @@ class MedicineStockViewModel: ObservableObject {
                 self.history = [history]
                 print("history : \(self.history)")
             }
+        }
+    }
+    func triByName(){
+        medicineRepository.trieByName { medicines in
+            self.medicines = medicines
         }
     }
     

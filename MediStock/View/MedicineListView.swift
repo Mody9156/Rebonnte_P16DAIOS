@@ -3,7 +3,7 @@ import SwiftUI
 struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
-
+    
     var body: some View {
         List {
             ForEach(viewModel.medicines.filter { $0.aisle == aisle }, id: \.id) { medicine in

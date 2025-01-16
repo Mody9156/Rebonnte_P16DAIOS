@@ -3,6 +3,7 @@ import SwiftUI
 struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
+    @State private var email = UserDefaults.standard.string(forKey: "email")
     
     var body: some View {
         NavigationView {
@@ -32,7 +33,8 @@ struct AllMedicinesView: View {
                 
                 // Liste des Médicaments
                 List {
-                    ForEach(viewModel.medicines, id: \.id) { medicine in
+                    ForEach(searchResult, id: \.id) { medicine in
+                        
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
@@ -41,21 +43,32 @@ struct AllMedicinesView: View {
                                     .font(.subheadline)
                             }
                         }
+                    }.onDelete { IndexSet in
+                        viewModel.deleteMedicines(at: IndexSet)
                     }
                 }
                 .navigationBarTitle("All Medicines")
                 .navigationBarItems(trailing: Button(action: {
-                    Task{
-                     try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                        Task{
+                            try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                        }
+                    }) {
+                        Image(systemName: "plus")
                     }
-                   
-                }) {
-                    Image(systemName: "plus")
-                })
+                )
             }
         }
         .onAppear {
             viewModel.observeMedicines()
+        }
+        
+    }
+    
+    var searchResult : [Medicine] {
+        if filterText.isEmpty {
+            return viewModel.medicines
+        }else{
+            return viewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
     
