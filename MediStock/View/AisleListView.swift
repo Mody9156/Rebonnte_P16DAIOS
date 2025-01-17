@@ -16,25 +16,24 @@ struct AisleListView: View {
                     NavigationLink(destination: MedicineListView(aisle: aisle)) {
                         Text(aisle)
                     }
-                }.onDelete { IndexSet in
-                    viewModel.deleteAisle(at: IndexSet)
                 }
             }
-            .navigationBarTitle("Aisles")
             .navigationBarItems(trailing:
              Button(action: {
                 Task{
-//                    guard let email = email else{return}
-//                    guard let uid = uid else {return}
                     try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
                 }
             }) {
                 Image(systemName: "plus")
             })
+            .navigationBarTitle("Aisles")
+        }.onChange(of: viewModel.medicines) { _ in
+            viewModel.observeAisles()
         }
         .onAppear {
             viewModel.observeAisles()
         }
+        
     }
     
 }

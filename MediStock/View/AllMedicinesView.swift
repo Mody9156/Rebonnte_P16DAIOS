@@ -24,7 +24,6 @@ struct AllMedicinesView: View {
                                 }
                             }
                         }
-                        
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)
@@ -34,7 +33,6 @@ struct AllMedicinesView: View {
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                        
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
@@ -47,21 +45,20 @@ struct AllMedicinesView: View {
                         viewModel.deleteMedicines(at: IndexSet)
                     }
                 }
-                .navigationBarTitle("All Medicines")
                 .navigationBarItems(trailing: Button(action: {
-                        Task{
-                            try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
-                        }
-                    }) {
-                        Image(systemName: "plus")
+                    Task{
+                        try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
                     }
-                )
+                }) {
+                    Image(systemName: "plus")
+                })
+                .navigationBarTitle("All Medicines")
+
             }
         }
         .onAppear {
             viewModel.observeMedicines()
         }
-        
     }
     
     var searchResult : [Medicine] {
