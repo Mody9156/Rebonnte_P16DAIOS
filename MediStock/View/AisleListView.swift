@@ -27,10 +27,13 @@ struct AisleListView: View {
                 Image(systemName: "plus")
             })
             .navigationBarTitle("Aisles")
+        }.onChange(of: viewModel.medicines) { _ in
+            viewModel.observeAisles()
         }
         .onAppear {
             viewModel.observeAisles()
         }
+        
     }
     
 }
