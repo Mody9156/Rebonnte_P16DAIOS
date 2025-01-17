@@ -16,11 +16,6 @@ struct AisleListView: View {
                     NavigationLink(destination: MedicineListView(aisle: aisle)) {
                         Text(aisle)
                     }
-                }.onDelete { IndexSet in
-                    viewModel.aisles.remove(atOffsets: IndexSet)
-                }
-                .onMove { (IndexSet,index ) in
-                    viewModel.aisles.move(fromOffsets: IndexSet, toOffset: index)
                 }
             }
             .navigationBarTitle("Aisles")
