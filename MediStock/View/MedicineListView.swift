@@ -18,21 +18,22 @@ struct MedicineListView: View {
             }.onDelete { IndexSet in
                 viewModel.deleteMedicines(at: IndexSet)
             }
-        }.toolbar{
+        }
+        .toolbar{
             ToolbarItem(placement:.navigationBarTrailing){
-                HStack {
-                EditButton()
-                Button(action: {
-                    Task{
-                        try await viewModel.addRandomMedicineToList(user: "test_user", aisle: aisle) // Remplacez par l'utilisateur actuel
+                HStack{
+                    EditButton()
+                    Button(action: {
+                        Task{
+                            try await viewModel.addRandomMedicineToList(user: "test_user", aisle: aisle) // Remplacez par l'utilisateur actuel
+                        }
+                    }) {
+                        Image(systemName: "plus")
                     }
-                }) {
-                    Image(systemName: "plus")
-            }
-            }
+                }
             }
         }
-         .navigationBarTitle(aisle)
+        .navigationBarTitle(aisle)
         .onAppear {
             viewModel.observeMedicines()
         }
