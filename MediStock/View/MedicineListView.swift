@@ -4,6 +4,7 @@ struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
     
+    
     var body: some View {
         List {
             ForEach(viewModel.medicines.filter { $0.aisle == aisle }, id: \.id) { medicine in
@@ -15,7 +16,9 @@ struct MedicineListView: View {
                             .font(.subheadline)
                     }
                 }
-            }.onDelete { IndexSet in
+                
+            }
+            .onDelete { IndexSet in
                 viewModel.deleteMedicines(at: IndexSet)
             }
         }
@@ -28,13 +31,6 @@ struct MedicineListView: View {
                    Image(systemName: "plus")
                })
         
-        .navigationBarItems(trailing: Button(action: {
-            Task{
-                try await viewModel.addRandomMedicineToList(user: "test_user", aisle: aisle) // Remplacez par l'utilisateur actuel
-            }
-        }) {
-            Image(systemName: "plus")
-        })
         .navigationBarTitle(aisle)
         .onAppear {
             viewModel.observeMedicines()
