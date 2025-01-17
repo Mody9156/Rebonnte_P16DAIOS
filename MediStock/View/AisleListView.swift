@@ -17,7 +17,10 @@ struct AisleListView: View {
                         Text(aisle)
                     }
                 }.onDelete { IndexSet in
-                    viewModel.deleteAisle(at: IndexSet)
+                    viewModel.aisles.remove(atOffsets: IndexSet)
+                }
+                .onMove { (IndexSet,index ) in
+                    viewModel.aisles.move(fromOffsets: IndexSet, toOffset: index)
                 }
             }
             .navigationBarTitle("Aisles")
