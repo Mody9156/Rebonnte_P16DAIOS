@@ -62,16 +62,15 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func delete(medicines: inout [Medicine], at offsets: IndexSet) {
-        let itemsToDelete = offsets.map { medicines[$0] }
-        medicines.remove(atOffsets: offsets)
-        itemsToDelete.forEach { medicine in
+    func delete(medicines: [Medicine], at offsets: IndexSet, completion: @escaping (Error?) -> Void) {
+        offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
                 db.collection("medicines").document(id).delete { error in
                     if let error = error {
-                        print("Error removing document: \(error)")
+                        completion(error)
+                    } else {
+                        completion(nil)
                     }
-                    print("element supprimé ")
                 }
             }
         }

@@ -13,7 +13,8 @@ class MedicineStockViewModel: ObservableObject {
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
-    
+    @Published var showErrorAlert : Bool = false
+    @Published var errorMessage : String = ""
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
@@ -39,7 +40,13 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func deleteMedicines(at offsets: IndexSet) {
-        medicineRepository.delete(medicines: &medicines, at: offsets)
+        medicineRepository.delete(medicines: medicines, at: offsets) { [self] error in
+            if let error = error {
+                showErrorAlert = true
+                errorMessage = error.localizedDescription
+            }
+        }
+
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
