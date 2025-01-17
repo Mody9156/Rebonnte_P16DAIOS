@@ -71,6 +71,7 @@ class MedicineRepository: ObservableObject {
                     if let error = error {
                         print("Error removing document: \(error)")
                     }
+                    print("element supprimé ")
                 }
             }
         }

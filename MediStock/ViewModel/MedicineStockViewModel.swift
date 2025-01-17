@@ -39,7 +39,7 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func deleteMedicines(at offsets: IndexSet) {
-        medicineRepository.delete(medicines: medicines, at: offsets)
+        medicineRepository.delete(medicines: &medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
