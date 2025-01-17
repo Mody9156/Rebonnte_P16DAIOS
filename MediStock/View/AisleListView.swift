@@ -18,7 +18,6 @@ struct AisleListView: View {
                     }
                 }
             }
-            .navigationBarTitle("Aisles")
             .navigationBarItems(trailing:
              Button(action: {
                 Task{
@@ -27,6 +26,7 @@ struct AisleListView: View {
             }) {
                 Image(systemName: "plus")
             })
+            .navigationBarTitle("Aisles")
         }
         .onAppear {
             viewModel.observeAisles()
