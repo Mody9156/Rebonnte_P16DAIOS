@@ -51,6 +51,16 @@ class MedicineRepository: ObservableObject {
             print("Error adding document: \(error)")
         }
     }
+    func setDataToList(user: String, aisle : String ) async throws {
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
+        do {
+            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+            print("Graduation vous venez d'ajouter: \(medicine)")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+        } catch let error {
+            print("Error adding document: \(error)")
+        }
+    }
     
     func delete(medicines:[Medicine] ,at offsets: IndexSet)  {
         offsets.map { medicines[$0] }.forEach { medicine in
