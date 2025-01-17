@@ -38,10 +38,6 @@ class MedicineStockViewModel: ObservableObject {
         medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
-    func deleteAisle(at offsets: IndexSet){
-        medicineRepository.deleteAisle(medicines: medicines, at: offsets)
-    }
-    
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)

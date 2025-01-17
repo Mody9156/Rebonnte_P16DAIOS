@@ -18,12 +18,12 @@ struct MedicineListView: View {
             }
         }
         .navigationBarItems(trailing: Button(action: {
-                Task{
-                    try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
-                }
-            }) {
-                Image(systemName: "plus")
-            })
+            Task{
+                try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+            }
+        }) {
+            Image(systemName: "plus")
+        })
         .navigationBarTitle(aisle)
         .onAppear {
             viewModel.observeMedicines()
