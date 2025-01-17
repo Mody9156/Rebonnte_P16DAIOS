@@ -8,7 +8,9 @@ struct MedicineListView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.medicines, id: \.id) { medicine in
+                ForEach(viewModel.medicines.filter({ Medicine in
+                    Medicine.aisle == aisle
+                }), id: \.id) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
                         VStack(alignment: .leading) {
                             Text(medicine.name)
@@ -35,9 +37,6 @@ struct MedicineListView: View {
             .onAppear {
                 viewModel.observeMedicines()
         }
-        }
-        .onAppear {
-            viewModel.observeMedicines()
         }
     }
 }
