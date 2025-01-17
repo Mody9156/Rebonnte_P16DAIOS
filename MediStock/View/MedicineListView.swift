@@ -19,7 +19,7 @@ struct MedicineListView: View {
         }
         .navigationBarItems(trailing: Button(action: {
             Task{
-                try await viewModel.addRandomMedicine(user: aisle) // Remplacez par l'utilisateur actuel
+                try await viewModel.addRandomMedicineToList(user: "test_user", aisle: aisle) // Remplacez par l'utilisateur actuel
             }
         }) {
             Image(systemName: "plus")
