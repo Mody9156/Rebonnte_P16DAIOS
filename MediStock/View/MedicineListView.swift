@@ -15,6 +15,8 @@ struct MedicineListView: View {
                             .font(.subheadline)
                     }
                 }
+            }.onDelete { IndexSet in
+                viewModel.deleteMedicines(at: IndexSet)
             }
         }
         .navigationBarItems(trailing: Button(action: {
