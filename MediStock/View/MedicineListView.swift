@@ -30,7 +30,9 @@ struct MedicineListView: View {
             Image(systemName: "plus")
         })
         .navigationBarTitle(aisle)
-        
+        .onAppear {
+            viewModel.observeMedicines()
+        }
     }
     
     struct MedicineListView_Previews: PreviewProvider {
