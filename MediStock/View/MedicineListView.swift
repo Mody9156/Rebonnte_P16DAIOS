@@ -4,7 +4,6 @@ struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
     
-    
     var body: some View {
         List {
             ForEach(viewModel.medicines.filter({ Medicine in
@@ -31,9 +30,7 @@ struct MedicineListView: View {
             Image(systemName: "plus")
         })
         .navigationBarTitle(aisle)
-        .onAppear {
-            viewModel.observeMedicines()
-        }
+        
     }
     
     struct MedicineListView_Previews: PreviewProvider {
