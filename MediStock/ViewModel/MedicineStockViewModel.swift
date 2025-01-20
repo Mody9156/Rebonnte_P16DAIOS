@@ -36,10 +36,10 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     func addRandomMedicine(user: String) async throws {
-            try await medicineRepository.setData(user: user)
+        try await medicineRepository.setData(user: user)
     }
     func addRandomMedicineToList(user: String, aisle: String) async throws {
-            try await medicineRepository.setDataToList(user: user, aisle: aisle)
+        try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
     func deleteMedicines(at offsets: IndexSet) {

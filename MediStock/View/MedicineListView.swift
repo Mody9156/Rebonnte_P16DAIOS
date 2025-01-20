@@ -4,7 +4,6 @@ struct MedicineListView: View {
     @StateObject var viewModel : MedicineStockViewModel
     var aisle: String
     @State private var email = UserDefaults.standard.string(forKey: "email")
-    @Environment(\.dismiss) var dismiss
 
     var filterMedicines : [Medicine] {
         return viewModel.medicines.filter({ Medicine in
