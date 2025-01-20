@@ -31,9 +31,7 @@ struct AisleListView: View {
         .onAppear {
             viewModel.observeAisles()
         }
-        
     }
-    
 }
 
 struct AisleListView_Previews: PreviewProvider {
