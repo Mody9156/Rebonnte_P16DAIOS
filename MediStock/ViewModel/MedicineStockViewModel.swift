@@ -26,7 +26,7 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    func observeAisles() {
+    @MainActor func observeAisles() {
         medicineRepository.fetchAisles { [weak self]  aisles in
             DispatchQueue.main.async {
                 self?.aisles = aisles
