@@ -6,7 +6,7 @@ struct MedicineListView: View {
     
     
     var body: some View {
-        VStack {
+        NavigationStack {
             List {
                 ForEach(viewModel.medicines.filter({ Medicine in
                     Medicine.aisle == aisle
@@ -25,27 +25,25 @@ struct MedicineListView: View {
                 }
             }
             .navigationBarItems(trailing:
-                    Button(action: {
-                       Task{
-                           try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
-                       }
-                   }) {
-                       Image(systemName: "plus")
-                   })
+                                    Button(action: {
+                Task{
+                    try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
+                }
+            }) {
+                Image(systemName: "plus")
+            })
             
             .navigationBarTitle(aisle)
-            .onChange(of: aisle, perform: { _ in
-                viewModel.observeMedicines()
-            })
-            .onAppear {
-                viewModel.observeMedicines()
+            
+            
         }
+        .onAppear {
+            viewModel.observeMedicines()
         }
     }
-}
-
-struct MedicineListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MedicineListView(aisle: "Aisle 1").environmentObject(SessionStore())
+    
+    struct MedicineListView_Previews: PreviewProvider {
+        static var previews: some View {
+            MedicineListView(aisle: "Aisle 1").environmentObject(SessionStore())
+        }
     }
-}

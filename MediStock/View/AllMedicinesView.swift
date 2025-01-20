@@ -29,7 +29,6 @@ struct AllMedicinesView: View {
                     .padding(.trailing, 10)
                 }
                 .padding(.top, 10)
-                
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
