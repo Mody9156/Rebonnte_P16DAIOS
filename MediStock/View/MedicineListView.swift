@@ -26,7 +26,6 @@ struct MedicineListView: View {
             }
             .onDelete { IndexSet in
                 viewModel.deleteMedicines(at: IndexSet)
-                dismiss()
             }
         }
         .navigationBarItems(trailing:Button(action: {
