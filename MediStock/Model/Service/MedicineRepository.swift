@@ -75,6 +75,7 @@ class MedicineRepository: ObservableObject {
                     if let error = error {
                         completion(error)
                     } else {
+                        print("Delete : \(medicine)")
                         completion(nil)
                     }
                 }

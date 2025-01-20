@@ -3,7 +3,8 @@ import SwiftUI
 struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
-    
+    @State private var email = UserDefaults.standard.string(forKey: "email")
+
     var filterMedicines : [Medicine] {
         return viewModel.medicines.filter({ Medicine in
             Medicine.aisle == aisle
@@ -29,7 +30,8 @@ struct MedicineListView: View {
             }
             .navigationBarItems(trailing:Button(action: {
                 Task{
-                    try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
+                    guard let email else {return}
+                    try await viewModel.addRandomMedicineToList(user: email, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
             }) {
                 Image(systemName: "plus")
