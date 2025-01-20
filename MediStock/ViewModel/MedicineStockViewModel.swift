@@ -18,7 +18,7 @@ class MedicineStockViewModel: ObservableObject {
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
-    
+    @MainActor
     func observeMedicines() {
         medicineRepository.fetchMedicines{ medicines in
             self.medicines = medicines
