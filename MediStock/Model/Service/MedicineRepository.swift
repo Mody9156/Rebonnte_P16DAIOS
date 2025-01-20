@@ -56,6 +56,9 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Graduation vous venez d'ajouter: \(medicine)")
+            DispatchQueue.main.async {
+                self.medicines.append(medicine) // Ajoutez directement le médicament à la liste
+            }
             addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")

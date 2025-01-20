@@ -25,7 +25,6 @@ struct MedicineListView: View {
         .navigationBarItems(trailing:Button(action: {
             Task{
                 try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
-                viewModel.observeMedicines()
             }
         }) {
             Image(systemName: "plus")
