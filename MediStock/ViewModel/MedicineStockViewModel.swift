@@ -20,8 +20,10 @@ class MedicineStockViewModel: ObservableObject {
     }
     @MainActor
     func observeMedicines() {
-        medicineRepository.fetchMedicines{ medicines in
-            self.medicines = medicines
+        DispatchQueue.main.async {
+            self.medicineRepository.fetchMedicines{ medicines in
+                self.medicines = medicines
+            }
         }
     }
     
