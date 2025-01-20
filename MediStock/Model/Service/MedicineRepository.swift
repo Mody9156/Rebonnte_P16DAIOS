@@ -51,6 +51,7 @@ class MedicineRepository: ObservableObject {
             print("Error adding document: \(error)")
         }
     }
+    
     @MainActor
     func setDataToList(user: String, aisle: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)

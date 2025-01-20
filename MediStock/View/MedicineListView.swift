@@ -33,7 +33,6 @@ struct MedicineListView: View {
         .onAppear {
             viewModel.observeMedicines()
         }
-        
     }
     
     struct MedicineListView_Previews: PreviewProvider {

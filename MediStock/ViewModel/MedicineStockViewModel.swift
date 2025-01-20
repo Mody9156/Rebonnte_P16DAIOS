@@ -19,25 +19,27 @@ class MedicineStockViewModel: ObservableObject {
         self.medicines = medicines
     }
     func observeMedicines() {
-            self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-                DispatchQueue.main.async {
-                    self? .medicines = medicines
-                }
+        self.medicineRepository.fetchMedicines{ [weak self]  medicines in
+            DispatchQueue.main.async {
+                self? .medicines = medicines
             }
-    }
-    
-    func observeAisles() {
-        medicineRepository.fetchAisles { aisles in
-            self.aisles = aisles
         }
     }
     
-    func addRandomMedicine(user: String) async throws {
-        try await medicineRepository.setData(user: user)
+    func observeAisles() {
+        medicineRepository.fetchAisles { [weak self]  aisles in
+            DispatchQueue.main.async {
+                self?.aisles = aisles
+            }
+        }
     }
-    
+    @MainActor
+    func addRandomMedicine(user: String) async throws {
+            try await medicineRepository.setData(user: user)
+    }
+    @MainActor
     func addRandomMedicineToList(user: String, aisle: String) async throws {
-        try await medicineRepository.setDataToList(user: user, aisle: aisle)
+            try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
     func deleteMedicines(at offsets: IndexSet) {
@@ -47,7 +49,7 @@ class MedicineStockViewModel: ObservableObject {
                 errorMessage = error.localizedDescription
             }
         }
-
+        
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -109,5 +111,4 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    
 }
