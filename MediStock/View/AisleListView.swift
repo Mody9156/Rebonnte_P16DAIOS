@@ -13,7 +13,7 @@ struct AisleListView: View {
         NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(aisle: aisle)) {
+                    NavigationLink(destination: MedicineListView(aisle: aisle, medicine: [Medicine( name: "", stock: 22, aisle: "")])) {
                         Text(aisle)
                     }
                 }
