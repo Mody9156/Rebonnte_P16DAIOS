@@ -13,7 +13,7 @@ struct MedicineListView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(filterMedicines, id: \.aisle) { medicine in
+                ForEach(filterMedicines, id: \.id) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
                         VStack(alignment: .leading) {
                             Text(medicine.name)
