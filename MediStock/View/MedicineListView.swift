@@ -32,7 +32,6 @@ struct MedicineListView: View {
             Task{
                 guard let email else {return}
                 try await viewModel.addRandomMedicineToList(user: email, aisle: aisle) // Remplacez par l'utilisateur actuel
-                dismiss()
             }
         }) {
             Image(systemName: "plus")

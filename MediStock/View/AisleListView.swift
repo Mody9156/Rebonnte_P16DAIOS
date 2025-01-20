@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AisleListView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @StateObject var viewModel = MedicineStockViewModel()
     @State private var email = UserDefaults.standard.string(forKey: "email")
     
     var aisles: [String] {
