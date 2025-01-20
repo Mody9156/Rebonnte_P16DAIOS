@@ -43,13 +43,7 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func deleteMedicines(at offsets: IndexSet) {
-        medicineRepository.delete(medicines: medicines, at: offsets) { [self] error in
-            if let error = error {
-                showErrorAlert = true
-                errorMessage = error.localizedDescription
-            }
-        }
-        
+        medicineRepository.delete(at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -70,7 +64,6 @@ class MedicineStockViewModel: ObservableObject {
             print("super utilisation de updateMedicine")
         }
     }
-    
     func fetchHistory(for medicine: Medicine) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in

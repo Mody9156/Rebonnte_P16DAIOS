@@ -68,21 +68,18 @@ class MedicineRepository: ObservableObject {
     }
 
     
-    func delete(medicines: [Medicine], at offsets: IndexSet, completion: @escaping (Error?) -> Void) {
+    func delete(at offsets: IndexSet) {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
                 db.collection("medicines").document(id).delete { error in
                     if let error = error {
-                        completion(error)
-                    } else {
-                        print("Delete : \(medicine)")
-                        completion(nil)
+                        print("Error removing document: \(error)")
                     }
                 }
             }
         }
     }
-
+   
     
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
