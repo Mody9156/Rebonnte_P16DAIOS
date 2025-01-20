@@ -68,7 +68,6 @@ struct AllMedicinesView: View {
             return viewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
-    
 }
 
 struct AllMedicinesView_Previews: PreviewProvider {
