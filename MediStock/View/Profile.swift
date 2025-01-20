@@ -23,7 +23,6 @@ struct Profile: View {
                     Text(email)
                         .foregroundColor(.red)
                 }
-                
             }
             .padding()
             

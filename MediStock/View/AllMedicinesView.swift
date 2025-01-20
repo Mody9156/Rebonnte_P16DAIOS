@@ -29,7 +29,6 @@ struct AllMedicinesView: View {
                     .padding(.trailing, 10)
                 }
                 .padding(.top, 10)
-                
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
@@ -47,7 +46,8 @@ struct AllMedicinesView: View {
                 }
                 .navigationBarItems(trailing: Button(action: {
                     Task{
-                        try await viewModel.addRandomMedicine(user: "test_user") // Remplacez par l'utilisateur actuel
+                        guard let email else {return}
+                        try await viewModel.addRandomMedicine(user: email) // Remplacez par l'utilisateur actuel
                     }
                 }) {
                     Image(systemName: "plus")
@@ -68,7 +68,6 @@ struct AllMedicinesView: View {
             return viewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
-    
 }
 
 struct AllMedicinesView_Previews: PreviewProvider {

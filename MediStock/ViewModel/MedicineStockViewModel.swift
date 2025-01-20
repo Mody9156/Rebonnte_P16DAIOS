@@ -15,38 +15,35 @@ class MedicineStockViewModel: ObservableObject {
     @Published var medicineRepository = MedicineRepository()
     @Published var showErrorAlert : Bool = false
     @Published var errorMessage : String = ""
+    
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
     
     func observeMedicines() {
-        medicineRepository.fetchMedicines{ medicines in
-            self.medicines = medicines
+        self.medicineRepository.fetchMedicines{ [weak self]  medicines in
+            DispatchQueue.main.async {
+                self? .medicines = medicines
+            }
         }
     }
     
-    func observeAisles() {
-        medicineRepository.fetchAisles { aisles in
-            self.aisles = aisles
+    @MainActor func observeAisles() {
+        medicineRepository.fetchAisles { [weak self]  aisles in
+            DispatchQueue.main.async {
+                self?.aisles = aisles
+            }
         }
     }
-    
     func addRandomMedicine(user: String) async throws {
         try await medicineRepository.setData(user: user)
     }
-    
     func addRandomMedicineToList(user: String, aisle: String) async throws {
         try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
     func deleteMedicines(at offsets: IndexSet) {
-        medicineRepository.delete(medicines: medicines, at: offsets) { [self] error in
-            if let error = error {
-                showErrorAlert = true
-                errorMessage = error.localizedDescription
-            }
-        }
-
+        medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -67,7 +64,6 @@ class MedicineStockViewModel: ObservableObject {
             print("super utilisation de updateMedicine")
         }
     }
-    
     func fetchHistory(for medicine: Medicine) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
@@ -108,5 +104,4 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    
 }
