@@ -6,37 +6,31 @@ struct MedicineListView: View {
     
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(viewModel.medicines.filter({ Medicine in
-                    Medicine.aisle == aisle
-                }), id: \.id) { medicine in
-                    NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
-                        VStack(alignment: .leading) {
-                            Text(medicine.name)
-                                .font(.headline)
-                            Text("Stock: \(medicine.stock)")
-                                .font(.subheadline)
-                        }
+        List {
+            ForEach(viewModel.medicines.filter({ Medicine in
+                Medicine.aisle == aisle
+            }), id: \.id) { medicine in
+                NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
+                    VStack(alignment: .leading) {
+                        Text(medicine.name)
+                            .font(.headline)
+                        Text("Stock: \(medicine.stock)")
+                            .font(.subheadline)
                     }
                 }
-                .onDelete { IndexSet in
-                    viewModel.deleteMedicines(at: IndexSet)
-                }
             }
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                Task{
-                    try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
-                }
-            }) {
-                Image(systemName: "plus")
-            })
-            
-            .navigationBarTitle(aisle)
-            
-            
+            .onDelete { IndexSet in
+                viewModel.deleteMedicines(at: IndexSet)
+            }
         }
+        .navigationBarItems(trailing:Button(action: {
+            Task{
+                try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
+            }
+        }) {
+            Image(systemName: "plus")
+        })
+        .navigationBarTitle(aisle)
         .onAppear {
             viewModel.observeMedicines()
         }
@@ -47,3 +41,4 @@ struct MedicineListView: View {
             MedicineListView(aisle: "Aisle 1").environmentObject(SessionStore())
         }
     }
+}

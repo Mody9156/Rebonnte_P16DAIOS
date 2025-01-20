@@ -10,7 +10,7 @@ struct AisleListView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
                     NavigationLink(destination: MedicineListView(aisle: aisle)) {
