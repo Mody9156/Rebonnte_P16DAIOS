@@ -14,18 +14,20 @@ class MedicineRepository: ObservableObject {
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
     
-    func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
+    func observeMedicines() {
+        db.collection("medicines").addSnapshotListener { snapshot, error in
+            guard let documents = snapshot?.documents else {
+                print("Erreur d'observation : \(error?.localizedDescription ?? "Inconnu")")
+                return
             }
+
+            self.medicines = documents.compactMap { document in
+                try? document.data(as: Medicine.self)
+            }
+            print("Medicines mis à jour : \(self.medicines.count)")
         }
     }
+
     
     func fetchAisles(completion:@escaping( [String])->Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
@@ -51,19 +53,21 @@ class MedicineRepository: ObservableObject {
             print("Error adding document: \(error)")
         }
     }
-    func setDataToList(user: String, aisle : String ) async throws {
+    @MainActor
+    func setDataToList(user: String, aisle: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Graduation vous venez d'ajouter: \(medicine)")
+            print("Ajouté : \(medicine)")
             DispatchQueue.main.async {
-                self.medicines.append(medicine) // Ajoutez directement le médicament à la liste
+                self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
             addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
-        } catch let error {
-            print("Error adding document: \(error)")
+        } catch {
+            print("Erreur : \(error)")
         }
     }
+
     
     func delete(medicines: [Medicine], at offsets: IndexSet, completion: @escaping (Error?) -> Void) {
         offsets.map { medicines[$0] }.forEach { medicine in
