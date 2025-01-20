@@ -34,10 +34,12 @@ struct MedicineListView: View {
                    })
             
             .navigationBarTitle(aisle)
-            .onChange(of: viewModel.medicines, perform: { _ in
+            .onChange(of: aisle, perform: { _ in
                 viewModel.observeMedicines()
             })
-            
+            .onAppear {
+                viewModel.observeMedicines()
+        }
         }
     }
 }
