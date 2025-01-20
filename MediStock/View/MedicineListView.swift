@@ -4,16 +4,16 @@ struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
     
-    var filterMedicines : Medicine {
-        viewModel.medicines.filter { Medicine in
-            Medicine.aisle = aisle
-        }
+    var filterMedicines : [Medicine] {
+        return viewModel.medicines.filter({ Medicine in
+            Medicine.aisle == aisle
+        })
     }
     
     var body: some View {
         VStack {
             List {
-                ForEach(filterMedicines), id: \.id) { medicine in
+                ForEach(filterMedicines, id: \.aisle) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicine: medicine)) {
                         VStack(alignment: .leading) {
                             Text(medicine.name)
