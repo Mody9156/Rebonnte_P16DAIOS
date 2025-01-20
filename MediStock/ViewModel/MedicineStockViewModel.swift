@@ -15,9 +15,11 @@ class MedicineStockViewModel: ObservableObject {
     @Published var medicineRepository = MedicineRepository()
     @Published var showErrorAlert : Bool = false
     @Published var errorMessage : String = ""
+    
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
+    
     func observeMedicines() {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
             DispatchQueue.main.async {
@@ -33,11 +35,9 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    @MainActor
     func addRandomMedicine(user: String) async throws {
             try await medicineRepository.setData(user: user)
     }
-    @MainActor
     func addRandomMedicineToList(user: String, aisle: String) async throws {
             try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
