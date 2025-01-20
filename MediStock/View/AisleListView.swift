@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AisleListView: View {
-    @StateObject var viewModel = MedicineStockViewModel()
+    @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var email = UserDefaults.standard.string(forKey: "email")
     
     var aisles: [String] {
@@ -12,7 +12,7 @@ struct AisleListView: View {
         NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(aisle: aisle)) {
+                    NavigationLink(destination: MedicineListView(viewModel: viewModel, aisle: aisle)) {
                         Text(aisle)
                     }
                 }
@@ -36,6 +36,6 @@ struct AisleListView: View {
 
 struct AisleListView_Previews: PreviewProvider {
     static var previews: some View {
-        AisleListView()
+        AisleListView(viewModel: MedicineStockViewModel())
     }
 }

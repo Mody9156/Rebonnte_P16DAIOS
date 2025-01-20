@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MedicineListView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @StateObject var viewModel : MedicineStockViewModel
     var aisle: String
     @State private var email = UserDefaults.standard.string(forKey: "email")
     @Environment(\.dismiss) var dismiss
