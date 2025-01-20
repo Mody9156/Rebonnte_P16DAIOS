@@ -3,7 +3,6 @@ import SwiftUI
 struct MedicineListView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     var aisle: String
-    var medicine : [Medicine]
     
     var body: some View {
         List {
@@ -26,6 +25,7 @@ struct MedicineListView: View {
         .navigationBarItems(trailing:Button(action: {
             Task{
                 try await viewModel.addRandomMedicineToList(user: "test_user1", aisle: aisle) // Remplacez par l'utilisateur actuel
+                viewModel.observeMedicines()
             }
         }) {
             Image(systemName: "plus")
@@ -34,14 +34,12 @@ struct MedicineListView: View {
         .onAppear {
             viewModel.observeMedicines()
         }
-        .onChange(of: medicine) { newValue in
-            viewModel.observeMedicines()
-        }
+        
     }
     
     struct MedicineListView_Previews: PreviewProvider {
         static var previews: some View {
-            MedicineListView(aisle: "Aisle 1", medicine: [Medicine(name: "", stock: 22, aisle: "")]).environmentObject(SessionStore())
+            MedicineListView(aisle: "Aisle 1").environmentObject(SessionStore())
         }
     }
 }
