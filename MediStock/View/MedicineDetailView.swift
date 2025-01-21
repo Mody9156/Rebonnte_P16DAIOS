@@ -43,11 +43,15 @@ struct MedicineDetailView: View {
                 }
             }
             .padding(.vertical)
-            .onChange(of: medicine, perform: { medicine in
-                viewModel.fetchHistory(for: medicine)
-            })
+           
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
+        .onAppear{
+            viewModel.fetchHistory(for: medicine)
+        }
+        .onChange(of: medicine) { _ in
+                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
         
     }
 }
@@ -120,7 +124,7 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             ScrollView(.vertical) {
-                    ForEach(viewModel.history) { entry in
+                ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
                     VStack(alignment: .leading, spacing: 5) {
                         Text(entry.action)
                             .font(.headline)

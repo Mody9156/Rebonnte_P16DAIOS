@@ -104,23 +104,22 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String)  {
-        guard let id = medicine.id else { return }
-        let newStock = amount
-        let oldStocks = medicine.stock
-        db.collection("medicines").document(id).updateData([
-            "stock": newStock
-        ]) { error in
-            if let error = error {
-                print("Error updating stock: \(error)")
-            } else {
-                if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                    self.medicines[index].stock = newStock
-                }
-                self.addHistory(action: "\(newStock > oldStocks ? "Increased" : "Decreased") stock of \(medicine.name)", user: user, medicineId: id, details: "Stock changed from \(oldStocks) to \(newStock)")
-            }
-        }
-    }
+     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
+           guard let id = medicine.id else { return }
+           let newStock = medicine.stock + amount
+           db.collection("medicines").document(id).updateData([
+               "stock": newStock
+           ]) { error in
+               if let error = error {
+                   print("Error updating stock: \(error)")
+               } else {
+                   if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                       self.medicines[index].stock = newStock
+                   }
+                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: id, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+               }
+           }
+       }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping(HistoryEntry)->Void) {
         guard let medicineId = medicine.id else { return }
