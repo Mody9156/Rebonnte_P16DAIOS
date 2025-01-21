@@ -49,7 +49,6 @@ class MedicineStockViewModel: ObservableObject {
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)
-            print("super utilisation de changeStock")
         }
     }
     
@@ -74,6 +73,7 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
+    
     func triByName(){
         medicineRepository.trieByName { medicines in
             self.medicines = medicines
