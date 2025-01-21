@@ -61,7 +61,6 @@ class MedicineStockViewModel: ObservableObject {
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.updateMedicine(medicine, user: user)
-            print("super utilisation de updateMedicine")
         }
     }
     
@@ -69,7 +68,6 @@ class MedicineStockViewModel: ObservableObject {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
                 self.history = [history]
-                print("history : \(self.history)")
             }
         }
     }
