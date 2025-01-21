@@ -70,8 +70,8 @@ extension MedicineDetailView {
                 .font(.headline)
             HStack {
                 Button(action: {
-                    
-                    viewModel.d
+                    guard let id = medicine.id else {return}
+                    viewModel.decreaseStock(medicine, user: id)
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
@@ -86,7 +86,8 @@ extension MedicineDetailView {
                 .frame(width: 100)
                 
                 Button(action: {
-                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    guard let id = medicine.id else {return}
+                    viewModel.increaseStock(medicine, user: id)
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
