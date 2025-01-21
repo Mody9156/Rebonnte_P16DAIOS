@@ -32,7 +32,7 @@ struct MedicineDetailView: View {
                         
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
-                        viewModel.fetchHistory(for: medicine)
+                        
                     }
                     .foregroundColor(.white)
                     .frame(width: 100,height: 50)
@@ -43,6 +43,9 @@ struct MedicineDetailView: View {
                 }
             }
             .padding(.vertical)
+            .onChange(of: medicine, perform: { _ in
+                viewModel.fetchHistory(for: medicine)
+            })
             .onAppear{
                 viewModel.fetchHistory(for: medicine)
             }

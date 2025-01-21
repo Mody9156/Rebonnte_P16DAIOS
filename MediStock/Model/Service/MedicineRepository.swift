@@ -26,6 +26,7 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+    
     @MainActor
     func fetchAisles(completion:@escaping( [String])->Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
