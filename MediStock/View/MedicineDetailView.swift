@@ -24,18 +24,18 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
-                
             }
             .padding(.vertical)
-            
+           
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear{
             viewModel.fetchHistory(for: medicine)
+            viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
         }
         .onChange(of: medicine) { _ in
-            viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-        }
+                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
         
     }
 }
@@ -81,7 +81,7 @@ extension MedicineDetailView {
                 Button(action: {
                     guard let id = medicine.id
                     else{return}
-                    viewModel.increaseStock(medicine, user: id)
+                       viewModel.increaseStock(medicine, user: id)
                     medicine.stock += 1
                 }) {
                     Image(systemName: "plus.circle")
