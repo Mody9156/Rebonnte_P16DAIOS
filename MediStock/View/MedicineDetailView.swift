@@ -43,9 +43,6 @@ struct MedicineDetailView: View {
                 }
             }
             .padding(.vertical)
-            .onChange(of: medicine, perform: { _ in
-                viewModel.fetchHistory(for: medicine)
-            })
             .onAppear{
                 viewModel.fetchHistory(for: medicine)
             }
