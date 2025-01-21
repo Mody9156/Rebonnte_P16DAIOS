@@ -71,7 +71,7 @@ extension MedicineDetailView {
             HStack {
                 Button(action: {
                     
-                    medicine.stock -= 1
+                    viewModel.d
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
@@ -86,7 +86,7 @@ extension MedicineDetailView {
                 .frame(width: 100)
                 
                 Button(action: {
-                    medicine.stock += 1
+                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)

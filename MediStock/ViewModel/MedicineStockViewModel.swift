@@ -58,6 +58,12 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
+    func decreaseStock(_ medicine: Medicine, user: String) {
+        DispatchQueue.global(qos:.background).async{
+            self.updateStock(medicine, by: -1, user: user)
+        }
+        }
+    
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.updateMedicine(medicine, user: user)
