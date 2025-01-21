@@ -70,8 +70,9 @@ extension MedicineDetailView {
                 .font(.headline)
             HStack {
                 Button(action: {
-                    guard let id = medicine.id else {return}
-                    viewModel.decreaseStock(medicine, user: id)
+                    if let id = session.session?.uid {
+                        viewModel.decreaseStock(medicine, user: id)
+                    }
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
@@ -79,15 +80,18 @@ extension MedicineDetailView {
                 }
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
-                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    if let id = session.session?.uid {
+                        viewModel.updateMedicine(medicine, user: id)
+                    }
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
                 .frame(width: 100)
                 
                 Button(action: {
-                    guard let id = medicine.id else {return}
-                    viewModel.increaseStock(medicine, user: id)
+                    if let id = session.session?.uid {
+                        viewModel.increaseStock(medicine, user: id)
+                    }
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
