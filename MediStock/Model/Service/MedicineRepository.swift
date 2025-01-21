@@ -132,6 +132,7 @@ class MedicineRepository: ObservableObject {
                     let history =  try? document.data(as: HistoryEntry.self)
                     if let history {
                         completion(history)
+                        print("il y a \(history)")
                     }
                     return history
                 } ?? []
