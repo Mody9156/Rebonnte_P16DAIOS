@@ -30,10 +30,8 @@ struct MedicineDetailView: View {
                     
                     Button("Registre") {
                         
-                        viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
-                        
                         viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                        
+                        viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                         viewModel.fetchHistory(for: medicine)
                     }
                     .foregroundColor(.white)

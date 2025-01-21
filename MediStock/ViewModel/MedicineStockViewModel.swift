@@ -58,12 +58,14 @@ class MedicineStockViewModel: ObservableObject {
             self.medicineRepository.updateStock(medicine, by: amount, user: user)
         }
     }
+    
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.updateMedicine(medicine, user: user)
             print("super utilisation de updateMedicine")
         }
     }
+    
     func fetchHistory(for medicine: Medicine) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
