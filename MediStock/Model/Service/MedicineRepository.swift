@@ -80,8 +80,6 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-
-    
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
