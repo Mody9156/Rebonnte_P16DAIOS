@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MedicineDetailView: View {
     @State var medicine: Medicine
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     
     var body: some View {
@@ -24,32 +24,18 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
-                
-                HStack {
-                    Spacer()
-                    
-                    Button("Registre") {
-                        
-                        viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
-                        
-                        viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                        
-                        viewModel.fetchHistory(for: medicine)
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: 100,height: 50)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    
-                    Spacer()
-                }
             }
             .padding(.vertical)
-            .onAppear{
-                viewModel.fetchHistory(for: medicine)
-            }
+           
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
+        .onAppear{
+            viewModel.fetchHistory(for: medicine)
+            viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
+        }
+        .onChange(of: medicine) { _ in
+                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
         
     }
 }
@@ -62,7 +48,6 @@ extension MedicineDetailView {
             TextField("Name", text: $medicine.name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.bottom, 10)
-            
         }
         .padding(.horizontal)
     }
@@ -73,8 +58,11 @@ extension MedicineDetailView {
                 .font(.headline)
             HStack {
                 Button(action: {
-                    
+                    guard let id = medicine.id
+                    else{return}
+                    viewModel.decreaseStock(medicine, user: id)
                     medicine.stock -= 1
+                    
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
@@ -82,13 +70,18 @@ extension MedicineDetailView {
                 }
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
-                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    if let id = session.session?.uid {
+                        viewModel.updateMedicine(medicine, user: id)
+                    }
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
                 .frame(width: 100)
                 
                 Button(action: {
+                    guard let id = medicine.id
+                    else{return}
+                       viewModel.increaseStock(medicine, user: id)
                     medicine.stock += 1
                 }) {
                     Image(systemName: "plus.circle")
@@ -117,8 +110,8 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ForEach(viewModel.history.filter { $0.medicineId == medicine.id }, id: \.id) { entry in
-                ScrollView {
+            ScrollView(.vertical) {
+                ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
                     VStack(alignment: .leading, spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
@@ -137,7 +130,6 @@ extension MedicineDetailView {
             }
         }
         .padding(.horizontal)
-        
     }
 }
 

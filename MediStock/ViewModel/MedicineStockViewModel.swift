@@ -49,29 +49,41 @@ class MedicineStockViewModel: ObservableObject {
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
         DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)
-            print("super utilisation de changeStock")
         }
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-        DispatchQueue.global(qos:.background).async{
+        DispatchQueue.main.async{
             self.medicineRepository.updateStock(medicine, by: amount, user: user)
         }
     }
+    
+    func increaseStock(_ medicine: Medicine, user: String) {
+        DispatchQueue.main.async{
+            self.updateStock(medicine, by: 1, user: user)
+        }
+    }
+    
+    func decreaseStock(_ medicine: Medicine, user: String) {
+        DispatchQueue.main.async{
+            self.updateStock(medicine, by: -1, user: user)
+        }
+    }
+    
     func updateMedicine(_ medicine: Medicine, user: String) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.updateMedicine(medicine, user: user)
-            print("super utilisation de updateMedicine")
         }
     }
+    
     func fetchHistory(for medicine: Medicine) {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
                 self.history = [history]
-                print("history : \(self.history)")
             }
         }
     }
+    
     func triByName(){
         medicineRepository.trieByName { medicines in
             self.medicines = medicines
