@@ -43,9 +43,9 @@ struct MedicineDetailView: View {
                 }
             }
             .padding(.vertical)
-            .onAppear{
+            .onChange(of: medicine, perform: { medicine in
                 viewModel.fetchHistory(for: medicine)
-            }
+            })
         }
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         
@@ -60,7 +60,6 @@ extension MedicineDetailView {
             TextField("Name", text: $medicine.name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.bottom, 10)
-            
         }
         .padding(.horizontal)
     }
@@ -115,9 +114,8 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-                ScrollView {
+            ScrollView(.vertical) {
                     ForEach(viewModel.history) { entry in
-
                     VStack(alignment: .leading, spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
@@ -136,7 +134,6 @@ extension MedicineDetailView {
             }
         }
         .padding(.horizontal)
-        
     }
 }
 
