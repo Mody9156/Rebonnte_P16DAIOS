@@ -115,8 +115,9 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ForEach(viewModel.history) { entry in
                 ScrollView {
+                    ForEach(viewModel.history) { entry in
+
                     VStack(alignment: .leading, spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
