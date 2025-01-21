@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MedicineDetailView: View {
     @State var medicine: Medicine
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     
     var body: some View {
