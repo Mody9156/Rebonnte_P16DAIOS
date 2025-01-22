@@ -119,9 +119,7 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             
-            ScrollView {
                 ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
-                    
                     VStack(spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
@@ -137,7 +135,6 @@ extension MedicineDetailView {
                     .cornerRadius(10)
                     .padding(.bottom, 5)
                 }
-            }
         }
         .padding(.horizontal)
     }
