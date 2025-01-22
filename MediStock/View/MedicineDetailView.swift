@@ -42,7 +42,7 @@ struct MedicineDetailView: View {
 extension MedicineDetailView {
     private var medicineNameSection: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Name"))
+            Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.headline)
             TextField("Name", text: $medicine.name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -53,7 +53,7 @@ extension MedicineDetailView {
     
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
-            Text("Stock")
+            Text(LocalizedStringKey("Stock"))
                 .font(.headline)
             HStack {
                 Button(action: decreaseStock) {
