@@ -114,29 +114,27 @@ extension MedicineDetailView {
     }
     
     private var historySection: some View {
-        VStack(alignment: .leading) {
+        HStack {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
             
-                ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 5) {
-                            Text(entry.action)
-                                .font(.headline)
-                            Text("User: \(entry.user)")
-                                .font(.subheadline)
-                            Text("Date: \(entry.timestamp.formatted())")
-                                .font(.subheadline)
-                            Text("Details: \(entry.details)")
-                                .font(.subheadline)
-                        }
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.bottom, 5)
+            ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
+                ScrollView(.vertical) {
+                    VStack(spacing: 5) {
+                        Text(entry.action)
+                            .font(.headline)
+                        Text("User: \(entry.user)")
+                            .font(.subheadline)
+                        Text("Date: \(entry.timestamp.formatted())")
+                            .font(.subheadline)
+                        Text("Details: \(entry.details)")
+                            .font(.subheadline)
                     }
-                    
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 5)
                 }
             }
         }
