@@ -32,8 +32,6 @@ class AuthViewModel : ObservableObject {
                     UserDefaults.standard.set(user.uid, forKey: "uid")
                     print("isAuthenticated : \(self.isAuthenticated)")
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
-                    UserDefaults.standard.removeObject(forKey: "email")
-                    UserDefaults.standard.removeObject(forKey: "uid")
                     self.onLoginSucceed?()
                 case .failure(let error):
                     self.messageError = "Erreur lors de la connection de l'utilisateur"
