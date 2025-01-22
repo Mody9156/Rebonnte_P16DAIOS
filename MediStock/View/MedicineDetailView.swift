@@ -35,6 +35,7 @@ struct MedicineDetailView: View {
         }
         .onChange(of: medicine) { _ in
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+            viewModel.fetchHistory(for: medicine)
                 }
         
     }
