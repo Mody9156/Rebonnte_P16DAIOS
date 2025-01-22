@@ -7,7 +7,7 @@ struct MedicineDetailView: View {
     var filterMedicine : [HistoryEntry]{
         return  viewModel.history.filter { $0.medicineId == medicine.id }
     }
-    let history : [HistoryEntry]
+//    let history : [HistoryEntry]
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
@@ -38,6 +38,7 @@ struct MedicineDetailView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if newMedicine == medicine {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    viewModel.fetchHistory(for: newMedicine)
                 }
             }
         }
@@ -147,10 +148,11 @@ extension MedicineDetailView {
 struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-        let history = [
-            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
+//        let history = [
+//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
         let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel, history: history).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
     }
 }
