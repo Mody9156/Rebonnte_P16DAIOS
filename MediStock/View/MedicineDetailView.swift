@@ -38,9 +38,7 @@ struct MedicineDetailView: View {
                     viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }
             }
-            
         }
-        
     }
 }
 
@@ -49,7 +47,9 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.headline)
-            TextField("Name", text: $medicine.name)
+            TextField("Name", text: $medicine.name, onCommit: {
+                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+            })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.bottom, 10)
         }
