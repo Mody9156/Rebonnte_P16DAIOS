@@ -5,7 +5,7 @@ struct MedicineDetailView: View {
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     var filterMedicine : [HistoryEntry]{
-       return  viewModel.history.filter { $0.medicineId == medicine.id }
+        return  viewModel.history.filter { $0.medicineId == medicine.id }
     }
     var body: some View {
         ScrollView {
@@ -26,6 +26,7 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
+                
             }
             .padding(.vertical)
             
@@ -116,31 +117,31 @@ extension MedicineDetailView {
     }
     
     private var historySection: some View {
-        VStack(alignment: .leading) {
-            Text("History")
-                .font(.headline)
-                .padding(.top, 20)
-            
-            HStack {
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("History")
+                    .font(.headline)
+                    .padding(.top, 20)
+                
                 ForEach(filterMedicine) { entry in
-                        VStack(spacing: 5) {
-                            Text(entry.action)
-                                .font(.headline)
-                            Text("User: \(entry.user)")
-                                .font(.subheadline)
-                            Text("Date: \(entry.timestamp.formatted())")
-                                .font(.subheadline)
-                            Text("Details: \(entry.details)")
-                                .font(.subheadline)
-                        }
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.bottom, 5)
+                    VStack(spacing: 5) {
+                        Text(entry.action)
+                            .font(.headline)
+                        Text("User: \(entry.user)")
+                            .font(.subheadline)
+                        Text("Date: \(entry.timestamp.formatted())")
+                            .font(.subheadline)
+                        Text("Details: \(entry.details)")
+                            .font(.subheadline)
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 5)
                 }
             }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 
