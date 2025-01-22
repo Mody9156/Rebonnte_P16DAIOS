@@ -17,7 +17,7 @@ class SessionStore: ObservableObject {
         if Auth.auth().currentUser != nil {
             do {
                 try await signOut()
-                unbind()
+                stopListeningToAuthChanges()
                 print("Déconnexion réussie pour désactiver la persistance.")
             } catch let error {
                 print("Erreur lors de la déconnexion : \(error.localizedDescription)")
@@ -58,13 +58,11 @@ class SessionStore: ObservableObject {
             self.handleAuthResult(result, error, completion: completion)
         }
     }
-    
+    @MainActor
     func signOut() async throws  {
         do {
             try Auth.auth().signOut()
-            DispatchQueue.main.async {
                 self.session = nil
-            }
         } catch {
             DispatchQueue.main.async {
                 self.error = .unknown
@@ -72,7 +70,7 @@ class SessionStore: ObservableObject {
         }
     }
     
-    func unbind() {
+    func stopListeningToAuthChanges() {
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
             self.handle = nil

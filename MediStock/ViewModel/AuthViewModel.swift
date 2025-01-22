@@ -29,7 +29,6 @@ class AuthViewModel : ObservableObject {
                 case .success(let user):
                     self.messageError = ""
                     UserDefaults.standard.set(user.email, forKey: "email")
-                    UserDefaults.standard.set(user.uid, forKey: "uid")
                     print("isAuthenticated : \(self.isAuthenticated)")
                     print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
                     self.onLoginSucceed?()

@@ -18,6 +18,9 @@ struct ContentView: View {
                 try await  authViewModel.disableAutoLogin()
                 }
             }
+            .onDisappear {
+                            authViewModel.stopListeningToAuthChanges() // Désactive le listener pour éviter les fuites
+                        }
          }
     }
 }
