@@ -7,6 +7,7 @@ struct MedicineDetailView: View {
     var filterMedicine : [HistoryEntry]{
         return  viewModel.history.filter { $0.medicineId == medicine.id }
     }
+    let history : [HistoryEntry]
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
@@ -146,6 +147,9 @@ extension MedicineDetailView {
 struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
+        let history = [
+            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
         let sampleViewModel = MedicineStockViewModel()
         MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
     }
