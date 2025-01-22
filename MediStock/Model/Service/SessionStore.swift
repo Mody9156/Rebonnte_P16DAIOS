@@ -62,7 +62,9 @@ class SessionStore: ObservableObject {
     func signOut() async throws  {
         do {
             try Auth.auth().signOut()
-            self.session = nil
+            DispatchQueue.main.async {
+                self.session = nil
+            }
         } catch {
             DispatchQueue.main.async {
                 self.error = .unknown
