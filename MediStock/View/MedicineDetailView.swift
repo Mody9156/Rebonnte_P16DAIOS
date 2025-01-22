@@ -118,9 +118,9 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ScrollView(.vertical) {
+            ScrollView(.horizontal) {
                 ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
-                    VStack(alignment: .leading, spacing: 5) {
+                    HStack(spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
                         Text("User: \(entry.user)")
