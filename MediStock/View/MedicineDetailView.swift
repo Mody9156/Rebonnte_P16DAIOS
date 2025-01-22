@@ -4,7 +4,9 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
-    
+    var filterMedicine : [HistoryEntry]{
+       return  viewModel.history.filter { $0.medicineId == medicine.id }
+    }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -119,22 +121,24 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             
-                ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
-                    VStack(spacing: 5) {
-                        Text(entry.action)
-                            .font(.headline)
-                        Text("User: \(entry.user)")
-                            .font(.subheadline)
-                        Text("Date: \(entry.timestamp.formatted())")
-                            .font(.subheadline)
-                        Text("Details: \(entry.details)")
-                            .font(.subheadline)
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.bottom, 5)
+            HStack {
+                ForEach(filterMedicine) { entry in
+                        VStack(spacing: 5) {
+                            Text(entry.action)
+                                .font(.headline)
+                            Text("User: \(entry.user)")
+                                .font(.subheadline)
+                            Text("Date: \(entry.timestamp.formatted())")
+                                .font(.subheadline)
+                            Text("Details: \(entry.details)")
+                                .font(.subheadline)
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 5)
                 }
+            }
         }
         .padding(.horizontal)
     }
