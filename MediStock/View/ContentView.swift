@@ -15,13 +15,13 @@ struct ContentView: View {
             .onAppear{
                 Task{
                     authViewModel.changeStatus()
-                try await  authViewModel.disableAutoLogin()
+                    try await  authViewModel.disableAutoLogin()
                 }
             }
             .onDisappear {
-                            authViewModel.stopListeningToAuthChanges() // Désactive le listener pour éviter les fuites
-                        }
-         }
+                authViewModel.stopListeningToAuthChanges()
+            }
+        }
     }
 }
 //
