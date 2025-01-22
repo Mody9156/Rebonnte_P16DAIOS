@@ -151,6 +151,6 @@ struct MedicineDetailView_Previews: PreviewProvider {
             HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
             HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
         let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel, history: history).environmentObject(SessionStore())
     }
 }

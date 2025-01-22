@@ -32,7 +32,7 @@ struct AllMedicinesView: View {
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
+                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel, history: [HistoryEntry(medicineId: "", user: "", action: "", details: "", timestamp: Date.now)])) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
                                     .font(.headline)
