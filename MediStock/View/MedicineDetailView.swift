@@ -90,7 +90,7 @@ extension MedicineDetailView {
     
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
-            Text("Aisle")
+            Text(LocalizedStringKey("Aisle"))
                 .font(.headline)
             TextField("Aisle", text: $medicine.aisle, onCommit: {
                 viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
