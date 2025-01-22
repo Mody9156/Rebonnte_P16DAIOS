@@ -42,7 +42,7 @@ struct MedicineDetailView: View {
 extension MedicineDetailView {
     private var medicineNameSection: some View {
         VStack(alignment: .leading) {
-            Text("Name")
+            Text(LocalizedStringKey("Name"))
                 .font(.headline)
             TextField("Name", text: $medicine.name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -101,11 +101,11 @@ extension MedicineDetailView {
     }
     
     private func increaseStock(){
-        guard let id = medicine.id
-        else{return}
+        guard let id = medicine.id else{return}
         viewModel.increaseStock(medicine, user: id)
-        medicine.stock +=
+        medicine.stock += 1
     }
+    
     private var historySection: some View {
         VStack(alignment: .leading) {
             Text("History")
