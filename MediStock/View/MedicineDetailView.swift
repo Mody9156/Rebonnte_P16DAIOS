@@ -8,29 +8,27 @@ struct MedicineDetailView: View {
         return  viewModel.history.filter { $0.medicineId == medicine.id }
     }
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Title
-                Text(medicine.name)
-                    .font(.largeTitle)
-                    .padding(.top, 20)
-                
-                // Medicine Name
-                medicineNameSection
-                
-                // Medicine Stock
-                medicineStockSection
-                
-                // Medicine Aisle
-                medicineAisleSection
-                
-                // History Section
-                historySection
-                
-            }
-            .padding(.vertical)
+        VStack(alignment: .leading, spacing: 20) {
+            // Title
+            Text(medicine.name)
+                .font(.largeTitle)
+                .padding(.top, 20)
+            
+            // Medicine Name
+            medicineNameSection
+            
+            // Medicine Stock
+            medicineStockSection
+            
+            // Medicine Aisle
+            medicineAisleSection
+            
+            // History Section
+            historySection
             
         }
+        .padding(.vertical)
+        
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear{
             viewModel.fetchHistory(for: medicine)
