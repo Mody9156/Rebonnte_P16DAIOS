@@ -118,22 +118,25 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
-            ScrollView(.horizontal) {
+            
                 ForEach(viewModel.history.filter { $0.medicineId == medicine.id }) { entry in
-                    HStack(spacing: 5) {
-                        Text(entry.action)
-                            .font(.headline)
-                        Text("User: \(entry.user)")
-                            .font(.subheadline)
-                        Text("Date: \(entry.timestamp.formatted())")
-                            .font(.subheadline)
-                        Text("Details: \(entry.details)")
-                            .font(.subheadline)
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 5) {
+                            Text(entry.action)
+                                .font(.headline)
+                            Text("User: \(entry.user)")
+                                .font(.subheadline)
+                            Text("Date: \(entry.timestamp.formatted())")
+                                .font(.subheadline)
+                            Text("Details: \(entry.details)")
+                                .font(.subheadline)
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 5)
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.bottom, 5)
+                    
                 }
             }
         }
