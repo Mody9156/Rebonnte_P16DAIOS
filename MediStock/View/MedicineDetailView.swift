@@ -50,8 +50,8 @@ extension MedicineDetailView {
             TextField("Name", text: $medicine.name, onCommit: {
                 viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.bottom, 10)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding(.bottom, 10)
         }
         .padding(.horizontal)
     }
@@ -95,8 +95,8 @@ extension MedicineDetailView {
             TextField("Aisle", text: $medicine.aisle, onCommit: {
                 viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.bottom, 10)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding(.bottom, 10)
         }
         .padding(.horizontal)
     }
