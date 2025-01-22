@@ -17,7 +17,6 @@ class SessionStore: ObservableObject {
         if Auth.auth().currentUser != nil {
             do {
                 try await signOut()
-                stopListeningToAuthChanges()
                 print("Déconnexion réussie pour désactiver la persistance.")
             } catch let error {
                 print("Erreur lors de la déconnexion : \(error.localizedDescription)")
