@@ -34,8 +34,6 @@ struct MedicineDetailView: View {
         }
         .onChange(of: medicine) { _ in
             viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-            viewModel.fetchHistory(for: medicine)
-            viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
         }
         
     }
@@ -62,30 +60,27 @@ extension MedicineDetailView {
                     guard let id = medicine.id
                     else{return}
                     viewModel.decreaseStock(medicine, user: id)
-                    medicine.stock -= 1
-                    viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                     
                 }) {
                     Image(systemName: "minus.circle")
                         .font(.title)
                         .foregroundColor(.red)
                 }
+                .accessibilityLabel("Decrease stock")
                 
-                TextField("Stock", value: $medicine.stock, formatter: NumberFormatter(), onCommit: {
-                    if let id = session.session?.uid {
-                        viewModel.updateMedicine(medicine, user: id)
-                    }
-                })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
-                .frame(width: 100)
+                TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
+                               .textFieldStyle(RoundedBorderTextFieldStyle())
+                               .keyboardType(.numberPad)
+                               .frame(width: 100)
+                               .onChange(of: medicine.stock) { newValue in
+                                   if newValue < 0 { medicine.stock = 0 }
+                               }
                 
                 Button(action: {
                     guard let id = medicine.id
                     else{return}
                     viewModel.increaseStock(medicine, user: id)
-                    medicine.stock += 1
-                    viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
+                 
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
