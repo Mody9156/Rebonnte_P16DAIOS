@@ -56,12 +56,7 @@ extension MedicineDetailView {
             Text("Stock")
                 .font(.headline)
             HStack {
-                Button(action: {
-                    guard let id = medicine.id
-                    else{return}
-                    viewModel.decreaseStock(medicine, user: id)
-                    
-                }) {
+                Button(action: {decreaseStock}) {
                     Image(systemName: "minus.circle")
                         .font(.title)
                         .foregroundColor(.red)
@@ -102,6 +97,12 @@ extension MedicineDetailView {
                 .padding(.bottom, 10)
         }
         .padding(.horizontal)
+    }
+    
+    private func decreaseStock(){
+        guard let id = medicine.id else{return}
+        viewModel.decreaseStock(medicine, user: id)
+        medicine.stock = max(0, medicine.stock - 1)
     }
     
     private var historySection: some View {
