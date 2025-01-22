@@ -63,6 +63,7 @@ extension MedicineDetailView {
                     else{return}
                     viewModel.decreaseStock(medicine, user: id)
                     medicine.stock -= 1
+                    viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                     
                 }) {
                     Image(systemName: "minus.circle")
@@ -84,6 +85,7 @@ extension MedicineDetailView {
                     else{return}
                     viewModel.increaseStock(medicine, user: id)
                     medicine.stock += 1
+                    viewModel.changeStock(medicine, user: session.session?.uid ?? "", stocks: medicine.stock)
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
