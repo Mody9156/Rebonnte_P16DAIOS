@@ -114,7 +114,7 @@ extension MedicineDetailView {
     }
     
     private var historySection: some View {
-        HStack {
+        VStack(alignment: .leading) {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
