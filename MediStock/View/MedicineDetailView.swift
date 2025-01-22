@@ -122,7 +122,7 @@ extension MedicineDetailView {
                     .padding(.top, 20)
                 
                 ForEach(filterMedicine) { entry in
-                    VStack(spacing: 5) {
+                    VStack(alignment: .leading,spacing: 5) {
                         Text(entry.action)
                             .font(.headline)
                         Text("User: \(entry.user)")
