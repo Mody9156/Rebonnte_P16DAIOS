@@ -69,23 +69,24 @@ extension MedicineDetailView {
                 .accessibilityLabel("Decrease stock")
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
-                               .textFieldStyle(RoundedBorderTextFieldStyle())
-                               .keyboardType(.numberPad)
-                               .frame(width: 100)
-                               .onChange(of: medicine.stock) { newValue in
-                                   if newValue < 0 { medicine.stock = 0 }
-                               }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .frame(width: 100)
+                    .onChange(of: medicine.stock) { newValue in
+                        if newValue < 0 { medicine.stock = 0 }
+                    }
                 
                 Button(action: {
                     guard let id = medicine.id
                     else{return}
                     viewModel.increaseStock(medicine, user: id)
-                 
+                    
                 }) {
                     Image(systemName: "plus.circle")
                         .font(.title)
                         .foregroundColor(.green)
                 }
+                .accessibilityLabel("Increase stock")
             }
             .padding(.bottom, 10)
         }
