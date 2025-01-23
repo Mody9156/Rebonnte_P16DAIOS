@@ -7,9 +7,11 @@ struct MedicineDetailView: View {
     @AppStorage("email") var identity : String = "email"
 
     var filterMedicine : [HistoryEntry]{
-        return  viewModel.history
+        return  viewModel.history.filter ({
+            $0.medicineId == identity
+        })
     }
-//    let history : [HistoryEntry]
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
