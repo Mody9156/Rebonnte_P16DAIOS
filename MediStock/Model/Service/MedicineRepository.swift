@@ -179,6 +179,31 @@ class MedicineRepository: ObservableObject {
     func resetHistoryCollection() {
         let collectionRef = db.collection("history")
 
+        // Supprimer tous les documents de la collection
+        collectionRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Erreur lors de la récupération des documents : \(error)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("Aucun document à supprimer.")
+                return
+            }
+
+            // Supprimer chaque document
+            for document in documents {
+                collectionRef.document(document.documentID).delete { error in
+                    if let error = error {
+                        print("Erreur lors de la suppression du document \(document.documentID) : \(error)")
+                    } else {
+                        print("Document \(document.documentID) supprimé.")
+                    }
+                }
+            }
+
+            print("Tous les documents de la collection ont été supprimés.")
+
             // Recréer des documents dans la collection (si nécessaire)
             let initialData: [String: Any] = [
                 "action": "Initial action",
@@ -194,6 +219,8 @@ class MedicineRepository: ObservableObject {
                 }
             }
         }
+    }
+
 }
 
 
