@@ -4,7 +4,9 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
-    
+    let history : [HistoryEntry] {
+        viewModel.history.filter { $0.medicineId == medicine.id }
+    }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
