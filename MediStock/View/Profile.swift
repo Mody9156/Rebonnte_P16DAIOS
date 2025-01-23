@@ -19,8 +19,7 @@ struct Profile: View {
                 .font(.largeTitle)
             
             HStack{
-                Text("Email : ")
-                Text("Identity : \(identity)")
+                Text("Email : \(identity)")
                     .foregroundColor(.red)
             }
             .padding()
