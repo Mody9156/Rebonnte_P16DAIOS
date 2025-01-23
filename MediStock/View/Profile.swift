@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
-    @State private var email = UserDefaults.standard.string(forKey: "email")
     @AppStorage("email") var identity : String = "email"
     var use : User
     var body: some View {
