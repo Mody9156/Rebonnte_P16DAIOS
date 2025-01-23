@@ -127,17 +127,10 @@ class MedicineRepository: ObservableObject {
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
-<<<<<<< HEAD
                 let history = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
                 } ?? []
                 completion(history)
-=======
-                let historyEntry = querySnapshot?.documents.compactMap { document in
-                      try? document.data(as: HistoryEntry.self)
-                } ?? []
-                completion(historyEntry)
->>>>>>> main
             }
         }
     }

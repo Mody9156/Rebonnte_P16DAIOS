@@ -4,16 +4,10 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
-<<<<<<< HEAD
-    let history : [HistoryEntry] {
-        viewModel.history.filter { $0.medicineId == medicine.id }
-    }
-=======
     var filterMedicine : [HistoryEntry]{
         return  viewModel.history.filter { $0.medicineId == medicine.id }
     }
 //    let history : [HistoryEntry]
->>>>>>> main
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
