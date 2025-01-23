@@ -8,7 +8,7 @@ struct MedicineDetailView: View {
 
     var filterMedicine : [HistoryEntry]{
         return  viewModel.history.filter ({
-            $0.medicineId == identity
+            $0. == medicine.aisle
         })
     }
 
