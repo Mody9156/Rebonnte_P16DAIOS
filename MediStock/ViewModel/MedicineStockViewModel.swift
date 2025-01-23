@@ -81,7 +81,7 @@ class MedicineStockViewModel: ObservableObject {
             self.medicineRepository.fetchHistory(for: medicine){ history in
                 DispatchQueue.main.async {
                     self.history = history
-                    print("self.history : \(self.history)")
+                    print("self.history : \(history)")
                 }
             }
         }
