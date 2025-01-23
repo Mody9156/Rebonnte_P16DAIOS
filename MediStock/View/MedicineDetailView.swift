@@ -5,7 +5,7 @@ struct MedicineDetailView: View {
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     var filterMedicine : [HistoryEntry]{
-        return  viewModel.history.filter { $0.medicineId == medicine.id }
+        return  viewModel.history.filter { $0.user == medicine.user }
     }
 //    let history : [HistoryEntry]
     var body: some View {

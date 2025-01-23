@@ -62,14 +62,12 @@ class MedicineStockViewModel: ObservableObject {
         DispatchQueue.main.async{
             self.updateStock(medicine, by: 1, user: user)
         }
-        print("graduation")
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) {
         DispatchQueue.main.async{
             self.updateStock(medicine, by: -1, user: user)
         }
-        print("graduation")
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) {
