@@ -49,7 +49,7 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Graduation vous venez d'ajouter: \(medicine)")
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: identity, details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: identity, details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")
         }
@@ -64,7 +64,7 @@ class MedicineRepository: ObservableObject {
             DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: identity, details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: identity, details: "Added new medicine")
         } catch {
             print("Erreur : \(error)")
         }
@@ -97,7 +97,7 @@ class MedicineRepository: ObservableObject {
         guard let id = medicine.id else { return }
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: self.identity, details: "Updated medicine details")
+            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: self.identity, details: "Updated medicine details")
             
         } catch let error {
             print("Error updating document: \(error)")
@@ -116,14 +116,13 @@ class MedicineRepository: ObservableObject {
                    if let index = self.medicines.firstIndex(where: { $0.id == id }) {
                        self.medicines[index].stock = newStock
                    }
-                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: self.identity, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: self.identity, medicineId: self.identity, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
                }
            }
        }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
-        guard let medicineId = medicine.id else { return }
-        db.collection("history").whereField("medicineId", isEqualTo: medicineId).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
+        db.collection("history").whereField("medicineId", isEqualTo: identity).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
@@ -176,47 +175,23 @@ class MedicineRepository: ObservableObject {
         }
     }
 
-    func resetHistoryCollection() {
-        let collectionRef = db.collection("history")
-
-        // Supprimer tous les documents de la collection
+    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection(collectionName)
+        
         collectionRef.getDocuments { (querySnapshot, error) in
             if let error = error {
-                print("Erreur lors de la récupération des documents : \(error)")
+                print("Erreur lors de la vérification : \(error)")
+                completion(false)
                 return
             }
-
-            guard let documents = querySnapshot?.documents else {
-                print("Aucun document à supprimer.")
-                return
-            }
-
-            // Supprimer chaque document
-            for document in documents {
-                collectionRef.document(document.documentID).delete { error in
-                    if let error = error {
-                        print("Erreur lors de la suppression du document \(document.documentID) : \(error)")
-                    } else {
-                        print("Document \(document.documentID) supprimé.")
-                    }
-                }
-            }
-
-            print("Tous les documents de la collection ont été supprimés.")
-
-            // Recréer des documents dans la collection (si nécessaire)
-            let initialData: [String: Any] = [
-                "action": "Initial action",
-                "user": "admin",
-                "details": "Collection reset",
-                "timestamp": Timestamp()
-            ]
-            collectionRef.document(UUID().uuidString).setData(initialData) { error in
-                if let error = error {
-                    print("Erreur lors de la recréation de la collection : \(error)")
-                } else {
-                    print("Collection recréée avec succès avec un document initial.")
-                }
+            
+            if let documents = querySnapshot?.documents, documents.isEmpty {
+                print("La collection \(collectionName) est vide.")
+                completion(true)
+            } else {
+                print("La collection \(collectionName) contient encore des documents.")
+                completion(false)
             }
         }
     }

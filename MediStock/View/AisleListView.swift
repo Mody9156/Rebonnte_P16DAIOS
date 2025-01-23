@@ -30,7 +30,6 @@ struct AisleListView: View {
         }
         .onAppear {
             viewModel.observeAisles()
-            viewModel.resetHistoryCollection()//1
         }
     }
 }

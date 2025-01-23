@@ -119,7 +119,4 @@ class MedicineStockViewModel: ObservableObject {
             }
         }
     }
-    func resetHistoryCollection(){
-        medicineRepository.resetHistoryCollection()
-    }
 }
