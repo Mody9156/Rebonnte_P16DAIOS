@@ -80,7 +80,7 @@ class MedicineStockViewModel: ObservableObject {
         DispatchQueue.global(qos:.background).async{
             self.medicineRepository.fetchHistory(for: medicine){ history in
                 DispatchQueue.main.async {
-                    self.history = history
+                    self.history.append(contentsOf: history)
                 }
             }
         }
