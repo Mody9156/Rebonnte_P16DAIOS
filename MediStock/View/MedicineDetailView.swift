@@ -4,8 +4,10 @@ struct MedicineDetailView: View {
     @State var medicine: Medicine
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
+    @AppStorage("email") var identity : String = "email"
+
     var filterMedicine : [HistoryEntry]{
-        return  viewModel.history.filter { $0.user == medicine.user }
+        return  viewModel.history.filter { $0.medicineId ==  identity}
     }
 //    let history : [HistoryEntry]
     var body: some View {

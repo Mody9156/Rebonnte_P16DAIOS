@@ -173,6 +173,45 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+    
+    func deleteAllHistoryWithBatch() {
+        let collectionRef = db.collection("history")
+        let batchSize = 100 // Nombre de documents à supprimer par itération
+
+        func deleteBatch() {
+            collectionRef.limit(to: batchSize).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Erreur lors de la récupération des documents : \(error)")
+                    return
+                }
+
+                guard let documents = querySnapshot?.documents else {
+                    print("Tous les documents ont été supprimés.")
+                    return
+                }
+
+                let batch = self.db.batch()
+
+                for document in documents {
+                    batch.deleteDocument(document.reference)
+                }
+
+                // Appliquer les suppressions en lot
+                batch.commit { batchError in
+                    if let batchError = batchError {
+                        print("Erreur lors de la suppression en lot : \(batchError)")
+                    } else {
+                        print("Un lot de documents supprimé.")
+                        // Continuer à supprimer les lots restants
+                        deleteBatch()
+                    }
+                }
+            }
+        }
+
+        deleteBatch()
+    }
+
 }
 
 
