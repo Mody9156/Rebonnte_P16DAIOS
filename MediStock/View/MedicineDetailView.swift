@@ -41,7 +41,6 @@ struct MedicineDetailView: View {
         .onChange(of: medicine) { newMedicine in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if newMedicine == medicine {
-                    viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     viewModel.fetchHistory(for: newMedicine)
                 }
             }
