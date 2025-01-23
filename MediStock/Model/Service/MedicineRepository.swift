@@ -123,14 +123,21 @@ class MedicineRepository: ObservableObject {
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
         guard let medicineId = medicine.id else { return }
-        db.collection("history").whereField("medicineId", isEqualTo: medicineId).addSnapshotListener { (querySnapshot, error) in
+        db.collection("history").whereField("medicineId", isEqualTo: medicineId).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
+<<<<<<< HEAD
                 let history = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
                 } ?? []
                 completion(history)
+=======
+                let historyEntry = querySnapshot?.documents.compactMap { document in
+                      try? document.data(as: HistoryEntry.self)
+                } ?? []
+                completion(historyEntry)
+>>>>>>> main
             }
         }
     }
