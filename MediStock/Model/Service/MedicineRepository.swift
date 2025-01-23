@@ -13,7 +13,8 @@ class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()//1
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
-    
+    @AppStorage("email") var identity : String = "email"
+
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {

@@ -11,6 +11,7 @@ struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
     @AppStorage("email") var identity : String = "email"
     var use : User
+    
     var body: some View {
         VStack (alignment: .center){
             Spacer()
