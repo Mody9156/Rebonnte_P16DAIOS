@@ -129,7 +129,9 @@ class MedicineRepository: ObservableObject {
             } else {
                 let history = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
+                   
                 } ?? []
+                print("history:\(history)")
                 completion(history)
             }
         }
@@ -173,7 +175,27 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+
+    func resetHistoryCollection() {
+        let collectionRef = db.collection("history")
+
+            // Recréer des documents dans la collection (si nécessaire)
+            let initialData: [String: Any] = [
+                "action": "Initial action",
+                "user": "admin",
+                "details": "Collection reset",
+                "timestamp": Timestamp()
+            ]
+            collectionRef.document(UUID().uuidString).setData(initialData) { error in
+                if let error = error {
+                    print("Erreur lors de la recréation de la collection : \(error)")
+                } else {
+                    print("Collection recréée avec succès avec un document initial.")
+                }
+            }
+        }
     
+
 }
 
 
