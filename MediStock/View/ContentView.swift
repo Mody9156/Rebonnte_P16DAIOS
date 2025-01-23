@@ -16,6 +16,7 @@ struct ContentView: View {
                 Task{
                     authViewModel.changeStatus()
                     try await  authViewModel.disableAutoLogin()
+                    
                 }
             }
             .onDisappear {

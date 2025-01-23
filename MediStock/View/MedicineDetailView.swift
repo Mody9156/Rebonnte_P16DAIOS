@@ -7,7 +7,7 @@ struct MedicineDetailView: View {
     @AppStorage("email") var identity : String = "email"
 
     var filterMedicine : [HistoryEntry]{
-        return  viewModel.history.filter { $0.medicineId ==  identity}
+        return  viewModel.history
     }
 //    let history : [HistoryEntry]
     var body: some View {
