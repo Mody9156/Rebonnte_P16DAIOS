@@ -49,7 +49,7 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Graduation vous venez d'ajouter: \(medicine)")
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: self.identity, details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")
         }
@@ -64,7 +64,7 @@ class MedicineRepository: ObservableObject {
             DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: self.identity, details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId:medicine.id ?? "Unknow", details: "Added new medicine")
         } catch {
             print("Erreur : \(error)")
         }
@@ -97,7 +97,7 @@ class MedicineRepository: ObservableObject {
         guard let id = medicine.id else { return }
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: self.identity, details: "Updated medicine details")
+            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
             
         } catch let error {
             print("Error updating document: \(error)")
@@ -116,7 +116,7 @@ class MedicineRepository: ObservableObject {
                    if let index = self.medicines.firstIndex(where: { $0.id == id }) {
                        self.medicines[index].stock = newStock
                    }
-                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: self.identity, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: medicine.id ?? "Unknow", details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
                }
            }
        }
