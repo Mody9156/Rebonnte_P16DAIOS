@@ -10,6 +10,7 @@ import SwiftUI
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
     @State private var email = UserDefaults.standard.string(forKey: "email")
+    @AppStorage("email") var identity : String = ""
     var use : User
     var body: some View {
         VStack (alignment: .center){
@@ -23,6 +24,8 @@ struct Profile: View {
                     Text(email)
                         .foregroundColor(.red)
                 }
+                Text("Identity : \(identity)")
+                    .foregroundColor(.orange)
             }
             .padding()
             
