@@ -5,13 +5,13 @@ struct MedicineDetailView: View {
     @StateObject var viewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
-
+    
     var filterMedicine : [HistoryEntry]{
         return  viewModel.history.filter ({
             $0.medicineId == medicine.id
         })
     }
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
@@ -120,12 +120,11 @@ extension MedicineDetailView {
     }
     
     private var historySection: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("History")
-                    .font(.headline)
-                    .padding(.top, 20)
-                
+        VStack(alignment: .leading) {
+            Text("History")
+                .font(.headline)
+                .padding(.top, 20)
+            ScrollView {
                 ForEach(filterMedicine) { entry in
                     VStack(alignment: .leading,spacing: 5) {
                         Text(entry.action)
@@ -143,18 +142,18 @@ extension MedicineDetailView {
                     .padding(.bottom, 5)
                 }
             }
-            .padding(.horizontal)
         }
+        .padding(.horizontal)
     }
 }
 
 struct MedicineDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-//        let history = [
-//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-//            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
+        //        let history = [
+        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
         let sampleViewModel = MedicineStockViewModel()
         MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
     }
