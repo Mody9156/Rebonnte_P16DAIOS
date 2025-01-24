@@ -22,22 +22,18 @@ class AuthViewModel : ObservableObject {
             .assign(to: &$isAuthenticated)
     }
     
-    func login(email:String, password:String){
-        session.signIn(email: email, password: password){ result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    self.messageError = ""
-                    UserDefaults.standard.set(user.email, forKey: "email")
-                    print("isAuthenticated : \(self.isAuthenticated)")
-                    print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
-                    self.onLoginSucceed?()
-                case .failure(let error):
-                    self.messageError = "Erreur lors de la connection de l'utilisateur"
-                    print("Erreur lors de la connection de l'utilisateur : \(error.localizedDescription)")
-                }
-            }
+    func login(email:String, password:String) async throws {
+        do {
+            let user = try await session.signIn(email: email, password: password)
+            UserDefaults.standard.set(user.email, forKey: "email")
+            print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
+            self.messageError = ""
+            self.onLoginSucceed?()
+        }catch{
+            self.messageError = "Erreur lors de la connection de l'utilisateur"
         }
+        
+        
     }
     
     func createdNewUser(email: String, password: String){
