@@ -75,19 +75,6 @@ class SessionStore: ObservableObject {
             self.handle = nil
         }
     }
-    
-    private func handleAuthResult(_ result: AuthDataResult?, _ error: Error?, completion: @escaping (Result<User, Error>) -> Void) {
-        DispatchQueue.main.async {
-            if let error = error {
-                completion(.failure(error))
-            } else if let user = result?.user {
-                let customUser = User(uid: user.uid, email: user.email)
-                completion(.success(customUser))
-            } else {
-                completion(.failure(AuthError.unknown))
-            }
-        }
-    }
 }
 
 enum AuthError: LocalizedError {
