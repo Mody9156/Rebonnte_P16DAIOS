@@ -6,9 +6,10 @@
 //
 
 import XCTest
-@testable import pack
+@testable import pack 
 
 final class SessionStoreTests: XCTestCase {
-    
+    var session : SessionStore
 
+    
 }
