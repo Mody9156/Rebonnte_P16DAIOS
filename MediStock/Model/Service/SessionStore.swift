@@ -71,7 +71,7 @@ class SessionStore: ObservableObject {
     
     func stopListeningToAuthChanges() {
         if let handle = handle {
-            Auth.auth().removeStateDidChangeListener(handle)
+            authService.removeDidChangeListenerHandle(handle: handle)
             self.handle = nil
         }
     }
