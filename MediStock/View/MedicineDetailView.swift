@@ -125,21 +125,23 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             ScrollView {
-                ForEach(filterMedicine) { entry in
-                    VStack(alignment: .leading,spacing: 5) {
-                        Text(entry.action)
-                            .font(.headline)
-                        Text("User: \(entry.user)")
-                            .font(.subheadline)
-                        Text("Date: \(entry.timestamp.formatted())")
-                            .font(.subheadline)
-                        Text("Details: \(entry.details)")
-                            .font(.subheadline)
+                VStack {
+                    ForEach(filterMedicine) { entry in
+                        VStack(alignment: .leading,spacing: 5) {
+                            Text(entry.action)
+                                .font(.headline)
+                            Text("User: \(entry.user)")
+                                .font(.subheadline)
+                            Text("Date: \(entry.timestamp.formatted())")
+                                .font(.subheadline)
+                            Text("Details: \(entry.details)")
+                                .font(.subheadline)
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 5)
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.bottom, 5)
                 }
             }
         }
