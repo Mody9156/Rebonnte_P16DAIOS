@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct AllMedicinesView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
     @State private var email = UserDefaults.standard.string(forKey: "email")
     @AppStorage("email") var identity : String = "email"
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -21,7 +21,7 @@ struct AllMedicinesView: View {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
                                 Task{
-                                    try await viewModel.trieElements(option: index)
+                                    try await medicineStockViewModel.trieElements(option: index)
                                 }
                             }
                         }
@@ -33,7 +33,7 @@ struct AllMedicinesView: View {
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
+                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: medicineStockViewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
                                     .font(.headline)
@@ -42,12 +42,12 @@ struct AllMedicinesView: View {
                             }
                         }
                     }.onDelete { IndexSet in
-                        viewModel.deleteMedicines(at: IndexSet)
+                        medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
                 .navigationBarItems(trailing: Button(action: {
                     Task{
-                        try await viewModel.addRandomMedicine(user: identity)
+                        try await medicineStockViewModel.addRandomMedicine(user: identity)
                     }
                 }) {
                     Image(systemName: "plus")
@@ -56,15 +56,15 @@ struct AllMedicinesView: View {
             }
         }
         .onAppear {
-            viewModel.observeMedicines()
+            medicineStockViewModel.observeMedicines()
         }
     }
     
     var searchResult : [Medicine] {
         if filterText.isEmpty {
-            return viewModel.medicines
+            return medicineStockViewModel.medicines
         }else{
-            return viewModel.medicines.filter{ $0.name.contains(filterText) }
+            return medicineStockViewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
 }
