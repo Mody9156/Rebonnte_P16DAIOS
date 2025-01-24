@@ -33,7 +33,6 @@ struct MedicineDetailView: View {
             
         }
         .padding(.vertical)
-        
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear{
             viewModel.fetchHistory(for: medicine)
@@ -125,7 +124,7 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             ScrollView {
-                VStack {
+                HStack {
                     ForEach(filterMedicine) { entry in
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
