@@ -137,6 +137,7 @@
 		237E0A852D3008C800EEC056 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				23FD055B2D43C5690089DB5C /* Auth */,
 				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
@@ -185,6 +186,13 @@
 				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		23FD055B2D43C5690089DB5C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		53E0D88A2C06084700DE1134 = {
