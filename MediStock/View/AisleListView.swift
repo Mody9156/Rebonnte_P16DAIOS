@@ -3,7 +3,8 @@ import SwiftUI
 struct AisleListView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var email = UserDefaults.standard.string(forKey: "email")
-    
+    @AppStorage("email") var identity : String = "email"
+
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
     }
@@ -14,6 +15,9 @@ struct AisleListView: View {
                 ForEach(aisles, id: \.self) { aisle in
                     NavigationLink(destination: MedicineListView(viewModel: medicineStockViewModel, aisle: aisle)) {
                         Text(aisle)
+                            .accessibilityLabel("Aisle \(aisle)")
+                            .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+
                     }
                 }
             }
