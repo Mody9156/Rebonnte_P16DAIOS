@@ -47,7 +47,6 @@ struct AllMedicinesView: View {
                 }
                 .navigationBarItems(trailing: Button(action: {
                     Task{
-                        guard let email else {return}
                         try await viewModel.addRandomMedicine(user: identity)
                     }
                 }) {
