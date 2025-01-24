@@ -9,10 +9,12 @@ class SessionStore: ObservableObject {
     @Published var error: AuthError?
     
     var handle: AuthStateDidChangeListenerHandle?
-    
+    private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil
     }
+    
+    
     
     func disableAutoLogin() async throws {
         if Auth.auth().currentUser != nil {
