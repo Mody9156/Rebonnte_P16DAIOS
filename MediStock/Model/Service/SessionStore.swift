@@ -9,6 +9,7 @@ class SessionStore: ObservableObject {
     @Published var error: AuthError?
     
     var handle: AuthStateDidChangeListenerHandle?
+    
     var isAuthenticated : Bool {
         session != nil
     }
@@ -38,8 +39,6 @@ class SessionStore: ObservableObject {
         }
     }
     
-    
-    
     func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             self.handleAuthResult(result, error, completion: completion)
@@ -57,6 +56,7 @@ class SessionStore: ObservableObject {
             self.handleAuthResult(result, error, completion: completion)
         }
     }
+    
     @MainActor
     func signOut() async throws  {
         do {

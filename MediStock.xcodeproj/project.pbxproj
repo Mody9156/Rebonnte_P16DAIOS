@@ -144,6 +144,7 @@
 		23F6C9962D2FBCF700CD0A42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				23FD05582D43C2650089DB5C /* Protocols */,
 				237E0A852D3008C800EEC056 /* Service */,
 				53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */,
 				53E0D8DB2C06099C00DE1134 /* Medicine.swift */,
@@ -174,6 +175,13 @@
 				230B004C2D38201F0037E537 /* Profile.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		23FD05582D43C2650089DB5C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		53E0D88A2C06084700DE1134 = {
