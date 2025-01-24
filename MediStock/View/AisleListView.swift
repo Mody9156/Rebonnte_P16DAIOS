@@ -1,18 +1,18 @@
 import SwiftUI
 
 struct AisleListView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var email = UserDefaults.standard.string(forKey: "email")
     
     var aisles: [String] {
-        viewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+        medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
     }
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(viewModel: viewModel, aisle: aisle)) {
+                    NavigationLink(destination: MedicineListView(viewModel: medicineStockViewModel, aisle: aisle)) {
                         Text(aisle)
                     }
                 }
@@ -21,7 +21,7 @@ struct AisleListView: View {
              Button(action: {
                 Task{
                     guard let email else {return}
-                    try await viewModel.addRandomMedicine(user: email)
+                    try await medicineStockViewModel.addRandomMedicine(user: email)
                 }
             }) {
                 Image(systemName: "plus")
@@ -29,13 +29,13 @@ struct AisleListView: View {
             .navigationBarTitle("Aisles")
         }
         .onAppear {
-            viewModel.observeAisles()
+            medicineStockViewModel.observeAisles()
         }
     }
 }
 
 struct AisleListView_Previews: PreviewProvider {
     static var previews: some View {
-        AisleListView(viewModel: MedicineStockViewModel())
+        AisleListView(medicineStockViewModel: MedicineStockViewModel())
     }
 }
