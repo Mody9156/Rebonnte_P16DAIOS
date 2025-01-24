@@ -2,11 +2,10 @@
 //  MediStockTests.swift
 //  MediStockTests
 //
-//  Created by Vincent Saluzzo on 28/05/2024.
+//  Created by KEITA on 24/01/2025.
 //
 
 import XCTest
-@testable import MediStock
 
 final class MediStockTests: XCTestCase {
 
@@ -28,7 +27,7 @@ final class MediStockTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }

@@ -1,41 +1,45 @@
 import SwiftUI
 
 struct AisleListView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
-    @State private var email = UserDefaults.standard.string(forKey: "email")
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
+    @AppStorage("email") var identity : String = "email"
     
     var aisles: [String] {
-        viewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+        medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
     }
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(viewModel: viewModel, aisle: aisle)) {
+                    NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
                         Text(aisle)
+                            .accessibilityLabel("Aisle \(aisle)")
+                            .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                     }
                 }
             }
             .navigationBarItems(trailing:
-             Button(action: {
+                                    Button(action: {
                 Task{
-                    guard let email else {return}
-                    try await viewModel.addRandomMedicine(user: email)
+                    try await medicineStockViewModel.addRandomMedicine(user: identity)
                 }
             }) {
                 Image(systemName: "plus")
             })
             .navigationBarTitle("Aisles")
+            .accessibilityLabel("Aisle List")
+            .accessibilityHint("Displays a list of aisles containing medicines.")
         }
         .onAppear {
-            viewModel.observeAisles()
+            medicineStockViewModel.observeAisles()
         }
+        .accessibilityElement(children: .contain)
     }
 }
 
 struct AisleListView_Previews: PreviewProvider {
     static var previews: some View {
-        AisleListView(viewModel: MedicineStockViewModel())
+        AisleListView(medicineStockViewModel: MedicineStockViewModel())
     }
 }

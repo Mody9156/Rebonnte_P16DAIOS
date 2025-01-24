@@ -9,8 +9,9 @@ import SwiftUI
 
 struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
-    @State private var email = UserDefaults.standard.string(forKey: "email")
+    @AppStorage("email") var identity : String = "email"
     var use : User
+    
     var body: some View {
         VStack (alignment: .center){
             Spacer()
@@ -18,11 +19,8 @@ struct Profile: View {
                 .font(.largeTitle)
             
             HStack{
-                Text("Email : ")
-                if let email = email {
-                    Text(email)
-                        .foregroundColor(.red)
-                }
+                Text("Email : \(identity)")
+                    .foregroundColor(.red)
             }
             .padding()
             

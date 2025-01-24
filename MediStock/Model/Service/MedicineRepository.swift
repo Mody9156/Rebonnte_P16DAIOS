@@ -8,12 +8,14 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import SwiftUI
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()//1
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
-    
+    @AppStorage("email") var identity : String = "email"
+
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -47,7 +49,7 @@ class MedicineRepository: ObservableObject {
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Graduation vous venez d'ajouter: \(medicine)")
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
         } catch let error {
             print("Error adding document: \(error)")
         }
@@ -62,7 +64,7 @@ class MedicineRepository: ObservableObject {
             DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "", details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
         } catch {
             print("Erreur : \(error)")
         }
@@ -95,7 +97,7 @@ class MedicineRepository: ObservableObject {
         guard let id = medicine.id else { return }
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: user, medicineId: id, details: "Updated medicine details")
+            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
             
         } catch let error {
             print("Error updating document: \(error)")
@@ -114,21 +116,23 @@ class MedicineRepository: ObservableObject {
                    if let index = self.medicines.firstIndex(where: { $0.id == id }) {
                        self.medicines[index].stock = newStock
                    }
-                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: user, medicineId: id, details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
                }
            }
        }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
-        guard let medicineId = medicine.id else { return }
-        db.collection("history").whereField("medicineId", isEqualTo: medicineId).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
+        guard let id = medicine.id else {return}
+        db.collection("history").whereField("medicineId", isEqualTo: id).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
-                let historyEntry = querySnapshot?.documents.compactMap { document in
-                      try? document.data(as: HistoryEntry.self)
+                let history = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: HistoryEntry.self)
+                   
                 } ?? []
-                completion(historyEntry)
+                print("history:\(history)")
+                completion(history)
             }
         }
     }
@@ -171,6 +175,28 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
+
+    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection(collectionName)
+        
+        collectionRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Erreur lors de la vérification : \(error)")
+                completion(false)
+                return
+            }
+            
+            if let documents = querySnapshot?.documents, documents.isEmpty {
+                print("La collection \(collectionName) est vide.")
+                completion(true)
+            } else {
+                print("La collection \(collectionName) contient encore des documents.")
+                completion(false)
+            }
+        }
+    }
+
 }
 
 

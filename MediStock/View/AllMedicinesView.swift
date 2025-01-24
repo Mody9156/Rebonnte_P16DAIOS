@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct AllMedicinesView: View {
-    @ObservedObject var viewModel = MedicineStockViewModel()
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
-    @State private var email = UserDefaults.standard.string(forKey: "email")
+    @AppStorage("email") var identity : String = "email"
     
     var body: some View {
         NavigationView {
@@ -13,6 +13,8 @@ struct AllMedicinesView: View {
                     TextField("Filter by name", text: $filterText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.leading, 10)
+                        .accessibilityLabel("Filter medicines")
+                        .accessibilityHint("Enter the name of the medicine to filter the list.")
                     
                     Spacer()
                     
@@ -20,52 +22,68 @@ struct AllMedicinesView: View {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
                                 Task{
-                                    try await viewModel.trieElements(option: index)
+                                    try await medicineStockViewModel.trieElements(option: index)
                                 }
                             }
+                            .accessibilityLabel("Sort by \(index.rawValue)")
+                            .accessibilityHint("Sort the medicines based on \(index.rawValue).")
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
                     .padding(.trailing, 10)
+                    .accessibilityLabel("Sorting options")
+                    .accessibilityHint("Tap to choose how to sort the medicines.")
+                    
                 }
                 .padding(.top, 10)
                 // Liste des Médicaments
                 List {
                     ForEach(searchResult, id: \.id) { medicine in
-                        NavigationLink(destination: MedicineDetailView(medicine: medicine, viewModel: viewModel)) {
+                        NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
                             VStack(alignment: .leading) {
                                 Text(medicine.name)
                                     .font(.headline)
+                                    .accessibilityLabel("Medicine name: \(medicine.name)")
+                                
+                                
                                 Text("Stock: \(medicine.stock)")
                                     .font(.subheadline)
+                                    .accessibilityLabel("Stock: \(medicine.stock)")
+                                
                             }
                         }
+                        .accessibilityHint("Tap to see more details about \(medicine.name).")
+                        
                     }.onDelete { IndexSet in
-                        viewModel.deleteMedicines(at: IndexSet)
+                        medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
+                .accessibilityLabel("List of medicines")
+                .accessibilityHint("Shows all available medicines and their stock.")
                 .navigationBarItems(trailing: Button(action: {
                     Task{
-                        guard let email else {return}
-                        try await viewModel.addRandomMedicine(user: email) // Remplacez par l'utilisateur actuel
+                        try await medicineStockViewModel.addRandomMedicine(user: identity)
                     }
                 }) {
                     Image(systemName: "plus")
+                        .accessibilityLabel("Add random medicine")
+                        .accessibilityHint("Adds a new random medicine to the list.")
                 })
                 .navigationBarTitle("All Medicines")
-
+                .accessibilityLabel("All Medicines View")
+                .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
             }
         }
         .onAppear {
-            viewModel.observeMedicines()
+            medicineStockViewModel.observeMedicines()
         }
     }
     
     var searchResult : [Medicine] {
         if filterText.isEmpty {
-            return viewModel.medicines
+            return medicineStockViewModel.medicines
         }else{
-            return viewModel.medicines.filter{ $0.name.contains(filterText) }
+            return medicineStockViewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
 }
