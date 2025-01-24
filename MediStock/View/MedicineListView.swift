@@ -3,7 +3,6 @@ import SwiftUI
 struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
-    @State private var email = UserDefaults.standard.string(forKey: "email")
     @AppStorage("email") var identity : String = "email"
 
     var filterMedicines : [Medicine] {
