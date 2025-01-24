@@ -58,15 +58,14 @@ class SessionStore: ObservableObject {
         }
     }
     
-    @MainActor
     func signOut() async throws  {
         do {
-            try Auth.auth().signOut()
-                self.session = nil
-        } catch {
+            try await authService.signOut()
             DispatchQueue.main.async {
-                self.error = .unknown
+                self.session = nil
             }
+        } catch {
+            throw error
         }
     }
     
