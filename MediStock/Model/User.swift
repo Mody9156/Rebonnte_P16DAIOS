@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User {
+public struct User {
     var uid: String
     var email: String?
 }

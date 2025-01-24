@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
-class FirebaseAuthService: AuthServiceProtocol {
+final class FirebaseAuthService: AuthServiceProtocol {
     func signUp(email: String, password: String) async throws -> User {
         let result = try await Auth.auth().createUser(withEmail: email, password: password)
         return  User(uid: result.user.uid, email: result.user.email)
