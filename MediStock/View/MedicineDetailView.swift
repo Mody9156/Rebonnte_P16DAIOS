@@ -124,7 +124,7 @@ extension MedicineDetailView {
                 .font(.headline)
                 .padding(.top, 20)
             ScrollView {
-                HStack {
+                VStack {
                     ForEach(filterMedicine) { entry in
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
