@@ -198,6 +198,13 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		23FD055E2D4405680089DB5C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +252,7 @@
 		53E0D8A62C06084900DE1134 /* MediStockTests */ = {
 			isa = PBXGroup;
 			children = (
+				23FD055E2D4405680089DB5C /* Mocks */,
 				53E0D8A72C06084900DE1134 /* MediStockTests.swift */,
 			);
 			path = MediStockTests;
