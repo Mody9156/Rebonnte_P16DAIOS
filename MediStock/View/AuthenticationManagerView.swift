@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct AuthenticationManagerView: View {
     @EnvironmentObject var session: SessionStore
     @StateObject var authViewModel = AuthViewModel()
     var body: some View {
