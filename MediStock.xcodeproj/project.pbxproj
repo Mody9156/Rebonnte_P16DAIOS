@@ -22,6 +22,7 @@
 		237E0A872D300A4F00EEC056 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A862D300A4F00EEC056 /* User.swift */; };
 		237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A882D300FBB00EEC056 /* AuthViewModel.swift */; };
 		237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A8A2D30320700EEC056 /* MedicineRepository.swift */; };
+		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
+		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		53E0D8932C06084700DE1134 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		23FD05582D43C2650089DB5C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
+				23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */,
 				237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */,
 				53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */,
 				237E0A872D300A4F00EEC056 /* User.swift in Sources */,
