@@ -64,7 +64,7 @@ class MedicineRepository: ObservableObject {
             DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
-            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
+            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
         } catch {
             print("Erreur : \(error)")
         }

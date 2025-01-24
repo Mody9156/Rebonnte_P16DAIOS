@@ -4,7 +4,8 @@ struct AllMedicinesView: View {
     @ObservedObject var viewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
     @State private var email = UserDefaults.standard.string(forKey: "email")
-    
+    @AppStorage("email") var identity : String = "email"
+
     var body: some View {
         NavigationView {
             VStack {
@@ -47,13 +48,12 @@ struct AllMedicinesView: View {
                 .navigationBarItems(trailing: Button(action: {
                     Task{
                         guard let email else {return}
-                        try await viewModel.addRandomMedicine(user: email) // Remplacez par l'utilisateur actuel
+                        try await viewModel.addRandomMedicine(user: identity)
                     }
                 }) {
                     Image(systemName: "plus")
                 })
                 .navigationBarTitle("All Medicines")
-
             }
         }
         .onAppear {
