@@ -24,12 +24,10 @@
 		237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A8A2D30320700EEC056 /* MedicineRepository.swift */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
-		23FD05622D4407EF0089DB5C /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05612D4407EF0089DB5C /* MockAuthService.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
 		53E0D89E2C06084900DE1134 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89D2C06084900DE1134 /* Preview Assets.xcassets */; };
-		53E0D8A82C06084900DE1134 /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8A72C06084900DE1134 /* MediStockTests.swift */; };
 		53E0D8B22C06084900DE1134 /* MediStockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8B12C06084900DE1134 /* MediStockUITests.swift */; };
 		53E0D8B42C06084900DE1134 /* MediStockUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8B32C06084900DE1134 /* MediStockUITestsLaunchTests.swift */; };
 		53E0D8D82C06097900DE1134 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8D72C06097900DE1134 /* LoginView.swift */; };
@@ -47,13 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		53E0D8A42C06084900DE1134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 53E0D88B2C06084700DE1134 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 53E0D8922C06084700DE1134;
-			remoteInfo = MediStock;
-		};
 		53E0D8AE2C06084900DE1134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53E0D88B2C06084700DE1134 /* Project object */;
@@ -70,14 +61,11 @@
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
-		23FD05612D4407EF0089DB5C /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
 		53E0D8932C06084700DE1134 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53E0D89D2C06084900DE1134 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		53E0D8A32C06084900DE1134 /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53E0D8A72C06084900DE1134 /* MediStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockTests.swift; sourceTree = "<group>"; };
 		53E0D8AD2C06084900DE1134 /* MediStockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E0D8B12C06084900DE1134 /* MediStockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockUITests.swift; sourceTree = "<group>"; };
 		53E0D8B32C06084900DE1134 /* MediStockUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -111,13 +99,6 @@
 				237E0A762D2FFE4500EEC056 /* FirebaseAuth in Frameworks */,
 				237E0A7C2D2FFE4600EEC056 /* FirebaseDatabase in Frameworks */,
 				237E0A782D2FFE4600EEC056 /* FirebaseAuthCombine-Community in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53E0D8A02C06084900DE1134 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,19 +181,10 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		23FD055E2D4405680089DB5C /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				23FD05612D4407EF0089DB5C /* MockAuthService.swift */,
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
 				53E0D8952C06084700DE1134 /* MediStock */,
-				53E0D8A62C06084900DE1134 /* MediStockTests */,
 				53E0D8B02C06084900DE1134 /* MediStockUITests */,
 				53E0D8942C06084700DE1134 /* Products */,
 				237E0A6E2D2FFE4500EEC056 /* Frameworks */,
@@ -223,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				53E0D8932C06084700DE1134 /* pack.app */,
-				53E0D8A32C06084900DE1134 /* MediStockTests.xctest */,
 				53E0D8AD2C06084900DE1134 /* MediStockUITests.xctest */,
 			);
 			name = Products;
@@ -250,15 +221,6 @@
 				53E0D89D2C06084900DE1134 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		53E0D8A62C06084900DE1134 /* MediStockTests */ = {
-			isa = PBXGroup;
-			children = (
-				23FD055E2D4405680089DB5C /* Mocks */,
-				53E0D8A72C06084900DE1134 /* MediStockTests.swift */,
-			);
-			path = MediStockTests;
 			sourceTree = "<group>";
 		};
 		53E0D8B02C06084900DE1134 /* MediStockUITests */ = {
@@ -303,24 +265,6 @@
 			productReference = 53E0D8932C06084700DE1134 /* pack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		53E0D8A22C06084900DE1134 /* MediStockTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 53E0D8BA2C06084900DE1134 /* Build configuration list for PBXNativeTarget "MediStockTests" */;
-			buildPhases = (
-				53E0D89F2C06084900DE1134 /* Sources */,
-				53E0D8A02C06084900DE1134 /* Frameworks */,
-				53E0D8A12C06084900DE1134 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				53E0D8A52C06084900DE1134 /* PBXTargetDependency */,
-			);
-			name = MediStockTests;
-			productName = MediStockTests;
-			productReference = 53E0D8A32C06084900DE1134 /* MediStockTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		53E0D8AC2C06084900DE1134 /* MediStockUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53E0D8BD2C06084900DE1134 /* Build configuration list for PBXNativeTarget "MediStockUITests" */;
@@ -352,10 +296,6 @@
 					53E0D8922C06084700DE1134 = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					53E0D8A22C06084900DE1134 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 53E0D8922C06084700DE1134;
-					};
 					53E0D8AC2C06084900DE1134 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 53E0D8922C06084700DE1134;
@@ -379,7 +319,6 @@
 			projectRoot = "";
 			targets = (
 				53E0D8922C06084700DE1134 /* pack */,
-				53E0D8A22C06084900DE1134 /* MediStockTests */,
 				53E0D8AC2C06084900DE1134 /* MediStockUITests */,
 			);
 		};
@@ -393,13 +332,6 @@
 				53E0D89E2C06084900DE1134 /* Preview Assets.xcassets in Resources */,
 				53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */,
 				53E0D8E42C0660FD00DE1134 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53E0D8A12C06084900DE1134 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,15 +371,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53E0D89F2C06084900DE1134 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				53E0D8A82C06084900DE1134 /* MediStockTests.swift in Sources */,
-				23FD05622D4407EF0089DB5C /* MockAuthService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		53E0D8A92C06084900DE1134 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,11 +383,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		53E0D8A52C06084900DE1134 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 53E0D8922C06084700DE1134 /* pack */;
-			targetProxy = 53E0D8A42C06084900DE1134 /* PBXContainerItemProxy */;
-		};
 		53E0D8AF2C06084900DE1134 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 53E0D8922C06084700DE1134 /* pack */;
@@ -654,46 +572,6 @@
 			};
 			name = Release;
 		};
-		53E0D8BB2C06084900DE1134 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 99UMC25BBL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediStock.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MediStock";
-			};
-			name = Debug;
-		};
-		53E0D8BC2C06084900DE1134 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 99UMC25BBL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediStock.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MediStock";
-			};
-			name = Release;
-		};
 		53E0D8BE2C06084900DE1134 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -747,15 +625,6 @@
 			buildConfigurations = (
 				53E0D8B82C06084900DE1134 /* Debug */,
 				53E0D8B92C06084900DE1134 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		53E0D8BA2C06084900DE1134 /* Build configuration list for PBXNativeTarget "MediStockTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53E0D8BB2C06084900DE1134 /* Debug */,
-				53E0D8BC2C06084900DE1134 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
