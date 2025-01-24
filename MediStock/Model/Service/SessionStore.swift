@@ -8,22 +8,20 @@ class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
     
-    var handle: AuthStateDidChangeListenerHandle?
+    private var handle: AuthStateDidChangeListenerHandle?
     private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil
     }
     
-    
+    init(authService: AuthServiceProtocol = FirebaseAuthService()) {
+        self.authService = authService
+    }
     
     func disableAutoLogin() async throws {
-        if Auth.auth().currentUser != nil {
-            do {
-                try await signOut()
-                print("Déconnexion réussie pour désactiver la persistance.")
-            } catch let error {
-                print("Erreur lors de la déconnexion : \(error.localizedDescription)")
-            }
+        if session != nil {
+            try await authService.signOut()
+            print("Déconnexion réussie pour désactiver la persistance.")
         }
     }
     
@@ -42,10 +40,10 @@ class SessionStore: ObservableObject {
     }
     
     func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            self.handleAuthResult(result, error, completion: completion)
-            
-        }
+//        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+//            self.handleAuthResult(result, error, completion: completion)
+//
+//        }
     }
     
     func signIn(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void) {
