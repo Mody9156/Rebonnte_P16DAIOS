@@ -26,15 +26,10 @@ class SessionStore: ObservableObject {
     }
     
     func listen() {
-        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+        authService.addDidChangeListenerHandle { [weak self] user in
             DispatchQueue.main.async {
-                if let user = user {
-                    self?.session = User(uid: user.uid, email: user.email)
-                    self?.error = nil
-                } else {
-                    self?.session = nil
-                    self?.error = .unknown
-                }
+                self?.session = user
+                self?.error = user == nil ? .unknown : nil
             }
         }
     }
