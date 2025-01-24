@@ -74,7 +74,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Stock"))
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
-
+            
             HStack {
                 Button(action: decreaseStock) {
                     Image(systemName: "minus.circle")
@@ -101,7 +101,7 @@ extension MedicineDetailView {
                 }
                 .accessibilityLabel("Increase stock")
                 .accessibilityHint("Increase the stock quantity by 1.")
-
+                
             }
             .padding(.bottom, 10)
         }
@@ -113,7 +113,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Aisle"))
                 .font(.headline)
                 .accessibilityLabel("Aisle Label")
-
+            
             TextField("Aisle", text: $medicine.aisle, onCommit: {
                 medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
@@ -152,19 +152,19 @@ extension MedicineDetailView {
                             Text(entry.action)
                                 .font(.headline)
                                 .accessibilityLabel("Action: \(entry.action)")
-
+                            
                             Text("User: \(entry.user)")
                                 .font(.subheadline)
                                 .accessibilityLabel("Performed by: \(entry.user)")
-
+                            
                             Text("Date: \(entry.timestamp.formatted())")
                                 .font(.subheadline)
                                 .accessibilityLabel("Date: \(entry.timestamp.formatted())")
-
+                            
                             Text("Details: \(entry.details)")
                                 .font(.subheadline)
                                 .accessibilityLabel("Details: \(entry.details)")
-
+                            
                         }
                         .padding()
                         .background(Color(.systemGray6))
