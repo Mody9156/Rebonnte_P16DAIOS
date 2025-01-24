@@ -15,12 +15,16 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Button(action: {
-                authViewModel.login(email: email, password: password)
+                Task{
+                    try await authViewModel.login(email: email, password: password)
+                }
             }) {
                 Text("Login")
             }
             Button(action: {
-                authViewModel.createdNewUser(email: email, password: password)
+                Task{
+                    try await authViewModel.createdNewUser(email: email, password: password)
+                }
             }) {
                 Text("Sign Up")
             }
