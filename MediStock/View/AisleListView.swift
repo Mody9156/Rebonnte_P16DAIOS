@@ -12,7 +12,7 @@ struct AisleListView: View {
         NavigationStack {
             List {
                 ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(viewModel: medicineStockViewModel, aisle: aisle)) {
+                    NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
                         Text(aisle)
                             .accessibilityLabel("Aisle \(aisle)")
                             .accessibilityHint("Tap to view medicines in aisle \(aisle).")
