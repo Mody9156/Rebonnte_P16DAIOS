@@ -34,11 +34,16 @@ class SessionStore: ObservableObject {
         }
     }
     
-    func signUp(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void)  {
-//        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-//            self.handleAuthResult(result, error, completion: completion)
-//
-//        }
+    func signUp(email: String, password: String) async throws -> User  {
+        do{
+           let user = try await authService.signUp(email: email, password: password)
+            DispatchQueue.main.async {
+                self.session = user
+            }
+            return user
+        }catch{
+            throw error
+        }
     }
     
     func signIn(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void) {
