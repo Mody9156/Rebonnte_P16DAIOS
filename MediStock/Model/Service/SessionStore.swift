@@ -46,14 +46,15 @@ class SessionStore: ObservableObject {
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping(Result<User,Error>) -> Void) {
-        guard !email.isEmpty, !password.isEmpty else {
-            completion(.failure(AuthError.invalidCredentials))
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            self.handleAuthResult(result, error, completion: completion)
+    func signIn(email: String, password: String) async throws -> User{
+        do{
+            let user = try await authService.signIn(email: email, password: password)
+            DispatchQueue.main.async {
+                self.session = user
+            }
+            return user
+        }catch{
+            throw error
         }
     }
     
