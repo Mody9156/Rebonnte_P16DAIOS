@@ -29,8 +29,7 @@ struct MedicineListView: View {
         }
         .navigationBarItems(trailing:Button(action: {
             Task{
-                guard let email else {return}
-                try await medicineStockViewModel.addRandomMedicineToList(user: email, aisle: aisle) // Remplacez par l'utilisateur actuel
+                try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
             }
         }) {
             Image(systemName: "plus")
