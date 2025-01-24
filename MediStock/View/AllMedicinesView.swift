@@ -3,7 +3,6 @@ import SwiftUI
 struct AllMedicinesView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
-    @State private var email = UserDefaults.standard.string(forKey: "email")
     @AppStorage("email") var identity : String = "email"
     
     var body: some View {
