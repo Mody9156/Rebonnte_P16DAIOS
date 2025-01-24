@@ -201,9 +201,17 @@
 		23FD05682D440E490089DB5C /* MediStockTests */ = {
 			isa = PBXGroup;
 			children = (
+				23FD05702D440E6C0089DB5C /* Mocks */,
 				23FD05692D440E490089DB5C /* MediStockTests.swift */,
 			);
 			path = MediStockTests;
+			sourceTree = "<group>";
+		};
+		23FD05702D440E6C0089DB5C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		53E0D88A2C06084700DE1134 = {
