@@ -4,7 +4,7 @@ struct AisleListView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var email = UserDefaults.standard.string(forKey: "email")
     @AppStorage("email") var identity : String = "email"
-
+    
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
     }
@@ -17,24 +17,25 @@ struct AisleListView: View {
                         Text(aisle)
                             .accessibilityLabel("Aisle \(aisle)")
                             .accessibilityHint("Tap to view medicines in aisle \(aisle).")
-
                     }
                 }
             }
             .navigationBarItems(trailing:
-             Button(action: {
+                                    Button(action: {
                 Task{
-                    guard let email else {return}
-                    try await medicineStockViewModel.addRandomMedicine(user: email)
+                    try await medicineStockViewModel.addRandomMedicine(user: identity)
                 }
             }) {
                 Image(systemName: "plus")
             })
             .navigationBarTitle("Aisles")
+            .accessibilityLabel("Aisle List")
+            .accessibilityHint("Displays a list of aisles containing medicines.")
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
         }
+        .accessibilityElement(children: .contain)
     }
 }
 
