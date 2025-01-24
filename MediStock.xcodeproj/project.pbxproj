@@ -22,6 +22,7 @@
 		237E0A872D300A4F00EEC056 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A862D300A4F00EEC056 /* User.swift */; };
 		237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A882D300FBB00EEC056 /* AuthViewModel.swift */; };
 		237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A8A2D30320700EEC056 /* MedicineRepository.swift */; };
+		23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC50C2D442059006BD481 /* SessionStoreTests.swift */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
@@ -68,6 +69,7 @@
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
+		23BAC50C2D442059006BD481 /* SessionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStoreTests.swift; sourceTree = "<group>"; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		23FD05672D440E480089DB5C /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +152,7 @@
 		23BAC50B2D442028006BD481 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */,
+				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				23FD05722D440E9D0089DB5C /* MockAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
