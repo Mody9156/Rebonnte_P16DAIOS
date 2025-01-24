@@ -8,11 +8,10 @@ struct MainTabView: View {
                     Image(systemName: "list.dash")
                         .accessibilityLabel("Aisles List Icon")
                     Text("Aisles")
-
                 }
                 .accessibilityLabel("Aisles")
                 .accessibilityHint("View the list of aisles in the pharmacy.")
-
+            
             AllMedicinesView()
                 .tabItem {
                     Image(systemName: "square.grid.2x2")
@@ -30,7 +29,6 @@ struct MainTabView: View {
                 }
                 .accessibilityLabel("Profile")
                 .accessibilityHint("View and edit your profile information.")
-
         }
         .accessibilityLabel("Main Tab Bar")
         .accessibilityHint("Use the tabs to switch between different sections of the app.")
