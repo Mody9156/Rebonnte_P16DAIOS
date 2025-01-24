@@ -2,12 +2,12 @@ import SwiftUI
 
 struct MedicineDetailView: View {
     @State var medicine: Medicine
-    @StateObject var viewModel : MedicineStockViewModel
+    @StateObject var medicineStockViewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
     
     var filterMedicine : [HistoryEntry]{
-        return  viewModel.history.filter ({
+        return  medicineStockViewModel.history.filter ({
             $0.medicineId == medicine.id
         })
     }
@@ -35,12 +35,12 @@ struct MedicineDetailView: View {
         .padding(.vertical)
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear{
-            viewModel.fetchHistory(for: medicine)
+            medicineStockViewModel.fetchHistory(for: medicine)
         }
         .onChange(of: medicine) { newMedicine in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if newMedicine == medicine {
-                    viewModel.fetchHistory(for: newMedicine)
+                    medicineStockViewModel.fetchHistory(for: newMedicine)
                 }
             }
         }
@@ -53,7 +53,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.headline)
             TextField("Name", text: $medicine.name, onCommit: {
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
@@ -98,7 +98,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Aisle"))
                 .font(.headline)
             TextField("Aisle", text: $medicine.aisle, onCommit: {
-                viewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
@@ -108,13 +108,13 @@ extension MedicineDetailView {
     
     private func decreaseStock(){
         guard let id = medicine.id else{return}
-        viewModel.decreaseStock(medicine, user: id)
+        medicineStockViewModel.decreaseStock(medicine, user: id)
         medicine.stock = max(0, medicine.stock - 1)
     }
     
     private func increaseStock(){
         guard let id = medicine.id else{return}
-        viewModel.increaseStock(medicine, user: id)
+        medicineStockViewModel.increaseStock(medicine, user: id)
         medicine.stock += 1
     }
     
@@ -156,6 +156,6 @@ struct MedicineDetailView_Previews: PreviewProvider {
         //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
         //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
         let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, viewModel: sampleViewModel).environmentObject(SessionStore())
+        MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
     }
 }
