@@ -14,6 +14,7 @@ import FirebaseFirestore
 import FirebaseCore
 
 final class SessionStoreTests: XCTestCase {
-
+    
+    var sessionStore : SessionStore
 
 }
