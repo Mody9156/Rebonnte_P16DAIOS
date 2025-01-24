@@ -142,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				23FD055B2D43C5690089DB5C /* Auth */,
-				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
 			path = Service;
@@ -195,6 +194,7 @@
 		23FD055B2D43C5690089DB5C /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				53E0D8DF2C0609B900DE1134 /* SessionStore.swift */,
 				23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */,
 			);
 			path = Auth;

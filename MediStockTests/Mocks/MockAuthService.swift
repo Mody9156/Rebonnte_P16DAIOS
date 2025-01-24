@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
 class MockAuthService : AuthServiceProtocol {
-    
+    var mockUser : User?
+    let 
 }
