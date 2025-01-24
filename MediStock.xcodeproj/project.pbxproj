@@ -24,6 +24,7 @@
 		237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A8A2D30320700EEC056 /* MedicineRepository.swift */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
+		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
@@ -45,6 +46,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		23FD056B2D440E490089DB5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53E0D88B2C06084700DE1134 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53E0D8922C06084700DE1134;
+			remoteInfo = pack;
+		};
 		53E0D8AE2C06084900DE1134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53E0D88B2C06084700DE1134 /* Project object */;
@@ -61,6 +69,8 @@
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		23FD05672D440E480089DB5C /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FD05692D440E490089DB5C /* MediStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockTests.swift; sourceTree = "<group>"; };
 		53E0D8932C06084700DE1134 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
@@ -84,6 +94,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		23FD05642D440E480089DB5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53E0D8902C06084700DE1134 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,11 +198,20 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		23FD05682D440E490089DB5C /* MediStockTests */ = {
+			isa = PBXGroup;
+			children = (
+				23FD05692D440E490089DB5C /* MediStockTests.swift */,
+			);
+			path = MediStockTests;
+			sourceTree = "<group>";
+		};
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
 				53E0D8952C06084700DE1134 /* MediStock */,
 				53E0D8B02C06084900DE1134 /* MediStockUITests */,
+				23FD05682D440E490089DB5C /* MediStockTests */,
 				53E0D8942C06084700DE1134 /* Products */,
 				237E0A6E2D2FFE4500EEC056 /* Frameworks */,
 			);
@@ -196,6 +222,7 @@
 			children = (
 				53E0D8932C06084700DE1134 /* pack.app */,
 				53E0D8AD2C06084900DE1134 /* MediStockUITests.xctest */,
+				23FD05672D440E480089DB5C /* MediStockTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,6 +262,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		23FD05662D440E480089DB5C /* MediStockTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23FD056D2D440E490089DB5C /* Build configuration list for PBXNativeTarget "MediStockTests" */;
+			buildPhases = (
+				23FD05632D440E480089DB5C /* Sources */,
+				23FD05642D440E480089DB5C /* Frameworks */,
+				23FD05652D440E480089DB5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23FD056C2D440E490089DB5C /* PBXTargetDependency */,
+			);
+			name = MediStockTests;
+			productName = MediStockTests;
+			productReference = 23FD05672D440E480089DB5C /* MediStockTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		53E0D8922C06084700DE1134 /* pack */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53E0D8B72C06084900DE1134 /* Build configuration list for PBXNativeTarget "pack" */;
@@ -290,9 +335,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					23FD05662D440E480089DB5C = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 53E0D8922C06084700DE1134;
+					};
 					53E0D8922C06084700DE1134 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -320,11 +369,19 @@
 			targets = (
 				53E0D8922C06084700DE1134 /* pack */,
 				53E0D8AC2C06084900DE1134 /* MediStockUITests */,
+				23FD05662D440E480089DB5C /* MediStockTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		23FD05652D440E480089DB5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53E0D8912C06084700DE1134 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -345,6 +402,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		23FD05632D440E480089DB5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53E0D88F2C06084700DE1134 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +448,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		23FD056C2D440E490089DB5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53E0D8922C06084700DE1134 /* pack */;
+			targetProxy = 23FD056B2D440E490089DB5C /* PBXContainerItemProxy */;
+		};
 		53E0D8AF2C06084900DE1134 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 53E0D8922C06084700DE1134 /* pack */;
@@ -391,6 +461,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		23FD056E2D440E490089DB5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 99UMC25BBL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Eventorias.MediStockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pack";
+			};
+			name = Debug;
+		};
+		23FD056F2D440E490089DB5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 99UMC25BBL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Eventorias.MediStockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pack";
+			};
+			name = Release;
+		};
 		53E0D8B52C06084900DE1134 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -611,6 +721,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		23FD056D2D440E490089DB5C /* Build configuration list for PBXNativeTarget "MediStockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23FD056E2D440E490089DB5C /* Debug */,
+				23FD056F2D440E490089DB5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		53E0D88E2C06084700DE1134 /* Build configuration list for PBXProject "MediStock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

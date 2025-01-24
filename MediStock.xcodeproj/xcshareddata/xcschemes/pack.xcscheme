@@ -40,6 +40,17 @@
                ReferencedContainer = "container:MediStock.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "23FD05662D440E480089DB5C"
+               BuildableName = "MediStockTests.xctest"
+               BlueprintName = "MediStockTests"
+               ReferencedContainer = "container:MediStock.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
