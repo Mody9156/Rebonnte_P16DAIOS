@@ -32,8 +32,6 @@ class AuthViewModel : ObservableObject {
         }catch{
             self.messageError = "Erreur lors de la connection de l'utilisateur"
         }
-        
-        
     }
     
     func createdNewUser(email: String, password: String) async throws {
