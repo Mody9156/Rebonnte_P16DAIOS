@@ -4,7 +4,7 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-
+    
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             Medicine.aisle == aisle
@@ -18,8 +18,12 @@ struct MedicineListView: View {
                     VStack(alignment: .leading) {
                         Text(medicine.name)
                             .font(.headline)
+                            .accessibilityLabel("Medicine Name: \(medicine.name)")
+                            .accessibilityHint("Tap to view details for \(medicine.name).")
+                        
                         Text("Stock: \(medicine.stock)")
                             .font(.subheadline)
+                            .accessibilityLabel("Stock available: \(medicine.stock)")
                     }
                 }
             }
@@ -33,9 +37,12 @@ struct MedicineListView: View {
             }
         }) {
             Image(systemName: "plus")
+                .accessibilityLabel("Add random medicine")
+                .accessibilityHint("Adds a random medicine to the current aisle.")
         })
         .navigationBarTitle(aisle)
-        
+        .accessibilityLabel("List of medicines in \(aisle)")
+        .accessibilityHint("Displays all medicines available in \(aisle).")
         .onAppear {
             medicineStockViewModel.observeMedicines()
         }
