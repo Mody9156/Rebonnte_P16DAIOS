@@ -18,6 +18,7 @@ struct MedicineDetailView: View {
             Text(medicine.name)
                 .font(.largeTitle)
                 .padding(.top, 20)
+                .accessibilityLabel("Medicine Name: \(medicine.name)")
             
             // Medicine Name
             medicineNameSection
@@ -44,6 +45,9 @@ struct MedicineDetailView: View {
                 }
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Medicine Details")
+        .accessibilityHint("Displays detailed information about the medicine.")
     }
 }
 
@@ -52,11 +56,15 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.headline)
+                .accessibilityLabel("Name Label")
+            
             TextField("Name", text: $medicine.name, onCommit: {
                 medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
+            .accessibilityLabel("Medicine Name Field")
+            .accessibilityHint("Edit the name of the medicine.")
         }
         .padding(.horizontal)
     }
@@ -65,6 +73,8 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
                 .font(.headline)
+                .accessibilityLabel("Stock Label")
+
             HStack {
                 Button(action: decreaseStock) {
                     Image(systemName: "minus.circle")
@@ -72,6 +82,7 @@ extension MedicineDetailView {
                         .foregroundColor(.red)
                 }
                 .accessibilityLabel("Decrease stock")
+                .accessibilityHint("Reduce the stock quantity by 1.")
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -80,6 +91,8 @@ extension MedicineDetailView {
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
                     }
+                    .accessibilityLabel("Stock Field")
+                    .accessibilityHint("Enter the current stock of the medicine.")
                 
                 Button(action: increaseStock) {
                     Image(systemName: "plus.circle")
@@ -87,6 +100,8 @@ extension MedicineDetailView {
                         .foregroundColor(.green)
                 }
                 .accessibilityLabel("Increase stock")
+                .accessibilityHint("Increase the stock quantity by 1.")
+
             }
             .padding(.bottom, 10)
         }
@@ -97,11 +112,15 @@ extension MedicineDetailView {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Aisle"))
                 .font(.headline)
+                .accessibilityLabel("Aisle Label")
+
             TextField("Aisle", text: $medicine.aisle, onCommit: {
                 medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
+            .accessibilityLabel("Aisle Field")
+            .accessibilityHint("Edit the aisle where the medicine is located.")
         }
         .padding(.horizontal)
     }
@@ -123,23 +142,36 @@ extension MedicineDetailView {
             Text("History")
                 .font(.headline)
                 .padding(.top, 20)
+                .accessibilityLabel("History Section")
+                .accessibilityHint("Displays the history of actions for this medicine.")
+            
             ScrollView {
                 VStack {
                     ForEach(filterMedicine) { entry in
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
                                 .font(.headline)
+                                .accessibilityLabel("Action: \(entry.action)")
+
                             Text("User: \(entry.user)")
                                 .font(.subheadline)
+                                .accessibilityLabel("Performed by: \(entry.user)")
+
                             Text("Date: \(entry.timestamp.formatted())")
                                 .font(.subheadline)
+                                .accessibilityLabel("Date: \(entry.timestamp.formatted())")
+
                             Text("Details: \(entry.details)")
                                 .font(.subheadline)
+                                .accessibilityLabel("Details: \(entry.details)")
+
                         }
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
                         .padding(.bottom, 5)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityHint("Details of this history entry.")
                     }
                 }
             }
