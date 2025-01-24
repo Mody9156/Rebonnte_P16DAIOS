@@ -27,7 +27,6 @@ struct AllMedicinesView: View {
                             }
                             .accessibilityLabel("Sort by \(index.rawValue)")
                             .accessibilityHint("Sort the medicines based on \(index.rawValue).")
-                            
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
