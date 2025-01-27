@@ -8,15 +8,16 @@ public class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
     
-    private var handle: AuthStateDidChangeListenerHandle?
+    var handle: AuthStateDidChangeListenerHandle?
     private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil
     }
     
-    init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User? = nil) {
+    init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User? = nil, handle: AuthStateDidChangeListenerHandle?) {
         self.authService = authService
         self.session = session
+        self.handle = handle
     }
     
     func disableAutoLogin() async throws {

@@ -96,11 +96,13 @@ class SessionStoreTests: XCTestCase {
     
     func testWhenListeningToAuthChangesSuccess(){
         //Given
-        
+        let mockhandle = AuthStateDidChangeListenerHandle()
+        mockAuthService.didAddListener
         //when
-        let authStateDidChangeListenerHandle : () = sessionStore.stopListeningToAuthChanges()
+        sessionStore.stopListeningToAuthChanges()
         //Then
-        print("authStateDidChangeListenerHandle : \(authStateDidChangeListenerHandle)")
+        XCTAssertTrue(mockAuthService.didAddListener)
+        XCTAssert(<#T##expression: Bool##Bool#>)
     }
     
 }
