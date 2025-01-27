@@ -19,7 +19,16 @@ class SessionStoreTests: XCTestCase {
         sessionStore = SessionStore(authService: mockAuthService)
     }
 
+    
+    func delete(){
+        var user = mockAuthService.mockUser
+        user?.uid.removeAll()
+        user?.email?.removeAll()
+    }
+    
+    
     func testSignInSuccess() async throws {
+        delete()
         mockAuthService.mockUser = User(uid: "mockUID", email: "test@example.com")
         let user = try await sessionStore.signIn(email: "test@example.com", password: "password")
         XCTAssertEqual(user.email, "test@example.com")
@@ -27,6 +36,7 @@ class SessionStoreTests: XCTestCase {
     }
 
     func testSignInFailure() async {
+        delete()
         mockAuthService.shouldThrowError = true
         do {
             _ = try await sessionStore.signIn(email: "test@example.com", password: "password")
@@ -37,13 +47,17 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpSuccess() async throws {
-        let user = try await sessionStore.signUp(email: email, password: "password")
+        delete()
+        let uid = "mockUID"
+        let email = "test@example.com"
+        let user = try await sessionStore.signUp(email: "test@example.com", password: "password")
         XCTAssert(user.email == email)
         XCTAssert(user.uid == uid)
         XCTAssert(sessionStore.session != nil)
     }
     
     func testSignUpFailure() async throws {
+        delete()
         mockAuthService.shouldThrowError = true
         do{
             _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
@@ -52,5 +66,6 @@ class SessionStoreTests: XCTestCase {
             XCTAssertEqual(error as? AuthError, AuthError.userCreationFailed)
         }
     }
+   
 }
 
