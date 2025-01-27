@@ -28,7 +28,6 @@
 		23FC3B092D4784CD005A2C34 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B082D4784CD005A2C34 /* FirebaseAuth */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
-		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
@@ -68,7 +67,6 @@
 		23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
-		23FD05692D440E490089DB5C /* MediStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockTests.swift; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 		23BAC50B2D442028006BD481 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				23FD05692D440E490089DB5C /* MediStockTests.swift */,
 				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
 			);
 			path = Model;
@@ -384,7 +381,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
