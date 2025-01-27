@@ -9,8 +9,11 @@ import XCTest
 @testable import pack
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseAuth
 
 class MockAuthService: AuthServiceProtocol {
+  
+    
     var mockUser: User?
     var shouldThrowError: Bool = false
 
@@ -28,10 +31,12 @@ class MockAuthService: AuthServiceProtocol {
         if shouldThrowError { throw AuthError.unknown }
     }
 
-    func addStateDidChangeListener(listener: @escaping (User?) -> Void) {
+    func addDidChangeListenerHandle(listener: @escaping (pack.User?) -> Void) {
         listener(mockUser)
     }
-
-    func removeStateDidChangeListener(handle: AuthStateDidChangeListenerHandle) {}
+    
+    func removeDidChangeListenerHandle(handle: AuthStateDidChangeListenerHandle) {
+        Auth.auth().removeStateDidChangeListener(handle)
+    }
 }
 
