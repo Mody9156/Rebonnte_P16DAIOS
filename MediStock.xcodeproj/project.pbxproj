@@ -26,6 +26,7 @@
 		23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC5102D442D49006BD481 /* MockAuthService.swift */; };
 		23FC3B072D478461005A2C34 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B062D478461005A2C34 /* FirebaseFirestore */; };
 		23FC3B092D4784CD005A2C34 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B082D4784CD005A2C34 /* FirebaseAuth */; };
+		23FC3B0C2D47CC0C005A2C34 /* UserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC3B0B2D47CC0C005A2C34 /* UserExtension.swift */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
@@ -66,6 +67,7 @@
 		23BAC5102D442D49006BD481 /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
 		23BAC5142D443117006BD481 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FC3B0B2D47CC0C005A2C34 /* UserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtension.swift; sourceTree = "<group>"; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		23FD05692D440E490089DB5C /* MediStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockTests.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		23FC3B0A2D47CBA0005A2C34 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				23FC3B0B2D47CC0C005A2C34 /* UserExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 			files = (
 				23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
+				23FC3B0C2D47CC0C005A2C34 /* UserExtension.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
