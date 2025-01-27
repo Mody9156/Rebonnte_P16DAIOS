@@ -74,16 +74,24 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testWhenSignOutSuccess() async throws {
-        //give
-        
         //When
-        let signUp = try await sessionStore.signUp(email: "test@example.com", password: "password")
-git s        let signIn = try await sessionStore.signIn(email: "test@example.com", password: "password")
-        let signOut = try await sessionStore.signOut()
+        _ = try await sessionStore.signOut()
         //Then
-        XCTAssertNil(sessionStore.session)
-        
+        XCTAssertFalse(mockAuthService.shouldThrowError)
     }
     
+    func testWhenSignOutThrowError() async throws {
+        //Given
+        mockAuthService.shouldThrowError = true
+        //When
+        do{
+            _ = try await sessionStore.signOut()
+            //Then
+            XCTFail("Expected an error but did not get one")
+        }catch{
+            //Then
+            XCTAssertEqual(error as? AuthError, AuthError.unknown)
+        }
+    }
 }
 
