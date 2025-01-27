@@ -102,6 +102,11 @@ class SessionStoreTests: XCTestCase {
         sessionStore.stopListeningToAuthChanges()
         //Then
         XCTAssertTrue(mockAuthService.didAddListener)
+        XCTAssert(sessionStore.handle == nil)
+    }
+    
+    func testWhenDisableAutoLoginNoThrowErrror(){
+        
     }
     
 }
