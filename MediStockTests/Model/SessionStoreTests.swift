@@ -73,12 +73,16 @@ class SessionStoreTests: XCTestCase {
         }
     }
     
-    func testWhenSignOutSuccess(){
+    func testWhenSignOutSuccess() async throws {
         //give
         
         //When
-        
+        let signUp = try await sessionStore.signUp(email: "test@example.com", password: "password")
+git s        let signIn = try await sessionStore.signIn(email: "test@example.com", password: "password")
+        let signOut = try await sessionStore.signOut()
         //Then
+        XCTAssertNil(sessionStore.session)
+        
     }
     
 }
