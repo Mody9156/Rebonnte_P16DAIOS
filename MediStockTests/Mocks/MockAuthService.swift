@@ -9,11 +9,17 @@ import XCTest
 @testable import pack
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseCore
 import FirebaseAuth
+
+
+
 
 class MockAuthService: AuthServiceProtocol {
     var mockUser: User?
     var shouldThrowError: Bool = false
+    var didAddListener : Bool = false
+    var mockHandle: AuthStateDidChangeListenerHandle = NSObject() // Handle factice
 
     func signUp(email: String, password: String) async throws -> User {
         if shouldThrowError { throw AuthError.userCreationFailed }
@@ -34,7 +40,7 @@ class MockAuthService: AuthServiceProtocol {
     }
     
     func removeDidChangeListenerHandle(handle: AuthStateDidChangeListenerHandle) {
-        Auth.auth().removeStateDidChangeListener(handle)
+        didAddListener = true
     }
 }
 
