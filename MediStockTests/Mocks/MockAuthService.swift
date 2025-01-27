@@ -10,20 +10,19 @@ import XCTest
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseCore
 
 class MockAuthService: AuthServiceProtocol {
-    var mockUser: User?
+    var mockUser: pack.User?
     var shouldThrowError: Bool = false
     var didAddListener : Bool = false
     var mockHandle: AuthStateDidChangeListenerHandle = NSObject() // Handle factice
 
-    func signUp(email: String, password: String) async throws -> User {
+    func signUp(email: String, password: String) async throws -> pack.User {
         if shouldThrowError { throw AuthError.userCreationFailed }
         return User(uid: "mockUID", email: email)
     }
 
-    func signIn(email: String, password: String) async throws -> User {
+    func signIn(email: String, password: String) async throws -> pack.User {
         if shouldThrowError { throw AuthError.invalidCredentials }
         return User(uid: "mockUID", email: email)
     }
@@ -40,4 +39,3 @@ class MockAuthService: AuthServiceProtocol {
         didAddListener = true
     }
 }
-
