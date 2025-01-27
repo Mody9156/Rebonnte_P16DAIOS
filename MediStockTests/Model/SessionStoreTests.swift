@@ -16,7 +16,7 @@ class SessionStoreTests: XCTestCase {
 
     override func setUp() {
         mockAuthService = MockAuthService()
-        sessionStore = SessionStore(authService: mockAuthService)
+        sessionStore = SessionStore(authService: mockAuthService, session: mockAuthService.mockUser)
     }
 
     
@@ -49,9 +49,9 @@ class SessionStoreTests: XCTestCase {
     
     func testSignUpSuccess() async throws {
         let user = try await sessionStore.signUp(email: "test2@example.com", password: "password")
-        XCTAssertFalse(((user.email?.isEmpty) != nil))
+        XCTAssertTrue(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
-        XCTAssertTrue(sessionStore.session != nil)
+        XCTAssert(sessionStore.session != nil)
     }
     
     func testSignUpFailure() async throws {

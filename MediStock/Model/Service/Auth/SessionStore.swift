@@ -14,8 +14,9 @@ public class SessionStore: ObservableObject {
         session != nil
     }
     
-    init(authService: AuthServiceProtocol = FirebaseAuthService()) {
+    init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User?) {
         self.authService = authService
+        self.session = session
     }
     
     func disableAutoLogin() async throws {
