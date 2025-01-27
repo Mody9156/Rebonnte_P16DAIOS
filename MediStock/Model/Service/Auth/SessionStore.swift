@@ -60,7 +60,6 @@ public class SessionStore: ObservableObject {
                 DispatchQueue.main.async {
                     self.session = nil
                     print("Déconnexion réussie pour désactiver la persistance.")
-                    
                 }
             }
         } catch {
