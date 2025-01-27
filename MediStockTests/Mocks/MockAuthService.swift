@@ -7,28 +7,10 @@
 
 import XCTest
 @testable import pack
-import FirebaseFirestoreSwift
+import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
-import FirebaseAuth
-
-protocol UserProtocol {
-    
-}
-
-class MockUser : Users {
-    private let emailValue: String?
-
-     override var email: String? {
-         return emailValue
-     }
-
-     init(email: String?) {
-         self.emailValue = email
-         super.init() // Firebase User ne fournit pas de constructeur public, ceci est fictif
-     }
-}
-
 
 class MockAuthService: AuthServiceProtocol {
     var mockUser: User?
