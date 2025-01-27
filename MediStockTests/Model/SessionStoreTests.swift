@@ -51,7 +51,7 @@ class SessionStoreTests: XCTestCase {
         let uid = "mockUID_2"
         let email = "test@example.com"
         let user = try await sessionStore.signUp(email: "test2@example.com", password: "password")
-        XCTAssertFalse(user.email.isEmpty)
+        XCTAssertFalse(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
         XCTAssert(sessionStore.session != nil)
     }
