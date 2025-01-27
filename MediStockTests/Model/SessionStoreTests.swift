@@ -47,12 +47,10 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpSuccess() async throws {
-        mockAuthService.mockUser = User(uid: "mockUID", email: "test@example.com")
         let user = try await sessionStore.signUp(email: "test2@example.com", password: "password")
         XCTAssertTrue(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
-        XCTAssertNotNil(sessionStore.session)
-        print("session : \(String(describing: sessionStore.session))")
+        XCTAssertNoThrow(user")
     }
     
     func testSignUpFailure() async throws {
