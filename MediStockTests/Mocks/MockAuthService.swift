@@ -7,18 +7,22 @@
 
 import XCTest
 @testable import pack
-import FirebaseFirestoreSwift
+import Foundation
+import FirebaseAuth
 import FirebaseFirestore
-class MockAuthService: AuthServiceProtocol {
-    var mockUser: User?
-    var shouldThrowError: Bool = false
 
-    func signUp(email: String, password: String) async throws -> User {
+class MockAuthService: AuthServiceProtocol {
+    var mockUser: pack.User?
+    var shouldThrowError: Bool = false
+    var didAddListener : Bool = false
+    var mockHandle: AuthStateDidChangeListenerHandle = NSObject() // Handle factice
+
+    func signUp(email: String, password: String) async throws -> pack.User {
         if shouldThrowError { throw AuthError.userCreationFailed }
         return User(uid: "mockUID", email: email)
     }
 
-    func signIn(email: String, password: String) async throws -> User {
+    func signIn(email: String, password: String) async throws -> pack.User {
         if shouldThrowError { throw AuthError.invalidCredentials }
         return User(uid: "mockUID", email: email)
     }
@@ -27,10 +31,11 @@ class MockAuthService: AuthServiceProtocol {
         if shouldThrowError { throw AuthError.unknown }
     }
 
-    func addStateDidChangeListener(listener: @escaping (User?) -> Void) {
+    func addDidChangeListenerHandle(listener: @escaping (pack.User?) -> Void) {
         listener(mockUser)
     }
-
-    func removeStateDidChangeListener(handle: AuthStateDidChangeListenerHandle) {}
+    
+    func removeDidChangeListenerHandle(handle: AuthStateDidChangeListenerHandle) {
+        didAddListener = true
+    }
 }
-
