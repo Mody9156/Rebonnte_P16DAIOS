@@ -28,7 +28,6 @@ class SessionStoreTests: XCTestCase {
     
     
     func testSignInSuccess() async throws {
-//        mockAuthService.mockUser = User(uid: "mockUID", email: "test@example.com")
         _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
         let user = try await sessionStore.signIn(email: "test@example.com", password: "password")
         XCTAssertEqual(user.email, "test@example.com")
@@ -48,11 +47,12 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpSuccess() async throws {
-        delete()
+        mockAuthService.mockUser = User(uid: "mockUID", email: "test@example.com")
         let user = try await sessionStore.signUp(email: "test2@example.com", password: "password")
         XCTAssertTrue(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
         XCTAssertNotNil(sessionStore.session)
+        print("session : \(String(describing: sessionStore.session))")
     }
     
     func testSignUpFailure() async throws {
