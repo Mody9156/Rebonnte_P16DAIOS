@@ -134,6 +134,13 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		23A693A12D4821ED00B74332 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		23BAC50B2D442028006BD481 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +212,7 @@
 		23FD05682D440E490089DB5C /* MediStockTests */ = {
 			isa = PBXGroup;
 			children = (
+				23A693A12D4821ED00B74332 /* ViewModel */,
 				23FC3B0A2D47CBA0005A2C34 /* Extension */,
 				23BAC50B2D442028006BD481 /* Model */,
 				23FD05702D440E6C0089DB5C /* Mocks */,
