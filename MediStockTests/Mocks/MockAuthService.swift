@@ -9,6 +9,7 @@ import XCTest
 @testable import pack
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+
 class MockAuthService: AuthServiceProtocol {
     var mockUser: User?
     var shouldThrowError: Bool = false
