@@ -16,7 +16,7 @@ class SessionStoreTests: XCTestCase {
     
     override func setUp() {
         mockAuthService = MockAuthService()
-        sessionStore = SessionStore(authService: mockAuthService, session: User(uid: "mockTest",email: "Fake@gmail.com"))
+        sessionStore = SessionStore(authService: mockAuthService, session: User(uid: "mockTest",email: "Fake@gmail.com"),handle: mockAuthService.mockHandle)
     }
     
     
@@ -96,13 +96,12 @@ class SessionStoreTests: XCTestCase {
     
     func testWhenListeningToAuthChangesSuccess(){
         //Given
-        let mockhandle = AuthStateDidChangeListenerHandle()
-        mockAuthService.didAddListener
+        let mockhandle = "unknown" as AuthStateDidChangeListenerHandle
+        mockAuthService.mockHandle = mockhandle
         //when
         sessionStore.stopListeningToAuthChanges()
         //Then
         XCTAssertTrue(mockAuthService.didAddListener)
-        XCTAssert(<#T##expression: Bool##Bool#>)
     }
     
 }
