@@ -20,12 +20,12 @@ class MockAuthService: AuthServiceProtocol {
 
     func signUp(email: String, password: String) async throws -> User {
         if shouldThrowError { throw AuthError.userCreationFailed }
-        return User(uid: "mockUID", email: email)
+        return mockUser
     }
 
     func signIn(email: String, password: String) async throws -> User {
         if shouldThrowError { throw AuthError.invalidCredentials }
-        return User(uid: "mockUID", email: email)
+        return mockUser
     }
 
     func signOut() async throws {
