@@ -29,6 +29,7 @@ class SessionStoreTests: XCTestCase {
         XCTAssertNotNil(sessionStore.session)
         print("session \(String(describing: sessionStore.session))")
         XCTAssertNoThrow(user)
+        print(sessionStore.session?.email?.count ?? "nil")
     }
 
     func testSignInFailure() async {
