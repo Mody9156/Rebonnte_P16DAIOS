@@ -144,6 +144,7 @@
 		23BAC50B2D442028006BD481 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				23FD05692D440E490089DB5C /* MediStockTests.swift */,
 				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
 			);
 			path = Model;
@@ -216,7 +217,6 @@
 				23FC3B0A2D47CBA0005A2C34 /* Extension */,
 				23BAC50B2D442028006BD481 /* Model */,
 				23FD05702D440E6C0089DB5C /* Mocks */,
-				23FD05692D440E490089DB5C /* MediStockTests.swift */,
 			);
 			path = MediStockTests;
 			sourceTree = "<group>";
