@@ -46,6 +46,8 @@ class SessionStoreTests: XCTestCase {
         XCTAssertTrue(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
         XCTAssertNoThrow(user)
+        XCTAssertNotNil(sessionStore.session)
+        XCTAssertEqual(user.uid, "mockUID")
     }
     
     func testSignUpFailure() async throws {
