@@ -24,6 +24,7 @@
 		237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A8A2D30320700EEC056 /* MedicineRepository.swift */; };
 		23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC50C2D442059006BD481 /* SessionStoreTests.swift */; };
 		23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC5102D442D49006BD481 /* MockAuthService.swift */; };
+		23FC3B072D478461005A2C34 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B062D478461005A2C34 /* FirebaseFirestore */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
@@ -63,9 +64,9 @@
 		23BAC50C2D442059006BD481 /* SessionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStoreTests.swift; sourceTree = "<group>"; };
 		23BAC5102D442D49006BD481 /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
 		23BAC5142D443117006BD481 /* pack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
-		23FD05672D440E480089DB5C /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MediStockTests.xctest; path = "/Users/keita/Documents/Rebonnte_P16DAIOS/build/Debug-iphoneos/MediStockTests.xctest"; sourceTree = "<absolute>"; };
 		23FD05692D440E490089DB5C /* MediStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockTests.swift; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FC3B072D478461005A2C34 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +218,7 @@
 				23FD05682D440E490089DB5C /* MediStockTests */,
 				237E0A6E2D2FFE4500EEC056 /* Frameworks */,
 				23BAC5142D443117006BD481 /* pack.app */,
+				23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,8 +262,11 @@
 				23FD056C2D440E490089DB5C /* PBXTargetDependency */,
 			);
 			name = MediStockTests;
+			packageProductDependencies = (
+				23FC3B062D478461005A2C34 /* FirebaseFirestore */,
+			);
 			productName = MediStockTests;
-			productReference = 23FD05672D440E480089DB5C /* MediStockTests.xctest */;
+			productReference = 23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		53E0D8922C06084700DE1134 /* pack */ = {
@@ -721,6 +727,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 23F6C99A2D2FC12A00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		23FC3B062D478461005A2C34 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23F6C99A2D2FC12A00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

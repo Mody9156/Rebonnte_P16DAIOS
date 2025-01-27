@@ -11,7 +11,7 @@ public struct User {
     public var uid: String
     public var email: String?
     
-    init(uid: String, email: String? = nil) {
+    public init(uid: String, email: String? = nil) {
         self.uid = uid
         self.email = email
     }
