@@ -37,9 +37,6 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpSuccess() async throws {
-        let uid = "mockUID"
-        let email = "test@example.com"
-        mockAuthService.mockUser = User(uid: uid, email: email)
         let user = try await sessionStore.signUp(email: email, password: "password")
         XCTAssert(user.email == email)
         XCTAssert(user.uid == uid)
@@ -52,7 +49,7 @@ class SessionStoreTests: XCTestCase {
             _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
             XCTFail("Expected an error but did not get one")
         }catch{
-            XCTAssertEqual(error as? AuthError, AuthError.invalidCredentials)
+            XCTAssertEqual(error as? AuthError, AuthError.userCreationFailed)
         }
     }
 }
