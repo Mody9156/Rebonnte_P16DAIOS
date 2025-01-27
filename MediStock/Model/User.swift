@@ -8,13 +8,6 @@
 import Foundation
 
 public struct User {
-    public var uid: String
-    public var email: String?
-    
-    public init(uid: String, email: String? = nil) {
-        self.uid = uid
-        self.email = email
-    }
-    
-    
+     var uid: String
+     var email: String?
 }
