@@ -51,7 +51,7 @@ class SessionStoreTests: XCTestCase {
         let user = try await sessionStore.signUp(email: "test2@example.com", password: "password")
         XCTAssertTrue(((user.email?.isEmpty) != nil))
         XCTAssertFalse(user.uid.isEmpty)
-        XCTAssert(sessionStore.session != nil)
+        XCTAssertNotNil(sessionStore.session)
     }
     
     func testSignUpFailure() async throws {

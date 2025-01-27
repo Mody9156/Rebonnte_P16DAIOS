@@ -14,7 +14,7 @@ public class SessionStore: ObservableObject {
         session != nil
     }
     
-    init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User?) {
+    init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User? = nil) {
         self.authService = authService
         self.session = session
     }
