@@ -25,6 +25,7 @@
 		23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC50C2D442059006BD481 /* SessionStoreTests.swift */; };
 		23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BAC5102D442D49006BD481 /* MockAuthService.swift */; };
 		23FC3B072D478461005A2C34 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B062D478461005A2C34 /* FirebaseFirestore */; };
+		23FC3B092D4784CD005A2C34 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 23FC3B082D4784CD005A2C34 /* FirebaseAuth */; };
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		23FD056A2D440E490089DB5C /* MediStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05692D440E490089DB5C /* MediStockTests.swift */; };
@@ -92,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FC3B072D478461005A2C34 /* FirebaseFirestore in Frameworks */,
+				23FC3B092D4784CD005A2C34 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +266,7 @@
 			name = MediStockTests;
 			packageProductDependencies = (
 				23FC3B062D478461005A2C34 /* FirebaseFirestore */,
+				23FC3B082D4784CD005A2C34 /* FirebaseAuth */,
 			);
 			productName = MediStockTests;
 			productReference = 23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */;
@@ -732,6 +735,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 23F6C99A2D2FC12A00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		23FC3B082D4784CD005A2C34 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23F6C99A2D2FC12A00CD0A42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

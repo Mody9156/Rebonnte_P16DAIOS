@@ -6,7 +6,8 @@
 //
 
 import XCTest
-@testable import pack 
+@testable import pack
+import FirebaseAuth
 import FirebaseFirestore
 
 class SessionStoreTests: XCTestCase {
