@@ -35,5 +35,15 @@ class SessionStoreTests: XCTestCase {
             XCTAssertEqual(error as? AuthError, AuthError.invalidCredentials)
         }
     }
+    
+    func testSignUpSuccess() async throws {
+        let uid = "mockUID"
+        let email = "test@example.com"
+        mockAuthService.mockUser = User(uid: uid, email: email)
+        let user = try await sessionStore.signUp(email: email, password: "password")
+        XCTAssert(user.email == email)
+        XCTAssert(user.uid == uid)
+        XCTAssert(sessionStore.session != nil)
+    }
 }
 
