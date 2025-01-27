@@ -20,18 +20,12 @@ class SessionStoreTests: XCTestCase {
     }
 
     
-    func delete(){
-        var user = mockAuthService.mockUser
-        user?.uid.removeAll()
-        user?.email?.removeAll()
-    }
-    
-    
     func testSignInSuccess() async throws {
         mockAuthService.shouldThrowError = false
         _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
         let user = try await sessionStore.signIn(email: "test@example.com", password: "password")
         XCTAssertEqual(user.email, "test@example.com")
+        XCTAssertEqual(user.uid, "mockUID")
         XCTAssertNotNil(sessionStore.session)
         print("session \(String(describing: sessionStore.session))")
         XCTAssertNoThrow(user)
