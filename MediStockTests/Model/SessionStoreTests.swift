@@ -88,10 +88,20 @@ class SessionStoreTests: XCTestCase {
             _ = try await sessionStore.signOut()
             //Then
             XCTFail("Expected an error but did not get one")
-        }catch{
+        }catch {
             //Then
             XCTAssertEqual(error as? AuthError, AuthError.unknown)
         }
     }
+    
+    func testWhenListeningToAuthChangesSuccess(){
+        //Given
+        
+        //when
+        let authStateDidChangeListenerHandle : () = sessionStore.stopListeningToAuthChanges()
+        //Then
+        print("authStateDidChangeListenerHandle : \(authStateDidChangeListenerHandle)")
+    }
+    
 }
 
