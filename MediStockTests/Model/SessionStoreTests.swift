@@ -45,5 +45,15 @@ class SessionStoreTests: XCTestCase {
         XCTAssert(user.uid == uid)
         XCTAssert(sessionStore.session != nil)
     }
+    
+    func testSignUpFailure() async throws {
+        mockAuthService.shouldThrowError = true
+        do{
+            _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
+            XCTFail("Expected an error but did not get one")
+        }catch{
+            XCTAssertEqual(error as? AuthError, AuthError.invalidCredentials)
+        }
+    }
 }
 
