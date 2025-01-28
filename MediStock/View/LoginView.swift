@@ -17,6 +17,8 @@ struct LoginView: View {
             Button(action: {
                 Task{
                     try await authViewModel.login(email: email, password: password)
+                    authViewModel.changeStatus()
+
                 }
             }) {
                 Text("Login")
