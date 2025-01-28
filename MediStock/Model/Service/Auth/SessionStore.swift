@@ -28,6 +28,7 @@ public class SessionStore: ObservableObject {
     }
         
     func listen() {
+        try await authService.signOut()
         authService.addDidChangeListenerHandle { [weak self] user in
             DispatchQueue.main.async {
                 self?.session = user

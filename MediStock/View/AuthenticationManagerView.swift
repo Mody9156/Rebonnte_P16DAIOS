@@ -21,8 +21,6 @@ struct AuthenticationManagerView: View {
                 Task{
                     try await authViewModel.disableAutoLogin()
                     authViewModel.changeStatus()
-                    
-                    authViewModel.stopListeningToAuthChanges()
                 }
             }
             .onDisappear {
