@@ -128,7 +128,7 @@ class MedicineRepository: ObservableObject {
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
         guard let id = medicine.id else {return}
-        db.collection("history").whereField("medicineId", isEqualTo: id).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
+        db.collection("history").whereField("user", isEqualTo: "exemple2@gmail.com").order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting history: \(error)")
             } else {
