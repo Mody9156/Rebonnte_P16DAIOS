@@ -12,12 +12,13 @@ import SwiftUI
 
 class MedicineRepository: ObservableObject {
     private var db = Firestore.firestore()//1
-    @Published var medicines: [Medicine] = []
-    @Published var historyEntry: [HistoryEntry] = []
+    @Published var medicines: [Medicine]
+    @Published var historyEntry: [HistoryEntry]
     @AppStorage("email") var identity : String = "email"
     
-    init(){
-        
+    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = []){
+        self.medicines = medicines
+        self.historyEntry = historyEntry
     }
 
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
