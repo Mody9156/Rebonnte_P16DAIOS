@@ -16,10 +16,9 @@ class AuthViewModel : ObservableObject {
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-//
-//        session.$session
-//            .map { $0 != nil }
-//            .assign(to: &$isAuthenticated)
+        session.$session
+            .map { $0 != nil }
+            .assign(to: &$isAuthenticated)
     }
     
     @MainActor
