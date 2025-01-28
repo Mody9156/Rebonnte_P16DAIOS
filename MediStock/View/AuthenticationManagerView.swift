@@ -7,7 +7,7 @@ struct AuthenticationManagerView: View {
     var body: some View {
         VStack {
             Group {
-                if session.isAuthenticated {
+                if authViewModel.isAuthenticated {
                     MainTabView()
                         .accessibilityLabel("Main Application View")
                         .accessibilityHint("Navigates to the main application content.")

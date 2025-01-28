@@ -16,10 +16,10 @@ class AuthViewModel : ObservableObject {
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-        
-        session.$session
-            .map { $0 != nil }
-            .assign(to: &$isAuthenticated)
+//
+//        session.$session
+//            .map { $0 != nil }
+//            .assign(to: &$isAuthenticated)
     }
     
     @MainActor
@@ -29,6 +29,7 @@ class AuthViewModel : ObservableObject {
             UserDefaults.standard.set(user.email, forKey: "email")
             print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
             self.messageError = ""
+            self.isAuthenticated = true
             self.onLoginSucceed?()
         }catch{
             self.messageError = "Erreur lors de la connection de l'utilisateur"
