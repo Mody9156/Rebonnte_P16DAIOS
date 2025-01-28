@@ -8,7 +8,7 @@ public class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
     
-    var handle: AuthStateDidChangeListenerHandle?
+    private var handle: AuthStateDidChangeListenerHandle?
     private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil
@@ -20,7 +20,18 @@ public class SessionStore: ObservableObject {
         self.handle = handle
     }
     
-    func listen() {
+    func disableAutoLogin() {
+           if Auth.auth().currentUser != nil {
+               do {
+                   try Auth.auth().signOut()
+                   print("Déconnexion réussie pour désactiver la persistance.")
+               } catch let error {
+                   print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+               }
+           }
+       }
+        
+    func listen()  {
         authService.addDidChangeListenerHandle { [weak self] user in
             DispatchQueue.main.async {
                 self?.session = user
@@ -54,17 +65,18 @@ public class SessionStore: ObservableObject {
     }
     
     func signOut() async throws  {
-        do {
-            if session != nil {
+        
+            do {
                 try await authService.signOut()
                 DispatchQueue.main.async {
                     self.session = nil
-                    print("Déconnexion réussie pour désactiver la persistance.")
                 }
+                print("Déconnexion réussie pour désactiver la persistance.")
+            } catch {
+                print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+                throw error
             }
-        } catch {
-            throw error
-        }
+        
     }
     
     func stopListeningToAuthChanges() {

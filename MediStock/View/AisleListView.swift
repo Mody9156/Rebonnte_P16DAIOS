@@ -19,8 +19,7 @@ struct AisleListView: View {
                     }
                 }
             }
-            .navigationBarItems(trailing:
-                                    Button(action: {
+            .navigationBarItems(trailing:Button(action: {
                 Task{
                     try await medicineStockViewModel.addRandomMedicine(user: identity)
                 }

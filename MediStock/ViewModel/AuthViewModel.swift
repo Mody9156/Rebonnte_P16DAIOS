@@ -16,12 +16,12 @@ class AuthViewModel : ObservableObject {
     init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-        
         session.$session
             .map { $0 != nil }
             .assign(to: &$isAuthenticated)
     }
     
+    @MainActor
     func login(email:String, password:String) async throws {
         do {
             let user = try await session.signIn(email: email, password: password)
@@ -44,11 +44,11 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    func changeStatus() {
-        session.listen()
+    func changeStatus()  {
+         session.listen()
     }
     func disableAutoLogin() async throws {
-      try await session.signOut()
+      session.disableAutoLogin()
     }
     
     func stopListeningToAuthChanges(){

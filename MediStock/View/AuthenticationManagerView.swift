@@ -19,15 +19,15 @@ struct AuthenticationManagerView: View {
             }
             .onAppear{
                 Task{
+                    try await authViewModel.disableAutoLogin()
                     authViewModel.changeStatus()
-                    try await  authViewModel.disableAutoLogin()
                 }
             }
             .onDisappear {
                 authViewModel.stopListeningToAuthChanges()
             }
         }
-        .accessibilityElement(children: .contain) // Groups children as one accessibility element if needed
+        .accessibilityElement(children: .contain)
         .accessibilityLabel("Authentication Manager")
         .accessibilityHint("Determines if the user is logged in or needs to log in.")
     }
