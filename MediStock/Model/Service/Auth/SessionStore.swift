@@ -8,7 +8,7 @@ public class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
     
-    var handle: AuthStateDidChangeListenerHandle?
+    private var handle: AuthStateDidChangeListenerHandle?
     private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil

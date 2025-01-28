@@ -20,7 +20,8 @@ struct AuthenticationManagerView: View {
             .onAppear{
                 Task{
                     authViewModel.changeStatus()
-                    try await  authViewModel.disableAutoLogin()
+                    try await authViewModel.disableAutoLogin()
+
                 }
             }
             .onDisappear {

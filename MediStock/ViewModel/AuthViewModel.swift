@@ -21,6 +21,7 @@ class AuthViewModel : ObservableObject {
             .map { $0 != nil }
             .assign(to: &$isAuthenticated)
     }
+    
     @MainActor
     func login(email:String, password:String) async throws {
         do {
@@ -45,7 +46,9 @@ class AuthViewModel : ObservableObject {
     }
     
     func changeStatus() {
-        session.listen()
+        if isAuthenticated {
+            session.listen()
+        }
     }
     func disableAutoLogin() async throws {
       try await session.signOut()
