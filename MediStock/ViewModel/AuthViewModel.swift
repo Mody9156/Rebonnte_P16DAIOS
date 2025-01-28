@@ -21,7 +21,7 @@ class AuthViewModel : ObservableObject {
             .map { $0 != nil }
             .assign(to: &$isAuthenticated)
     }
-    
+    @MainActor
     func login(email:String, password:String) async throws {
         do {
             let user = try await session.signIn(email: email, password: password)
