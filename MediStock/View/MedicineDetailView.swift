@@ -36,12 +36,12 @@ struct MedicineDetailView: View {
         .padding(.vertical)
         .navigationBarTitle("Medicine Details", displayMode: .inline)
         .onAppear{
-            medicineStockViewModel.fetchHistory(for: medicine.id)
+            medicineStockViewModel.fetchHistory(for: medicine)
         }
         .onChange(of: medicine) { newMedicine in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if newMedicine == medicine {
-                    medicineStockViewModel.fetchHistory(for: newMedicine.id)
+                    medicineStockViewModel.fetchHistory(for: newMedicine)
                 }
             }
         }
