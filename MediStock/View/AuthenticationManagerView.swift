@@ -7,7 +7,7 @@ struct AuthenticationManagerView: View {
     var body: some View {
         VStack {
             Group {
-                if authViewModel.isAuthenticated {
+                if session.isAuthenticated {
                     MainTabView()
                         .accessibilityLabel("Main Application View")
                         .accessibilityHint("Navigates to the main application content.")
@@ -19,6 +19,7 @@ struct AuthenticationManagerView: View {
             }
             .onAppear{
                 Task{
+                    authViewModel.changeStatus()
                     try await authViewModel.disableAutoLogin()
                 }
             }
