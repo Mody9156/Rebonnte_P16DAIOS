@@ -44,8 +44,8 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    func changeStatus() {
-            session.listen()
+    func changeStatus()  {
+         session.listen()
     }
     func disableAutoLogin() async throws {
       try await session.signOut()

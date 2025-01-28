@@ -21,14 +21,20 @@ public class SessionStore: ObservableObject {
     }
     
     func disableAutoLogin() async throws {
-        if session != nil {
-            try await authService.signOut()
-            print("Déconnexion réussie pour désactiver la persistance.")
+        
+        guard session != nil else {
+            print("Aucune session active.")
+            return
         }
+        
+        try await authService.signOut()
+            DispatchQueue.main.async {
+                self.session = nil
+            }
+            print("Déconnexion réussie pour désactiver la persistance.")
     }
         
-    func listen() {
-        try await authService.signOut()
+    func listen()  {
         authService.addDidChangeListenerHandle { [weak self] user in
             DispatchQueue.main.async {
                 self?.session = user
@@ -62,16 +68,11 @@ public class SessionStore: ObservableObject {
     }
     
     func signOut() async throws  {
-        guard session != nil else {
-            print("Aucune session active.")
-            return
-        }
-        
             do {
-                    try await authService.signOut()
-                    DispatchQueue.main.async {
-                        self.session = nil
-                    }
+                try await authService.signOut()
+                DispatchQueue.main.async {
+                    self.session = nil
+                }
                 print("Déconnexion réussie pour désactiver la persistance.")
             } catch {
                 print("Erreur lors de la déconnexion : \(error.localizedDescription)")
