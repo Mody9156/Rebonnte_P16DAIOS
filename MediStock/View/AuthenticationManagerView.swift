@@ -19,8 +19,10 @@ struct AuthenticationManagerView: View {
             }
             .onAppear{
                 Task{
-                    authViewModel.changeStatus()
                     try await authViewModel.disableAutoLogin()
+                    authViewModel.changeStatus()
+                    
+                    authViewModel.stopListeningToAuthChanges()
                 }
             }
             .onDisappear {
