@@ -16,10 +16,11 @@ xcuserdata/
 
 # Ignorer le fichier spécifique
 ../MediStock/GoogleService-Info.plist
+MediStock/GoogleService-Info.plist
 **/GoogleService-Info.plist
-
-*GoogleService-Info.plist
- 
+			 
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
+
+			
