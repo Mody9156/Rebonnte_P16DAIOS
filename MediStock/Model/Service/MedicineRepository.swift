@@ -15,6 +15,10 @@ class MedicineRepository: ObservableObject {
     @Published var medicines: [Medicine] = []
     @Published var historyEntry: [HistoryEntry] = []
     @AppStorage("email") var identity : String = "email"
+    
+    init(){
+        
+    }
 
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
