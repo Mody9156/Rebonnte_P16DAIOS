@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */; };
+		2301D6792D4A3DE60032B5DF /* FirebaseMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6782D4A3DE60032B5DF /* FirebaseMedicineService.swift */; };
+		2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */; };
+		2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67C2D4A44850032B5DF /* MockMedicineService.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
 		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -57,6 +61,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineServiceProtocol.swift; sourceTree = "<group>"; };
+		2301D6782D4A3DE60032B5DF /* FirebaseMedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMedicineService.swift; sourceTree = "<group>"; };
+		2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
+		2301D67C2D4A44850032B5DF /* MockMedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMedicineService.swift; sourceTree = "<group>"; };
 		230B004C2D38201F0037E537 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -116,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2301D6752D4A39100032B5DF /* Medicine */ = {
+			isa = PBXGroup;
+			children = (
+				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
+				2301D6782D4A3DE60032B5DF /* FirebaseMedicineService.swift */,
+			);
+			path = Medicine;
+			sourceTree = "<group>";
+		};
 		237E0A6E2D2FFE4500EEC056 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +143,8 @@
 		237E0A852D3008C800EEC056 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				2301D6752D4A39100032B5DF /* Medicine */,
 				23FD055B2D43C5690089DB5C /* Auth */,
-				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -143,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
+				2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
+				2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -222,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				23BAC5102D442D49006BD481 /* MockAuthService.swift */,
+				2301D67C2D4A44850032B5DF /* MockMedicineService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -381,6 +401,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */,
+				2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
@@ -405,8 +427,10 @@
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
 				53E0D8DA2C06098F00DE1134 /* MedicineListView.swift in Sources */,
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
+				2301D6792D4A3DE60032B5DF /* FirebaseMedicineService.swift in Sources */,
 				53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */,
 				53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */,
+				2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */,
 				53E0D8EE2C06718100DE1134 /* AllMedicinesView.swift in Sources */,
 				53E0D8EC2C06717200DE1134 /* MainTabView.swift in Sources */,
 			);

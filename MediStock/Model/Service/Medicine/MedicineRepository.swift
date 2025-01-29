@@ -11,14 +11,15 @@ import FirebaseFirestore
 import SwiftUI
 
 class MedicineRepository: ObservableObject {
-    private var db = Firestore.firestore()//1
+    private var db : Firestore
     @Published var medicines: [Medicine]
     @Published var historyEntry: [HistoryEntry]
     @AppStorage("email") var identity : String = "email"
     
-    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = []){
+    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore()){
         self.medicines = medicines
         self.historyEntry = historyEntry
+        self.db = db
     }
 
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
@@ -180,27 +181,27 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-
-    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        let collectionRef = db.collection(collectionName)
-        
-        collectionRef.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Erreur lors de la vérification : \(error)")
-                completion(false)
-                return
-            }
-            
-            if let documents = querySnapshot?.documents, documents.isEmpty {
-                print("La collection \(collectionName) est vide.")
-                completion(true)
-            } else {
-                print("La collection \(collectionName) contient encore des documents.")
-                completion(false)
-            }
-        }
-    }
+//
+//    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
+//        let db = Firestore.firestore()
+//        let collectionRef = db.collection(collectionName)
+//
+//        collectionRef.getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Erreur lors de la vérification : \(error)")
+//                completion(false)
+//                return
+//            }
+//
+//            if let documents = querySnapshot?.documents, documents.isEmpty {
+//                print("La collection \(collectionName) est vide.")
+//                completion(true)
+//            } else {
+//                print("La collection \(collectionName) contient encore des documents.")
+//                completion(false)
+//            }
+//        }
+//    }
 
 }
 
