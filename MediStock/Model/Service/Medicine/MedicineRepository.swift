@@ -19,6 +19,7 @@ class MedicineRepository: ObservableObject {
     init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore()){
         self.medicines = medicines
         self.historyEntry = historyEntry
+        self.db = db
     }
 
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
