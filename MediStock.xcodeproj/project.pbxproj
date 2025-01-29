@@ -119,6 +119,7 @@
 		2301D6752D4A39100032B5DF /* Medicine */ = {
 			isa = PBXGroup;
 			children = (
+				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
 			path = Medicine;
 			sourceTree = "<group>";
@@ -135,7 +136,6 @@
 			children = (
 				2301D6752D4A39100032B5DF /* Medicine */,
 				23FD055B2D43C5690089DB5C /* Auth */,
-				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
