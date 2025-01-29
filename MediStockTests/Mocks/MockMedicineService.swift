@@ -10,7 +10,5 @@ import XCTest
 import FirebaseFirestore
 
 final class MockMedicineService: Firestore {
-    var collectionCalled : String?
-    var mockDocuments: [QueryDocumentSnapshot] = []
-
+  
 }
