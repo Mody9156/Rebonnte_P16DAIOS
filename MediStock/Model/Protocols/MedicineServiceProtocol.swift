@@ -10,12 +10,12 @@ import FirebaseFirestore
 
 // Protocole pour CollectionReference
 protocol CollectionReferenceProtocol {
-    func addSnapshotListener(_ listener: @escaping (QuerySnapshot?, Error?) -> Void) -> ListenerRegistration
+    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) -> ListenerRegistration
 }
 
 // Protocole pour QuerySnapshot
 protocol QuerySnapshotProtocol {
-    var documents: [QueryDocumentSnapshot] { get }
+    var documents: [QueryDocumentSnapshotProtocol] { get }
 }
 
 // Protocole pour QueryDocumentSnapshot
