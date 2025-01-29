@@ -180,27 +180,27 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-
-    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        let collectionRef = db.collection(collectionName)
-        
-        collectionRef.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Erreur lors de la vérification : \(error)")
-                completion(false)
-                return
-            }
-            
-            if let documents = querySnapshot?.documents, documents.isEmpty {
-                print("La collection \(collectionName) est vide.")
-                completion(true)
-            } else {
-                print("La collection \(collectionName) contient encore des documents.")
-                completion(false)
-            }
-        }
-    }
+//
+//    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
+//        let db = Firestore.firestore()
+//        let collectionRef = db.collection(collectionName)
+//        
+//        collectionRef.getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Erreur lors de la vérification : \(error)")
+//                completion(false)
+//                return
+//            }
+//
+//            if let documents = querySnapshot?.documents, documents.isEmpty {
+//                print("La collection \(collectionName) est vide.")
+//                completion(true)
+//            } else {
+//                print("La collection \(collectionName) contient encore des documents.")
+//                completion(false)
+//            }
+//        }
+//    }
 
 }
 
