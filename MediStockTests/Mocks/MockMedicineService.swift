@@ -8,6 +8,16 @@ import XCTest
 @testable import pack
 import FirebaseFirestore
 
+class MockMedicineService: Firestore {
+    var collection: String? = nil
+    var mockDocuments: [QueryDocumentSnapshotProtocol] = []
+    
+    func collection(_ collectionPath: String) -> QueryDocumentSnapshotProtocol {
+        collection = collectionPath
+        return MockCollectionReference(mockDocuments: mockDocuments) as! QueryDocumentSnapshotProtocol
+    }
+}
+
 //Mock pour QuerDocumentSnapshot
 class MockQueryDocumentSnapshotProtocol: QueryDocumentSnapshotProtocol{
     private var mockData : [String: Any]
