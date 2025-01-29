@@ -10,8 +10,20 @@ import Firebase
 import FirebaseFirestore
 
 class FirebaseMedicineService : MedicineServiceProtocol {
+    private var db = Firestore.firestore()
+
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
-        <#code#>
+        
+        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let medicines = querySnapshot?.documents.compactMap { document in
+                    try? document.data(as: Medicine.self)
+                } ?? []
+                completion(medicines)
+            }
+        }
     }
     
     func fetchAisles(completion: @escaping ([String]) -> Void) {

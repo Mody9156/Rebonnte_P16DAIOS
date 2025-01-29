@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */; };
 		2301D6792D4A3DE60032B5DF /* FirebaseMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6782D4A3DE60032B5DF /* FirebaseMedicineService.swift */; };
+		2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
 		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineServiceProtocol.swift; sourceTree = "<group>"; };
 		2301D6782D4A3DE60032B5DF /* FirebaseMedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMedicineService.swift; sourceTree = "<group>"; };
+		2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		230B004C2D38201F0037E537 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
+				2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
