@@ -6,6 +6,8 @@
 //
 
 import XCTest
+@testable import pack
+import FirebaseFirestore
 
 final class MockMedicineService: XCTestCase {
 
