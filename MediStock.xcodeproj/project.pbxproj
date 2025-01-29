@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
 		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineServiceProtocol.swift; sourceTree = "<group>"; };
 		230B004C2D38201F0037E537 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
+				2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
 				53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */,
 				53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */,
+				2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */,
 				53E0D8EE2C06718100DE1134 /* AllMedicinesView.swift in Sources */,
 				53E0D8EC2C06717200DE1134 /* MainTabView.swift in Sources */,
 			);
