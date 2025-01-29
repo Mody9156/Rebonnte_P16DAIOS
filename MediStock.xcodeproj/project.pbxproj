@@ -116,6 +116,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2301D6752D4A39100032B5DF /* Medicine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Medicine;
+			sourceTree = "<group>";
+		};
 		237E0A6E2D2FFE4500EEC056 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +133,7 @@
 		237E0A852D3008C800EEC056 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				2301D6752D4A39100032B5DF /* Medicine */,
 				23FD055B2D43C5690089DB5C /* Auth */,
 				237E0A8A2D30320700EEC056 /* MedicineRepository.swift */,
 			);
