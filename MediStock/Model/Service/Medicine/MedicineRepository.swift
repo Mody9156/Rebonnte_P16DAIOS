@@ -52,13 +52,20 @@ class MedicineRepository: ObservableObject {
     
     func setData(user: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+       
+            db.collection("medicines").addSnapshotListener({ querySnapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else{
+                    _ = querySnapshot?.documents.compactMap { documentQuery in
+                       try? documentQuery.documents(documentPath:medicine.id ?? UUID().uuidString).setData(from: medicine)
+                    }
+                }
+            })
+//            .document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Graduation vous venez d'ajouter: \(medicine)")
             addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch let error {
-            print("Error adding document: \(error)")
-        }
+        
     }
     
     @MainActor
