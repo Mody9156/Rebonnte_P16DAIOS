@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 // Protocole pour CollectionReference
 protocol CollectionReferenceProtocol {
-    func getDocuments(completion: @escaping ([QueryDocumentSnapshotProtocol]) -> Void)
+    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void)
 }
 
 // Protocole pour QuerySnapshot
@@ -26,4 +26,5 @@ protocol QueryDocumentSnapshotProtocol {
 
 protocol FirestoreServiceProtocol {
     func collection(_ collectionPath: String) -> CollectionReferenceProtocol
+
 }

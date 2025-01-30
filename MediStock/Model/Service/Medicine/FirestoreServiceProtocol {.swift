@@ -10,6 +10,9 @@ import Firebase
 import FirebaseFirestore
 
 class FirebaseMedicineService : CollectionReferenceProtocol {
+    
+    
+    
     var collectionReference :  CollectionReference
     
     init(collectionReference :  CollectionReference){
@@ -26,4 +29,10 @@ class FirebaseMedicineService : CollectionReferenceProtocol {
             completion(addDocuments)
         }
     }
+    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) {
+        collectionReference.addSnapshotListener { snapshot, error in
+            listener(snapshot,error)
+        }
+    }
+    
 }
