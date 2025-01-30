@@ -28,5 +28,9 @@ class FirestoreQueryDocumentAdapter : QueryDocumentSnapshotProtocol {
         let documentReferenc = Firestore.firestore().document(documentPath)
         return documentReferenc
     }
+    
+    func whereField(field:String,isEqualTo value: Any) {
+        Firestore.firestore().collection("history").whereField(field, isEqualTo: value)
+    }
 }
 //document(medicine.id ?? UUID().uuidString).setData(from: medicine)

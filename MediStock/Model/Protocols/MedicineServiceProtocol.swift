@@ -23,6 +23,9 @@ protocol QueryDocumentSnapshotProtocol {
     var data : [String: Any] {get}
     func asMedicine() -> Medicine?
     func documents(documentPath:String) -> DocumentReference
+    func whereField(field:String,isEqualTo value: Any)
+    func order(by field: String, descending: Bool) -> Query
+
 }
 
 protocol FirestoreServiceProtocol {

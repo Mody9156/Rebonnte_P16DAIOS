@@ -26,4 +26,8 @@ class FirebaseMedicineService : CollectionReferenceProtocol {
         }
     }
     
+    func order(by field: String, descending: Bool) -> Query {
+        
+    }
+    
 }

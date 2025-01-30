@@ -128,30 +128,40 @@ class MedicineRepository: ObservableObject {
     func updateMedicine(_ medicine: Medicine, user: String){
         
         guard let id = medicine.id else { return }
-        do {
-            try db.collection("medicines").document(id).setData(from: medicine)
+            db.collection("medicines").addSnapshotListener({ querySnapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                }else{
+                    _ = querySnapshot?.documents.compactMap{ querySnapshot in
+                        try? querySnapshot.documents(documentPath:id).setData(from: medicine)
+                    }
+                }
+            })
             addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
-            
-        } catch let error {
-            print("Error updating document: \(error)")
-        }
     }
     
      func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
            guard let id = medicine.id else { return }
            let newStock = medicine.stock + amount
-           db.collection("medicines").document(id).updateData([
-               "stock": newStock
-           ]) { error in
-               if let error = error {
-                   print("Error updating stock: \(error)")
-               } else {
-                   if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                       self.medicines[index].stock = newStock
-                   }
-                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
-               }
-           }
+         db.collection("medicines").addSnapshotListener { querySnapshot, error in
+             if let error = error {
+                 print("Error getting documents: \(error)")
+             }else{
+                 _ = querySnapshot?.documents.compactMap{ querySnapshot in
+                     try? querySnapshot.documents(documentPath:id).updateData(["stock": newStock]) { error in
+                                       if let error = error {
+                                           print("Error updating stock: \(error)")
+                                       } else {
+                                           if let index = self.medicines.firstIndex(where: { $0.id == id }) {
+                                               self.medicines[index].stock = newStock
+                                           }
+                                           self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
+                                       }
+                                   }
+                 }
+             }
+         }
+
        }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
@@ -202,7 +212,7 @@ class MedicineRepository: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
+                    document.asMedicine()
                 } ?? []
                 completion(medicines)
             }
