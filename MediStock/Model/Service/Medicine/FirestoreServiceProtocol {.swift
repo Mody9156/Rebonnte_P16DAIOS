@@ -10,29 +10,20 @@ import Firebase
 import FirebaseFirestore
 
 class FirebaseMedicineService : CollectionReferenceProtocol {
-    
-    
-    
     var collectionReference :  CollectionReference
     
     init(collectionReference :  CollectionReference){
         self.collectionReference =  collectionReference
     }
     
-    func getDocuments(completion: @escaping ([QueryDocumentSnapshotProtocol]) -> Void) {
-        collectionReference.getDocuments { query, error in
-            guard let document = query?.documents else {
-                completion([])
-                return
-            }
-            let addDocuments = document.map{ FirestoreQueryDocumentAdapter(document: $0) }
-            completion(addDocuments)
-        }
-    }
     func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) {
         collectionReference.addSnapshotListener { snapshot, error in
-            listener(snapshot,error)
-        }
+                if let snapshot = snapshot {
+                    listener(FirestoreQuerySnapshotAdapter(snapshot: snapshot), error)
+                } else {
+                    listener(nil, error)
+                }
+            }
     }
     
 }
