@@ -24,4 +24,9 @@ class FirestoreQueryDocumentAdapter : QueryDocumentSnapshotProtocol {
         return try? document.data(as: Medicine.self)
     }
     
+    func documents(documentPath:String) -> DocumentReference {
+        let documentReferenc = Firestore.firestore().document(documentPath)
+        return documentReferenc
+    }
 }
+//document(medicine.id ?? UUID().uuidString).setData(from: medicine)

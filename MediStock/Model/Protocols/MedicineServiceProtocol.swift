@@ -21,6 +21,8 @@ protocol QuerySnapshotProtocol {
 // Protocole pour QueryDocumentSnapshot
 protocol QueryDocumentSnapshotProtocol {
     var data : [String: Any] {get}
+    func asMedicine() -> Medicine?
+    func documents(documentPath:String) -> DocumentReference
 }
 
 protocol FirestoreServiceProtocol {

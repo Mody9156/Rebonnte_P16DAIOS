@@ -28,7 +28,7 @@ class MedicineRepository: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
+                  document.asMedicine()
                 } ?? []
                 completion(medicines)
             }
@@ -42,7 +42,7 @@ class MedicineRepository: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 let allMedicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
+                   document.asMedicine()
                 } ?? []
                 let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
                 completion(aisles)
