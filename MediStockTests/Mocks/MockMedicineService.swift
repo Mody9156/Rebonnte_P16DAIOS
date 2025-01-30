@@ -18,7 +18,7 @@ class MockMedicineService: FirestoreServiceProtocol {
         self.mockDocuments = mockDocuments
     }
 
-    func collection(_ collectionPath: String) -> CollectionReferenceProtocol {
+    func collection(_ collectionPath: String) -> pack.CollectionReferenceProtocol {
         self.collectionPath = collectionPath
         return MockCollectionReference(mockDocuments: mockDocuments)
     }

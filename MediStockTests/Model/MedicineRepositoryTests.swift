@@ -17,9 +17,7 @@ final class MedicineRepositoryTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        mockMedicineService = MockMedicineService()
-        mockMedicineService.collection = "medicines"
-        mockMedicineService.mockDocuments = [mockDocument]
+        mockMedicineService = MockMedicineService(collection: "medicines", mockDocuments: [mockDocument])
         mockCollection = MockCollectionReference(mockDocuments: [mockDocument])
         medicineRepository = MedicineRepository(medicines: [Medicine(name: "", stock: 11, aisle: "")], historyEntry: [HistoryEntry(medicineId: "", user: "", action: "", details: "")], db: mockMedicineService)
           }
