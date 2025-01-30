@@ -9,4 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
-class FirebaseMedicineService : 
+class FirebaseMedicineService : FirestoreServiceProtocol {
+    
+}
