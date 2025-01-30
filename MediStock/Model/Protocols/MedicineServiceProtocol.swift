@@ -23,3 +23,7 @@ protocol QueryDocumentSnapshotProtocol {
     func data() -> [String: Any]
     var documentID: String { get }
 }
+
+protocol FirestoreServiceProtocol {
+    func collection(_ collectionPath: String) -> CollectionReferenceProtocol
+}
