@@ -20,8 +20,7 @@ protocol QuerySnapshotProtocol {
 
 // Protocole pour QueryDocumentSnapshot
 protocol QueryDocumentSnapshotProtocol {
-    func data() -> [String: Any]
-    var documentID: String { get }
+    var data : [String: Any] {get}
 }
 
 protocol FirestoreServiceProtocol {
