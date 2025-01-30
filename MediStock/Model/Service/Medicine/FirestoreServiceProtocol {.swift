@@ -19,15 +19,10 @@ class FirebaseMedicineService : CollectionReferenceProtocol {
     func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) {
         collectionReference.addSnapshotListener { snapshot, error in
             if let snapshot = snapshot {
-                listener(FirestoreQuerySnapshotAdapter(snapshot: snapshot), error)
+                listener(FirestoreQuerySnapshotAdapter(snapshot: snapshot, collectionReference: self.collectionReference), error)
             } else {
                 listener(nil, error)
             }
         }
     }
-    
-    func order(by field: String, descending: Bool) -> Query {
-        
-    }
-    
 }
