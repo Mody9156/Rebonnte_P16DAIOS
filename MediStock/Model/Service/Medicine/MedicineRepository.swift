@@ -71,27 +71,42 @@ class MedicineRepository: ObservableObject {
     @MainActor
     func setDataToList(user: String, aisle: String) async throws {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+            db.collection("medicines").addSnapshotListener({ querySnapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else{
+                    _ = querySnapshot?.documents.compactMap { documentQuery in
+                        try? documentQuery.documents(documentPath:medicine.id ?? UUID().uuidString).setData(from: medicine)
+                    }
+                }
+            })
+            
             print("Ajouté : \(medicine)")
             DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             }
             addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch {
-            print("Erreur : \(error)")
-        }
+       
     }
 
     
     func delete(medicines: [Medicine], at offsets: IndexSet) {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
+                db.collection("medicines").addSnapshotListener { querySnapshot, error in
                     if let error = error {
-                        print("Error removing document: \(error)")
+                        print("Error getting documents: \(error)")
+                    } else{
+                        _ = querySnapshot?.documents.compactMap { documentQuery in
+                           documentQuery.documents(documentPath:id).delete { error in
+                                if let error = error {
+                                print("Error removing document: \(error)")
+                                  }
+                            }
+                        }
                     }
                 }
+
             }
         }
     }
