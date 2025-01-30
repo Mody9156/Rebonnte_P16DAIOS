@@ -24,72 +24,86 @@ class MockMedicineService: FirestoreServiceProtocol {
     }
 }
 
-//Mock pour QuerDocumentSnapshot
-class MockQueryDocumentSnapshotProtocol: QueryDocumentSnapshotProtocol{
-    private var mockData : [String: Any]
-    var documentID: String
-    
-    init(mockData: [String : Any], documentID: String) {
-        self.mockData = mockData
-        self.documentID = documentID
-    }
-    
-    func data() -> [String : Any] {
-        return mockData
-    }
-}
+// Simule une collection Firestore
+class MockCollectionReference: CollectionReferenceProtocol {
+    var mockDocuments: [QueryDocumentSnapshotProtocol]
 
-//Mock pour QuerySnapshot
-class MockQuerySnapshot: QuerySnapshotProtocol{
-    var documents: [QueryDocumentSnapshotProtocol]
-    
-    init(documents: [QueryDocumentSnapshotProtocol]) {
-        self.documents = documents
-    }
-}
-
-//Mock pour CollectionReference
-class MockCollectionReference: CollectionReferenceProtocol{
-    private var mockDocuments: [QueryDocumentSnapshotProtocol]
-    
     init(mockDocuments: [QueryDocumentSnapshotProtocol]) {
         self.mockDocuments = mockDocuments
     }
-    
-    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) -> ListenerRegistration {
-        let snapshot = MockQuerySnapshot(documents: mockDocuments)
-        listener(snapshot, nil)
-        return MockListenerRegistration()
+
+    func getDocuments(completion: @escaping ([pack.QueryDocumentSnapshotProtocol]) -> Void) {
+        completion(mockDocuments)
     }
-    
-    
 }
 
-//Mock pour ListenerRegistration
-class MockListenerRegistration: NSObject, ListenerRegistration {
-    func remove(){
-        // Implémentation vide pour le mock
-    }
-}
-//class FirestoreServiceTests {
-//    func testFetchData() {
-//        // Données mock
-//        let mockData: [String: Any] = ["name": "Test Item", "value": 42]
-//        let mockDocument = MockQueryDocumentSnapshot(data: mockData, documentID: "abc123")
-//        let mockCollection = MockCollectionReference(documents: [mockDocument])
 //
-//        // Utilisez mockCollection dans vos tests
-//        mockCollection.addSnapshotListener { snapshot, error in
-//            guard let snapshot = snapshot else {
-//                // Gérer l'erreur
-//                return
-//            }
+////Mock pour QuerDocumentSnapshot
+//class MockQueryDocumentSnapshotProtocol: QueryDocumentSnapshotProtocol{
+//    private var mockData : [String: Any]
+//    var documentID: String
 //
-//            for document in snapshot.documents {
-//                let data = document.data()
-//                // Testez les données
-//                print(data)
-//            }
-//        }
+//    init(mockData: [String : Any], documentID: String) {
+//        self.mockData = mockData
+//        self.documentID = documentID
+//    }
+//
+//    func data() -> [String : Any] {
+//        return mockData
 //    }
 //}
+//
+////Mock pour QuerySnapshot
+//class MockQuerySnapshot: QuerySnapshotProtocol{
+//    var documents: [QueryDocumentSnapshotProtocol]
+//
+//    init(documents: [QueryDocumentSnapshotProtocol]) {
+//        self.documents = documents
+//    }
+//}
+//
+////Mock pour CollectionReference
+//class MockCollectionReference: CollectionReferenceProtocol{
+//    private var mockDocuments: [QueryDocumentSnapshotProtocol]
+//
+//    init(mockDocuments: [QueryDocumentSnapshotProtocol]) {
+//        self.mockDocuments = mockDocuments
+//    }
+//
+//    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) -> ListenerRegistration {
+//        let snapshot = MockQuerySnapshot(documents: mockDocuments)
+//        listener(snapshot, nil)
+//        return MockListenerRegistration()
+//    }
+//
+//
+//}
+//
+////Mock pour ListenerRegistration
+//class MockListenerRegistration: NSObject, ListenerRegistration {
+//    func remove(){
+//        // Implémentation vide pour le mock
+//    }
+//}
+////class FirestoreServiceTests {
+////    func testFetchData() {
+////        // Données mock
+////        let mockData: [String: Any] = ["name": "Test Item", "value": 42]
+////        let mockDocument = MockQueryDocumentSnapshot(data: mockData, documentID: "abc123")
+////        let mockCollection = MockCollectionReference(documents: [mockDocument])
+////
+////        // Utilisez mockCollection dans vos tests
+////        mockCollection.addSnapshotListener { snapshot, error in
+////            guard let snapshot = snapshot else {
+////                // Gérer l'erreur
+////                return
+////            }
+////
+////            for document in snapshot.documents {
+////                let data = document.data()
+////                // Testez les données
+////                print(data)
+////            }
+////        }
+////    }
+////}
