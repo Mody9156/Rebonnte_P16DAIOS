@@ -12,6 +12,7 @@
 		2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */; };
 		2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67C2D4A44850032B5DF /* MockMedicineService.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
+		230CD2032D4BBBCA009C3F05 /* ExtensionFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230CD2022D4BBBCA009C3F05 /* ExtensionFirestore.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
 		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
 		237E0A742D2FFE4500EEC056 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A732D2FFE4500EEC056 /* FirebaseAnalyticsSwift */; };
@@ -66,6 +67,7 @@
 		2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		2301D67C2D4A44850032B5DF /* MockMedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMedicineService.swift; sourceTree = "<group>"; };
 		230B004C2D38201F0037E537 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		230CD2022D4BBBCA009C3F05 /* ExtensionFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFirestore.swift; sourceTree = "<group>"; };
 		237E0A862D300A4F00EEC056 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		237E0A882D300FBB00EEC056 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		237E0A8A2D30320700EEC056 /* MedicineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepository.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		230CD2012D4BBB59009C3F05 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				230CD2022D4BBBCA009C3F05 /* ExtensionFirestore.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */,
 				53E0D8EE2C06718100DE1134 /* AllMedicinesView.swift in Sources */,
 				53E0D8EC2C06717200DE1134 /* MainTabView.swift in Sources */,
+				230CD2032D4BBBCA009C3F05 /* ExtensionFirestore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
