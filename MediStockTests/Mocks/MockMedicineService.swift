@@ -9,8 +9,13 @@ import XCTest
 import FirebaseFirestore
 
 class MockMedicineService: Firestore {
-    var collection: String? = nil
-    var mockDocuments: [QueryDocumentSnapshotProtocol] = []
+    var collection: String?
+    var mockDocuments: [QueryDocumentSnapshotProtocol]
+    
+     init(collection: String?,mockDocuments: [QueryDocumentSnapshotProtocol]){
+         self.collection = collection
+         self.mockDocuments = mockDocuments
+    }
     
     func collection(_ collectionPath: String) -> QueryDocumentSnapshotProtocol {
         collection = collectionPath

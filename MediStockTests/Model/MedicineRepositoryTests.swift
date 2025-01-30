@@ -24,4 +24,6 @@ final class MedicineRepositoryTests: XCTestCase {
         medicineRepository = MedicineRepository(medicines: [Medicine(name: "", stock: 11, aisle: "")], historyEntry: [HistoryEntry(medicineId: "", user: "", action: "", details: "")], db: mockMedicineService)
           }
   
+    
+    
 }
