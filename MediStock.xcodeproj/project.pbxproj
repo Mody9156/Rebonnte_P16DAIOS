@@ -133,6 +133,13 @@
 			path = Medicine;
 			sourceTree = "<group>";
 		};
+		230CD2012D4BBB59009C3F05 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		237E0A6E2D2FFE4500EEC056 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +175,7 @@
 		23F6C9962D2FBCF700CD0A42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				230CD2012D4BBB59009C3F05 /* Extension */,
 				23FD05582D43C2650089DB5C /* Protocols */,
 				237E0A852D3008C800EEC056 /* Service */,
 				53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */,

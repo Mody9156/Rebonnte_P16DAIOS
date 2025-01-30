@@ -9,6 +9,21 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
-class FirebaseMedicineService : FirestoreServiceProtocol {
+class FirebaseMedicineService : CollectionReferenceProtocol {
+    var collectionReference :  CollectionReference
     
+    init(collectionReference :  CollectionReference){
+        self.collectionReference =  collectionReference
+    }
+    
+    func getDocuments(completion: @escaping ([QueryDocumentSnapshotProtocol]) -> Void) {
+        collectionReference.getDocuments { query, error in
+            guard let document = query?.documents else {
+                completion([])
+                return
+            }
+            let addDocuments = document.map{ FirestoreQueryDocumentAdapter(document.$0) }
+            completion(addDocuments)
+        }
+    }
 }
