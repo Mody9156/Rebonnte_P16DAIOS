@@ -11,12 +11,13 @@ import FirebaseFirestore
 import SwiftUI
 
 class MedicineRepository: ObservableObject {
-    var db : Firestore
+    var db : FirestoreServiceProtocol
     @Published var medicines: [Medicine]
     @Published var historyEntry: [HistoryEntry]
     @AppStorage("email") var identity : String = "email"
+    @Published var collection : String 
     
-    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore()){
+    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : FirestoreServiceProtocol = Firestore.firestore()){
         self.medicines = medicines
         self.historyEntry = historyEntry
         self.db = db

@@ -22,7 +22,7 @@ class FirebaseMedicineService : CollectionReferenceProtocol {
                 completion([])
                 return
             }
-            let addDocuments = document.map{ FirestoreQueryDocumentAdapter(document.$0) }
+            let addDocuments = document.map{ FirestoreQueryDocumentAdapter(document: $0) }
             completion(addDocuments)
         }
     }

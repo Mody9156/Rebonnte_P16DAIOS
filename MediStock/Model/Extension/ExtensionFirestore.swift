@@ -10,6 +10,6 @@ import Firebase
 
 extension Firestore: FirestoreServiceProtocol {
     func collection(_ collectionPath: String) -> CollectionReferenceProtocol {
-        return self.Collection(collectionPath) as CollectionReference
+        FirebaseMedicineService(collectionReference: collection(collectionPath))
     }
 }

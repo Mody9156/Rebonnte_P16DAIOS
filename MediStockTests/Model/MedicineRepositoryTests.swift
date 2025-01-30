@@ -22,7 +22,7 @@ final class MedicineRepositoryTests: XCTestCase {
         mockMedicineService = MockMedicineService(collection: "medicines", mockDocuments: [mockDocument])
         mockCollection = MockCollectionReference(mockDocuments: [mockDocument])
         mockFirestore = MockFirestore(mockCollection: mockCollection)
-        medicineRepository = MedicineRepository(medicines: medicine, historyEntry: history, db: mockFirestore)
+//        medicineRepository = MedicineRepository(medicines: medicine, historyEntry: history, db: mockFirestore)
         
     }
     
