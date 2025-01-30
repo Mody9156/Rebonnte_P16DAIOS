@@ -6,16 +6,22 @@
 //
 
 import Foundation
+import Firebase
 
 class FirestoreQueryDocumentAdapter : QueryDocumentSnapshotProtocol {
-    let snapshot: QuerySnapshot
-
-        init(snapshot: QuerySnapshot) {
-            self.snapshot = snapshot
-        }
-
-        var documents: [String: Any] {
-            return snapshot.documents.map { QuerySnapshotProtocol(document: $0) }
-        }
+    var document: QueryDocumentSnapshot
+    
+    init(document: QueryDocumentSnapshot ) {
+        self.document = document
+    }
+    
+    
+    var data: [String: Any] {
+       return document.data()
+    }
+    
+    func asMedicine() -> Medicine?{
+        return try? document.data(as: Medicine.self)
+    }
     
 }
