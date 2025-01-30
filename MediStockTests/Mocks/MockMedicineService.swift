@@ -9,6 +9,19 @@ import XCTest
 import FirebaseFirestore
 
 // Mock du service Firestore
+class MockFirestore {
+    var mockCollection: MockCollectionReference
+
+    init(mockCollection: MockCollectionReference) {
+        self.mockCollection = mockCollection
+    }
+
+    func collection(_ collectionPath: String) -> MockCollectionReference {
+        return mockCollection
+    }
+}
+
+// Mock du service Firestore
 class MockMedicineService: FirestoreServiceProtocol {
     var collectionPath: String?
     var mockDocuments: [QueryDocumentSnapshotProtocol] = []
@@ -38,20 +51,14 @@ class MockCollectionReference: CollectionReferenceProtocol {
 }
 
 //
-////Mock pour QuerDocumentSnapshot
-//class MockQueryDocumentSnapshotProtocol: QueryDocumentSnapshotProtocol{
-//    private var mockData : [String: Any]
-//    var documentID: String
-//
-//    init(mockData: [String : Any], documentID: String) {
-//        self.mockData = mockData
-//        self.documentID = documentID
-//    }
-//
-//    func data() -> [String : Any] {
-//        return mockData
-//    }
-//}
+//Mock pour QuerDocumentSnapshot
+class MockQueryDocumentSnapshotProtocol: QueryDocumentSnapshotProtocol{
+    var data: [String : Any]
+      
+    init(data: [String : Any]){
+        self.data = data
+    }
+}
 //
 ////Mock pour QuerySnapshot
 //class MockQuerySnapshot: QuerySnapshotProtocol{
