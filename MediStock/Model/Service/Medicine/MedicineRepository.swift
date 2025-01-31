@@ -54,22 +54,20 @@ class MedicineRepository: ObservableObject {
                 addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
             }
         }catch{
-            throw MedicineError.invalidAisles
+            throw MedicineError.invalidSetData
         }
     }
     
     @MainActor
     func setDataToList(user: String, aisle: String) async throws {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Ajouté : \(medicine)")
-            DispatchQueue.main.async {
-                self.medicines.append(medicine) // Ajoute localement pour éviter un délai
+        
+        do{
+            let medicine = try await medicineService.setDataToList(user: user, aisle: aisle)
+            for medicines in medicine {
+                addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
             }
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch {
-            print("Erreur : \(error)")
+        }catch{
+            throw MedicineError.invalidSetData
         }
     }
     
