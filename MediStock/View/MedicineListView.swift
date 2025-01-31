@@ -28,7 +28,9 @@ struct MedicineListView: View {
                 }
             }
             .onDelete { IndexSet in
-                medicineStockViewModel.deleteMedicines(at: IndexSet)
+                Task{
+                   try await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                }
             }
         }
         .navigationBarItems(trailing:Button(action: {

@@ -68,7 +68,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-    func delete(medicines: [Medicine], at offsets: IndexSet) {
+    func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
                 db.collection("medicines").document(id).delete { error in
@@ -80,13 +80,14 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String) {
-        guard let id = medicine.id else { return }
+    func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
+        guard let id = medicine.id else { return [medicine]}
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
         } catch let error {
             print("Error updating document: \(error)")
         }
+        return [medicine]
     }
     
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {

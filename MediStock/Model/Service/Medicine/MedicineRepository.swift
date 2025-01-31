@@ -70,16 +70,13 @@ class MedicineRepository: ObservableObject {
     }
     
     
-    func delete(medicines: [Medicine], at offsets: IndexSet) {
-//        offsets.map { medicines[$0] }.forEach { medicine in
-//            if let id = medicine.id {
-//                db.collection("medicines").document(id).delete { error in
-//                    if let error = error {
-//                        print("Error removing document: \(error)")
-//                    }
-//                }
-//            }
-//        }
+    func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
+        do{
+          try await medicineService.delete(medicines: medicines, at: offsets)
+            
+        } catch{
+            throw MedicineError.invalidDelete
+        }
     }
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
@@ -92,15 +89,14 @@ class MedicineRepository: ObservableObject {
     }
     
     func updateMedicine(_ medicine: Medicine, user: String){
-        
-        guard let id = medicine.id else { return }
-        do {
-            try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
-            
-        } catch let error {
-            print("Error updating document: \(error)")
-        }
+//        guard let id = medicine.id else { return }
+//        do {
+//            try db.collection("medicines").document(id).setData(from: medicine)
+//            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
+//            
+//        } catch let error {
+//            print("Error updating document: \(error)")
+//        }
     }
     
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
