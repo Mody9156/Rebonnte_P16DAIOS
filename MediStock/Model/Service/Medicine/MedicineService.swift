@@ -53,7 +53,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-    func setDataToList(user: String, aisle: String) async throws {
+    func setDataToList(user: String, aisle: String) async throws -> [Medicine] {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
@@ -65,6 +65,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         } catch {
             print("Erreur : \(error)")
         }
+        return [medicine]
     }
     
     func delete(medicines: [Medicine], at offsets: IndexSet) {
