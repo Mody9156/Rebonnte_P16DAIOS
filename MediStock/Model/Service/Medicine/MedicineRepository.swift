@@ -88,15 +88,15 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String){
-//        guard let id = medicine.id else { return }
-//        do {
-//            try db.collection("medicines").document(id).setData(from: medicine)
-//            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
-//            
-//        } catch let error {
-//            print("Error updating document: \(error)")
-//        }
+    func updateMedicine(_ medicine: Medicine, user: String) async throws {
+        do{
+           let medicine = try await medicineService.updateMedicine(medicine, user: user)
+            for medicines in medicine {
+                addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details")
+            }
+        }catch{
+            
+        }
     }
     
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
