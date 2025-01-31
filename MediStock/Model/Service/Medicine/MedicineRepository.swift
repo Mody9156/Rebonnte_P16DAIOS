@@ -47,7 +47,6 @@ class MedicineRepository: ObservableObject {
     }
     
     func setData(user: String) async throws {
-        
         do{
             let medicine = try await medicineService.setData(user: user)
             for medicines in medicine {
@@ -60,7 +59,6 @@ class MedicineRepository: ObservableObject {
     
     @MainActor
     func setDataToList(user: String, aisle: String) async throws {
-        
         do{
             let medicine = try await medicineService.setDataToList(user: user, aisle: aisle)
             for medicines in medicine {
@@ -73,15 +71,15 @@ class MedicineRepository: ObservableObject {
     
     
     func delete(medicines: [Medicine], at offsets: IndexSet) {
-        offsets.map { medicines[$0] }.forEach { medicine in
-            if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    }
-                }
-            }
-        }
+//        offsets.map { medicines[$0] }.forEach { medicine in
+//            if let id = medicine.id {
+//                db.collection("medicines").document(id).delete { error in
+//                    if let error = error {
+//                        print("Error removing document: \(error)")
+//                    }
+//                }
+//            }
+//        }
     }
     
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
