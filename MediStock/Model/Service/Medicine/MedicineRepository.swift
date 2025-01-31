@@ -118,8 +118,7 @@ class MedicineRepository: ObservableObject {
                 print("Error getting documents: \(error)")
             } else{
                 _ = querySnapshot?.documents.compactMap{ documentQuery in
-                    let docs: ()? =  try? documentQuery.documents(documentPath:history.id ?? UUID().uuidString).setData(from: history)
-                    print("historique : \(String(describing: docs))")
+                    try? documentQuery.documents(documentPath:history.id ?? UUID().uuidString).setData(from: history)
                 }
                 
             }
