@@ -11,6 +11,8 @@
 		2301D6792D4A3DE60032B5DF /* FirestoreServiceProtocol {.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D6782D4A3DE60032B5DF /* FirestoreServiceProtocol {.swift */; };
 		2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */; };
 		2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67C2D4A44850032B5DF /* MockMedicineService.swift */; };
+		23026F2E2D4CD5DD00F017B0 /* MedicineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23026F2D2D4CD5DD00F017B0 /* MedicineProtocol.swift */; };
+		23026F302D4CDE7100F017B0 /* MedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23026F2F2D4CDE7100F017B0 /* MedicineService.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
 		230CD2032D4BBBCA009C3F05 /* ExtensionFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230CD2022D4BBBCA009C3F05 /* ExtensionFirestore.swift */; };
 		230CD2052D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230CD2042D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift */; };
@@ -69,6 +71,8 @@
 		2301D6782D4A3DE60032B5DF /* FirestoreServiceProtocol {.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirestoreServiceProtocol {.swift"; sourceTree = "<group>"; };
 		2301D67A2D4A444B0032B5DF /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		2301D67C2D4A44850032B5DF /* MockMedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMedicineService.swift; sourceTree = "<group>"; };
+		23026F2D2D4CD5DD00F017B0 /* MedicineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineProtocol.swift; sourceTree = "<group>"; };
+		23026F2F2D4CDE7100F017B0 /* MedicineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineService.swift; sourceTree = "<group>"; };
 		230B004C2D38201F0037E537 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		230CD2022D4BBBCA009C3F05 /* ExtensionFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFirestore.swift; sourceTree = "<group>"; };
 		230CD2042D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreQueryDocumentAdapter.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				230CD2042D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift */,
 				230CD2062D4BE4DA009C3F05 /* FirestoreQuerySnapshotAdapter.swift */,
 				230CD2082D4C0E06009C3F05 /* FirestoreQueryAdapter.swift */,
+				23026F2F2D4CDE7100F017B0 /* MedicineService.swift */,
 			);
 			path = Medicine;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 			children = (
 				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
 				2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */,
+				23026F2D2D4CD5DD00F017B0 /* MedicineProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				53E0D8E22C065FFE00DE1134 /* AppDelegate.swift in Sources */,
 				237E0A8B2D30320700EEC056 /* MedicineRepository.swift in Sources */,
 				53E0D8D82C06097900DE1134 /* LoginView.swift in Sources */,
+				23026F302D4CDE7100F017B0 /* MedicineService.swift in Sources */,
 				230CD2092D4C0E06009C3F05 /* FirestoreQueryAdapter.swift in Sources */,
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
@@ -447,6 +454,7 @@
 				237E0A872D300A4F00EEC056 /* User.swift in Sources */,
 				230CD2052D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
+				23026F2E2D4CD5DD00F017B0 /* MedicineProtocol.swift in Sources */,
 				53E0D8DA2C06098F00DE1134 /* MedicineListView.swift in Sources */,
 				53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */,
 				230CD2072D4BE4DA009C3F05 /* FirestoreQuerySnapshotAdapter.swift in Sources */,
