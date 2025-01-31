@@ -22,6 +22,7 @@ class MedicineRepository: ObservableObject {
         self.medicines = medicines
         self.historyEntry = historyEntry
         self.db = db
+        self.medicineService = medicineService
     }
 
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
