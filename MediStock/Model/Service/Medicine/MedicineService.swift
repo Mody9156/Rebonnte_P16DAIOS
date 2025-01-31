@@ -7,6 +7,6 @@
 
 import Foundation
 
-class MedicineService{
+class MedicineService: MedicineProtocol{
     
 }
