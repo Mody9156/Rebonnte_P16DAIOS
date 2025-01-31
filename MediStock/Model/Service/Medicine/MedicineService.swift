@@ -41,7 +41,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    func setData(user: String) async throws {
+    func setData(user: String, completion: @escaping([Medicine]) -> Void) {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)

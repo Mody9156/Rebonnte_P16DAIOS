@@ -47,14 +47,17 @@ class MedicineRepository: ObservableObject {
     }
     
     func setData(user: String) async throws {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Graduation vous venez d'ajouter: \(medicine)")
-            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch let error {
-            print("Error adding document: \(error)")
-        }
+        
+       try? await medicineService.setData(user: user)
+       
+//        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
+//        do {
+//            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+//            print("Graduation vous venez d'ajouter: \(medicine)")
+//            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
+//        } catch let error {
+//            print("Error adding document: \(error)")
+//        }
     }
     
     @MainActor

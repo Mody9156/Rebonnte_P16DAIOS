@@ -10,7 +10,7 @@ import Foundation
 protocol MedicineProtocol{
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void)
     func fetchAisles(completion:@escaping( [String])->Void)
-    func setData(user: String) async throws
+    func setData(user: String, completion: @escaping([Medicine]) -> Void)
     func setDataToList(user: String, aisle: String) async throws
     func delete(medicines: [Medicine], at offsets: IndexSet)
     func updateMedicine(_ medicine: Medicine, user: String)
