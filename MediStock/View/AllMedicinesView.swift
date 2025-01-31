@@ -55,7 +55,9 @@ struct AllMedicinesView: View {
                         .accessibilityHint("Tap to see more details about \(medicine.name).")
                         
                     }.onDelete { IndexSet in
-                        medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        Task{
+                          try? await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        }
                     }
                 }
                 .accessibilityLabel("List of medicines")
