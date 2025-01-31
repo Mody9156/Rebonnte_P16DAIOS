@@ -37,14 +37,10 @@ class MedicineRepository: ObservableObject {
     
     @MainActor
     func fetchAisles(completion:@escaping( [String])->Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let allMedicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+        medicineService.fetchAisles { aisles in
+            if aisles.isEmpty {
+                print("\(MedicineError.invalidAisles)")
+            }else{
                 completion(aisles)
             }
         }
@@ -209,6 +205,7 @@ class MedicineRepository: ObservableObject {
 enum MedicineError: LocalizedError {
     case invalidDelete
     case invalidMedicine
+    case invalidAisles
     
     var errorDescription: String? {
         switch self {
@@ -216,6 +213,8 @@ enum MedicineError: LocalizedError {
             return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
         case .invalidMedicine:
             return "Impossible de récupérer les données du tableau"
+        case .invalidAisles:
+            return "Impossible de récupérer les aisles du tableau"
         }
     }
 }
