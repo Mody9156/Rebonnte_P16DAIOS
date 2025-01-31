@@ -16,8 +16,9 @@ class MedicineRepository: ObservableObject {
     @Published var medicines: [Medicine]
     @Published var historyEntry: [HistoryEntry]
     @AppStorage("email") var identity : String = "email"
+    private var medicineService: MedicineProtocol
     
-    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore()){
+    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore(),medicineService: MedicineProtocol = MedicineService(medicines: medicines)){
         self.medicines = medicines
         self.historyEntry = historyEntry
         self.db = db
