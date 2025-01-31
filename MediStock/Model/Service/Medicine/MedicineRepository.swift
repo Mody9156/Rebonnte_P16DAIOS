@@ -37,7 +37,11 @@ class MedicineRepository: ObservableObject {
 //            }
 //        }
         medicineService.fetchMedicines { medicine in
-            completion(medicine)
+            if medicine.isEmpty {
+               print("\(MedicineError.invalidMedicine)")
+            }else{
+                completion(medicine)
+            }
         }
     }
     
@@ -214,11 +218,14 @@ class MedicineRepository: ObservableObject {
 
 enum MedicineError: LocalizedError {
     case invalidDelete
+    case invalidMedicine
     
     var errorDescription: String? {
         switch self {
         case .invalidDelete:
             return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
+        case .invalidMedicine:
+            return "Impossible de récupérer les données du tableau"
         }
     }
 }
