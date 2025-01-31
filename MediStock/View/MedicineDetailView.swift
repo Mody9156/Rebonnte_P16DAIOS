@@ -59,7 +59,9 @@ extension MedicineDetailView {
                 .accessibilityLabel("Name Label")
             
             TextField("Name", text: $medicine.name, onCommit: {
-                medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                Task{
+                   try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
@@ -115,7 +117,9 @@ extension MedicineDetailView {
                 .accessibilityLabel("Aisle Label")
             
             TextField("Aisle", text: $medicine.aisle, onCommit: {
-                medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                Task{
+                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
