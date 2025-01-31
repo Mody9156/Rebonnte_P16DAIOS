@@ -14,7 +14,7 @@ protocol MedicineProtocol{
     func setDataToList(user: String, aisle: String) async throws -> [Medicine]
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine]
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String)
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) -> [Medicine]
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void)
     func trieByName(completion:@escaping([Medicine]) ->Void)
     func trieByStock(completion:@escaping([Medicine]) ->Void)

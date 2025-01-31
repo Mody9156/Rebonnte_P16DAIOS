@@ -90,8 +90,8 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-        guard let id = medicine.id else { return }
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) -> [Medicine] {
+        guard let id = medicine.id else { return [medicine]}
         let newStock = medicine.stock + amount
         db.collection("medicines").document(id).updateData([
             "stock": newStock
@@ -104,6 +104,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 }
             }
         }
+        return [medicine]
     }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping ([HistoryEntry]) -> Void) {
