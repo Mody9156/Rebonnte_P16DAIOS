@@ -13,15 +13,16 @@ class MedicineService: MedicineProtocol, ObservableObject{
     @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
     
-    func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
+    func fetchMedicines(completion: @escaping (Result<[Medicine],Error>) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
+                completion(.failure(error))
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
                 } ?? []
-                completion(medicines)
+                completion(.success(medicines))
             }
         }
     }

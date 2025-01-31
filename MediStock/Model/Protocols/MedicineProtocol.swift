@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MedicineProtocol{
-    func fetchMedicines(completion:@escaping([Medicine]) -> Void)
+    func fetchMedicines(completion: @escaping (Result<[Medicine],Error>) -> Void)
     func fetchAisles(completion:@escaping( [String])->Void)
     func setData(user: String) async throws
     func setDataToList(user: String, aisle: String) async throws
