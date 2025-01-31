@@ -10,12 +10,8 @@ import Firebase
 import FirebaseFirestore
 
 class MedicineService: MedicineProtocol, ObservableObject{
-    @Published var medicines: [Medicine]
+    @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
-    
-    init(medicines: [Medicine]) {
-        self.medicines = medicines
-    }
     
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
