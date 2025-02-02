@@ -59,11 +59,9 @@ struct ButtonForUpdateSession: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .frame(height: 40)
-                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
-                    .border(Color("ButtonBackground"),width: 4)
                 
                 Text(text)
-                    .foregroundColor(text == "Login" ? .white : Color("ButtonBackground"))
+                    .foregroundColor(text == "Login" ? .white : .clear)
             }
         }
     }
