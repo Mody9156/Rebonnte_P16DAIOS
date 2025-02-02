@@ -13,6 +13,7 @@ struct LoginView: View {
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                    
                 
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -23,7 +24,9 @@ struct LoginView: View {
                     }
                 }) {
                     Text("Login")
+                        .foregroundColor(.white)
                 }
+                
                 Button(action: {
                     Task{
                         try await authViewModel.createdNewUser(email: email, password: password)
