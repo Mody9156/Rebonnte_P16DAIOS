@@ -19,21 +19,7 @@ struct LoginView: View {
                     .padding()
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
-                
-                Button(action: {
-                    Task{
-                        try await authViewModel.createdNewUser(email: email, password: password)
-                    }
-                }) {
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 40)
-                            .cornerRadius(12)
-                        
-                        Text("Sign Up")
-                            .foregroundColor(.white)
-                    }
-                }
+                ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                 
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
