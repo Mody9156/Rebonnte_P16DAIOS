@@ -6,34 +6,36 @@ struct LoginView: View {
     @StateObject var authViewModel = AuthViewModel()
     
     var body: some View {
-        VStack {
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            Button(action: {
-                Task{
-                    try await authViewModel.login(email: email, password: password)
+        ZStack {
+            VStack {
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Button(action: {
+                    Task{
+                        try await authViewModel.login(email: email, password: password)
+                    }
+                }) {
+                    Text("Login")
                 }
-            }) {
-                Text("Login")
-            }
-            Button(action: {
-                Task{
-                    try await authViewModel.createdNewUser(email: email, password: password)
+                Button(action: {
+                    Task{
+                        try await authViewModel.createdNewUser(email: email, password: password)
+                    }
+                }) {
+                    Text("Sign Up")
                 }
-            }) {
-                Text("Sign Up")
+                
+                Text(authViewModel.messageError)
+                    .foregroundColor(.red)
+                    .font(.title2)
             }
-            
-            Text(authViewModel.messageError)
-                .foregroundColor(.red)
-                .font(.title2)
+            .padding()
         }
-        .padding()
     }
 }
 
