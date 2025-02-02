@@ -18,20 +18,7 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
-                Button(action: {
-                    Task{
-                        try await authViewModel.login(email: email, password: password)
-                    }
-                }) {
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 40)
-                            .cornerRadius(12)
-                        
-                        Text("Login")
-                            .foregroundColor(.white)
-                    }
-                }
+                ButtonForUpdateSession(email: email, password: password)
                 
                 Button(action: {
                     Task{
@@ -60,5 +47,28 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView().environmentObject(SessionStore())
+    }
+}
+
+struct ButtonForUpdateSession: View {
+    @Binding var email : String
+    @Binding var password : String
+    @StateObject var authViewModel = AuthViewModel()
+    
+    var body: some View {
+        Button(action: {
+            Task{
+                try await authViewModel.login(email: email, password: password)
+            }
+        }) {
+            ZStack {
+                Rectangle()
+                    .frame(height: 40)
+                    .cornerRadius(12)
+                
+                Text("Login")
+                    .foregroundColor(.white)
+            }
+        }
     }
 }
