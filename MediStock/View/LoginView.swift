@@ -4,10 +4,14 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @StateObject var authViewModel = AuthViewModel()
-    
+//    var LinearGradient : Color {
+//        LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
+//    }
+
     var body: some View {
         ZStack {
-            Color("BackgroundColor")
+      
+                LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
                 TextField("Email", text: $email)
@@ -52,21 +56,15 @@ struct ButtonForUpdateSession: View {
                 }
             }
         }) {
-//            ZStack {
-//                Rectangle()
-//                    .frame(height: 40)
-//                    .cornerRadius(12)
-//                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
-//                    .border(Color("ButtonBackground"),width: 4)
-//
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 40)
+                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
+                    .border(Color("ButtonBackground"),width: 4)
                 
                 Text(text)
                     .foregroundColor(text == "Login" ? .white : Color("ButtonBackground"))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.blue, lineWidth: 4)
-                    }
-//            }
+            }
         }
     }
 }
