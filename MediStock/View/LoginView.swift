@@ -58,7 +58,7 @@ struct ButtonForUpdateSession: View {
                     .cornerRadius(12)
                 
                 Text(text)
-                    .foregroundColor(.white)
+                    .foregroundColor(text == "Login" ? .white : .blue)
             }
         }
     }
