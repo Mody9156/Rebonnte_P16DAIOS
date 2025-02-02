@@ -44,6 +44,7 @@ struct LoginView: View {
                             .cornerRadius(12)
                         
                         Text("Sign Up")
+                            .foregroundColor(.white)
                     }
                 }
                 
