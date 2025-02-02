@@ -23,8 +23,12 @@ struct LoginView: View {
                         try await authViewModel.login(email: email, password: password)
                     }
                 }) {
-                    Text("Login")
-                        .foregroundColor(.white)
+                    ZStack {
+                        Rectangle()
+                        
+                        Text("Login")
+                            .foregroundColor(.white)
+                    }
                 }
                 
                 Button(action: {
