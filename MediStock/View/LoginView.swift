@@ -52,17 +52,21 @@ struct ButtonForUpdateSession: View {
                 }
             }
         }) {
-            ZStack {
-                Rectangle()
-                    .frame(height: 40)
-                    .cornerRadius(12)
-                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
-                    .border(Color("ButtonBackground"),width: 4)
-                
+//            ZStack {
+//                Rectangle()
+//                    .frame(height: 40)
+//                    .cornerRadius(12)
+//                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
+//                    .border(Color("ButtonBackground"),width: 4)
+//
                 
                 Text(text)
                     .foregroundColor(text == "Login" ? .white : Color("ButtonBackground"))
-            }
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.blue, lineWidth: 4)
+                    }
+//            }
         }
     }
 }
