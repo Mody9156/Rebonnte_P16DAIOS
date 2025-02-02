@@ -38,7 +38,13 @@ struct LoginView: View {
                         try await authViewModel.createdNewUser(email: email, password: password)
                     }
                 }) {
-                    Text("Sign Up")
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 40)
+                            .cornerRadius(12)
+                        
+                        Text("Sign Up")
+                    }
                 }
                 
                 Text(authViewModel.messageError)
