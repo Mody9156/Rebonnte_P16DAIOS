@@ -26,6 +26,7 @@ struct LoginView: View {
                     ZStack {
                         Rectangle()
                             .frame(height: 40)
+                            .cornerRadius(20)
                         
                         Text("Login")
                             .foregroundColor(.white)
