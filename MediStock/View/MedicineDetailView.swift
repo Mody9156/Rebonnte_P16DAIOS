@@ -60,7 +60,7 @@ extension MedicineDetailView {
             
             TextField("Name", text: $medicine.name, onCommit: {
                 Task{
-                   try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                   medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
