@@ -13,11 +13,11 @@ struct LoginView: View {
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    
                 
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                
                 Button(action: {
                     Task{
                         try await authViewModel.login(email: email, password: password)
@@ -25,6 +25,7 @@ struct LoginView: View {
                 }) {
                     ZStack {
                         Rectangle()
+                            .frame(height: 40)
                         
                         Text("Login")
                             .foregroundColor(.white)
