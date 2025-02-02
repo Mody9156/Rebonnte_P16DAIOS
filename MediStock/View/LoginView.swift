@@ -18,7 +18,7 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
-                ButtonForUpdateSession(email: email, password: password)
+                ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 
                 Button(action: {
                     Task{
@@ -54,11 +54,16 @@ struct ButtonForUpdateSession: View {
     @Binding var email : String
     @Binding var password : String
     @StateObject var authViewModel = AuthViewModel()
+    var text : String
     
     var body: some View {
         Button(action: {
             Task{
-                try await authViewModel.login(email: email, password: password)
+                if text == "Login" {
+                    try await authViewModel.login(email: email, password: password)
+                }else{
+                    try await authViewModel.createdNewUser(email: email, password: password)
+                }
             }
         }) {
             ZStack {
@@ -66,7 +71,7 @@ struct ButtonForUpdateSession: View {
                     .frame(height: 40)
                     .cornerRadius(12)
                 
-                Text("Login")
+                Text(text)
                     .foregroundColor(.white)
             }
         }
