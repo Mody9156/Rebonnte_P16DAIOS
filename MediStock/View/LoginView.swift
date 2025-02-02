@@ -7,6 +7,8 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
+            Color("BackgroundColor")
+                .ignoresSafeArea()
             VStack {
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
