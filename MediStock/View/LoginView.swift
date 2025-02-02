@@ -56,8 +56,9 @@ struct ButtonForUpdateSession: View {
                 Rectangle()
                     .frame(height: 40)
                     .cornerRadius(12)
-                    .foregroundColor(text == "Login" ? Color(.blue):Color("ButtonBackground"))
-                    
+                    .foregroundColor(text == "Login" ? Color("ButtonBackground"):Color("BackgroundColor"))
+                    .border(Color("ButtonBackground"),width: 4)
+                
                 
                 Text(text)
                     .foregroundColor(text == "Login" ? .white : Color("ButtonBackground"))
