@@ -31,6 +31,7 @@ struct HistoryView: View {
                             
                             VStack(alignment: .leading,spacing: 5) {
                                 Text(entry.action)
+                                    .foregroundColor(.white)
                                     .font(.headline)
                                     .accessibilityLabel("Action: \(entry.action)")
                                 
