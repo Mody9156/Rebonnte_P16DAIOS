@@ -117,7 +117,7 @@ extension MedicineDetailView {
                 .accessibilityLabel("Aisle Label")
             
             TextField("Aisle", text: $medicine.aisle)
-            .onChange(of: medicine, perform: { newValue in
+            .onChange(of: medicine, perform: { _ in
                         Task{
                          try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         }
