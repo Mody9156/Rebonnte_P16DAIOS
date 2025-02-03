@@ -36,8 +36,10 @@ struct HistoryView: View {
                                     .fontWeight(.bold)
                                     .accessibilityLabel("Action: \(entry.action)")
                                 
-                                TextForShowDetails(user: entry.user)
-                                    .accessibilityLabel("Performed by: \(user)")
+                                TextForShowDetails(user: entry.user,text: "User:")
+                                    .accessibilityLabel("Performed by: \(entry.user)")
+                                TextForShowDetails(user: entry.timestamp.formatted(),text: "Date:")
+                                    .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                                 
                                 Text("Date: \(entry.timestamp.formatted())")
                                     .font(.subheadline)
@@ -70,10 +72,10 @@ struct HistoryView_Previews: PreviewProvider {
 
 struct TextForShowDetails: View {
     var user : String
-    
+    var text : String
     var body: some View {
         HStack {
-            Text("User:")
+            Text(text)
                 .fontWeight(.bold)
             Text(user)
                 .font(.subheadline)
