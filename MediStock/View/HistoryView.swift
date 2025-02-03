@@ -9,9 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-    var count: Int {
-        return filterMedicine.count - 1
-    }
+   
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.blue, Color("BackgroundColor")]), startPoint: .top, endPoint: .bottom)
