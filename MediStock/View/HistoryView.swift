@@ -21,11 +21,11 @@ struct HistoryView: View {
                         HStack {
                             VStack {
                                 Image(systemName: "circle.fill")
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.blue)
                                 HStack {
                                     Divider()
                                         .frame(width:4)
-                                        .overlay(.red)
+                                        .overlay(.blue)
                                 }
                             }
                             
