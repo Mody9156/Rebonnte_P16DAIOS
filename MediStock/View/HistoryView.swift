@@ -46,6 +46,6 @@ struct HistoryView: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView(filterMedicine: [HistoryEntry(medicineId: "", user: "", action: "", details: "", timestamp: Date.now)])
+        HistoryView(filterMedicine: [HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)])
     }
 }
