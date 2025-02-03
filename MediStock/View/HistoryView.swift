@@ -20,12 +20,10 @@ struct HistoryView: View {
                         VStack {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(.blue)
-                            ForEach(1...count, id: \.self){ _ in
                                 HStack {
                                     Divider()
                                         .frame(width:4)
                                         .overlay(.blue)
-                                }
                             }
                         }
                         
