@@ -35,9 +35,7 @@ struct HistoryView: View {
                                     .font(.headline)
                                     .accessibilityLabel("Action: \(entry.action)")
                                 
-                                Text("User: \(entry.user)")
-                                    .font(.subheadline)
-                                    .accessibilityLabel("Performed by: \(entry.user)")
+                                TextForShowDetails()
                                 Text("Date: \(entry.timestamp.formatted())")
                                     .font(.subheadline)
                                     .accessibilityLabel("Date: \(entry.timestamp.formatted())")
@@ -64,5 +62,13 @@ struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView(filterMedicine: [HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
                                      HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)])
+    }
+}
+
+struct TextForShowDetails: View {
+    var body: some View {
+        Text("User: \(entry.user)")
+            .font(.subheadline)
+            .accessibilityLabel("Performed by: \(entry.user)")
     }
 }
