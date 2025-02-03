@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HistoryView: View {
+    var filterMedicine : [HistoryEntry]
+    
     var body: some View {
         ScrollView {
             VStack {
