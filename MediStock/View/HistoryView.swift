@@ -66,6 +66,7 @@ struct HistoryView_Previews: PreviewProvider {
 }
 
 struct TextForShowDetails: View {
+    var filterMedicine : [HistoryEntry]
     var body: some View {
         Text("User: \(entry.user)")
             .font(.subheadline)
