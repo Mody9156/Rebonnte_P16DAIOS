@@ -18,7 +18,7 @@ struct HistoryView: View {
             .ignoresSafeArea()
             
             ScrollView {
-                VStack {
+                VStack (alignment:.leading){
                     ForEach(filterMedicine) { entry in
                         HStack {
                             VStack {
