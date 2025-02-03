@@ -16,6 +16,7 @@ struct HistoryView: View {
                 ForEach(filterMedicine) { entry in
                     HStack {
                         Image(systemName: "circle.fill")
+                            .foregroundColor(.blue)
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
                                 .font(.headline)
