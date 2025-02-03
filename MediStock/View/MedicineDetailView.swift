@@ -144,11 +144,17 @@ extension MedicineDetailView {
     
     private var historySection: some View {
         VStack(alignment: .leading) {
-            Text("History")
-                .font(.headline)
-                .padding(.top, 20)
-                .accessibilityLabel("History Section")
-                .accessibilityHint("Displays the history of actions for this medicine.")
+            Button {
+                <#code#>
+            } label: {
+                Text("History")
+                    .font(.headline)
+                    .padding(.top, 20)
+                    .accessibilityLabel("History Section")
+                    .accessibilityHint("Displays the history of actions for this medicine.")
+            }
+
+            
             
 //            ScrollView {
 //                VStack {
