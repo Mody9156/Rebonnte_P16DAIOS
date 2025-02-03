@@ -22,18 +22,19 @@ struct HistoryView: View {
                                 .font(.headline)
                                 .accessibilityLabel("Action: \(entry.action)")
                             
-                            Text("User: \(entry.user)")
-                                .font(.subheadline)
+                            HStack {
+                                Text("User: \(entry.user)")
+                                    .font(.subheadline)
                                 .accessibilityLabel("Performed by: \(entry.user)")
+                                Text("Date: \(entry.timestamp.formatted())")
+                                    .font(.subheadline)
+                                    .accessibilityLabel("Date: \(entry.timestamp.formatted())")
+                            }
                             
-                            Text("Date: \(entry.timestamp.formatted())")
-                                .font(.subheadline)
-                                .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                             
                             Text("Details: \(entry.details)")
                                 .font(.subheadline)
                                 .accessibilityLabel("Details: \(entry.details)")
-                            
                         }
                         .padding()
                         .cornerRadius(10)
