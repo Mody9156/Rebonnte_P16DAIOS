@@ -153,9 +153,6 @@ extension MedicineDetailView {
                     .accessibilityLabel("History Section")
                     .accessibilityHint("Displays the history of actions for this medicine.")
             }
-
-            
-            
 //            ScrollView {
 //                VStack {
 //                    ForEach(filterMedicine) { entry in
