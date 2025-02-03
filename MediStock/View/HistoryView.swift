@@ -17,6 +17,11 @@ struct HistoryView: View {
                     HStack {
                         Image(systemName: "circle.fill")
                             .foregroundColor(.blue)
+                        
+                        Divider()
+                            .foregroundColor(.blue)
+                            .frame(width:4)
+                        
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
                                 .font(.headline)
@@ -42,9 +47,7 @@ struct HistoryView: View {
                         .accessibilityElement(children: .combine)
                         .accessibilityHint("Details of this history entry.")
                         
-                        Divider()
-                            .foregroundColor(.black)
-                            .frame(width:4)
+                       
                     }
                 }
             }
