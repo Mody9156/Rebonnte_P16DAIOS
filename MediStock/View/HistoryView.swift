@@ -9,8 +9,36 @@ import SwiftUI
 
 struct HistoryView: View {
     var body: some View {
-        Text("History")
-    }
+        ScrollView {
+            VStack {
+                ForEach(filterMedicine) { entry in
+                    VStack(alignment: .leading,spacing: 5) {
+                        Text(entry.action)
+                            .font(.headline)
+                            .accessibilityLabel("Action: \(entry.action)")
+                        
+                        Text("User: \(entry.user)")
+                            .font(.subheadline)
+                            .accessibilityLabel("Performed by: \(entry.user)")
+                        
+                        Text("Date: \(entry.timestamp.formatted())")
+                            .font(.subheadline)
+                            .accessibilityLabel("Date: \(entry.timestamp.formatted())")
+                        
+                        Text("Details: \(entry.details)")
+                            .font(.subheadline)
+                            .accessibilityLabel("Details: \(entry.details)")
+                        
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 5)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint("Details of this history entry.")
+                }
+            }
+        }    }
 }
 
 struct HistoryView_Previews: PreviewProvider {
