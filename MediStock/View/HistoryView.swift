@@ -14,6 +14,9 @@ struct HistoryView: View {
     }
     var body: some View {
         ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
             ScrollView {
                 VStack {
                     ForEach(filterMedicine) { entry in
