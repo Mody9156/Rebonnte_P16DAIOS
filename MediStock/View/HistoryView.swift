@@ -18,9 +18,11 @@ struct HistoryView: View {
                         VStack {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(.blue)
-                            Divider()
-                                .foregroundColor(.blue)
-                                .frame(width:4)
+                            HStack {
+                                Divider()
+                                 .frame(width:4)
+                                 .overlay(.blue)
+                            }
                         }
                         
                         VStack(alignment: .leading,spacing: 5) {
