@@ -61,7 +61,7 @@ struct ButtonForUpdateSession: View {
                     .frame(height: 40)
                     
                 Text(text)
-                    .foregroundColor(text == "Login" ? .white : .clear)
+                    .foregroundColor(.white)
             }
         }
     }
