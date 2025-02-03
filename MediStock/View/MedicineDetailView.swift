@@ -39,7 +39,7 @@ struct MedicineDetailView: View {
             medicineStockViewModel.fetchHistory(for: medicine)
         }
         .onChange(of: medicine) { newMedicine in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if newMedicine == medicine {
                     medicineStockViewModel.fetchHistory(for: newMedicine)
                 }
