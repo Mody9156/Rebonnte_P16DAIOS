@@ -33,7 +33,6 @@ struct HistoryView: View {
                         
                     }
                     .padding()
-                    .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 5)
                     .accessibilityElement(children: .combine)
