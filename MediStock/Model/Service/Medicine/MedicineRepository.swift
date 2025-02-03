@@ -86,6 +86,7 @@ class MedicineRepository: ObservableObject {
         } catch let error {
             print("Error adding history: \(error)")
         }
+        print("\(history)")
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws {
