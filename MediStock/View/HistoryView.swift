@@ -40,11 +40,12 @@ struct HistoryView: View {
                     .accessibilityHint("Details of this history entry.")
                 }
             }
-        }    }
+        }
+    }
 }
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView()
+        HistoryView(filterMedicine: [HistoryEntry(medicineId: "", user: "", action: "", details: "", timestamp: Date.now)])
     }
 }
