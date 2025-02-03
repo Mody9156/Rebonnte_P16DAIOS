@@ -15,12 +15,13 @@ struct HistoryView: View {
             VStack {
                 ForEach(filterMedicine) { entry in
                     HStack {
-                        Image(systemName: "circle.fill")
-                            .foregroundColor(.blue)
-                        
-                        Divider()
-                            .foregroundColor(.blue)
-                            .frame(width:4)
+                        VStack {
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(.blue)
+                            Divider()
+                                .foregroundColor(.blue)
+                                .frame(width:4)
+                        }
                         
                         VStack(alignment: .leading,spacing: 5) {
                             Text(entry.action)
