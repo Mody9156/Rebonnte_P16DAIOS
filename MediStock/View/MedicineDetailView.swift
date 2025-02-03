@@ -116,11 +116,12 @@ extension MedicineDetailView {
                 .font(.headline)
                 .accessibilityLabel("Aisle Label")
             
-            TextField("Aisle", text: $medicine.aisle, onCommit: {
-                Task{
-                 try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                }
-            })
+            TextField("Aisle", text: $medicine.aisle)
+            .onChange(of: medicine, perform: { newValue in
+                        Task{
+                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        }
+                })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
             .accessibilityLabel("Aisle Field")
