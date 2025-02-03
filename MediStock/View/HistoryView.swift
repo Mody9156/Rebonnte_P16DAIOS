@@ -40,7 +40,11 @@ struct HistoryView: View {
                         .cornerRadius(10)
                         .padding(.bottom, 5)
                         .accessibilityElement(children: .combine)
-                    .accessibilityHint("Details of this history entry.")
+                        .accessibilityHint("Details of this history entry.")
+                        
+                        Divider()
+                            .foregroundColor(.black)
+                            .frame(width:4)
                     }
                 }
             }
@@ -50,6 +54,7 @@ struct HistoryView: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView(filterMedicine: [HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)])
+        HistoryView(filterMedicine: [HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)])
     }
 }
