@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-    
+    var count: Int {
+      return filterMedicine.count - 1
+    }
     var body: some View {
         ScrollView {
             VStack {
@@ -18,10 +20,12 @@ struct HistoryView: View {
                         VStack {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(.blue)
-                            HStack {
-                                Divider()
-                                 .frame(width:4)
-                                 .overlay(.blue)
+                            ForEach(1...count, id: \.self){ _ in
+                                HStack {
+                                    Divider()
+                                        .frame(width:4)
+                                        .overlay(.blue)
+                                }
                             }
                         }
                         
@@ -38,7 +42,6 @@ struct HistoryView: View {
                                     .font(.subheadline)
                                     .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                             }
-                            
                             
                             Text("Details: \(entry.details)")
                                 .font(.subheadline)
