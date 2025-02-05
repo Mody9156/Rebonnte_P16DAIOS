@@ -16,7 +16,10 @@ struct LoginView: View {
             VStack {
                 ZStack{
                     Rectangle()
-                        .frame(height: 300)
+                        .frame(height: 200)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                    
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
@@ -24,7 +27,8 @@ struct LoginView: View {
                     SecureField("Password", text: $password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
-                }
+                }.padding()
+                
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                 
