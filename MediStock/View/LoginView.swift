@@ -56,7 +56,7 @@ struct ButtonForUpdateSession: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .frame(height: 40)
+                    .frame(width:100, height: 40)
                     
                 Text(text)
                     .foregroundColor(.white)
