@@ -12,7 +12,7 @@ struct HistoryView: View {
    
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, Color("BackgroundColor")]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.blue,Color("BackgroundColor")]), startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
             
             ScrollView {
@@ -41,13 +41,9 @@ struct HistoryView: View {
                                 TextForShowDetails(user: entry.timestamp.formatted(),text: "Date:")
                                     .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                                 
-                                Text("Date: \(entry.timestamp.formatted())")
-                                    .font(.subheadline)
-                                    .accessibilityLabel("Date: \(entry.timestamp.formatted())")
-                                
-                                Text("Details: \(entry.details)")
-                                    .font(.subheadline)
+                                TextForShowDetails(user: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
+                                    
                             }
                             .padding()
                             .cornerRadius(10)
@@ -65,8 +61,20 @@ struct HistoryView: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView(filterMedicine: [HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-                                     HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)])
+        HistoryView(filterMedicine: [
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+            HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)
+                                    
+        ])
     }
 }
 
