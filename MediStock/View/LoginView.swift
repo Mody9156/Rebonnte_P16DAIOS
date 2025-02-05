@@ -30,7 +30,6 @@ struct LoginView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                         }
-                      
                             
                         VStack(alignment: .leading) {
                             Text("Password")
@@ -41,10 +40,7 @@ struct LoginView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                         }
-                       
                     }
-                    
-                  
                     
                 }
                 .padding()
