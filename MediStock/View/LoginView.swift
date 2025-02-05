@@ -16,6 +16,7 @@ struct LoginView: View {
             VStack {
                 ZStack{
                     Rectangle()
+                        .frame(height: 300)
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
