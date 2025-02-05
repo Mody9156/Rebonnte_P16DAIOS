@@ -20,25 +20,28 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     
-                    VStack {
-                        VStack {
+                    VStack{
+                        VStack(alignment: .leading){
                             Text("EMAIL")
                             TextField("Email", text: $email)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                         }
+                        .padding()
                             
-                        VStack {
+                        VStack(alignment: .leading) {
                             Text("PASSWORD")
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                         }
+                        .padding()
                     }
                     
                   
                     
-                }.padding()
+                }
+                .padding()
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
