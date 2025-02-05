@@ -18,7 +18,7 @@ struct AllMedicinesView: View {
                     
                     Spacer()
                     
-                    Menu("Sort by") {
+                    Menu(Image(systemName: "arrow.up.arrow.down")) {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
                                 Task{
