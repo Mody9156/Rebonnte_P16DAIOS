@@ -37,8 +37,6 @@ struct AisleListView: View {
     }
 }
 
-struct AisleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AisleListView(medicineStockViewModel: MedicineStockViewModel())
-    }
+#Preview{
+    AisleListView(medicineStockViewModel: MedicineStockViewModel())
 }

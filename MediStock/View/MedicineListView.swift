@@ -50,9 +50,9 @@ struct MedicineListView: View {
         }
     }
     
-    struct MedicineListView_Previews: PreviewProvider {
-        static var previews: some View {
-            MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "", stock: 2, aisle: "")]), aisle: "Aisle 1").environmentObject(SessionStore())
-        }
-    }
+    
+}
+
+#Preview{
+    MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "", stock: 2, aisle: "")]), aisle: "Aisle 1").environmentObject(SessionStore())
 }
