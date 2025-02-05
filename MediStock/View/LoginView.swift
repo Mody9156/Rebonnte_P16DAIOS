@@ -21,12 +21,19 @@ struct LoginView: View {
                         .cornerRadius(12)
                     
                     VStack {
-                        TextField("Email", text: $email)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
-                        SecureField("Password", text: $password)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
+                        VStack {
+                            Text("EMAIL")
+                            TextField("Email", text: $email)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                        }
+                            
+                        VStack {
+                            Text("PASSWORD")
+                            SecureField("Password", text: $password)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                        }
                     }
                     
                   
