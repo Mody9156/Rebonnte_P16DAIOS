@@ -14,14 +14,16 @@ struct LoginView: View {
                 LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
+                ZStack{
+                    Rectangle()
+                    TextField("Email", text: $email)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                }
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                 
