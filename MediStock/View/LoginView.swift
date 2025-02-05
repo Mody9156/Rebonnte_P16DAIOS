@@ -16,14 +16,15 @@ struct LoginView: View {
             VStack {
                 ZStack{
                     Rectangle()
-                        .frame(height: 200)
+                        .frame(height: 250)
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     
                     VStack{
                         VStack(alignment: .leading){
-                            Text("EMAIL")
-                                .padding()
+                            Text("Email")
+                                .foregroundColor(.blue)
+                                .padding(.leading)
                             
                             TextField("Email", text: $email)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -32,8 +33,9 @@ struct LoginView: View {
                       
                             
                         VStack(alignment: .leading) {
-                            Text("PASSWORD")
-                                .padding()
+                            Text("Password")
+                                .foregroundColor(.blue)
+                                .padding(.leading)
                             
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
