@@ -90,8 +90,7 @@ struct AllMedicinesView: View {
     }
 }
 
-struct AllMedicinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        AllMedicinesView()
-    }
+
+#Preview {
+    AllMedicinesView()
 }
