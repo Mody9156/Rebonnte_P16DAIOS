@@ -33,8 +33,6 @@ struct AuthenticationManagerView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthenticationManagerView().environmentObject(SessionStore())
-    }
+#Preview {
+    AuthenticationManagerView()
 }
