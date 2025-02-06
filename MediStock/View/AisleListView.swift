@@ -27,6 +27,7 @@ struct AisleListView: View {
                     }
                 }) {
                     ZStack {
+                        Circle()
                         
                         Image(systemName: "plus")
                             .resizable()
