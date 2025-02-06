@@ -33,6 +33,7 @@ struct AisleListView: View {
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 50, height: 50)
+                            .foregroundColor(.white)
                     }
                 }
                 .padding()
