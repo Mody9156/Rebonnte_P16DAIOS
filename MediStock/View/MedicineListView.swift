@@ -12,7 +12,7 @@ struct MedicineListView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottomTrailing) {
             List {
                 ForEach(filterMedicines, id: \.id) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -40,9 +40,17 @@ struct MedicineListView: View {
                     try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
             }) {
-                Image(systemName: "plus")
-                    .accessibilityLabel("Add random medicine")
-                    .accessibilityHint("Adds a random medicine to the current aisle.")
+                ZStack {
+                    Circle()
+                        .frame(height: 70)
+                    
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(.white)
+                        .accessibilityLabel("Add random medicine")
+                        .accessibilityHint("Adds a random medicine to the current aisle.")
+                }
             }
             .navigationBarTitle(aisle)
             .accessibilityLabel("List of medicines in \(aisle)")
@@ -50,6 +58,7 @@ struct MedicineListView: View {
             .onAppear {
                 medicineStockViewModel.observeMedicines()
             }
+            .padding()
         }
     }
     
