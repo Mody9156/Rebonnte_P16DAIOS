@@ -29,6 +29,7 @@ struct AisleListView: View {
                             }
                         }
                     }
+                    .listStyle(InsetListStyle())
                 }
                 
                 Button(action: {
