@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 // Protocole pour CollectionReference
 protocol CollectionReferenceProtocol {
-    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void) -> ListenerRegistration
+    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void)
 }
 
 // Protocole pour QuerySnapshot
@@ -20,6 +20,19 @@ protocol QuerySnapshotProtocol {
 
 // Protocole pour QueryDocumentSnapshot
 protocol QueryDocumentSnapshotProtocol {
-    func data() -> [String: Any]
-    var documentID: String { get }
+    var data : [String: Any] {get}
+    func asMedicine() -> Medicine?
+    func asHistory() -> HistoryEntry?
+    func documents(documentPath:String) -> DocumentReference
+    func whereField(field:String,isEqualTo value: Any) -> CollectionReferenceProtocol
+    func order(by field: String, descending: Bool) -> CollectionReferenceProtocol
+
+}
+
+protocol QueryProtocol {
+    func addSnapshotListener(_ listener: @escaping (QuerySnapshotProtocol?, Error?) -> Void)
+}
+
+protocol FirestoreServiceProtocol {
+    func collection(_ collectionPath: String) -> CollectionReferenceProtocol
 }

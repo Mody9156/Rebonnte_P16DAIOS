@@ -12,45 +12,60 @@ struct MedicineListView: View {
     }
     
     var body: some View {
-        List {
-            ForEach(filterMedicines, id: \.id) { medicine in
-                NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
-                    VStack(alignment: .leading) {
-                        Text(medicine.name)
-                            .font(.headline)
-                            .accessibilityLabel("Medicine Name: \(medicine.name)")
-                            .accessibilityHint("Tap to view details for \(medicine.name).")
-                        
-                        Text("Stock: \(medicine.stock)")
-                            .font(.subheadline)
-                            .accessibilityLabel("Stock available: \(medicine.stock)")
+        ZStack(alignment: .bottomTrailing) {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
+            List {
+                ForEach(filterMedicines, id: \.id) { medicine in
+                    NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
+                        VStack(alignment: .leading) {
+                            Text(medicine.name)
+                                .font(.headline)
+                                .accessibilityLabel("Medicine Name: \(medicine.name)")
+                                .accessibilityHint("Tap to view details for \(medicine.name).")
+                            
+                            Text("Stock: \(medicine.stock)")
+                                .font(.subheadline)
+                                .accessibilityLabel("Stock available: \(medicine.stock)")
+                        }
+                    }
+                }
+                .onDelete { IndexSet in
+                    Task{
+                        try await medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
             }
-            .onDelete { IndexSet in
-                medicineStockViewModel.deleteMedicines(at: IndexSet)
+            
+            Button(action: {
+                Task{
+                    try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+                }
+            }) {
+                ZStack {
+                    Circle()
+                        .frame(height: 70)
+                    
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(.white)
+                        .accessibilityLabel("Add random medicine")
+                        .accessibilityHint("Adds a random medicine to the current aisle.")
+                }
             }
-        }
-        .navigationBarItems(trailing:Button(action: {
-            Task{
-                try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+            .navigationBarTitle(aisle)
+            .accessibilityLabel("List of medicines in \(aisle)")
+            .accessibilityHint("Displays all medicines available in \(aisle).")
+            .onAppear {
+                medicineStockViewModel.observeMedicines()
             }
-        }) {
-            Image(systemName: "plus")
-                .accessibilityLabel("Add random medicine")
-                .accessibilityHint("Adds a random medicine to the current aisle.")
-        })
-        .navigationBarTitle(aisle)
-        .accessibilityLabel("List of medicines in \(aisle)")
-        .accessibilityHint("Displays all medicines available in \(aisle).")
-        .onAppear {
-            medicineStockViewModel.observeMedicines()
+            .padding()
         }
     }
-    
-    struct MedicineListView_Previews: PreviewProvider {
-        static var previews: some View {
-            MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "", stock: 2, aisle: "")]), aisle: "Aisle 1").environmentObject(SessionStore())
-        }
-    }
+}
+
+#Preview{
+    MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "", stock: 2, aisle: "")]), aisle: "Aisle 1").environmentObject(SessionStore())
 }
