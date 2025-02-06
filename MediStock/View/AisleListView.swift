@@ -11,12 +11,18 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                List {
-                    ForEach(aisles, id: \.self) { aisle in
-                        NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
-                            Text(aisle)
-                                .accessibilityLabel("Aisle \(aisle)")
-                                .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+                VStack {
+                    Text("Aisles")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
+                    List {
+                        ForEach(aisles, id: \.self) { aisle in
+                            NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
+                                Text(aisle)
+                                    .accessibilityLabel("Aisle \(aisle)")
+                                    .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+                            }
                         }
                     }
                 }
@@ -37,7 +43,6 @@ struct AisleListView: View {
                     }
                 }
                 .padding()
-                .navigationBarTitle("Aisles")
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
