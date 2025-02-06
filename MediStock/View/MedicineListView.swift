@@ -13,6 +13,9 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
             List {
                 ForEach(filterMedicines, id: \.id) { medicine in
                     NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -61,8 +64,6 @@ struct MedicineListView: View {
             .padding()
         }
     }
-    
-    
 }
 
 #Preview{
