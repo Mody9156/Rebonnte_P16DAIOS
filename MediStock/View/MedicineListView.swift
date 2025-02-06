@@ -12,41 +12,43 @@ struct MedicineListView: View {
     }
     
     var body: some View {
-        List {
-            ForEach(filterMedicines, id: \.id) { medicine in
-                NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
-                    VStack(alignment: .leading) {
-                        Text(medicine.name)
-                            .font(.headline)
-                            .accessibilityLabel("Medicine Name: \(medicine.name)")
-                            .accessibilityHint("Tap to view details for \(medicine.name).")
-                        
-                        Text("Stock: \(medicine.stock)")
-                            .font(.subheadline)
-                            .accessibilityLabel("Stock available: \(medicine.stock)")
+        VStack {
+            List {
+                ForEach(filterMedicines, id: \.id) { medicine in
+                    NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
+                        VStack(alignment: .leading) {
+                            Text(medicine.name)
+                                .font(.headline)
+                                .accessibilityLabel("Medicine Name: \(medicine.name)")
+                                .accessibilityHint("Tap to view details for \(medicine.name).")
+                            
+                            Text("Stock: \(medicine.stock)")
+                                .font(.subheadline)
+                                .accessibilityLabel("Stock available: \(medicine.stock)")
+                        }
+                    }
+                }
+                .onDelete { IndexSet in
+                    Task{
+                        try await medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
             }
-            .onDelete { IndexSet in
+            .navigationBarItems(trailing:Button(action: {
                 Task{
-                   try await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                    try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
+            }) {
+                Image(systemName: "plus")
+                    .accessibilityLabel("Add random medicine")
+                    .accessibilityHint("Adds a random medicine to the current aisle.")
+            })
+            .navigationBarTitle(aisle)
+            .accessibilityLabel("List of medicines in \(aisle)")
+            .accessibilityHint("Displays all medicines available in \(aisle).")
+            .onAppear {
+                medicineStockViewModel.observeMedicines()
             }
-        }
-        .navigationBarItems(trailing:Button(action: {
-            Task{
-                try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
-            }
-        }) {
-            Image(systemName: "plus")
-                .accessibilityLabel("Add random medicine")
-                .accessibilityHint("Adds a random medicine to the current aisle.")
-        })
-        .navigationBarTitle(aisle)
-        .accessibilityLabel("List of medicines in \(aisle)")
-        .accessibilityHint("Displays all medicines available in \(aisle).")
-        .onAppear {
-            medicineStockViewModel.observeMedicines()
         }
     }
     
