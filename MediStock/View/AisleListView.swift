@@ -26,9 +26,12 @@ struct AisleListView: View {
                         try await medicineStockViewModel.addRandomMedicine(user: identity)
                     }
                 }) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 100, height: 50)
+                    ZStack {
+                        
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                    }
                 }
                 .padding()
                 .navigationBarTitle("Aisles")
