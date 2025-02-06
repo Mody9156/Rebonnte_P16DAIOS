@@ -31,7 +31,17 @@ struct AisleListView: View {
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
                 
-                
+                Button(action: {
+                    Task{
+                        try await medicineStockViewModel.addRandomMedicine(user: identity)
+                    }
+                }) {
+                    Image(systemName: "plus")
+                }
+                .padding()
+                .navigationBarTitle("Aisles")
+                .accessibilityLabel("Aisle List")
+                .accessibilityHint("Displays a list of aisles containing medicines.")
             }
         }
         .onAppear {
