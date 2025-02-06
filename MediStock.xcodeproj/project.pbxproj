@@ -13,7 +13,6 @@
 		2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301D67C2D4A44850032B5DF /* MockMedicineService.swift */; };
 		230B004D2D38201F0037E537 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230B004C2D38201F0037E537 /* Profile.swift */; };
 		237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A6F2D2FFE4500EEC056 /* FirebaseAnalytics */; };
-		237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A712D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion */; };
 		237E0A742D2FFE4500EEC056 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A732D2FFE4500EEC056 /* FirebaseAnalyticsSwift */; };
 		237E0A762D2FFE4500EEC056 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A752D2FFE4500EEC056 /* FirebaseAuth */; };
 		237E0A782D2FFE4600EEC056 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A772D2FFE4600EEC056 /* FirebaseAuthCombine-Community */; };
@@ -21,7 +20,6 @@
 		237E0A7C2D2FFE4600EEC056 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A7B2D2FFE4600EEC056 /* FirebaseDatabase */; };
 		237E0A7E2D2FFE4600EEC056 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A7D2D2FFE4600EEC056 /* FirebaseDatabaseSwift */; };
 		237E0A802D2FFE4600EEC056 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A7F2D2FFE4600EEC056 /* FirebaseFirestore */; };
-		237E0A822D2FFE4600EEC056 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A812D2FFE4600EEC056 /* FirebaseFirestoreCombine-Community */; };
 		237E0A842D2FFE4600EEC056 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 237E0A832D2FFE4600EEC056 /* FirebaseFirestoreSwift */; };
 		237E0A872D300A4F00EEC056 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A862D300A4F00EEC056 /* User.swift */; };
 		237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237E0A882D300FBB00EEC056 /* AuthViewModel.swift */; };
@@ -110,8 +108,6 @@
 				237E0A7E2D2FFE4600EEC056 /* FirebaseDatabaseSwift in Frameworks */,
 				237E0A742D2FFE4500EEC056 /* FirebaseAnalyticsSwift in Frameworks */,
 				237E0A702D2FFE4500EEC056 /* FirebaseAnalytics in Frameworks */,
-				237E0A822D2FFE4600EEC056 /* FirebaseFirestoreCombine-Community in Frameworks */,
-				237E0A722D2FFE4500EEC056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				237E0A842D2FFE4600EEC056 /* FirebaseFirestoreSwift in Frameworks */,
 				237E0A7A2D2FFE4600EEC056 /* FirebaseCrashlytics in Frameworks */,
 				237E0A802D2FFE4600EEC056 /* FirebaseFirestore in Frameworks */,
@@ -706,7 +702,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
