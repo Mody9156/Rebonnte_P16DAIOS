@@ -18,6 +18,7 @@ struct AisleListView: View {
                     Text("Aisles")
                         .font(.largeTitle)
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
                     
                     List {
                         ForEach(aisles, id: \.self) { aisle in
