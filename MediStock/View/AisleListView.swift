@@ -10,25 +10,29 @@ struct AisleListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
-                        Text(aisle)
-                            .accessibilityLabel("Aisle \(aisle)")
-                            .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+            ZStack {
+                List {
+                    ForEach(aisles, id: \.self) { aisle in
+                        NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
+                            Text(aisle)
+                                .accessibilityLabel("Aisle \(aisle)")
+                                .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+                        }
                     }
                 }
+                .navigationBarItems(trailing:Button(action: {
+                    Task{
+                        try await medicineStockViewModel.addRandomMedicine(user: identity)
+                    }
+                }) {
+                    Image(systemName: "plus")
+                })
+                .navigationBarTitle("Aisles")
+                .accessibilityLabel("Aisle List")
+                .accessibilityHint("Displays a list of aisles containing medicines.")
+                
+                
             }
-            .navigationBarItems(trailing:Button(action: {
-                Task{
-                    try await medicineStockViewModel.addRandomMedicine(user: identity)
-                }
-            }) {
-                Image(systemName: "plus")
-            })
-            .navigationBarTitle("Aisles")
-            .accessibilityLabel("Aisle List")
-            .accessibilityHint("Displays a list of aisles containing medicines.")
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
