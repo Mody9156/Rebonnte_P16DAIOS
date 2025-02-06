@@ -20,16 +20,6 @@ struct AisleListView: View {
                         }
                     }
                 }
-                .navigationBarItems(trailing:Button(action: {
-                    Task{
-                        try await medicineStockViewModel.addRandomMedicine(user: identity)
-                    }
-                }) {
-                    Image(systemName: "plus")
-                })
-                .navigationBarTitle("Aisles")
-                .accessibilityLabel("Aisle List")
-                .accessibilityHint("Displays a list of aisles containing medicines.")
                 
                 Button(action: {
                     Task{
