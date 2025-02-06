@@ -34,7 +34,8 @@ struct MedicineListView: View {
                     }
                 }
             }
-            .navigationBarItems(trailing:Button(action: {
+            
+            Button(action: {
                 Task{
                     try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
@@ -42,7 +43,7 @@ struct MedicineListView: View {
                 Image(systemName: "plus")
                     .accessibilityLabel("Add random medicine")
                     .accessibilityHint("Adds a random medicine to the current aisle.")
-            })
+            }
             .navigationBarTitle(aisle)
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
