@@ -45,11 +45,11 @@ struct MedicineListView: View {
             }) {
                 ZStack {
                     Circle()
-                        .frame(height: 70)
+                        .frame(height: 60)
                     
                     Image(systemName: "plus")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 40, height: 40)
                         .foregroundColor(.white)
                         .accessibilityLabel("Add random medicine")
                         .accessibilityHint("Adds a random medicine to the current aisle.")
