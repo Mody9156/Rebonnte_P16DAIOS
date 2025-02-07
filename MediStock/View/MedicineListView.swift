@@ -10,6 +10,7 @@ struct MedicineListView: View {
             Medicine.aisle == aisle
         })
     }
+//    @Environment(\)
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -38,6 +39,7 @@ struct MedicineListView: View {
                 }
             }
             .navigationBarHidden(true)
+            .navigationTitle("\(Image(systemName: "arrow.backward"))")
             
             Button(action: {
                 Task{
