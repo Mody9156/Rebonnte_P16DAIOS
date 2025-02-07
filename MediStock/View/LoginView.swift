@@ -3,7 +3,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @StateObject var authViewModel = AuthViewModel()
+    @ObservedObject var authViewModel = AuthViewModel()
 
     var body: some View {
         ZStack {
