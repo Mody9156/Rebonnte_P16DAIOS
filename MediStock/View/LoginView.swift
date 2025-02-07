@@ -45,12 +45,15 @@ struct LoginView: View {
                 }
                 .padding()
                 
-                ButtonForUpdateSession(email: $email, password: $password, text:"Login")
-                ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
-                
-                Text(authViewModel.messageError)
-                    .foregroundColor(.orange)
-                    .font(.title2)
+                VStack {
+                    ButtonForUpdateSession(email: $email, password: $password, text:"Login")
+                    ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
+                    
+                    Text(authViewModel.messageError)
+                        .foregroundColor(.red)
+                        .font(.title2)
+                }
+               
             }
             .padding()
         }
