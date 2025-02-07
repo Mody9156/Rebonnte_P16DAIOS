@@ -37,6 +37,7 @@ struct MedicineListView: View {
                     }
                 }
             }
+            .navigationBarHidden(true)
             
             Button(action: {
                 Task{
