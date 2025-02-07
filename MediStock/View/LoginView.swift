@@ -3,11 +3,11 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @ObservedObject var authViewModel = AuthViewModel()
-
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some View {
         ZStack {
-                LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
                 ZStack{
@@ -26,7 +26,7 @@ struct LoginView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                         }
-                            
+                        
                         VStack(alignment: .leading) {
                             Text("Password")
                                 .foregroundColor(.blue)
@@ -40,12 +40,14 @@ struct LoginView: View {
                 }
                 .padding()
                 
-                    ButtonForUpdateSession(email: $email, password: $password, text:"Login")
-                    ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
-                    
-                Text(authViewModel.messageError)
+                ButtonForUpdateSession(email: $email, password: $password, text:"Login")
+                ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
+                
+                if !authViewModel.messageError.isEmpty {
+                    Text(authViewModel.messageError)
                         .foregroundColor(.red)
                         .font(.title2)
+                }
             }
             .padding()
         }
@@ -76,7 +78,7 @@ struct ButtonForUpdateSession: View {
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(text == "Login" ? .blue : .clear)
                     .frame(width:100, height: 40)
-                    
+                
                 Text(text)
                     .foregroundColor(text == "Login" ? .white: .blue)
             }
