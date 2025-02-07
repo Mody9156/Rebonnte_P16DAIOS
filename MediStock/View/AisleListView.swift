@@ -30,7 +30,8 @@ struct AisleListView: View {
                                 }
                             }
                     }
-                    .listStyle(InsetListStyle())
+                    .navigationBarHidden(true)
+                    .navigationBarTitle("\(Image(systemName: "arrow.backward"))")
                   
                 }
                 
