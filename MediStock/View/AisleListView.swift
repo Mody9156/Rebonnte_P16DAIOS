@@ -21,7 +21,6 @@ struct AisleListView: View {
                         .foregroundColor(.white)
                     
                     List {
-                        Section{
                             ForEach(aisles, id: \.self) { aisle in
                                 NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
                                   
@@ -30,13 +29,6 @@ struct AisleListView: View {
                                         .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                                 }
                             }
-                        }header: {
-                            Text("All Ailses of medicines 1 to 10")
-                        } footer: {
-                            Text("You should add new aisle with medicines, with simple click on the button")
-                        }
-                        .listRowSeparatorTint(.blue,edges: .bottom)
-                        
                     }
                     .listStyle(InsetListStyle())
                   
