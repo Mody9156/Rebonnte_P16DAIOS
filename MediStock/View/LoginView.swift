@@ -4,13 +4,9 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @StateObject var authViewModel = AuthViewModel()
-//    var LinearGradient : Color {
-//        LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
-//    }
 
     var body: some View {
         ZStack {
-      
                 LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
@@ -41,19 +37,15 @@ struct LoginView: View {
                                 .padding()
                         }
                     }
-                    
                 }
                 .padding()
                 
-                VStack {
                     ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                     ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                     
-                    Text(authViewModel.messageError)
+                Text(authViewModel.messageError)
                         .foregroundColor(.red)
                         .font(.title2)
-                }
-               
             }
             .padding()
         }
