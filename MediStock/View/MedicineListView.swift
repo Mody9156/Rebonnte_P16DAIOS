@@ -39,7 +39,6 @@ struct MedicineListView: View {
                 }
             }
             .navigationBarHidden(true)
-            .navigationBarTitle("\(Image(systemName: "arrow.backward"))")
             
             Button(action: {
                 Task{
