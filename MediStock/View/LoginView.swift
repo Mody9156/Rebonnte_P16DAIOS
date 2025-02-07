@@ -49,7 +49,7 @@ struct LoginView: View {
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                 
                 Text(authViewModel.messageError)
-                    .foregroundColor(.red)
+                    .foregroundColor(.orange)
                     .font(.title2)
             }
             .padding()

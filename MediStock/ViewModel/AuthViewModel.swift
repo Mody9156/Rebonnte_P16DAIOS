@@ -30,6 +30,7 @@ class AuthViewModel : ObservableObject {
             self.messageError = ""
             self.onLoginSucceed?()
         }catch{
+            print(self.messageError )
             self.messageError = "Erreur lors de la connection de l'utilisateur"
         }
     }
@@ -41,6 +42,7 @@ class AuthViewModel : ObservableObject {
             print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
         }catch{
             self.messageError = "Erreur lors de la création de l'utilisateur"
+            print(self.messageError )
         }
     }
     
