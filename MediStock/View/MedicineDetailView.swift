@@ -55,6 +55,7 @@ extension MedicineDetailView {
     private var medicineNameSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
+                .font(.largeTitle)
                 .font(.headline)
                 .accessibilityLabel("Name Label")
             
@@ -74,6 +75,7 @@ extension MedicineDetailView {
     private var medicineStockSection: some View {
         VStack {
             Text(LocalizedStringKey("Stock"))
+                .font(.largeTitle)
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
             
@@ -92,7 +94,6 @@ extension MedicineDetailView {
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
-                    .frame(width: 150)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
                     }
@@ -118,6 +119,7 @@ extension MedicineDetailView {
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Aisle"))
+                .font(.largeTitle)
                 .font(.headline)
                 .accessibilityLabel("Aisle Label")
             
