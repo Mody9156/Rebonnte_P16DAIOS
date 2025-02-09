@@ -27,11 +27,11 @@ class AuthViewModel : ObservableObject {
             let user = try await session.signIn(email: email, password: password)
             UserDefaults.standard.set(user.email, forKey: "email")
             print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
-            self.messageError = ""
-            self.onLoginSucceed?()
+            messageError = ""
+            onLoginSucceed?()
         }catch{
             print(self.messageError )
-            self.messageError = "Erreur lors de la connection de l'utilisateur"
+            messageError = "Erreur lors de la connection de l'utilisateur"
         }
     }
     
@@ -39,10 +39,10 @@ class AuthViewModel : ObservableObject {
     func createdNewUser(email: String, password: String) async throws {
         do{
             let user = try await session.signUp(email: email, password: password)
-            self.messageError = ""
+            messageError = ""
             print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
         }catch{
-                self.messageError = "Erreur lors de la création de l'utilisateur"
+            messageError = "Erreur lors de la création de l'utilisateur"
         }
     }
     
