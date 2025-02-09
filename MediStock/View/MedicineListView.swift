@@ -56,13 +56,17 @@ struct MedicineListView: View {
                         .accessibilityHint("Adds a random medicine to the current aisle.")
                 }
             }
-            .navigationBarTitle(aisle)
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
                 medicineStockViewModel.observeMedicines()
             }
             .padding()
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(aisle)
+            }
         }
     }
 }

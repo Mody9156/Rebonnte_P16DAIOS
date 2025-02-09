@@ -52,6 +52,7 @@ struct AisleListView: View {
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
+           
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
