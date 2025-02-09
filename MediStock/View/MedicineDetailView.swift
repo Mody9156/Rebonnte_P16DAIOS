@@ -61,7 +61,7 @@ extension MedicineDetailView {
             
             TextField("Name", text: $medicine.name, onCommit: {
                 Task{
-                   medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                   try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }
             })
