@@ -72,14 +72,17 @@ extension MedicineDetailView {
     }
     
     private var medicineStockSection: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text(LocalizedStringKey("Stock"))
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
             
             HStack {
+                Spacer()
                 Button(action: decreaseStock) {
                     Image(systemName: "minus.circle")
+                        .resizable()
+                        .frame(width: 80,height: 80)
                         .font(.title)
                         .foregroundColor(.red)
                 }
@@ -89,7 +92,7 @@ extension MedicineDetailView {
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
-                    .frame(width: 100)
+                    .frame(width: 150)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
                     }
@@ -98,12 +101,14 @@ extension MedicineDetailView {
                 
                 Button(action: increaseStock) {
                     Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 80,height: 80)
                         .font(.title)
                         .foregroundColor(.green)
                 }
                 .accessibilityLabel("Increase stock")
                 .accessibilityHint("Increase the stock quantity by 1.")
-                
+                Spacer()
             }
             .padding(.bottom, 10)
         }
