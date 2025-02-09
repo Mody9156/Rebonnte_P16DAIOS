@@ -12,7 +12,7 @@ struct AisleListView: View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
                 LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+                    .ignoresSafeArea()
                 
                 VStack {
                     Text("Aisles")
@@ -21,16 +21,16 @@ struct AisleListView: View {
                         .foregroundColor(.white)
                     
                     List {
-                            ForEach(aisles, id: \.self) { aisle in
-                                NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
-                                  
-                                    Text(aisle)
-                                        .accessibilityLabel("Aisle \(aisle)")
-                                        .accessibilityHint("Tap to view medicines in aisle \(aisle).")
-                                }
+                        ForEach(aisles, id: \.self) { aisle in
+                            NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
+                                
+                                Text(aisle)
+                                    .accessibilityLabel("Aisle \(aisle)")
+                                    .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
+                        }
                     }
-                  
+                    
                 }
                 
                 Button(action: {
@@ -52,7 +52,7 @@ struct AisleListView: View {
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
-           
+            
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
