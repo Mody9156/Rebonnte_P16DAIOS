@@ -10,25 +10,48 @@ struct AisleListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(aisles, id: \.self) { aisle in
-                    NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
-                        Text(aisle)
-                            .accessibilityLabel("Aisle \(aisle)")
-                            .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+            ZStack(alignment: .bottomTrailing) {
+                LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+                
+                VStack {
+                    Text("Aisles")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    List {
+                            ForEach(aisles, id: \.self) { aisle in
+                                NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
+                                  
+                                    Text(aisle)
+                                        .accessibilityLabel("Aisle \(aisle)")
+                                        .accessibilityHint("Tap to view medicines in aisle \(aisle).")
+                                }
+                            }
+                    }
+                  
+                }
+                
+                Button(action: {
+                    Task{
+                        try await medicineStockViewModel.addRandomMedicine(user: identity)
+                    }
+                }) {
+                    ZStack {
+                        Circle()
+                            .frame(height: 60)
+                        
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
                     }
                 }
+                .padding()
+                .accessibilityLabel("Aisle List")
+                .accessibilityHint("Displays a list of aisles containing medicines.")
             }
-            .navigationBarItems(trailing:Button(action: {
-                Task{
-                    try await medicineStockViewModel.addRandomMedicine(user: identity)
-                }
-            }) {
-                Image(systemName: "plus")
-            })
-            .navigationBarTitle("Aisles")
-            .accessibilityLabel("Aisle List")
-            .accessibilityHint("Displays a list of aisles containing medicines.")
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
@@ -37,8 +60,6 @@ struct AisleListView: View {
     }
 }
 
-struct AisleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AisleListView(medicineStockViewModel: MedicineStockViewModel())
-    }
+#Preview{
+    AisleListView(medicineStockViewModel: MedicineStockViewModel())
 }

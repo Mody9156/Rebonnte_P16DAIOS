@@ -42,8 +42,8 @@ class MedicineStockViewModel: ObservableObject {
         try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
-    func deleteMedicines(at offsets: IndexSet) {
-        medicineRepository.delete(medicines: medicines, at: offsets)
+    func deleteMedicines(at offsets: IndexSet) async throws {
+        try await  medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -70,10 +70,8 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String) {
-        DispatchQueue.global(qos:.background).async{
-            self.medicineRepository.updateMedicine(medicine, user: user)
-        }
+    func updateMedicine(_ medicine: Medicine, user: String) async throws {
+        try await medicineRepository.updateMedicine(medicine, user: user)
     }
     
     func fetchHistory(for medicine: Medicine) {

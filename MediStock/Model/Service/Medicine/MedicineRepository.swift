@@ -1,6 +1,7 @@
 //
 //  MedicineRepository.swift
 //  pack
+//  pack
 //
 //  Created by KEITA on 09/01/2025.
 //
@@ -15,77 +16,66 @@ class MedicineRepository: ObservableObject {
     @Published var medicines: [Medicine]
     @Published var historyEntry: [HistoryEntry]
     @AppStorage("email") var identity : String = "email"
+    private var medicineService: MedicineProtocol
     
-    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore()){
+    init(medicines: [Medicine] = [], historyEntry: [HistoryEntry] = [], db : Firestore = Firestore.firestore(),medicineService: MedicineProtocol = MedicineService()){
         self.medicines = medicines
         self.historyEntry = historyEntry
         self.db = db
+        self.medicineService = medicineService
     }
-
+    
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
+        medicineService.fetchMedicines { medicine in
+            if medicine.isEmpty {
+                print("\(MedicineError.invalidMedicine)")
+            }else{
+                completion(medicine)
             }
         }
     }
     
     @MainActor
     func fetchAisles(completion:@escaping( [String])->Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let allMedicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+        medicineService.fetchAisles { aisles in
+            if aisles.isEmpty {
+                print("\(MedicineError.invalidAisles)")
+            }else{
                 completion(aisles)
             }
         }
     }
     
     func setData(user: String) async throws {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Graduation vous venez d'ajouter: \(medicine)")
-            addHistory(action: "Added \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch let error {
-            print("Error adding document: \(error)")
+        do{
+            let medicine = try await medicineService.setData(user: user)
+            for medicines in medicine {
+                addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+            }
+        }catch{
+            throw MedicineError.invalidSetData
         }
     }
     
     @MainActor
     func setDataToList(user: String, aisle: String) async throws {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Ajouté : \(medicine)")
-            DispatchQueue.main.async {
-                self.medicines.append(medicine) // Ajoute localement pour éviter un délai
+        do{
+            let medicine = try await medicineService.setDataToList(user: user, aisle: aisle)
+            for medicines in medicine {
+                addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
             }
-            addHistory(action: "Added \(medicine.name)", user: user, medicineId: medicine.id ?? "Unknow", details: "Added new medicine")
-        } catch {
-            print("Erreur : \(error)")
+        }catch{
+            throw MedicineError.invalidSetData
         }
     }
-
     
-    func delete(medicines: [Medicine], at offsets: IndexSet) {
-        offsets.map { medicines[$0] }.forEach { medicine in
-            if let id = medicine.id {
-                db.collection("medicines").document(id).delete { error in
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    }
-                }
-            }
+    
+    func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
+        do{
+          try await medicineService.delete(medicines: medicines, at: offsets)
+            
+        } catch{
+            throw MedicineError.invalidDelete
         }
     }
     
@@ -98,121 +88,90 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String){
-        
-        guard let id = medicine.id else { return }
-        do {
-            try db.collection("medicines").document(id).setData(from: medicine)
-            addHistory(action: "Updated \(medicine.name)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Updated medicine details")
-            
-        } catch let error {
-            print("Error updating document: \(error)")
+    func updateMedicine(_ medicine: Medicine, user: String) async throws {
+        do{
+           let medicine = try await medicineService.updateMedicine(medicine, user: user)
+            for medicines in medicine {
+                addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details")
+            }
+        }catch{
+            throw MedicineError.invalidMedicine
         }
     }
-    
-     func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-           guard let id = medicine.id else { return }
-           let newStock = medicine.stock + amount
-           db.collection("medicines").document(id).updateData([
-               "stock": newStock
-           ]) { error in
-               if let error = error {
-                   print("Error updating stock: \(error)")
-               } else {
-                   if let index = self.medicines.firstIndex(where: { $0.id == id }) {
-                       self.medicines[index].stock = newStock
-                   }
-                   self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicine.name) by \(amount)", user: self.identity, medicineId: medicine.id ?? "Unknow", details: "Stock changed from \(medicine.stock - amount) to \(newStock)")
-               }
-           }
-       }
+
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
+       let medicine = medicineService.updateStock(medicine, by: amount, user: user)
+       
+        for medicines in medicine {
+            let newStock = medicines.stock + amount
+            self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock - amount) to \(newStock)")
+        }
+    }
     
     func fetchHistory(for medicine: Medicine, completion: @escaping([HistoryEntry])->Void) {
-        guard let id = medicine.id else {return}
-        db.collection("history").whereField("medicineId", isEqualTo: id).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting history: \(error)")
-            } else {
-                let history = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: HistoryEntry.self)
-                   
-                } ?? []
-                print("history:\(history)")
-                completion(history)
-            }
+        medicineService.fetchHistory(for: medicine) { historyEntry in
+            completion(historyEntry)
         }
     }
-    
+    //Try here 
     func trieByName(completion:@escaping([Medicine]) ->Void)  {
-        db.collection("medicines").order(by: "name", descending: true).addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
-            }
+        medicineService.trieByName { medicine in
+            completion(medicine)
         }
     }
     
     func trieByStock(completion:@escaping([Medicine]) ->Void){
-        db.collection("medicines").order(by: "stock", descending: true).addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
-            }
+        medicineService.trieByStock { medicine in
+            completion(medicine)
         }
     }
     
     func getAllElements(completion:@escaping([Medicine]) -> Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
-            }
+        medicineService.getAllElements { medicine in
+            completion(medicine)
         }
     }
-//
-//    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
-//        let db = Firestore.firestore()
-//        let collectionRef = db.collection(collectionName)
-//
-//        collectionRef.getDocuments { (querySnapshot, error) in
-//            if let error = error {
-//                print("Erreur lors de la vérification : \(error)")
-//                completion(false)
-//                return
-//            }
-//
-//            if let documents = querySnapshot?.documents, documents.isEmpty {
-//                print("La collection \(collectionName) est vide.")
-//                completion(true)
-//            } else {
-//                print("La collection \(collectionName) contient encore des documents.")
-//                completion(false)
-//            }
-//        }
-//    }
-
+    //
+    //    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
+    //        let db = Firestore.firestore()
+    //        let collectionRef = db.collection(collectionName)
+    //
+    //        collectionRef.getDocuments { (querySnapshot, error) in
+    //            if let error = error {
+    //                print("Erreur lors de la vérification : \(error)")
+    //                completion(false)
+    //                return
+    //            }
+    //
+    //            if let documents = querySnapshot?.documents, documents.isEmpty {
+    //                print("La collection \(collectionName) est vide.")
+    //                completion(true)
+    //            } else {
+    //                print("La collection \(collectionName) contient encore des documents.")
+    //                completion(false)
+    //            }
+    //        }
+    //    }
+    
 }
 
 
 enum MedicineError: LocalizedError {
     case invalidDelete
+    case invalidMedicine
+    case invalidAisles
+    case invalidSetData
     
     var errorDescription: String? {
         switch self {
         case .invalidDelete:
             return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
+        case .invalidMedicine:
+            return "Impossible de récupérer les données du tableau"
+        case .invalidAisles:
+            return "Impossible de récupérer les aisles du tableau"
+        case .invalidSetData:
+            return "Impossible d'ajouter un nouvelle element au tableau"
         }
     }
 }

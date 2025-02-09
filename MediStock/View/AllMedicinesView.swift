@@ -18,7 +18,7 @@ struct AllMedicinesView: View {
                     
                     Spacer()
                     
-                    Menu("Sort by") {
+                    Menu("\(Image(systemName: "arrow.up.arrow.down"))") {
                         ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                             Button(index.rawValue){
                                 Task{
@@ -55,7 +55,9 @@ struct AllMedicinesView: View {
                         .accessibilityHint("Tap to see more details about \(medicine.name).")
                         
                     }.onDelete { IndexSet in
-                        medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        Task{
+                          try? await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        }
                     }
                 }
                 .accessibilityLabel("List of medicines")
@@ -88,8 +90,7 @@ struct AllMedicinesView: View {
     }
 }
 
-struct AllMedicinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        AllMedicinesView()
-    }
+
+#Preview {
+    AllMedicinesView()
 }

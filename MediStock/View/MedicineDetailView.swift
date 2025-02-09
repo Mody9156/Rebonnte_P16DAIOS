@@ -39,7 +39,7 @@ struct MedicineDetailView: View {
             medicineStockViewModel.fetchHistory(for: medicine)
         }
         .onChange(of: medicine) { newMedicine in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if newMedicine == medicine {
                     medicineStockViewModel.fetchHistory(for: newMedicine)
                 }
@@ -61,6 +61,7 @@ extension MedicineDetailView {
             TextField("Name", text: $medicine.name, onCommit: {
                 Task{
                    medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -125,6 +126,16 @@ extension MedicineDetailView {
             .padding(.bottom, 10)
             .accessibilityLabel("Aisle Field")
             .accessibilityHint("Edit the aisle where the medicine is located.")
+            TextField("Aisle", text: $medicine.aisle)
+                .onChange(of: medicine, perform: { _ in
+                    Task{
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    }
+                })
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.bottom, 10)
+                .accessibilityLabel("Aisle Field")
+                .accessibilityHint("Edit the aisle where the medicine is located.")
         }
         .padding(.horizontal)
     }
@@ -143,55 +154,58 @@ extension MedicineDetailView {
     
     private var historySection: some View {
         VStack(alignment: .leading) {
-            Text("History")
-                .font(.headline)
-                .padding(.top, 20)
-                .accessibilityLabel("History Section")
-                .accessibilityHint("Displays the history of actions for this medicine.")
             
-            ScrollView {
-                VStack {
-                    ForEach(filterMedicine) { entry in
-                        VStack(alignment: .leading,spacing: 5) {
-                            Text(entry.action)
-                                .font(.headline)
-                                .accessibilityLabel("Action: \(entry.action)")
-                            
-                            Text("User: \(entry.user)")
-                                .font(.subheadline)
-                                .accessibilityLabel("Performed by: \(entry.user)")
-                            
-                            Text("Date: \(entry.timestamp.formatted())")
-                                .font(.subheadline)
-                                .accessibilityLabel("Date: \(entry.timestamp.formatted())")
-                            
-                            Text("Details: \(entry.details)")
-                                .font(.subheadline)
-                                .accessibilityLabel("Details: \(entry.details)")
-                            
-                        }
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.bottom, 5)
-                        .accessibilityElement(children: .combine)
-                        .accessibilityHint("Details of this history entry.")
-                    }
-                }
+            NavigationLink {
+                HistoryView(filterMedicine: filterMedicine)
+            } label: {
+                Text("History")
+                    .font(.headline)
+                    .padding(.top, 20)
+                    .accessibilityLabel("History Section")
+                    .accessibilityHint("Displays the history of actions for this medicine.")
             }
+            //            ScrollView {
+            //                VStack {
+            //                    ForEach(filterMedicine) { entry in
+            //                        VStack(alignment: .leading,spacing: 5) {
+            //                            Text(entry.action)
+            //                                .font(.headline)
+            //                                .accessibilityLabel("Action: \(entry.action)")
+            //
+            //                            Text("User: \(entry.user)")
+            //                                .font(.subheadline)
+            //                                .accessibilityLabel("Performed by: \(entry.user)")
+            //
+            //                            Text("Date: \(entry.timestamp.formatted())")
+            //                                .font(.subheadline)
+            //                                .accessibilityLabel("Date: \(entry.timestamp.formatted())")
+            //
+            //                            Text("Details: \(entry.details)")
+            //                                .font(.subheadline)
+            //                                .accessibilityLabel("Details: \(entry.details)")
+            //
+            //                        }
+            //                        .padding()
+            //                        .background(Color(.systemGray6))
+            //                        .cornerRadius(10)
+            //                        .padding(.bottom, 5)
+            //                        .accessibilityElement(children: .combine)
+            //                        .accessibilityHint("Details of this history entry.")
+            //                    }
+            //                }
+            //            }
         }
         .padding(.horizontal)
     }
 }
 
-struct MedicineDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-        //        let history = [
-        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-        //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
-        let sampleViewModel = MedicineStockViewModel()
-        MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
-    }
+
+#Preview{
+    let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
+    //        let history = [
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
+    let sampleViewModel = MedicineStockViewModel()
+    MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
 }

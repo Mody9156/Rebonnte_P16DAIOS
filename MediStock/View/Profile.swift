@@ -41,8 +41,6 @@ struct Profile: View {
     }
 }
 
-struct Profile_Previews: PreviewProvider {
-    static var previews: some View {
-        Profile(authViewModel : AuthViewModel(), use: User(uid: "f4d6s"))
-    }
+#Preview{
+    Profile(authViewModel : AuthViewModel(), use: User(uid: "f4d6s"))
 }
