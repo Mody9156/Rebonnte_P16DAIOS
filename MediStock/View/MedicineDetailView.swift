@@ -5,6 +5,7 @@ struct MedicineDetailView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
+    @FocusState var isTyping : Bool 
     
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
