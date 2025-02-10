@@ -5,7 +5,7 @@ struct MedicineDetailView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
-    @FocusState var isTyping : Bool 
+    @FocusState var isTyping : Bool
     
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
@@ -65,7 +65,9 @@ extension MedicineDetailView {
                     try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                 }
             })
-            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(height: 55)
+            .focused($isTyping)
+            .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
             .padding(.bottom, 10)
             .accessibilityLabel("Medicine Name Field")
             .accessibilityHint("Edit the name of the medicine.")
