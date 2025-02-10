@@ -5,6 +5,7 @@ struct MedicineDetailView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
+    @FocusState var isTyping : Bool
     
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
@@ -61,19 +62,46 @@ extension MedicineDetailView {
             
             TextField("Name", text: $medicine.name, onCommit: {
                 Task{
-                   try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-
+                    
                 }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.bottom, 10)
             .accessibilityLabel("Medicine Name Field")
             .accessibilityHint("Edit the name of the medicine.")
+            VStack {
+                ZStack(alignment: .leading) {
+                    TextField("", text: $medicine.name, onCommit: {
+                        Task{
+                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        }
+                    })
+                    .padding(.leading)
+                    .frame(height: 55)
+                    .focused($isTyping)
+                    .foregroundStyle(isTyping ? .blue : Color.clear)
+                    .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
+                    .accessibilityLabel("Medicine Name Field")
+                    .accessibilityHint("Edit the name of the medicine.")
+                    
+                    Text(LocalizedStringKey("Name")) // prise en charge des langues
+                        .padding(.horizontal,5)
+                        .background(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
+                        .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : Color.primary)
+                        .padding(.leading)
+                        .offset(y:isTyping ? -27:0)
+                        .onTapGesture {
+                            isTyping.toggle()
+                        }
+                        .accessibilityLabel("Name Label")
+                }
+                .animation(.linear(duration: 0.2),value: isTyping)
+                
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
-    
     private var medicineStockSection: some View {
         VStack {
             Text(LocalizedStringKey("Stock"))
