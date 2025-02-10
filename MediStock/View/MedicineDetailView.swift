@@ -54,23 +54,32 @@ struct MedicineDetailView: View {
 
 extension MedicineDetailView {
     private var medicineNameSection: some View {
-        VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Name")) // prise en charge des langues
-                .font(.largeTitle)
-                .font(.headline)
-                .accessibilityLabel("Name Label")
-            
-            TextField("Name", text: $medicine.name, onCommit: {
-                Task{
-                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                }
-            })
-            .frame(height: 55)
-            .focused($isTyping)
-            .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
-            .padding(.bottom, 10)
-            .accessibilityLabel("Medicine Name Field")
-            .accessibilityHint("Edit the name of the medicine.")
+        VStack {
+            ZStack(alignment: .leading) {
+                TextField("", text: $medicine.name, onCommit: {
+                    Task{
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                    }
+                })
+                .padding(.leading)
+                .frame(height: 55)
+                .focused($isTyping)
+                .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
+                .accessibilityLabel("Medicine Name Field")
+                .accessibilityHint("Edit the name of the medicine.")
+                
+                Text(LocalizedStringKey("Name")) // prise en charge des langues
+                    .padding(.horizontal,5)
+                    .foregroundStyle(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
+                    .padding(.leading)
+                    .offset(y:isTyping ? -27:0)
+                    .onTapGesture {
+                        isTyping.toggle()
+                    }
+                    .accessibilityLabel("Name Label")
+            }
+            .animation(.linear(duration: 0.2),value: isTyping)
+         
         }
         .padding(.horizontal)
     }
