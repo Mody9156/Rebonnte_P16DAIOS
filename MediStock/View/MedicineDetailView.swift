@@ -64,13 +64,13 @@ extension MedicineDetailView {
                 .padding(.leading)
                 .frame(height: 55)
                 .focused($isTyping)
-                .background(isTyping ? .blue : .clear, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
+                .foregroundStyle(isTyping ? .blue : Color.clear)
+                .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
                 .accessibilityLabel("Medicine Name Field")
                 .accessibilityHint("Edit the name of the medicine.")
                 
                 Text(LocalizedStringKey("Name")) // prise en charge des langues
                     .padding(.horizontal,5)
-                    .background(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
                     .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : Color.primary)
                     .padding(.leading)
                     .offset(y:isTyping ? -27:0)
