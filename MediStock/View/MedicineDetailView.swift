@@ -17,9 +17,11 @@ struct MedicineDetailView: View {
         VStack(alignment: .leading, spacing: 20) {
             // Title
             Text(medicine.name)
-                .font(.largeTitle)
+                .font(.headline)
                 .padding(.top, 20)
                 .accessibilityLabel("Medicine Name: \(medicine.name)")
+                .padding(.leading)
+
             
             // Medicine Name
             medicineNameSection
@@ -87,9 +89,9 @@ extension MedicineDetailView {
     }
     
     private var medicineStockSection: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
-                .font(.largeTitle)
+                .font(.headline)
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
             
