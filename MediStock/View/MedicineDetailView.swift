@@ -15,8 +15,7 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
-            Color("BackgroundColor")
-                .ignoresSafeArea()
+          
             VStack(alignment: .leading, spacing: 20) {
                 // Title
                 Text(medicine.name)
@@ -24,7 +23,6 @@ struct MedicineDetailView: View {
                     .padding(.top, 20)
                     .accessibilityLabel("Medicine Name: \(medicine.name)")
                     .padding(.leading)
-                
                 
                 // Medicine Name
                 medicineNameSection
@@ -71,7 +69,7 @@ extension MedicineDetailView {
                 .frame(height: 55)
                 .focused($isTyping)
                 .foregroundStyle(isTyping ? .blue : Color.clear)
-                .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
+                .background(isTyping ? .blue : .black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
                 .accessibilityLabel("Medicine Name Field")
                 .accessibilityHint("Edit the name of the medicine.")
                 
@@ -98,38 +96,52 @@ extension MedicineDetailView {
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
             
-            HStack {
+            HStack{
                 Spacer()
                 Button(action: decreaseStock) {
+                    ZStack {
+                        Circle()
+                            .frame(width:30,height: 30)
+                            .opacity(0.6)
+                            .foregroundStyle(.blue)
                     Image(systemName: "minus")
                         .resizable()
-                        .frame(width: 30,height: 5)
+                        .frame(width: 20,height: 4)
                         .font(.title)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(.blue)
+                }
                 }
                 .accessibilityLabel("Decrease stock")
                 .accessibilityHint("Reduce the stock quantity by 1.")
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(width: 100,height: 55)
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
                     }
+                    .multilineTextAlignment(.center)
                     .accessibilityLabel("Stock Field")
                     .accessibilityHint("Enter the current stock of the medicine.")
                 
                 Button(action: increaseStock) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .font(.title)
-                        .foregroundColor(.green)
+                    ZStack {
+                        Circle()
+                            .frame(width:30,height: 30)
+                            .foregroundStyle(.blue)
+                            .opacity(0.6)
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 20,height: 20)
+                            .font(.title)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .accessibilityLabel("Increase stock")
                 .accessibilityHint("Increase the stock quantity by 1.")
                 Spacer()
             }
+            
             .padding(.bottom, 10)
         }
         .padding(.horizontal)
