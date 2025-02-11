@@ -13,31 +13,57 @@ struct Profile: View {
     var use : User
     
     var body: some View {
-        VStack (alignment: .center){
-            Spacer()
-            Text("Hello")
-                .font(.largeTitle)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
-            HStack{
-                Text("Email : \(identity)")
-                    .foregroundColor(.red)
-            }
-            .padding()
-            
-            Spacer()
-            
-            Button("Sign Out") {
-                Task{
-                    try await  authViewModel.disableAutoLogin()
+            VStack (alignment: .center){
+                VStack (alignment: .leading){
+                    Text("Account")
+                        .foregroundStyle(.white)
+                        .font(.headline)
+                        .fontWeight(.heavy)
+                        .padding()
+                    
+                    ZStack(alignment: .leading){
+                        RoundedRectangle(cornerRadius: 12)
+                            .frame(height: 80)
+                            .foregroundStyle(.white)
+                            .opacity(0.4)
+                        
+                        HStack {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .frame(width: 50,height: 50)
+                                .foregroundStyle(.blue)
+                            Spacer()
+                            VStack(alignment: .leading){
+                                Text("Email Adresse: ")
+                                    .foregroundColor(.white)
+                                Text(identity)
+                                    .foregroundColor(.blue)
+                            }
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                    }
+                    .padding()
+                }
+                Spacer()
+                
+                Button(action:{
+                    Task{
+                        try await  authViewModel.disableAutoLogin()
+                    }
+                }) {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .resizable()
+                        .frame(width: 50,height: 50)
+                        .foregroundStyle(.blue)
                 }
             }
-            .foregroundColor(.white)
-            .frame(width:100, height: 50)
-            .background(Color.red)
-            .cornerRadius(12)
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 
