@@ -14,28 +14,46 @@ struct Profile: View {
     
     var body: some View {
         VStack (alignment: .center){
-            Spacer()
-            Text("Hello")
-                .font(.largeTitle)
+            Text("Account")
+                .foregroundStyle(.blue)
             
-            HStack{
-                Text("Email : \(identity)")
-                    .foregroundColor(.red)
+            ZStack(alignment: .leading){
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(height: 80)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
+                
+                HStack {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .frame(width: 50,height: 50)
+                        .foregroundStyle(.blue)
+                    Spacer()
+                    VStack(alignment: .leading){
+                        Text("Email Adresse: ")
+                            .foregroundColor(.blue)
+                        Text(identity)
+                            .foregroundColor(.blue)
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal)
             }
             .padding()
             
             Spacer()
             
-            Button("Sign Out") {
+            Button(action:{
                 Task{
                     try await  authViewModel.disableAutoLogin()
                 }
+            }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .resizable()
+                            .frame(width: 50,height: 50)
+                            .foregroundStyle(.blue)
+                      
             }
-            .foregroundColor(.white)
-            .frame(width:100, height: 50)
-            .background(Color.red)
-            .cornerRadius(12)
-            Spacer()
         }
         .padding()
     }
