@@ -69,7 +69,7 @@ extension MedicineDetailView {
                 .frame(height: 55)
                 .focused($isTyping)
                 .foregroundStyle(isTyping ? .blue : Color.clear)
-                .background(isTyping ? .blue : .black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
+                .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                 .accessibilityLabel("Medicine Name Field")
                 .accessibilityHint("Edit the name of the medicine.")
                 
@@ -116,6 +116,7 @@ extension MedicineDetailView {
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .frame(width: 100,height: 55)
+                    .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
