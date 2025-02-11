@@ -13,49 +13,57 @@ struct Profile: View {
     var use : User
     
     var body: some View {
-        VStack (alignment: .center){
-            Text("Account")
-                .foregroundStyle(.blue)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
-            ZStack(alignment: .leading){
-                RoundedRectangle(cornerRadius: 12)
-                    .frame(height: 80)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
+            VStack (alignment: .center){
+                VStack (alignment: .leading){
+                    Text("Account")
+                        .foregroundStyle(.white)
+                        .font(.headline)
+                        .fontWeight(.heavy)
+                        .padding()
+                    
+                    ZStack(alignment: .leading){
+                        RoundedRectangle(cornerRadius: 12)
+                            .frame(height: 80)
+                            .foregroundStyle(.white)
+                            .opacity(0.4)
+                        
+                        HStack {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .frame(width: 50,height: 50)
+                                .foregroundStyle(.blue)
+                            Spacer()
+                            VStack(alignment: .leading){
+                                Text("Email Adresse: ")
+                                    .foregroundColor(.white)
+                                Text(identity)
+                                    .foregroundColor(.blue)
+                            }
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                    }
+                    .padding()
+                }
+                Spacer()
                 
-                HStack {
-                    Image(systemName: "person.crop.circle.fill")
+                Button(action:{
+                    Task{
+                        try await  authViewModel.disableAutoLogin()
+                    }
+                }) {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
                         .resizable()
                         .frame(width: 50,height: 50)
                         .foregroundStyle(.blue)
-                    Spacer()
-                    VStack(alignment: .leading){
-                        Text("Email Adresse: ")
-                            .foregroundColor(.blue)
-                        Text(identity)
-                            .foregroundColor(.blue)
-                    }
-                    Spacer()
                 }
-                .padding(.horizontal)
             }
             .padding()
-            
-            Spacer()
-            
-            Button(action:{
-                Task{
-                    try await  authViewModel.disableAutoLogin()
-                }
-            }) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .resizable()
-                            .frame(width: 50,height: 50)
-                            .foregroundStyle(.blue)
-                      
-            }
         }
-        .padding()
     }
 }
 
