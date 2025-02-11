@@ -161,7 +161,8 @@ extension MedicineDetailView {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     }
                 })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(height: 55, alignment: <#T##Alignment#>)
+                .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                 .padding(.bottom, 10)
                 .accessibilityLabel("Aisle Field")
                 .accessibilityHint("Edit the aisle where the medicine is located.")
