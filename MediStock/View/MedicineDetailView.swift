@@ -14,43 +14,47 @@ struct MedicineDetailView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // Title
-            Text(medicine.name)
-                .font(.headline)
-                .padding(.top, 20)
-                .accessibilityLabel("Medicine Name: \(medicine.name)")
-                .padding(.leading)
-
-            
-            // Medicine Name
-            medicineNameSection
-            
-            // Medicine Stock
-            medicineStockSection
-            
-            // Medicine Aisle
-            medicineAisleSection
-            
-            // History Section
-            historySection
-            
-        }
-        .padding(.vertical)
-        .navigationBarTitle("Medicine Details", displayMode: .inline)
-        .onAppear{
-            medicineStockViewModel.fetchHistory(for: medicine)
-        }
-        .onChange(of: medicine) { newMedicine in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if newMedicine == medicine {
-                    medicineStockViewModel.fetchHistory(for: newMedicine)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 20) {
+                // Title
+                Text(medicine.name)
+                    .font(.headline)
+                    .padding(.top, 20)
+                    .accessibilityLabel("Medicine Name: \(medicine.name)")
+                    .padding(.leading)
+                
+                
+                // Medicine Name
+                medicineNameSection
+                
+                // Medicine Stock
+                medicineStockSection
+                
+                // Medicine Aisle
+                medicineAisleSection
+                
+                // History Section
+                historySection
+                
+            }
+            .padding(.vertical)
+            .navigationBarTitle("Medicine Details", displayMode: .inline)
+            .onAppear{
+                medicineStockViewModel.fetchHistory(for: medicine)
+            }
+            .onChange(of: medicine) { newMedicine in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if newMedicine == medicine {
+                        medicineStockViewModel.fetchHistory(for: newMedicine)
+                    }
                 }
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Medicine Details")
+            .accessibilityHint("Displays detailed information about the medicine.")
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Medicine Details")
-        .accessibilityHint("Displays detailed information about the medicine.")
     }
 }
 
@@ -91,7 +95,6 @@ extension MedicineDetailView {
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
-                .font(.headline)
                 .font(.headline)
                 .accessibilityLabel("Stock Label")
             
@@ -135,7 +138,7 @@ extension MedicineDetailView {
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Aisle"))
-                .font(.largeTitle)
+                .font(.headline)
                 .font(.headline)
                 .accessibilityLabel("Aisle Label")
             
