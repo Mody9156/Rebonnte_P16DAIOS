@@ -6,6 +6,7 @@ struct MedicineDetailView: View {
     @EnvironmentObject var session: SessionStore
     @AppStorage("email") var identity : String = "email"
     @FocusState var isTyping : Bool
+    @FocusState var isTypingMedicine : Bool
     
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
@@ -150,22 +151,24 @@ extension MedicineDetailView {
     
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Aisle"))
-                .font(.headline)
-                .font(.headline)
-                .accessibilityLabel("Aisle Label")
-            
+           
             TextField("Aisle", text: $medicine.aisle)
                 .onChange(of: medicine, perform: { _ in
                     Task{
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                     }
                 })
-                .frame(height: 55, alignment: <#T##Alignment#>)
+                .frame(height: 55)
                 .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                 .padding(.bottom, 10)
                 .accessibilityLabel("Aisle Field")
                 .accessibilityHint("Edit the aisle where the medicine is located.")
+            
+            Text(LocalizedStringKey("Aisle"))
+                .font(.headline)
+                .font(.headline)
+                .accessibilityLabel("Aisle Label")
+            
         }
         .padding(.horizontal)
     }
