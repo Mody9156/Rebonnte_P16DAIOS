@@ -72,7 +72,7 @@ extension MedicineDetailView {
                 Text(LocalizedStringKey("Name")) // prise en charge des langues
                     .padding(.horizontal,5)
                     .background()
-                    .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : Color.primary)
+                    .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : .black)
                     .padding(.leading)
                     .offset(y:isTyping ? -27:0)
                     .onTapGesture {
@@ -96,11 +96,11 @@ extension MedicineDetailView {
             HStack {
                 Spacer()
                 Button(action: decreaseStock) {
-                    Image(systemName: "minus.circle")
+                    Image(systemName: "minus")
                         .resizable()
-                        .frame(width: 80,height: 80)
+                        .frame(width: 30,height: 5)
                         .font(.title)
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                 }
                 .accessibilityLabel("Decrease stock")
                 .accessibilityHint("Reduce the stock quantity by 1.")
@@ -115,9 +115,9 @@ extension MedicineDetailView {
                     .accessibilityHint("Enter the current stock of the medicine.")
                 
                 Button(action: increaseStock) {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "plus")
                         .resizable()
-                        .frame(width: 80,height: 80)
+                        .frame(width: 30,height: 30)
                         .font(.title)
                         .foregroundColor(.green)
                 }
