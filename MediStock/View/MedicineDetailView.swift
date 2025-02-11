@@ -15,7 +15,7 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            Color("BackgroundColor")
                 .ignoresSafeArea()
             VStack(alignment: .leading, spacing: 20) {
                 // Title
