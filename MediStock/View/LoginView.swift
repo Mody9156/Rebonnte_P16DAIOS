@@ -70,7 +70,6 @@ struct ButtonForUpdateSession: View {
                         try await authViewModel.createdNewUser(email: email, password: password)
                     }
                 }
-                visible.toggle()
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
@@ -86,7 +85,12 @@ struct ButtonForUpdateSession: View {
                     .foregroundColor(.red)
                     .font(.headline)
                     .opacity(visible ? 1 : 0)
-                    .animation(.easeOut(duration: 1),value:visible)
+                    .animation(.easeOut(duration: 0.8),value:visible)
+            }
+        }
+        .onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                visible = false
             }
         }
     }
