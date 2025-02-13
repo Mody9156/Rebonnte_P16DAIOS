@@ -3,7 +3,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @StateObject var authViewModel = AuthViewModel()
+    @StateObject private var authViewModel = AuthViewModel()
     
     var body: some View {
         ZStack {
@@ -42,13 +42,6 @@ struct LoginView: View {
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
-                
-                if !authViewModel.messageError.isEmpty {
-                    Text(authViewModel.messageError)
-                        .foregroundColor(.red)
-                        .font(.title2)
-                }
-                
             }
             .padding()
         }
@@ -83,6 +76,11 @@ struct ButtonForUpdateSession: View {
                 Text(text)
                     .foregroundColor(text == "Login" ? .white: .blue)
             }
+        }
+        if !authViewModel.messageError.isEmpty {
+            Text(authViewModel.messageError)
+                .foregroundColor(.red)
+                .font(.title2)
         }
     }
 }
