@@ -40,8 +40,9 @@ struct LoginView: View {
                 }
                 .padding()
                 
-                ButtonForUpdateSession(email: $email, password: $password, text:"Login")
-                ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
+                    ButtonForUpdateSession(email: $email, password: $password, text:"Login")
+                    ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
+                    
             }
             .padding()
         }
@@ -56,31 +57,37 @@ struct ButtonForUpdateSession: View {
     @Binding var email : String
     @Binding var password : String
     @StateObject var authViewModel = AuthViewModel()
+    @State var visible: Bool = false
     var text : String
     
     var body: some View {
-        Button(action: {
-            Task{
-                if text == "Login" {
-                    try await authViewModel.login(email: email, password: password)
-                }else{
-                    try await authViewModel.createdNewUser(email: email, password: password)
+        VStack{
+            Button(action: {
+                Task{
+                    if text == "Login" {
+                        try await authViewModel.login(email: email, password: password)
+                    }else{
+                        try await authViewModel.createdNewUser(email: email, password: password)
+                    }
+                }
+                visible.toggle()
+            }) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(text == "Login" ? .blue : .clear)
+                        .frame(width:100, height: 40)
+                    
+                    Text(text)
+                        .foregroundColor(text == "Login" ? .white: .blue)
                 }
             }
-        }) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(text == "Login" ? .blue : .clear)
-                    .frame(width:100, height: 40)
-                
-                Text(text)
-                    .foregroundColor(text == "Login" ? .white: .blue)
+            if !authViewModel.messageError.isEmpty {
+                Text(authViewModel.messageError)
+                    .foregroundColor(.red)
+                    .font(.headline)
+                    .opacity(visible ? 1 : 0)
+                    .animation(.easeOut(duration: 1),value:visible)
             }
-        }
-        if !authViewModel.messageError.isEmpty {
-            Text(authViewModel.messageError)
-                .foregroundColor(.red)
-                .font(.title2)
         }
     }
 }
