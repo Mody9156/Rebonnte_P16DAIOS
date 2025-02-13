@@ -35,6 +35,11 @@ struct LoginView: View {
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
+                            if !authViewModel.messageError.isEmpty {
+                                Text("Error: \(self.authViewModel.messageError)")
+                                    .foregroundColor(.red)
+                                    .font(.title2)
+                            }
                         }
                     }
                 }
@@ -43,11 +48,7 @@ struct LoginView: View {
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
                 
-                if !authViewModel.messageError.isEmpty {
-                    Text(authViewModel.messageError)
-                        .foregroundColor(.red)
-                        .font(.title2)
-                }
+                
             }
             .padding()
         }
