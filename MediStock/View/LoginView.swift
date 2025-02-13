@@ -57,7 +57,7 @@ struct ButtonForUpdateSession: View {
     @Binding var email : String
     @Binding var password : String
     @StateObject var authViewModel = AuthViewModel()
-    @State var visible: Bool = false
+    @State private var visible: Bool = true
     var text : String
     
     var body: some View {
@@ -80,12 +80,12 @@ struct ButtonForUpdateSession: View {
                         .foregroundColor(text == "Login" ? .white: .blue)
                 }
             }
+            
             if !authViewModel.messageError.isEmpty {
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
                     .font(.headline)
-                    .opacity(visible ? 1 : 0)
-                    .animation(.easeOut(duration: 1),value:visible)
+                    .animation(.easeOut(duration: 1).delay(1),value:visible)
             }
         }
         .onAppear{
