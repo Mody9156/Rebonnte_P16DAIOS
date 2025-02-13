@@ -36,7 +36,7 @@ struct LoginView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                             if !authViewModel.messageError.isEmpty {
-                                Text("Error: \(self.authViewModel.messageError)")
+                                Text(authViewModel.messageError)
                                     .foregroundColor(.red)
                                     .font(.title2)
                             }
