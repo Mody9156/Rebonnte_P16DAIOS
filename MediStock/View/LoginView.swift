@@ -57,18 +57,21 @@ struct ButtonForUpdateSession: View {
     @Binding var email : String
     @Binding var password : String
     @StateObject var authViewModel = AuthViewModel()
-    @State private var visible: Bool = true
+    @State private var visible: Bool = false
     var text : String
     
     var body: some View {
         VStack{
             Button(action: {
                 Task{
-                    if text == "Login" {
-                        try await authViewModel.login(email: email, password: password)
-                    }else{
-                        try await authViewModel.createdNewUser(email: email, password: password)
-                    }
+                        if text == "Login" {
+                            try await authViewModel.login(email: email, password: password)
+                        }else{
+                            try await authViewModel.createdNewUser(email: email, password: password)
+                        }
+                       
+                        visible = true
+                    ThorowsError()
                 }
             }) {
                 ZStack {
@@ -81,18 +84,26 @@ struct ButtonForUpdateSession: View {
                 }
             }
             
-            if visible {
+            if visible && !authViewModel.messageError.isEmpty{
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
                     .font(.headline)
-                    .opacity(visible ? 1:0)
-                    .animation(.easeOut(duration: 1).delay(1),value:visible)
+                    .opacity(visible ? 1 :0)
+                    .animation(.easeOut(duration: 0.7),value:visible)
             }
         }
-        .onChange(of: visible) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+        .onChange(of: authViewModel.messageError){ newValue in
+            visible = !newValue.isEmpty
+            ThorowsError()
+        }
+    }
+    
+    private func ThorowsError(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3 ){
+            withAnimation {
                 visible = false
             }
+
         }
     }
 }
