@@ -24,7 +24,6 @@ struct LoginView: View {
                             
                             TextField("Email", text: $email)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .background(Color("TexfieldDarkMode"))
                                 .padding()
                         }
                         
