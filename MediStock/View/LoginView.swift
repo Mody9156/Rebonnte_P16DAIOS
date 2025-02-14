@@ -13,7 +13,7 @@ struct LoginView: View {
                 ZStack{
                     Rectangle()
                         .frame(height: 250)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("RectangleDarkMode"))
                         .cornerRadius(12)
                     
                     VStack{
