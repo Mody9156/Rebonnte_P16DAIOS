@@ -81,14 +81,15 @@ struct ButtonForUpdateSession: View {
                 }
             }
             
-            if visible && !authViewModel.messageError.isEmpty {
+            if visible {
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
                     .font(.headline)
+                    .opacity(visible ? 1:0)
                     .animation(.easeOut(duration: 1).delay(1),value:visible)
             }
         }
-        .onAppear{
+        .onChange(of: visible) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 3){
                 visible = false
             }
