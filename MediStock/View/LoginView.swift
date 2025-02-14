@@ -81,7 +81,7 @@ struct ButtonForUpdateSession: View {
                 }
             }
             
-            if visible{
+            if visible && !authViewModel.messageError.isEmpty {
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
                     .font(.headline)
