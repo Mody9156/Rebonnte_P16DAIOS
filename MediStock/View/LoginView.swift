@@ -40,9 +40,9 @@ struct LoginView: View {
                 }
                 .padding()
                 
-                    ButtonForUpdateSession(email: $email, password: $password, text:"Login")
-                    ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
-                    
+                ButtonForUpdateSession(email: $email, password: $password, text:"Login")
+                ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
+                
             }
             .padding()
         }
@@ -64,14 +64,14 @@ struct ButtonForUpdateSession: View {
         VStack{
             Button(action: {
                 Task{
-                        if text == "Login" {
-                            try await authViewModel.login(email: email, password: password)
-                        }else{
-                            try await authViewModel.createdNewUser(email: email, password: password)
-                        }
-                       
-                        visible = true
-                    ThorowsError()
+                    if text == "Login" {
+                        try await authViewModel.login(email: email, password: password)
+                    }else{
+                        try await authViewModel.createdNewUser(email: email, password: password)
+                    }
+                    
+                    visible = true
+                    ThorowsMessagesError()
                 }
             }) {
                 ZStack {
@@ -94,16 +94,16 @@ struct ButtonForUpdateSession: View {
         }
         .onChange(of: authViewModel.messageError){ newValue in
             visible = !newValue.isEmpty
-            ThorowsError()
+            ThorowsMessagesError()
         }
     }
     
-    private func ThorowsError(){
+    private func ThorowsMessagesError(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 3 ){
             withAnimation {
                 visible = false
             }
-
+            
         }
     }
 }
