@@ -23,7 +23,9 @@ struct LoginView: View {
                                 .padding(.leading)
                             
                             TextField("Email", text: $email)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .border(.blue,width:3)
+                                .cornerRadius(3)
                                 .padding()
                         }
                         
@@ -34,6 +36,8 @@ struct LoginView: View {
                             
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .border(.blue,width:3)
+                                .cornerRadius(3)
                                 .padding()
                         }
                     }
