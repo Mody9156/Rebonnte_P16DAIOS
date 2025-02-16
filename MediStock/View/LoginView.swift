@@ -23,7 +23,7 @@ struct LoginView: View {
                                 .padding(.leading)
                             
                             TextField("Email", text: $email)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .background(RoundedRectangle(cornerRadius: 10).fill(.white))
                                 .padding()
                         }
                         
