@@ -4,6 +4,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
+@MainActor
 public class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
