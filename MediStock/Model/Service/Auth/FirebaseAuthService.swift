@@ -11,6 +11,17 @@ import FirebaseFirestore
 import FirebaseCore
 
 final class FirebaseAuthService: AuthServiceProtocol {
+    func disableAutoLogin() async throws {
+        if Auth.auth().currentUser != nil {
+            do {
+                try Auth.auth().signOut()
+                print("Déconnexion réussie pour désactiver la persistance.")
+            } catch let error {
+                print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func signUp(email: String, password: String) async throws -> User {
         let result = try await Auth.auth().createUser(withEmail: email, password: password)
         return  User(uid: result.user.uid, email: result.user.email)

@@ -104,6 +104,8 @@ class SessionStoreTests: XCTestCase {
         XCTAssertTrue(mockAuthService.didAddListener)
         XCTAssert(sessionStore.handle == nil)
     }
+    
+  
    
 }
 
