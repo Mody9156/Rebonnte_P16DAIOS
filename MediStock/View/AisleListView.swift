@@ -30,7 +30,6 @@ struct AisleListView: View {
                             }
                         }
                     }
-                    
                 }
                 
                 Button(action: {
