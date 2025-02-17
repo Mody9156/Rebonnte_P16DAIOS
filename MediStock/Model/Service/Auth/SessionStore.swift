@@ -4,7 +4,6 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
-@MainActor
 public class SessionStore: ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
@@ -44,7 +43,7 @@ public class SessionStore: ObservableObject {
     func signUp(email: String, password: String) async throws -> User  {
         do{
             let user = try await authService.signUp(email: email, password: password)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.session = user
             }
             return user
@@ -56,7 +55,7 @@ public class SessionStore: ObservableObject {
     func signIn(email: String, password: String) async throws -> User{
         do{
             let user = try await authService.signIn(email: email, password: password)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.session = user
             }
             return user
@@ -69,7 +68,7 @@ public class SessionStore: ObservableObject {
         
             do {
                 try await authService.signOut()
-                DispatchQueue.main.async {
+                await MainActor.run {
                     self.session = nil
                 }
                 print("Déconnexion réussie pour désactiver la persistance.")
