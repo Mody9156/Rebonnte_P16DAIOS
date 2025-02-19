@@ -1,5 +1,5 @@
 
-name: iOS Build and Test
+name: CI
 
 on:
   pull_request:
