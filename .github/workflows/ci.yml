@@ -1,30 +1,30 @@
-name: ci
 
-# Controls when the action will run.
-# Triggers the workflow on pull request events but only for the master branch.
+name: iOS Build and Test
+
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build-and-test"
   build-and-test:
-    # The type of runner that the job will run on
-    runs-on: macos-15-xlarge
+    runs-on: macos-latest
 
-    timeout-minutes: 8
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_16.2.app
+      - name: Build and Test
+        uses: sersoft-gmbh/xcodebuild-action@v3.2.0
+        with:
+          project: MediStock.xcodeproj
+          scheme: pack
+          destination: 'platform=iOS Simulator,name=iPhone 16'
+          action: test
+          result-bundle-path: 'TestResults/TestResults.xcresult'
 
-    - name: Xcode version
-      run: /usr/bin/xcodebuild -version
-
-    - name: Build and Test
-      run: xcodebuild clean build test -project MediStock.xcodeproj -scheme "pack" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" ONLY_ACTIVE_ARCH=YES
+      - name: Process Test Results
+        uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: TestResults/TestResults.xcresult
+        if: success() || failure()
