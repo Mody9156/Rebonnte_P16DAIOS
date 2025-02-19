@@ -17,4 +17,5 @@ import FirebaseCore
     func signOut() async throws
     func addDidChangeListenerHandle(listener: @escaping (User?) -> Void)
     func removeDidChangeListenerHandle(handle : AuthStateDidChangeListenerHandle)
+    func disableAutoLogin() async throws
 }

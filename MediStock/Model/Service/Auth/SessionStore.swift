@@ -20,15 +20,21 @@ public class SessionStore: ObservableObject {
         self.handle = handle
     }
     
-    func disableAutoLogin() {
-           if Auth.auth().currentUser != nil {
-               do {
-                   try Auth.auth().signOut()
-                   print("Déconnexion réussie pour désactiver la persistance.")
-               } catch let error {
-                   print("Erreur lors de la déconnexion : \(error.localizedDescription)")
-               }
-           }
+    func disableAutoLogin() async throws {
+//           if Auth.auth().currentUser != nil {
+//               do {
+//                   try Auth.auth().signOut()
+//                   print("Déconnexion réussie pour désactiver la persistance.")
+//               } catch let error {
+//                   print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+//               }
+//           }
+        do{
+          try await authService.disableAutoLogin()
+            print("Déconnexion réussie pour désactiver la persistance.")
+        }catch let error {
+            print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+        }
        }
         
     func listen()  {
@@ -44,7 +50,7 @@ public class SessionStore: ObservableObject {
     func signUp(email: String, password: String) async throws -> User  {
         do{
             let user = try await authService.signUp(email: email, password: password)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.session = user
             }
             return user
@@ -56,7 +62,7 @@ public class SessionStore: ObservableObject {
     func signIn(email: String, password: String) async throws -> User{
         do{
             let user = try await authService.signIn(email: email, password: password)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.session = user
             }
             return user
@@ -69,7 +75,7 @@ public class SessionStore: ObservableObject {
         
             do {
                 try await authService.signOut()
-                DispatchQueue.main.async {
+                await MainActor.run {
                     self.session = nil
                 }
                 print("Déconnexion réussie pour désactiver la persistance.")
