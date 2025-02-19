@@ -12,6 +12,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class MockAuthService: AuthServiceProtocol {
+    
+    
     var mockUser: pack.User?
     var shouldThrowError: Bool = false
     var didAddListener : Bool = false
@@ -37,5 +39,9 @@ class MockAuthService: AuthServiceProtocol {
     
     func removeDidChangeListenerHandle(handle: AuthStateDidChangeListenerHandle) {
         didAddListener = true
+    }
+    
+    func disableAutoLogin() async throws {
+        if shouldThrowError {throw AuthError.invalidCredentials}
     }
 }
