@@ -2,28 +2,30 @@
 name: iOS Build and Test
 
 on:
-    pull_request:
+  pull_request:
     branches:
-        - main
+      - main
 
 jobs:
-    build-and-test:
+  build-and-test:
     runs-on: macos-latest
-    
-    steps:
-        - name: Checkout repository
+
+  steps:
+
+      - name: Checkout repository
         uses: actions/checkout@v2
-            - name: Build and Test
+
+          - name: Build and Test
                 uses: sersoft-gmbh/xcodebuild-action@v3.2.0
             with:
-                project: MediStock.xcodeproj
-                scheme: pack
-                destination: 'platform=iOS Simulator,name=iPhone 14'
-                action: test
-                result-bundle-path: 'TestResults/TestResults.xcresult'
-        
-        - name: Process Test Results
+            project: MediStock.xcodeproj
+               scheme: pack
+               destination: 'platform=iOS Simulator,name=iPhone 14'
+               action: test
+               result-bundle-path: 'TestResults/TestResults.xcresult'
+
+      - name: Process Test Results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-            path: TestResults/TestResults.xcresult
+          path: TestResults/TestResults.xcresult
         if: success() || failure()
