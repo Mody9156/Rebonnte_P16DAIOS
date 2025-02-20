@@ -10,7 +10,6 @@ struct MedicineListView: View {
             Medicine.aisle == aisle
         })
     }
-//    @Environment(\)
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
