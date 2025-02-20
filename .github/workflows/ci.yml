@@ -21,6 +21,16 @@ jobs:
           destination: 'platform=iOS Simulator,name=iPhone 14'
           action: test
           result-bundle-path: 'TestResults/TestResults.xcresult'
+          xcodebuild-options: '-allowProvisioningUpdates'
+
+      - name: Verify Test Results
+        run: |
+          if [ -d "TestResults/TestResults.xcresult" ]; then
+            echo "TestResults.xcresult found!"
+          else
+            echo "❌ TestResults.xcresult NOT found!"
+            exit 1
+          fi
 
       - name: Process Test Results
         if: success() || failure()
