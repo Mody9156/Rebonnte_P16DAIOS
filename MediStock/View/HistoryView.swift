@@ -36,12 +36,12 @@ struct HistoryView: View {
                                     .fontWeight(.bold)
                                     .accessibilityLabel("Action: \(entry.action)")
                                 
-                                TextForShowDetails(user: entry.user,text: "User:")
+                                TextForShowDetails(value: entry.user,text: "User:")
                                     .accessibilityLabel("Performed by: \(entry.user)")
-                                TextForShowDetails(user: entry.timestamp.formatted(),text: "Date:")
+                                TextForShowDetails(value: entry.timestamp.formatted(),text: "Date:")
                                     .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                                 
-                                TextForShowDetails(user: entry.details,text: "Details")
+                                TextForShowDetails(value: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
                                     
                             }
@@ -60,9 +60,9 @@ struct HistoryView: View {
 }
 
 #Preview{
-    HistoryView(filterMedicine: [
+        HistoryView(filterMedicine: [
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-    HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
@@ -77,13 +77,13 @@ struct HistoryView: View {
 }
 
 struct TextForShowDetails: View {
-    var user : String
+    var value : String
     var text : String
     var body: some View {
         HStack {
             Text(text)
                 .fontWeight(.bold)
-            Text(user)
+            Text(value)
                 .font(.subheadline)
         }
     }
