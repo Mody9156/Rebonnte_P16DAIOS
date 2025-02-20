@@ -36,6 +36,8 @@
 		23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */; };
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */; };
+		4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */; };
+		4F3FF56F2D67AB43003EB6D8 /* pack-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4E2D5BE07B00E461BE /* pack-Info.plist */; };
 		4FD6DADE2D661571006E7FE5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90414E2D53666100BA4690 /* FirebaseAnalytics */; };
 		4FD6DADF2D661571006E7FE5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041502D53666100BA4690 /* FirebaseAnalyticsSwift */; };
 		4FD6DAE02D661571006E7FE5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041522D53666100BA4690 /* FirebaseAuth */; };
@@ -54,7 +56,6 @@
 		53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8DD2C0609A800DE1134 /* MedicineStockViewModel.swift */; };
 		53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8DF2C0609B900DE1134 /* SessionStore.swift */; };
 		53E0D8E22C065FFE00DE1134 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8E12C065FFE00DE1134 /* AppDelegate.swift */; };
-		53E0D8E42C0660FD00DE1134 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D8E32C0660FD00DE1134 /* GoogleService-Info.plist */; };
 		53E0D8E62C066F4100DE1134 /* AisleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8E52C066F4100DE1134 /* AisleListView.swift */; };
 		53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8E72C066F6500DE1134 /* MedicineDetailView.swift */; };
 		53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */; };
@@ -96,6 +97,7 @@
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		4F159B4E2D5BE07B00E461BE /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "pack-Info.plist"; sourceTree = "<group>"; };
 		4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,7 +108,6 @@
 		53E0D8DD2C0609A800DE1134 /* MedicineStockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModel.swift; sourceTree = "<group>"; };
 		53E0D8DF2C0609B900DE1134 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		53E0D8E12C065FFE00DE1134 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		53E0D8E32C0660FD00DE1134 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53E0D8E52C066F4100DE1134 /* AisleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AisleListView.swift; sourceTree = "<group>"; };
 		53E0D8E72C066F6500DE1134 /* MedicineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineDetailView.swift; sourceTree = "<group>"; };
 		53E0D8E92C066F7A00DE1134 /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
+				4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */,
 				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				23FD05682D440E490089DB5C /* MediStockTests */,
@@ -302,7 +304,6 @@
 		53E0D8952C06084700DE1134 /* MediStock */ = {
 			isa = PBXGroup;
 			children = (
-				53E0D8E32C0660FD00DE1134 /* GoogleService-Info.plist */,
 				23F6C9962D2FBCF700CD0A42 /* Model */,
 				23F6C9982D2FBD3000CD0A42 /* View */,
 				23F6C9972D2FBD1300CD0A42 /* ViewModel */,
@@ -425,10 +426,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F3FF56F2D67AB43003EB6D8 /* pack-Info.plist in Resources */,
+				4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */,
 				53E0D89E2C06084900DE1134 /* Preview Assets.xcassets in Resources */,
 				53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */,
 				4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */,
-				53E0D8E42C0660FD00DE1134 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
