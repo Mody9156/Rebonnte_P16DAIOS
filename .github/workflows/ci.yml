@@ -1,39 +1,24 @@
+
 name: iOS Build and Test
 
 on:
   pull_request:
-    branches:
-      - main
-
+    branches: [ main ]
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build-and-test"
   build-and-test:
-    runs-on: macos-latest
-
+    # The type of runner that the job will run on
+    runs-on: macos-14-xlarge
+    timeout-minutes: 8
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Build and Test
-        uses: sersoft-gmbh/xcodebuild-action@v3.2.0
-        with:
-          project: MediStock.xcodeproj
-          scheme: pack
-          destination: 'platform=iOS Simulator,name=iPhone 14'
-          action: test
-          result-bundle-path: 'TestResults/TestResults.xcresult'
-          xcodebuild-options: '-allowProvisioningUpdates'
-
-      - name: Verify Test Results
-        run: |
-          if [ -d "TestResults/TestResults.xcresult" ]; then
-            echo "TestResults.xcresult found!"
-          else
-            echo "❌ TestResults.xcresult NOT found!"
-            exit 1
-          fi
-
-      - name: Process Test Results
-        if: success() || failure()
-        uses: kishikawakatsumi/xcresulttool@v1
-        with:
-          path: TestResults/TestResults.xcresult
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v4
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_15.4.app
+      run: sudo xcode-select -switch /Applications/Xcode_14.2.app
+    - name: Xcode version
+      run: /usr/bin/xcodebuild -version
+    - name: Build and Test
+      run: xcodebuild clean build test -project MediStock.xcodeproj -scheme "pack" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" ONLY_ACTIVE_ARCH=YES
