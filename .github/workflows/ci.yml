@@ -31,4 +31,3 @@ jobs:
         with:
           path: TestResults/TestResults.xcresult
         if: success() || failure()
-"
