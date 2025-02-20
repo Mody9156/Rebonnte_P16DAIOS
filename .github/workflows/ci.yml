@@ -1,4 +1,4 @@
-
+"
 name: CI
 
 on:
@@ -12,14 +12,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        
+      - name: Debug - Check project path
+        run: ls -R
 
       - name: Build and Test
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0
         with:
           project: MediStock.xcodeproj
           scheme: pack
-          destination: 'platform=iOS Simulator,name=iPhone 16'
+          destination: 'platform=iOS Simulator,name=iPhone 15 Pro'
           action: test
           result-bundle-path: 'TestResults/TestResults.xcresult'
 
@@ -28,3 +31,4 @@ jobs:
         with:
           path: TestResults/TestResults.xcresult
         if: success() || failure()
+"
