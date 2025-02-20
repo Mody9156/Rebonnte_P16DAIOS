@@ -7,10 +7,11 @@ on:
 jobs:
   build-and-test:
     runs-on: macos-14
-    timeout-minutes: 8
+    timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_15.2.app
@@ -20,6 +21,12 @@ jobs:
 
       - name: List Available Simulators
         run: xcrun simctl list devices
+
+      - name: Restore GoogleService-Info.plist
+        run: echo "${{ secrets.GOOGLE_SERVICE_INFO_PLIST }}" | base64 --decode > MediStock/GoogleService-Info.plist
+
+      - name: Resolve Swift Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project MediStock.xcodeproj
 
       - name: Build and Test
         run: |

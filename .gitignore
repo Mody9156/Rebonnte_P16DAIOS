@@ -14,9 +14,7 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-# Ignorer le fichier spécifique
-*GoogleService-Info.plist
- 
+
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
