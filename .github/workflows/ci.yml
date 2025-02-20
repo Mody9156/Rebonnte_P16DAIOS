@@ -5,31 +5,29 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
 
-  steps:
-Étapes du fichier :
-* Effectuez le checkout du code, c'est-à-dire la vérification du code source depuis le repository. Cela permet aux actions suivantes d'accéder au code.
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-* Puis utilisez l'action sersoft-gmbh/xcodebuild-action pour compiler l'application et exécuter les tests unitaires. Les paramètres de cette action incluent le projet Xcode, le schéma, la destination du simulateur et les paramètres de build.
-
-          - name: Build and Test
-                uses: sersoft-gmbh/xcodebuild-action@v3.2.0
-            with:
-               project: MediStock.xcodeproj
-               scheme: pack
-               destination: 'platform=iOS Simulator,name=iPhone 14'
-               action: test
-               result-bundle-path: 'TestResults/TestResults.xcresult'
-* Enfin, utilisez l'action kishikawakatsumi/xcresulttool pour traiter les résultats des tests et générer des rapports lisibles. Nous souhaitons par ailleurs exécuter la génération de rapport, que le résultat des tests soit un succès ou non.
-
-      - name: Process Test Results
-        uses: kishikawakatsumi/xcresulttool@v1
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
-          path: TestResults/TestResults.xcresult
-        if: success() || failure()
+          access_token: ${{ github.token }}
+
+      # Installer la dernière version stable d'Xcode (15.x)
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
+
+      # Lancer les tests avec xcodebuild (sans Fastlane)
+      - name: Run Tests
+        run: |
+          xcodebuild test \
+            -project MediStock.xcodeproj \
+            -scheme pack \
+            -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2' \
+            -resultBundlePath TestResults/TestResults.xcresult
