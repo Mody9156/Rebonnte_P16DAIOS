@@ -64,7 +64,7 @@ struct AllMedicinesView: View {
                 .accessibilityHint("Shows all available medicines and their stock.")
                 .navigationBarItems(trailing: Button(action: {
                     Task{
-                        try await medicineStockViewModel.addRandomMedicine(user: identity)
+                            try? await medicineStockViewModel.addRandomMedicine(user: identity)
                     }
                 }) {
                     Image(systemName: "plus")

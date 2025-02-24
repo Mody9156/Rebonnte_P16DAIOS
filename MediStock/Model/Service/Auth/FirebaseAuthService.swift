@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseCore
 
 final class FirebaseAuthService: AuthServiceProtocol {
+    
     func disableAutoLogin() async throws {
         if Auth.auth().currentUser != nil {
             do {

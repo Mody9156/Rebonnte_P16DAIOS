@@ -1,6 +1,7 @@
 import Foundation
 import Firebase
 
+
 class MedicineStockViewModel: ObservableObject {
     enum FilterOption: String, CaseIterable {
         case noFilter
@@ -26,28 +27,24 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    @MainActor func observeAisles() {
+    func observeAisles() {
         medicineRepository.fetchAisles { [weak self]  aisles in
-            DispatchQueue.main.async {
                 self?.aisles = aisles
-            }
         }
     }
     func addRandomMedicine(user: String) async throws {
-        try await medicineRepository.setData(user: user)
+            try await medicineRepository.setData(user: user)
     }
     func addRandomMedicineToList(user: String, aisle: String) async throws {
         try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
     func deleteMedicines(at offsets: IndexSet) async throws {
-        try await  medicineRepository.delete(medicines: medicines, at: offsets)
+            try await  medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
-        DispatchQueue.global(qos:.background).async{
             self.updateStock(medicine, by: stocks, user: user)
-        }
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
@@ -59,7 +56,9 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) {
+        DispatchQueue.global(qos: .background).async{
             self.updateStock(medicine, by: -1, user: user)
+        }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws {

@@ -33,14 +33,14 @@ struct MedicineListView: View {
                 }
                 .onDelete { IndexSet in
                     Task{
-                        try await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                            try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
             }
             
             Button(action: {
                 Task{
-                    try await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+                        try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
             }) {
                 ZStack {

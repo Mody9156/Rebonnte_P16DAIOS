@@ -35,7 +35,6 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchAisles(completion:@escaping( [String])->Void) {
         medicineService.fetchAisles { aisles in
             if aisles.isEmpty {
@@ -57,7 +56,6 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    @MainActor
     func setDataToList(user: String, aisle: String) async throws {
         do{
             let medicine = try await medicineService.setDataToList(user: user, aisle: aisle)
