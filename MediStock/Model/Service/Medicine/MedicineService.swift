@@ -58,9 +58,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Ajouté : \(medicine)")
-            DispatchQueue.main.async {
                 self.medicines.append(medicine) // Ajoute localement pour éviter un délai
-            }
             
         } catch {
             print("Erreur : \(error)")

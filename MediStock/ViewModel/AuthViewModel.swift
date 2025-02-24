@@ -21,7 +21,6 @@ class AuthViewModel : ObservableObject {
             .assign(to: &$isAuthenticated)
     }
     
-    @MainActor
     func login(email:String, password:String) async throws {
         do {
             let user = try await session.signIn(email: email, password: password)
@@ -35,7 +34,6 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    @MainActor
     func createdNewUser(email: String, password: String) async throws {
         do{
             let user = try await session.signUp(email: email, password: password)
@@ -49,8 +47,9 @@ class AuthViewModel : ObservableObject {
     func changeStatus()  {
          session.listen()
     }
+    
     func disableAutoLogin() async throws {
-        try await session.disableAutoLogin()
+            try? await session.disableAutoLogin()
     }
     
     func stopListeningToAuthChanges(){

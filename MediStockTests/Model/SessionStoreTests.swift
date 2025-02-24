@@ -9,6 +9,7 @@ import XCTest
 @testable import pack
 import FirebaseAuth
 import FirebaseFirestore
+import Testing
 
 class SessionStoreTests: XCTestCase {
     var sessionStore: SessionStore!
@@ -104,8 +105,6 @@ class SessionStoreTests: XCTestCase {
         XCTAssertTrue(mockAuthService.didAddListener)
         XCTAssert(sessionStore.handle == nil)
     }
-    
-  
    
 }
 

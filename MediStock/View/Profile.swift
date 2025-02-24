@@ -52,9 +52,9 @@ struct Profile: View {
                 Spacer()
                 
                 Button(action:{
-                    Task{
-                        try await  authViewModel.disableAutoLogin()
-                    }
+                    Task {
+                        try await authViewModel.disableAutoLogin()
+                      }
                 }) {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .resizable()
