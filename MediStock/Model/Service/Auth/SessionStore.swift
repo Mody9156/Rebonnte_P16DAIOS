@@ -21,14 +21,6 @@ public class SessionStore: ObservableObject {
     }
     
     func disableAutoLogin() async throws {
-//           if Auth.auth().currentUser != nil {
-//               do {
-//                   try Auth.auth().signOut()
-//                   print("Déconnexion réussie pour désactiver la persistance.")
-//               } catch let error {
-//                   print("Erreur lors de la déconnexion : \(error.localizedDescription)")
-//               }
-//           }
         do{
           try await authService.disableAutoLogin()
             print("Déconnexion réussie pour désactiver la persistance.")

@@ -49,7 +49,7 @@ class AuthViewModel : ObservableObject {
     }
     
     func disableAutoLogin() async throws {
-            try await session.disableAutoLogin()
+       try await session.disableAutoLogin()
     }
     
     func stopListeningToAuthChanges(){
