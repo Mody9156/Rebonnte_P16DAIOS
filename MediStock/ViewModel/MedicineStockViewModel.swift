@@ -22,9 +22,7 @@ class MedicineStockViewModel: ObservableObject {
     
     func observeMedicines() {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-            DispatchQueue.main.async {
                 self? .medicines = medicines
-            }
         }
     }
     
@@ -53,21 +51,15 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-        DispatchQueue.main.async{
             self.medicineRepository.updateStock(medicine, by: amount, user: user)
-        }
     }
     
     func increaseStock(_ medicine: Medicine, user: String) {
-        DispatchQueue.main.async{
             self.updateStock(medicine, by: 1, user: user)
-        }
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) {
-        DispatchQueue.main.async{
             self.updateStock(medicine, by: -1, user: user)
-        }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws {
@@ -75,12 +67,10 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func fetchHistory(for medicine: Medicine) {
-        DispatchQueue.global(qos:.background).async{
-            self.medicineRepository.fetchHistory(for: medicine){ history in
-                DispatchQueue.main.async {
+           self.medicineRepository.fetchHistory(for: medicine){history in
+               DispatchQueue.global(qos:.background).async{
                     self.history = history
-                    print("self.history : \(history)")
-                }
+                    print("history : \(history)")
             }
         }
     }

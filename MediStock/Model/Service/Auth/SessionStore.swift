@@ -36,22 +36,18 @@ public class SessionStore: ObservableObject {
             print("Erreur lors de la déconnexion : \(error.localizedDescription)")
         }
        }
-        
+    
     func listen()  {
         authService.addDidChangeListenerHandle { [weak self] user in
-            DispatchQueue.main.async {
                 self?.session = user
                 self?.error = user == nil ? .unknown : nil
-            }
         }
     }
     
     func signUp(email: String, password: String) async throws -> User  {
         do{
             let user = try await authService.signUp(email: email, password: password)
-            await MainActor.run {
-                self.session = user
-            }
+            self.session = user
             return user
         }catch{
             throw error
@@ -61,9 +57,7 @@ public class SessionStore: ObservableObject {
     func signIn(email: String, password: String) async throws -> User{
         do{
             let user = try await authService.signIn(email: email, password: password)
-            await MainActor.run {
-                self.session = user
-            }
+            self.session = user
             return user
         }catch{
             throw error
@@ -74,9 +68,7 @@ public class SessionStore: ObservableObject {
         
             do {
                 try await authService.signOut()
-                await MainActor.run {
-                    self.session = nil
-                }
+                self.session = nil
                 print("Déconnexion réussie pour désactiver la persistance.")
             } catch {
                 print("Erreur lors de la déconnexion : \(error.localizedDescription)")
