@@ -74,6 +74,13 @@ class SessionStoreTests: XCTestCase {
         }
     }
     
+//    func testSignOutWhenNotSignedIn() async throws {
+//        //When
+//        let signUp = try await sessionStore.signUp(email: "", password: "")
+//        //Then
+//        XCTAssert(sessionStore.error != nil)
+//    }
+    
     func testWhenSignOutSuccess() async throws {
         //When
         _ = try await sessionStore.signOut()
@@ -103,8 +110,39 @@ class SessionStoreTests: XCTestCase {
         sessionStore.stopListeningToAuthChanges()
         //Then
         XCTAssertTrue(mockAuthService.didAddListener)
-        XCTAssert(sessionStore.handle == nil)
+        XCTAssertNil(sessionStore.handle)
+        XCTAssertNil(sessionStore.error)
+    }
+    
+    func testWhenListeningToAuthChangesSuccess() async throws {
+        //When
+        let user = User(uid: "fakeUIid", email: "exemple@gmail.com")
+        let mock = mockAuthService.mockUser
+        mockAuthService.mockUser = user
+        //When
+        mockAuthService.addDidChangeListenerHandle { user in
+            //Then
+            XCTAssertNotNil(user)
+        }
+        //When
+        sessionStore.listen()
+        //Then
+        XCTAssertNil(sessionStore.error)
     }
    
+    func testWhenListeninToAuthChangesFail() async throws {
+        //When
+        mockAuthService.mockUser = nil
+        //When
+        mockAuthService.addDidChangeListenerHandle { user in
+            //Then
+            XCTAssertNil(user)
+        }
+        //When
+        sessionStore.listen()
+        //Then
+        XCTAssertNotNil(sessionStore.error)
+    }
+    
 }
 

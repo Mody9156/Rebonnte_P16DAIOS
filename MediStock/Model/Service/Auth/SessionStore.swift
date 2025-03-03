@@ -43,14 +43,15 @@ public class SessionStore: ObservableObject {
             self.session = user
             return user
         }catch{
-            throw error
+            throw AuthError.userCreationFailed
         }
     }
     
+    @MainActor
     func signIn(email: String, password: String) async throws -> User{
         do{
             let user = try await authService.signIn(email: email, password: password)
-            self.session = user
+                self.session = user
             return user
         }catch{
             throw error
