@@ -17,7 +17,7 @@ class MockAuthService: AuthServiceProtocol {
     var mockUser: pack.User?
     var shouldThrowError: Bool = false
     var didAddListener : Bool = false
-    var mockHandle: AuthStateDidChangeListenerHandle = NSObject() // Handle factice
+    var mockHandle: AuthStateDidChangeListenerHandle? = NSObject() // Handle factice
 
     func signUp(email: String, password: String) async throws -> pack.User {
         if shouldThrowError { throw AuthError.userCreationFailed }
