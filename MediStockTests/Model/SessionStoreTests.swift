@@ -70,6 +70,7 @@ class SessionStoreTests: XCTestCase {
             XCTFail("Expected an error but did not get one")
         }catch{
             //Then
+            XCTAssert(sessionStore.error == .userCreationFailed)
             XCTAssertEqual(error as? AuthError, AuthError.userCreationFailed)
         }
     }
