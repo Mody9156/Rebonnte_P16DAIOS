@@ -70,10 +70,16 @@ class SessionStoreTests: XCTestCase {
             XCTFail("Expected an error but did not get one")
         }catch{
             //Then
-            XCTAssert(sessionStore.error == .userCreationFailed)
             XCTAssertEqual(error as? AuthError, AuthError.userCreationFailed)
         }
     }
+    
+//    func testSignOutWhenNotSignedIn() async throws {
+//        //When
+//        let signUp = try await sessionStore.signUp(email: "", password: "")
+//        //Then
+//        XCTAssert(sessionStore.error != nil)
+//    }
     
     func testWhenSignOutSuccess() async throws {
         //When
