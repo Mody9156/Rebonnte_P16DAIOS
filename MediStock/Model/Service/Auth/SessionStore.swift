@@ -42,7 +42,7 @@ public class SessionStore: ObservableObject {
             self.session = user
             return user
         }catch{
-            throw error
+            throw AuthError.userCreationFailed
         }
     }
     
