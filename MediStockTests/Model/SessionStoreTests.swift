@@ -74,12 +74,6 @@ class SessionStoreTests: XCTestCase {
         }
     }
     
-//    func testSignOutWhenNotSignedIn() async throws {
-//        //When
-//        let signUp = try await sessionStore.signUp(email: "", password: "")
-//        //Then
-//        XCTAssert(sessionStore.error != nil)
-//    }
     
     func testWhenSignOutSuccess() async throws {
         //When
@@ -144,5 +138,18 @@ class SessionStoreTests: XCTestCase {
         XCTAssertNotNil(sessionStore.error)
     }
     
+    func testDisableNoThrowsErrors() async throws {
+        //Given
+        let email = "fakeEmail@gmail.com"
+        let password = "123456"
+        mockAuthService.shouldThrowError = false
+        
+        //When
+        let _ = try await mockAuthService.signUp(email: email, password: password)
+        let _ = try await mockAuthService.signIn(email: email, password: password)
+        let disable : () = try await mockAuthService.disableAutoLogin()
+        //Then
+        XCTAssertNoThrow(disable)
+    }
 }
 

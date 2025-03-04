@@ -24,7 +24,7 @@ public class SessionStore: ObservableObject {
         do{
             try await authService.disableAutoLogin()
             print("Déconnexion réussie pour désactiver la persistance.")
-        }catch let error {
+        }catch {
             throw AuthError.disableAutoLogin
         }
     }
