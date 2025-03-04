@@ -154,15 +154,9 @@ class SessionStoreTests: XCTestCase {
     
     func testWhenDisableThrowsError() async throws {
         //Given
-        let email = "fakeEmail@gmail.com"
-        let password = "123456"
+        let email = "fake2Email@gmail.com"
+        let password = "123456d"
         mockAuthService.shouldThrowError = true
-        //When
-        let _ = try await mockAuthService.signUp(email: email, password: password)
-        let _ = try await mockAuthService.signIn(email: email, password: password)
-        let disable : () = try await mockAuthService.disableAutoLogin()
-        //Then
-        XCTAssertThrowsError(disable)
         
         //When
         do{
