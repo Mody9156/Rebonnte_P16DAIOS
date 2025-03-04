@@ -30,6 +30,7 @@ struct AisleListView: View {
                             }
                         }
                     }
+                   
                 }
                 
                 Button(action: {
@@ -52,6 +53,8 @@ struct AisleListView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
         }
+        
+      
         .onAppear {
             medicineStockViewModel.observeAisles()
         }

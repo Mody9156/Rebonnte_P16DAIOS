@@ -25,7 +25,7 @@ public class SessionStore: ObservableObject {
             try await authService.disableAutoLogin()
             print("Déconnexion réussie pour désactiver la persistance.")
         }catch let error {
-            print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+            throw AuthError.disableAutoLogin
         }
     }
     
@@ -82,6 +82,7 @@ enum AuthError: LocalizedError {
     case invalidCredentials
     case userCreationFailed
     case unknown
+    case disableAutoLogin
     
     var errorDescription: String? {
         switch self {
@@ -91,6 +92,8 @@ enum AuthError: LocalizedError {
             return "Impossible de créer un compte. Vérifiez vos informations et réessayez."
         case .unknown:
             return "Une erreur inconnue est survenue."
+        case .disableAutoLogin:
+            return "Impossible de reintitialisé l'authentification automatique. Veuillez vous déconnecter et réessayer."
         }
     }
 }
