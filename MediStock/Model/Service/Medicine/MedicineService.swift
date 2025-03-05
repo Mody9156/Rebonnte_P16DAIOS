@@ -66,6 +66,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
+    @MainActor
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
