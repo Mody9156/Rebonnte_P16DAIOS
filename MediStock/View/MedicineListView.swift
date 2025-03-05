@@ -7,7 +7,7 @@ struct MedicineListView: View {
     
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
-            Medicine.aisle == aisle
+             return   Medicine.aisle == aisle
         })
     }
     

@@ -29,6 +29,11 @@ struct AisleListView: View {
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
                         }
+                        .onDelete { indexOf in
+                            Task{
+                            try await medicineStockViewModel.deleteMedicines(at: indexOf)
+                            }
+                        }
                     }
                    
                 }
