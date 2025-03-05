@@ -69,7 +69,9 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
+                print("Voici votre id: \(id)")
                 db.collection("medicines").document(id).delete { error in
+                 
                     if let error = error {
                         print("Error removing document: \(error)")
                     }
@@ -78,15 +80,10 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    func deleteAisle(aisle: String, at offsets: IndexSet) async throws {
-            for _ in offsets {
-                do{
-                    try await db.collection("medecines").document(aisle).delete()
-                } catch {
-                    print("Erreur lors de la suppression de l’allée \(aisle) : \(error.localizedDescription)")
-                    throw error
-                }
-            }
+    func deleteAisle(aisle:String,at offsets: IndexSet) async throws {
+        for _ in offsets {
+          try? await db.collection("medicines").document(aisle).delete()
+        }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {

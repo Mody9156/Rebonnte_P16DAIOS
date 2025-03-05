@@ -31,7 +31,7 @@ struct AisleListView: View {
                         }
                         .onDelete { IndexSet in
                             Task{
-                              try? await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                                try? await medicineStockViewModel.deleteAisle(at: IndexSet)
                             }
                         }
                     }

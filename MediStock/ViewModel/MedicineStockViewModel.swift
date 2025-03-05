@@ -49,8 +49,8 @@ class MedicineStockViewModel: ObservableObject {
             try await  medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
-    func deleteAisle(aisle: String, at offsets: IndexSet) async throws {
-        try await  medicineRepository.deleteAisle(aisle: aisle, at: offsets)
+    func deleteAisle(at offsets: IndexSet) async throws {
+        try await  medicineRepository.deleteAisle(aisle:medicines, at: offsets)
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
