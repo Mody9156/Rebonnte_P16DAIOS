@@ -79,12 +79,12 @@ class MedicineService: MedicineProtocol, ObservableObject{
             }
         }
     }
-    
+    //vérifier l'erreur concernant la suppréssion des 💊
     func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
         var updateAisle = aisles
         
         let medicineDelete = offsets.map { updateAisle[$0]}
-        
+        print("medicineDelete :\(medicineDelete)")
         for aisles in medicineDelete {
             print("Vous allez supprimer l'id : \(aisles)")
             let query =  try await db.collection("medicines")
@@ -95,9 +95,12 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 print("Aisle sélectionnée n'existe pas")
             }
             for id in query.documents {
+                let QueryId = id
                 let documentId = id.documentID
+                
                 do{
                     try await db.collection("medicines").document(documentId).delete()
+
                     print("✅ Document \(documentId) supprimé avec succès")
                 } catch {
                     print("❌ Erreur Firebase : \(error.localizedDescription)")
