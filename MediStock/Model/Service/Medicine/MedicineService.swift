@@ -66,7 +66,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-    @MainActor
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
@@ -77,6 +76,20 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 }
             }
         }
+    }
+    
+    func deleteAisle(aisle: String, at offsets: IndexSet) async throws {
+        
+            for _ in offsets {
+                do{
+                    try await db.collection("medecines").document(aisle).delete()
+                } catch {
+                    print("Erreur lors de la suppression de l’allée \(aisle) : \(error.localizedDescription)")
+                    throw error
+                }
+            }
+      
+      
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
