@@ -58,7 +58,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Ajouté : \(medicine)")
-                self.medicines.append(medicine) // Ajoute localement pour éviter un délai
+            self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             
         } catch {
             print("Erreur : \(error)")
@@ -69,13 +69,46 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
+                print("Voici votre id: \(id)")
                 db.collection("medicines").document(id).delete { error in
+                    
                     if let error = error {
                         print("Error removing document: \(error)")
                     }
                 }
             }
         }
+    }
+    //vérifier l'erreur concernant la suppréssion des 💊
+    func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
+        var updateAisle = aisles
+        
+        let medicineDelete = offsets.map { updateAisle[$0]}
+        print("medicineDelete :\(medicineDelete)")
+        for aisles in medicineDelete {
+            print("Vous allez supprimer l'id : \(aisles)")
+            let query =  try await db.collection("medicines")
+                .whereField("aisle", isEqualTo: aisles)
+                .getDocuments()
+            
+            if query.documents.isEmpty {
+                print("Aisle sélectionnée n'existe pas")
+            }
+            for id in query.documents {
+                let QueryId = id
+                let documentId = id.documentID
+                
+                do{
+                    try await db.collection("medicines").document(documentId).delete()
+
+                    print("✅ Document \(documentId) supprimé avec succès")
+                } catch {
+                    print("❌ Erreur Firebase : \(error.localizedDescription)")
+                }
+            }
+            updateAisle.removeAll {  medicineDelete.contains($0)}
+        }
+        return updateAisle
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {

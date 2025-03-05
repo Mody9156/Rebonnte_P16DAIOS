@@ -29,6 +29,12 @@ struct AisleListView: View {
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
                         }
+                        .onDelete { IndexSet in
+                            print("Indices reçus pour suppression : \(IndexSet)")
+                            Task{
+                                try? await medicineStockViewModel.deleteAisle(at: IndexSet)
+                            }
+                        }
                     }
                 }
                 
@@ -52,6 +58,8 @@ struct AisleListView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
         }
+        
+      
         .onAppear {
             medicineStockViewModel.observeAisles()
         }

@@ -23,7 +23,9 @@ class MedicineStockViewModel: ObservableObject {
     
     func observeMedicines() {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-                self? .medicines = medicines
+            for i in  medicines {
+                    self? .medicines = medicines
+            }
         }
     }
     
@@ -32,15 +34,29 @@ class MedicineStockViewModel: ObservableObject {
                 self?.aisles = aisles
         }
     }
+    
     func addRandomMedicine(user: String) async throws {
             try await medicineRepository.setData(user: user)
     }
+    
     func addRandomMedicineToList(user: String, aisle: String) async throws {
         try await medicineRepository.setDataToList(user: user, aisle: aisle)
     }
     
     func deleteMedicines(at offsets: IndexSet) async throws {
             try await  medicineRepository.delete(medicines: medicines, at: offsets)
+    }
+    
+    func deleteAisle(at offsets: IndexSet) async throws {
+        do{
+            let updateAisle = try await  medicineRepository.deleteAisle(aisles:self.aisles,at: offsets)
+            await MainActor.run {
+                self.aisles = updateAisle
+            }
+        }catch{
+            print("erreur lors de la suppression")
+        }
+        
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
@@ -67,10 +83,8 @@ class MedicineStockViewModel: ObservableObject {
     
     func fetchHistory(for medicine: Medicine) {
            self.medicineRepository.fetchHistory(for: medicine){history in
-               DispatchQueue.global(qos:.background).async{
                     self.history = history
                     print("history : \(history)")
-            }
         }
     }
     
