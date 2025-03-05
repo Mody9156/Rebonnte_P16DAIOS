@@ -56,7 +56,7 @@ class MedicineStockViewModel: ObservableObject {
                 self.aisles = updateAisle
             }
         }catch{
-            print("erreur de suppression")
+            print("erreur lors de la suppression")
         }
         
     }
