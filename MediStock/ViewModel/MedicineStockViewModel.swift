@@ -23,7 +23,11 @@ class MedicineStockViewModel: ObservableObject {
     
     func observeMedicines() {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-                self? .medicines = medicines
+            for i in  medicines {
+                if !i.name.isEmpty || i.stock != 0 {
+                    self? .medicines = medicines
+                }
+            }
         }
     }
     
