@@ -32,11 +32,10 @@ struct AisleListView: View {
                         .onDelete { IndexSet in
                             print("Indices reçus pour suppression : \(IndexSet)")
                             Task{
-                                try? await medicineStockViewModel.deleteAisle(at: IndexSet)
+                                try? await medicineStockViewModel.deleteAisle(aisles: aisles, at: IndexSet)
                             }
                         }
                     }
-                   
                 }
                 
                 Button(action: {

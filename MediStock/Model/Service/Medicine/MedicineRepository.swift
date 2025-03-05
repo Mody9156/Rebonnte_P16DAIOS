@@ -77,9 +77,9 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func deleteAisle(at offsets: IndexSet) async throws {
+    func deleteAisle(aisles:[String], at offsets: IndexSet) async throws {
         do{
-            try await medicineService.deleteAisle(at: offsets)
+            try await medicineService.deleteAisle(aisles:aisles, at: offsets)
         } catch{
             throw MedicineError.invalidDelete
         }
