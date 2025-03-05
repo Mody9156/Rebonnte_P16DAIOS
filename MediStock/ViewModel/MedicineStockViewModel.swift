@@ -24,9 +24,7 @@ class MedicineStockViewModel: ObservableObject {
     func observeMedicines() {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
             for i in  medicines {
-                if !i.name.isEmpty || i.stock != 0 {
                     self? .medicines = medicines
-                }
             }
         }
     }
@@ -51,7 +49,7 @@ class MedicineStockViewModel: ObservableObject {
     
     func deleteAisle(at offsets: IndexSet) async throws {
         do{
-           let updateAisle = try await  medicineRepository.deleteAisle(aisles:aisles,at: offsets)
+            let updateAisle = try await  medicineRepository.deleteAisle(aisles:self.aisles,at: offsets)
             await MainActor.run {
                 self.aisles = updateAisle
             }

@@ -83,33 +83,27 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
         var updateAisle = aisles
         
-        let medicineDelete = offsets.compactMap { index -> String? in
-            guard updateAisle.indices.contains(index) else {
-                print("Index \(index) hors limites pour medicines")
-                return nil
-            }
-            return updateAisle[index]
-        }
+        let medicineDelete = offsets.map { updateAisle[$0]}
         
         for aisles in medicineDelete {
             print("Vous allez supprimer l'id : \(aisles)")
-            let query =  try await db.collection("medicines").whereField("aisle", isEqualTo: aisles).getDocuments()
+            let query =  try await db.collection("medicines")
+                .whereField("aisle", isEqualTo: aisles)
+                .getDocuments()
             
             if query.documents.isEmpty {
                 print("Aisle sélectionnée n'existe pas")
             }
             for id in query.documents {
-                let documentId = id
+                let documentId = id.documentID
                 do{
-                    try await db.collection("medicines").document(String(describing:documentId)).delete()
+                    try await db.collection("medicines").document(documentId).delete()
                     print("✅ Document \(documentId) supprimé avec succès")
                 } catch {
                     print("❌ Erreur Firebase : \(error.localizedDescription)")
                 }
             }
-            updateAisle.removeAll { aisle in
-                medicineDelete.contains(aisle)
-            }
+            updateAisle.removeAll {  medicineDelete.contains($0)}
         }
         return updateAisle
     }
