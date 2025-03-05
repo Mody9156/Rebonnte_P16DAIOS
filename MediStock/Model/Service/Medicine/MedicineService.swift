@@ -79,7 +79,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     func deleteAisle(aisle: String, at offsets: IndexSet) async throws {
-        
             for _ in offsets {
                 do{
                     try await db.collection("medecines").document(aisle).delete()
@@ -88,8 +87,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
                     throw error
                 }
             }
-      
-      
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {

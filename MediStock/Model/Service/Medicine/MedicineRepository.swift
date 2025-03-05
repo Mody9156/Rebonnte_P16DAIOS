@@ -77,6 +77,15 @@ class MedicineRepository: ObservableObject {
         }
     }
     
+    func deleteAisle(aisle: String, at offsets: IndexSet) async throws {
+        do{
+            try await medicineService.deleteAisle(aisle: aisle, at: offsets)
+        } catch{
+            throw MedicineError.invalidDelete
+        }
+        
+    }
+    
     private func addHistory(action: String, user: String, medicineId: String, details: String) {
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
