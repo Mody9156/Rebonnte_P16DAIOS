@@ -12,7 +12,7 @@ import FirebaseFirestore
 class MedicineService: MedicineProtocol, ObservableObject{
     @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
-    
+
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -80,13 +80,15 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    func deleteAisle(aisles:[String], at offsets: IndexSet) async throws {
+   func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
+        var updateAisle = aisles
+       
         let medicineDelete = offsets.compactMap { index -> String? in
-            guard aisles.indices.contains(index) else {
+            guard updateAisle.indices.contains(index) else {
                 print("Index \(index) hors limites pour medicines")
                 return nil
             }
-            return aisles[index]
+            return updateAisle[index]
         }
         
         for aisles in medicineDelete {
@@ -98,6 +100,11 @@ class MedicineService: MedicineProtocol, ObservableObject{
                     print("Erreur lors de la suppression du medicament")
                 }
         }
+            updateAisle.removeAll { aisle in
+                   medicineDelete.contains(aisle)
+           }
+       
+       return updateAisle
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
