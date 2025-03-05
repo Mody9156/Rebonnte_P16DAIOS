@@ -80,10 +80,22 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    func deleteAisle(aisle:String,at offsets: IndexSet) async throws {
-        for _ in offsets {
-          try? await db.collection("medicines").document(aisle).delete()
+    func deleteAisle(medicines: [Medicine], at offsets: IndexSet) async throws {
+        for index in offsets {
+            guard medicines.indices.contains(index) else {
+                print("Index \(index) hors limites pour medicines")
+                continue
         }
+            let medicine = medicines[index]
+            
+            if let id = medicine.id {
+                print("Voici votre id: \(id)")
+                db.collection("medicines").document(medicine.aisle).delete { error in
+                    if let error = error {
+                        print("Error removing document: \(error)")
+                    }
+                }
+            }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
