@@ -50,7 +50,15 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func deleteAisle(aisles:[String], at offsets: IndexSet) async throws {
-        try await  medicineRepository.deleteAisle(aisles:aisles,at: offsets)
+        do{
+           let updateAisle = try await  medicineRepository.deleteAisle(aisles:aisles,at: offsets)
+            await MainActor.run {
+                self.aisles = updateAisle
+            }
+        }catch{
+            print("erreur de suppression")
+        }
+        
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {

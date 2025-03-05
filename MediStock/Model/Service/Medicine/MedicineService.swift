@@ -12,7 +12,7 @@ import FirebaseFirestore
 class MedicineService: MedicineProtocol, ObservableObject{
     @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
-
+    
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -58,7 +58,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             print("Ajouté : \(medicine)")
-                self.medicines.append(medicine) // Ajoute localement pour éviter un délai
+            self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             
         } catch {
             print("Erreur : \(error)")
@@ -71,7 +71,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
             if let id = medicine.id {
                 print("Voici votre id: \(id)")
                 db.collection("medicines").document(id).delete { error in
-                 
+                    
                     if let error = error {
                         print("Error removing document: \(error)")
                     }
@@ -80,9 +80,9 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-   func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
+    func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
         var updateAisle = aisles
-       
+        
         let medicineDelete = offsets.compactMap { index -> String? in
             guard updateAisle.indices.contains(index) else {
                 print("Index \(index) hors limites pour medicines")
@@ -92,19 +92,26 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
         
         for aisles in medicineDelete {
-                print("Vous allez supprimer l'id : \(aisles)")
+            print("Vous allez supprimer l'id : \(aisles)")
+            let query =  try await db.collection("medicines").whereField("aisle", isEqualTo: aisles).getDocuments()
+            
+            if query.documents.isEmpty {
+                print("Aisle sélectionnée n'existe pas")
+            }
+            for id in query.documents {
+                let documentId = id
                 do{
-                    try await db.collection("medicines").document(aisles).delete()
-                    print("Super travaille tu viens de supprimer le médicament")
-                }catch{
-                    print("Erreur lors de la suppression du medicament")
+                    try await db.collection("medicines").document(String(describing:documentId)).delete()
+                    print("✅ Document \(documentId) supprimé avec succès")
+                } catch {
+                    print("❌ Erreur Firebase : \(error.localizedDescription)")
                 }
-        }
+            }
             updateAisle.removeAll { aisle in
-                   medicineDelete.contains(aisle)
-           }
-       
-       return updateAisle
+                medicineDelete.contains(aisle)
+            }
+        }
+        return updateAisle
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
