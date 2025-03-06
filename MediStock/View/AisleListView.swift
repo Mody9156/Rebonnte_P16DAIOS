@@ -11,7 +11,7 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+                Color("BackgroundButton")
                     .ignoresSafeArea()
                 
                 VStack {
