@@ -7,36 +7,33 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-          
             VStack {
                 ZStack{
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.blue)
                         .frame(height: 250)
                         .foregroundColor(Color("RectangleDarkMode"))
-                        .cornerRadius(12)
-                        .border(.blue,width: 2)
-                    
+                        .opacity(0.5)
+
                     VStack{
                         VStack(alignment: .leading){
                             Text("Email")
-                                .foregroundColor(.blue)
+                                .foregroundColor(.white)
                                 .padding(.leading)
                             
                             TextField("Email", text: $email)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .border(.blue,width:3)
                                 .cornerRadius(3)
                                 .padding()
                         }
                         
                         VStack(alignment: .leading) {
                             Text("Password")
-                                .foregroundColor(.blue)
+                                .foregroundColor(.white)
                                 .padding(.leading)
                             
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .border(.blue,width:3)
                                 .cornerRadius(3)
                                 .padding()
                         }
