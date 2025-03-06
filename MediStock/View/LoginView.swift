@@ -14,6 +14,7 @@ struct LoginView: View {
                         .frame(height: 250)
                         .foregroundColor(Color("RectangleDarkMode"))
                         .cornerRadius(12)
+                        .border(.blue,width: 2)
                     
                     VStack{
                         VStack(alignment: .leading){
