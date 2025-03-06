@@ -7,14 +7,14 @@ struct MedicineListView: View {
     
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
-             return   Medicine.aisle == aisle
+            return   Medicine.aisle == aisle
         })
     }
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
-            .ignoresSafeArea()
+                .ignoresSafeArea()
             
             List {
                 ForEach(filterMedicines, id: \.id) { medicine in
@@ -33,14 +33,14 @@ struct MedicineListView: View {
                 }
                 .onDelete { IndexSet in
                     Task{
-                            try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
                     }
                 }
             }
             
             Button(action: {
                 Task{
-                        try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
                 }
             }) {
                 ZStack {
@@ -63,7 +63,7 @@ struct MedicineListView: View {
             .padding()
         }
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .topBarLeading) {
                 Text(aisle)
             }
         }

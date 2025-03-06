@@ -7,18 +7,18 @@ struct AisleListView: View {
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
     }
-    
+ 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-//                Color("BackgroundButton")
-//                    .ignoresSafeArea()
+                Color("BackgroundButton")
+                    .ignoresSafeArea()
                 
                 VStack {
-                    Text("Aisles")
+                    Text("Aisle")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                     
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -28,6 +28,7 @@ struct AisleListView: View {
                                     .accessibilityLabel("Aisle \(aisle)")
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
+                            .navigationTitle("")
                         }
                         .onDelete { IndexSet in
                             print("Indices reçus pour suppression : \(IndexSet)")
@@ -59,7 +60,6 @@ struct AisleListView: View {
             }
         }
         
-      
         .onAppear {
             medicineStockViewModel.observeAisles()
         }
