@@ -65,6 +65,7 @@ struct MedicineListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Text(aisle)
+                    .foregroundStyle(.blue)
             }
         }
     }
