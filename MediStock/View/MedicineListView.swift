@@ -11,6 +11,8 @@ struct MedicineListView: View {
         })
     }
     
+ 
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
@@ -64,8 +66,12 @@ struct MedicineListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Text(aisle)
-                    .foregroundStyle(.blue)
+                HStack {
+                    Image(systemName: "arrow.left")
+                                    .foregroundColor(.blue)
+                    Text(aisle)
+                        .foregroundStyle(.blue)
+                }
             }
         }
     }
