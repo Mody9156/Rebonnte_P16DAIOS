@@ -13,7 +13,7 @@ struct LoginView: View {
                         .fill(.blue)
                         .frame(height: 250)
                         .foregroundColor(Color("RectangleDarkMode"))
-                        .opacity(0.5)
+                        .opacity(0.6)
 
                     VStack{
                         VStack(alignment: .leading){
@@ -79,11 +79,16 @@ struct ButtonForUpdateSession: View {
                     RoundedRectangle(cornerRadius: 12)
                         .foregroundColor(text == "Login" ? .blue : .clear)
                         .frame(width:100, height: 40)
-                    
+                        .opacity(0.6)
+                        .border(.blue,width: 2)
+                            
+
                     Text(text)
-                        .foregroundColor(text == "Login" ? .white: .blue)
+                        .foregroundColor(text == "Login" ? .white : .blue)
+                        .opacity(text == "Login" ? 1 : 0.6)
                 }
             }
+        
             
             if visible && !authViewModel.messageError.isEmpty{
                 Text(authViewModel.messageError)
