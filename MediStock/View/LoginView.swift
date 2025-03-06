@@ -12,9 +12,9 @@ struct LoginView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.blue)
                         .frame(height: 250)
-                        .foregroundColor(Color("RectangleDarkMode"))
+                        .foregroundColor(Color("BackgroundButton"))
                         .opacity(0.6)
-
+                    
                     VStack{
                         VStack(alignment: .leading){
                             Text("Email")
@@ -75,22 +75,18 @@ struct ButtonForUpdateSession: View {
                     ThorowsMessagesError()
                 }
             }) {
-                ZStack {
-//                    RoundedRectangle(cornerRadius: 12)
-//                        .padding()
-//                        .border(.blue,width: 2)
-//                        .foregroundColor(text == "Login" ? .blue : .clear)
-//                        .frame(width:100, height: 40)
-//                        .opacity(0.6)
-//                        
-
-                    Text(text)
-                        .foregroundColor(text == "Login" ? .white : .blue)
-                        .opacity(text == "Login" ? 1 : 0.6)
-                        
-                }
+                Text(text)
+                    .foregroundColor(text == "Login" ? .white : .blue)
+                    .opacity(text == "Login" ? 1 : 0.6)
+                    .frame(width: 100, height: 40)
+                    .background(text == "Login" ? Color("BackgroundButton") : Color.clear)
+                    .cornerRadius(12)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color("BackgroundButton"), lineWidth: 2)
+                    }
             }
-        
+            .padding()
             
             if visible && !authViewModel.messageError.isEmpty{
                 Text(authViewModel.messageError)
