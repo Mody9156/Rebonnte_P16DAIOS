@@ -20,11 +20,11 @@ struct MedicineDetailView: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 // Title : Changer d'emplacement❗️ -> BarTitle ✅
-//                Text(medicine.name)
-//                    .font(.headline)
-//                    .padding(.top, 20)
-//                    .accessibilityLabel("Medicine Name: \(medicine.name)")
-//                    .padding(.leading)
+                //                Text(medicine.name)
+                //                    .font(.headline)
+                //                    .padding(.top, 20)
+                //                    .accessibilityLabel("Medicine Name: \(medicine.name)")
+                //                    .padding(.leading)
                 
                 // Medicine Name
                 medicineNameSection
