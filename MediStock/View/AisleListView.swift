@@ -28,9 +28,6 @@ struct AisleListView: View {
                                     .accessibilityLabel("Aisle \(aisle)")
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
-                            .navigationTitle("")
-                            .navigationBarBackButtonHidden(true)
-
                         }
                         .onDelete { IndexSet in
                             print("Indices reçus pour suppression : \(IndexSet)")
@@ -39,6 +36,7 @@ struct AisleListView: View {
                             }
                         }
                     }
+                    .navigationBarTitle("")
                 }
                 
                 Button(action: {

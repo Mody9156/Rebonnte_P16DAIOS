@@ -95,7 +95,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 print("Aisle sélectionnée n'existe pas")
             }
             for id in query.documents {
-                let QueryId = id
                 let documentId = id.documentID
                 
                 do{

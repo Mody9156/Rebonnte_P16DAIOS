@@ -65,13 +65,9 @@ struct MedicineListView: View {
             .padding()
         }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack {
-                    Image(systemName: "arrow.left")
-                                    .foregroundColor(.blue)
+            ToolbarItem(placement: .principal) {
                     Text(aisle)
                         .foregroundStyle(.blue)
-                }
             }
         }
     }
