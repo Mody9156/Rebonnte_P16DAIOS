@@ -11,14 +11,14 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                Color("BackgroundButton")
-                    .ignoresSafeArea()
+//                Color("BackgroundButton")
+//                    .ignoresSafeArea()
                 
                 VStack {
                     Text("Aisles")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                     
                     List {
                         ForEach(aisles, id: \.self) { aisle in
