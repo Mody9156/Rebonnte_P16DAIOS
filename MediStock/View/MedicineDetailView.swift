@@ -19,12 +19,12 @@ struct MedicineDetailView: View {
         ZStack {
             
             VStack(alignment: .leading, spacing: 20) {
-                // Title
-                Text(medicine.name)
-                    .font(.headline)
-                    .padding(.top, 20)
-                    .accessibilityLabel("Medicine Name: \(medicine.name)")
-                    .padding(.leading)
+                // Title : Changer d'emplacement❗️ -> BarTitle ✅
+//                Text(medicine.name)
+//                    .font(.headline)
+//                    .padding(.top, 20)
+//                    .accessibilityLabel("Medicine Name: \(medicine.name)")
+//                    .padding(.leading)
                 
                 // Medicine Name
                 medicineNameSection
@@ -39,6 +39,7 @@ struct MedicineDetailView: View {
                 historySection
                 
             }
+            .padding(.horizontal)
             .padding(.vertical)
             .navigationBarTitle("Medicine Details", displayMode: .inline)
             .onAppear{
