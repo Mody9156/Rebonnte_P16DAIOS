@@ -76,16 +76,18 @@ struct ButtonForUpdateSession: View {
                 }
             }) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(text == "Login" ? .blue : .clear)
-                        .frame(width:100, height: 40)
-                        .opacity(0.6)
-                        .border(.blue,width: 2)
-                            
+//                    RoundedRectangle(cornerRadius: 12)
+//                        .padding()
+//                        .border(.blue,width: 2)
+//                        .foregroundColor(text == "Login" ? .blue : .clear)
+//                        .frame(width:100, height: 40)
+//                        .opacity(0.6)
+//                        
 
                     Text(text)
                         .foregroundColor(text == "Login" ? .white : .blue)
                         .opacity(text == "Login" ? 1 : 0.6)
+                        
                 }
             }
         
