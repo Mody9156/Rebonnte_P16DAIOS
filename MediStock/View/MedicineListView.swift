@@ -13,9 +13,8 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            LinearGradient(gradient: Gradient(colors: [.blue, .white]), startPoint: .top, endPoint: .bottom)
+            Color("BackgroundButton")
                 .ignoresSafeArea()
-            
             VStack {
                 Text(aisle)
                     .font(.largeTitle)
