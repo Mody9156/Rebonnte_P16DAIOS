@@ -50,7 +50,8 @@ struct AisleListView: View {
                     ZStack {
                         Circle()
                             .frame(height: 60)
-                        
+                            .foregroundStyle(.blue)
+                            .opacity(0.9)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 40, height: 40)

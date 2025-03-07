@@ -100,7 +100,7 @@ extension MedicineDetailView {
                             Text(LocalizedStringKey("Name")) // prise en charge des langues
                                 .padding(.horizontal,5)
                                 .background()
-                                .background(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
+                                .background(.gray.opacity(0.1))
                                 .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .black : Color.primary)
                                 .padding(.leading)
                                 .offset(y:isTyping ? -27:0)
@@ -205,6 +205,7 @@ extension MedicineDetailView {
                         Text(LocalizedStringKey("Name")) // prise en charge des langues
                             .padding(.horizontal,5)
                             .background()
+                            .background(.gray.opacity(0.1))
                             .foregroundStyle(isTypingMedicine  || !medicine.aisle.isEmpty ? .black : .black)
                             .padding(.leading)
                             .offset(y:isTypingMedicine ? -27:0)
