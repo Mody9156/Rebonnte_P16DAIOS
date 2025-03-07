@@ -8,17 +8,28 @@ struct MedicineDetailView: View {
     @FocusState var isTyping : Bool
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
-    @State var animate : Bool = false
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
             $0.medicineId == medicine.id
         })
     }
     
+    @State var animation : Bool = false
+
     var body: some View {
         ZStack {
             Circle()
-                
+                .frame(height: 200)
+                .position(x: 1, y: 1)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 400, y: 800)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
             VStack(alignment: .leading, spacing: 20) {
                 // Medicine Name
                 medicineNameSection
@@ -31,12 +42,16 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
+                
+                
+               
             }
             .padding(.horizontal)
             .padding(.vertical)
             .navigationBarTitle("Medicine Details", displayMode: .inline)
             .onAppear{
                 medicineStockViewModel.fetchHistory(for: medicine)
+                
             }
             .onChange(of: medicine) { newMedicine in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -58,7 +73,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.largeTitle)
                 .font(.headline)
-                .foregroundStyle(.blue)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Name Label")
             
             VStack {
@@ -73,8 +88,8 @@ extension MedicineDetailView {
                             .padding(.leading)
                             .frame(height: 55)
                             .focused($isTyping)
-                            .foregroundStyle(isTyping ? .blue : Color.clear)
-                            .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                            .foregroundStyle(isTyping ? .black : Color.clear)
+                            .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .accessibilityLabel("Medicine Name Field")
                             .accessibilityHint("Edit the name of the medicine.")
                             
@@ -82,7 +97,7 @@ extension MedicineDetailView {
                                 .padding(.horizontal,5)
                                 .background()
                                 .background(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
-                                .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : Color.primary)
+                                .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .black : Color.primary)
                                 .padding(.leading)
                                 .offset(y:isTyping ? -27:0)
                                 .onTapGesture {
@@ -124,7 +139,7 @@ extension MedicineDetailView {
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .frame(width: 100,height: 55)
-                    .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                    .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
@@ -161,7 +176,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Aisle"))
                 .font(.largeTitle)
                 .font(.headline)
-                .foregroundStyle(.blue)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Aisle Label")
             
             
@@ -177,16 +192,16 @@ extension MedicineDetailView {
                             })
                             .padding(.leading)
                             .frame(height: 55)
-                            .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                            .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .focused($isTypingMedicine)
-                            .foregroundStyle(isTypingMedicine ? .blue: .clear)
+                            .foregroundStyle(isTypingMedicine ? .black: .clear)
                             .accessibilityLabel("Aisle Field")
                             .accessibilityHint("Edit the aisle where the medicine is located.")
                         
                         Text(LocalizedStringKey("Name")) // prise en charge des langues
                             .padding(.horizontal,5)
                             .background()
-                            .foregroundStyle(isTypingMedicine  || !medicine.aisle.isEmpty ? .blue : .black)
+                            .foregroundStyle(isTypingMedicine  || !medicine.aisle.isEmpty ? .black : .black)
                             .padding(.leading)
                             .offset(y:isTypingMedicine ? -27:0)
                             .onTapGesture {
@@ -218,12 +233,16 @@ extension MedicineDetailView {
             Button(action:{
                 isPresented = true
             }){
-                HStack {
-                    Image(systemName: "arrow.up.backward.bottomtrailing.rectangle.fill")
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                    Text("History")
+                
+                ZStack {
+                    Rectangle()
+                        .frame(height: 45)
+                        .foregroundColor(.blue)
+                        .cornerRadius(15)
+                        
+                    Text("Show History")
                         .font(.title3)
+                        .foregroundStyle(.white)
                 }
             }
             .sheet(isPresented: $isPresented) {
