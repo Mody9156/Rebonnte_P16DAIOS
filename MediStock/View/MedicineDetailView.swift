@@ -117,12 +117,12 @@ extension MedicineDetailView {
                         Circle()
                             .frame(width:30,height: 30)
                             .opacity(0.6)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.red)
                         Image(systemName: "minus")
                             .resizable()
                             .frame(width: 20,height: 4)
                             .font(.title)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.white)
                     }
                 }
                 .accessibilityLabel("Decrease stock")
@@ -143,13 +143,13 @@ extension MedicineDetailView {
                     ZStack {
                         Circle()
                             .frame(width:30,height: 30)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.green)
                             .opacity(0.6)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 20,height: 20)
                             .font(.title)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.white)
                     }
                 }
                 .accessibilityLabel("Increase stock")
