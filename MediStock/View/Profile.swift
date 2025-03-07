@@ -54,7 +54,7 @@ struct Profile: View {
                 Button(action:{
                     Task {
                         try await authViewModel.disableAutoLogin()
-                      }
+                    }
                 }) {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .resizable()

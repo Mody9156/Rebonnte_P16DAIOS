@@ -53,6 +53,21 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
+    func setDataTiAisle(user: String, aisle: [String]) async throws -> [Medicine] {
+        
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...100)))")
+        do {
+                try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+                print("Graduation vous venez d'ajouter: \(medicine)")
+            
+            
+        } catch let error {
+            print("Error adding document: \(error)")
+        }
+        return [medicine]
+    }
+    
+    
     func setDataToList(user: String, aisle: String) async throws -> [Medicine] {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
         do {
@@ -66,6 +81,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
+  
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
@@ -95,7 +111,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 print("Aisle sélectionnée n'existe pas")
             }
             for id in query.documents {
-                let QueryId = id
                 let documentId = id.documentID
                 
                 do{

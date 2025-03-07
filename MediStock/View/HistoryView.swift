@@ -9,11 +9,24 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-   
+    
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue,Color("BackgroundColor")]), startPoint: .top, endPoint: .bottom)
-            .ignoresSafeArea()
+            Color(.gray)
+                .ignoresSafeArea()
+                .opacity(0.1)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 1, y: 1)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 400, y: 800)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
             
             ScrollView {
                 VStack (alignment:.leading){
@@ -21,17 +34,17 @@ struct HistoryView: View {
                         HStack {
                             VStack {
                                 Image(systemName: "circle.fill")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.blue)
                                 HStack {
                                     Divider()
                                         .frame(width:4)
-                                        .overlay(.white)
+                                        .overlay(.blue)
                                 }
                             }
                             
                             VStack(alignment: .leading,spacing: 5) {
                                 Text(entry.action)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.blue)
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .accessibilityLabel("Action: \(entry.action)")
@@ -43,7 +56,7 @@ struct HistoryView: View {
                                 
                                 TextForShowDetails(value: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
-                                    
+                                
                             }
                             .padding()
                             .cornerRadius(10)
@@ -54,13 +67,14 @@ struct HistoryView: View {
                         }
                     }
                 }
+                .padding(.top)
             }
         }
     }
 }
 
 #Preview{
-        HistoryView(filterMedicine: [
+    HistoryView(filterMedicine: [
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
@@ -72,7 +86,7 @@ struct HistoryView: View {
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)
-                                
+        
     ])
 }
 

@@ -8,24 +8,32 @@ struct MedicineDetailView: View {
     @FocusState var isTyping : Bool
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
-    
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
             $0.medicineId == medicine.id
         })
     }
     
+    @State var animation : Bool = false
+    
     var body: some View {
         ZStack {
-          
+            Color(.gray)
+                .ignoresSafeArea()
+                .opacity(0.1)
+            Circle()
+                .frame(height: 200)
+                .position(x: 1, y: 1)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 400, y: 800)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
             VStack(alignment: .leading, spacing: 20) {
-                // Title
-                Text(medicine.name)
-                    .font(.headline)
-                    .padding(.top, 20)
-                    .accessibilityLabel("Medicine Name: \(medicine.name)")
-                    .padding(.leading)
-                
                 // Medicine Name
                 medicineNameSection
                 
@@ -38,11 +46,15 @@ struct MedicineDetailView: View {
                 // History Section
                 historySection
                 
+                
+                
             }
+            .padding(.horizontal)
             .padding(.vertical)
             .navigationBarTitle("Medicine Details", displayMode: .inline)
             .onAppear{
                 medicineStockViewModel.fetchHistory(for: medicine)
+                
             }
             .onChange(of: medicine) { newMedicine in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -54,6 +66,7 @@ struct MedicineDetailView: View {
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Medicine Details")
             .accessibilityHint("Displays detailed information about the medicine.")
+            
         }
     }
 }
@@ -64,25 +77,11 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Name Label")
             
-            TextField("Name", text: $medicine.name, onCommit: {
-                Task{
-                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                    
-                }
-            })
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding(.bottom, 10)
-            .accessibilityLabel("Medicine Name Field")
-            .accessibilityHint("Edit the name of the medicine.")
             VStack {
                 ZStack(alignment: .leading) {
-                    TextField("", text: $medicine.name, onCommit: {
-                        Task{
-                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                        }
-                    })
                     VStack {
                         ZStack(alignment: .leading) {
                             TextField("", text: $medicine.name, onCommit: {
@@ -93,27 +92,16 @@ extension MedicineDetailView {
                             .padding(.leading)
                             .frame(height: 55)
                             .focused($isTyping)
-                            .foregroundStyle(isTyping ? .blue : Color.clear)
-                            .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                            .foregroundStyle(isTyping ? .black : Color.clear)
+                            .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .accessibilityLabel("Medicine Name Field")
                             .accessibilityHint("Edit the name of the medicine.")
                             
                             Text(LocalizedStringKey("Name")) // prise en charge des langues
                                 .padding(.horizontal,5)
                                 .background()
-                                .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : .black)
-                                .padding(.leading)
-                                .frame(height: 55)
-                                .focused($isTyping)
-                                .foregroundStyle(isTyping ? .blue : Color.clear)
-                                .background(isTyping ? .blue : Color.primary, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 2))
-                                .accessibilityLabel("Medicine Name Field")
-                                .accessibilityHint("Edit the name of the medicine.")
-                            
-                            Text(LocalizedStringKey("Name")) // prise en charge des langues
-                                .padding(.horizontal,5)
-                                .background(.black.opacity(isTyping || !medicine.name.isEmpty ? 1:0))
-                                .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .blue : Color.primary)
+                                .background(.gray.opacity(0.1))
+                                .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .black : Color.primary)
                                 .padding(.leading)
                                 .offset(y:isTyping ? -27:0)
                                 .onTapGesture {
@@ -124,7 +112,6 @@ extension MedicineDetailView {
                         .animation(.linear(duration: 0.2),value: isTyping)
                         
                     }
-                    .padding(.horizontal)
                 }
             }
         }
@@ -132,7 +119,9 @@ extension MedicineDetailView {
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
+                .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
             
             HStack{
@@ -140,14 +129,15 @@ extension MedicineDetailView {
                 Button(action: decreaseStock) {
                     ZStack {
                         Circle()
-                            .frame(width:30,height: 30)
-                            .opacity(0.6)
+                            .frame(height: 50)
                             .foregroundStyle(.blue)
+                            .opacity(0.8)
+                        
                         Image(systemName: "minus")
                             .resizable()
                             .frame(width: 20,height: 4)
                             .font(.title)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.white)
                     }
                 }
                 .accessibilityLabel("Decrease stock")
@@ -155,7 +145,7 @@ extension MedicineDetailView {
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .frame(width: 100,height: 55)
-                    .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                    .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
@@ -167,14 +157,14 @@ extension MedicineDetailView {
                 Button(action: increaseStock) {
                     ZStack {
                         Circle()
-                            .frame(width:30,height: 30)
+                            .frame(height: 50)
                             .foregroundStyle(.blue)
-                            .opacity(0.6)
+                            .opacity(0.8)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 20,height: 20)
                             .font(.title)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.white)
                     }
                 }
                 .accessibilityLabel("Increase stock")
@@ -182,9 +172,7 @@ extension MedicineDetailView {
                 Spacer()
             }
             
-            .padding(.bottom, 10)
         }
-        .padding(.horizontal)
     }
     
     private var medicineAisleSection: some View {
@@ -192,25 +180,12 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Aisle"))
                 .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Aisle Label")
             
-            TextField("Aisle", text: $medicine.aisle)
-                .onChange(of: medicine, perform: { _ in
-                    Task{
-                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                    }
-                })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.bottom, 10)
-                .accessibilityLabel("Aisle Field")
-                .accessibilityHint("Edit the aisle where the medicine is located.")
             
             VStack {
                 VStack(alignment: .leading) {
-                    Text(LocalizedStringKey("Aisle"))
-                        .font(.headline)
-                        .font(.headline)
-                        .accessibilityLabel("Aisle Label")
                     
                     ZStack (alignment: .leading) {
                         TextField("", text: $medicine.aisle)
@@ -221,16 +196,17 @@ extension MedicineDetailView {
                             })
                             .padding(.leading)
                             .frame(height: 55)
-                            .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                            .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .focused($isTypingMedicine)
-                            .foregroundStyle(isTypingMedicine ? .blue: .clear)
+                            .foregroundStyle(isTypingMedicine ? .black: .clear)
                             .accessibilityLabel("Aisle Field")
                             .accessibilityHint("Edit the aisle where the medicine is located.")
                         
                         Text(LocalizedStringKey("Name")) // prise en charge des langues
                             .padding(.horizontal,5)
                             .background()
-                            .foregroundStyle(isTypingMedicine  || !medicine.aisle.isEmpty ? .blue : .black)
+                            .background(.gray.opacity(0.1))
+                            .foregroundStyle(isTypingMedicine  || !medicine.aisle.isEmpty ? .black : .black)
                             .padding(.leading)
                             .offset(y:isTypingMedicine ? -27:0)
                             .onTapGesture {
@@ -241,50 +217,53 @@ extension MedicineDetailView {
                     .animation(.linear(duration: 0.2),value: isTyping)
                     
                 }
-                .padding(.horizontal)
             }
         }
     }
-        private func decreaseStock(){
-            guard let id = medicine.id else{return}
-            medicineStockViewModel.decreaseStock(medicine, user: id)
-            medicine.stock = max(0, medicine.stock - 1)
-        }
-        
-        private func increaseStock(){
-            guard let id = medicine.id else{return}
-            medicineStockViewModel.increaseStock(medicine, user: id)
-            medicine.stock += 1
-        }
+    private func decreaseStock(){
+        guard let id = medicine.id else{return}
+        medicineStockViewModel.decreaseStock(medicine, user: id)
+        medicine.stock = max(0, medicine.stock - 1)
+    }
     
-        private var historySection: some View {
-            VStack(alignment: .leading) {
-                Button(action:{
-                    isPresented = true
-                }){
-                    HStack {
-                        Image(systemName: "arrow.up.backward.bottomtrailing.rectangle.fill")
-                            .resizable()
-                            .frame(width: 40,height: 40)
-                        Text("History")
-                            .font(.title3)
-                    }
-                }
-                .sheet(isPresented: $isPresented) {
-                    HistoryView(filterMedicine: filterMedicine)
+    private func increaseStock(){
+        guard let id = medicine.id else{return}
+        medicineStockViewModel.increaseStock(medicine, user: id)
+        medicine.stock += 1
+    }
+    
+    private var historySection: some View {
+        VStack(alignment: .leading) {
+            Button(action:{
+                isPresented = true
+            }){
+                
+                ZStack {
+                    Rectangle()
+                        .frame(height: 45)
+                        .foregroundColor(.blue)
+                        .cornerRadius(15)
+                    
+                    Text("Show History")
+                        .font(.title3)
+                        .foregroundStyle(.white)
                 }
             }
-            .padding()
+            .sheet(isPresented: $isPresented) {
+                HistoryView(filterMedicine: filterMedicine)
+            }
         }
+        .padding()
+    }
     
 }
 
-//#Preview{
-//    let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-//    //        let history = [
-//    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-//    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
-//    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
-//    let sampleViewModel = MedicineStockViewModel()
-//    MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
-//}
+#Preview{
+    let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
+    //        let history = [
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update"),
+    //            HistoryEntry(medicineId: "gdfgfj84hrt", user: "Medicine 1", action: "Increment new user", details: "There are new update")]
+    let sampleViewModel = MedicineStockViewModel()
+    MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
+}
