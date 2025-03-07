@@ -18,6 +18,9 @@ struct MedicineDetailView: View {
 
     var body: some View {
         ZStack {
+            Color(.gray)
+                .ignoresSafeArea()
+                .opacity(0.1)
             Circle()
                 .frame(height: 200)
                 .position(x: 1, y: 1)
@@ -63,6 +66,7 @@ struct MedicineDetailView: View {
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Medicine Details")
             .accessibilityHint("Displays detailed information about the medicine.")
+            
         }
     }
 }
@@ -108,7 +112,6 @@ extension MedicineDetailView {
                         .animation(.linear(duration: 0.2),value: isTyping)
                         
                     }
-                    .padding(.horizontal)
                 }
             }
         }
@@ -116,7 +119,9 @@ extension MedicineDetailView {
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
+                .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
             
             HStack{
@@ -125,7 +130,9 @@ extension MedicineDetailView {
                     ZStack {
                         Circle()
                             .frame(height: 50)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.blue)
+                            .opacity(0.8)
+
                         Image(systemName: "minus")
                             .resizable()
                             .frame(width: 20,height: 4)
@@ -151,7 +158,8 @@ extension MedicineDetailView {
                     ZStack {
                         Circle()
                             .frame(height: 50)
-                            .foregroundStyle(.green)
+                            .foregroundStyle(.blue)
+                            .opacity(0.8)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 20,height: 20)
@@ -164,9 +172,7 @@ extension MedicineDetailView {
                 Spacer()
             }
             
-            .padding(.bottom, 10)
         }
-        .padding(.horizontal)
     }
     
     private var medicineAisleSection: some View {
@@ -210,7 +216,6 @@ extension MedicineDetailView {
                     .animation(.linear(duration: 0.2),value: isTyping)
                     
                 }
-                .padding(.horizontal)
             }
         }
     }
