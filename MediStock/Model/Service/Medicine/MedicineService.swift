@@ -54,18 +54,12 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     func setDataTiAisle(user: String, aisle: [String]) async throws -> [Medicine] {
-        let aislesArray : [String] = aisle
-        let number = Int.random(in: 1...10)
-        let maxNumber = Array(0...10)
         
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(number))")
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...100)))")
         do {
-            if !maxNumber.contains(number){
                 try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
                 print("Graduation vous venez d'ajouter: \(medicine)")
-            }else{
-                print("Vosu ne pouvez pas ajouter d'élément supplémentaire car votre liste est pleine")
-            }
+            
             
         } catch let error {
             print("Error adding document: \(error)")
