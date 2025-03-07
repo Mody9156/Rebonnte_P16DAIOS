@@ -124,8 +124,7 @@ extension MedicineDetailView {
                 Button(action: decreaseStock) {
                     ZStack {
                         Circle()
-                            .frame(width:30,height: 30)
-                            .opacity(0.6)
+                            .frame(height: 50)
                             .foregroundStyle(.red)
                         Image(systemName: "minus")
                             .resizable()
@@ -151,9 +150,8 @@ extension MedicineDetailView {
                 Button(action: increaseStock) {
                     ZStack {
                         Circle()
-                            .frame(width:30,height: 30)
+                            .frame(height: 50)
                             .foregroundStyle(.green)
-                            .opacity(0.6)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 20,height: 20)
