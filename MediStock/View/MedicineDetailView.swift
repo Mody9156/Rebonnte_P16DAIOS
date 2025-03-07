@@ -8,7 +8,7 @@ struct MedicineDetailView: View {
     @FocusState var isTyping : Bool
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
-    
+    @State var animate : Bool = false
     var filterMedicine : [HistoryEntry]{
         return  medicineStockViewModel.history.filter ({
             $0.medicineId == medicine.id
@@ -17,15 +17,9 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
-            
-            VStack(alignment: .leading, spacing: 20) {
-                // Title : Changer d'emplacement❗️ -> BarTitle ✅
-                //                Text(medicine.name)
-                //                    .font(.headline)
-                //                    .padding(.top, 20)
-                //                    .accessibilityLabel("Medicine Name: \(medicine.name)")
-                //                    .padding(.leading)
+            Circle()
                 
+            VStack(alignment: .leading, spacing: 20) {
                 // Medicine Name
                 medicineNameSection
                 
@@ -37,7 +31,6 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
-                
             }
             .padding(.horizontal)
             .padding(.vertical)
