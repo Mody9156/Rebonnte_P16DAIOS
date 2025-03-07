@@ -65,6 +65,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
                 .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.blue)
                 .accessibilityLabel("Name Label")
             
             VStack {
@@ -130,7 +131,7 @@ extension MedicineDetailView {
                 
                 TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
                     .frame(width: 100,height: 55)
-                    .background(.black, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                    .background(.blue, in:RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
@@ -167,6 +168,7 @@ extension MedicineDetailView {
             Text(LocalizedStringKey("Aisle"))
                 .font(.largeTitle)
                 .font(.headline)
+                .foregroundStyle(.blue)
                 .accessibilityLabel("Aisle Label")
             
             
