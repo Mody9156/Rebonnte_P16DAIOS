@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-   
+    
     var body: some View {
         ZStack {
             Color(.gray)
@@ -56,7 +56,7 @@ struct HistoryView: View {
                                 
                                 TextForShowDetails(value: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
-                                    
+                                
                             }
                             .padding()
                             .cornerRadius(10)
@@ -67,13 +67,14 @@ struct HistoryView: View {
                         }
                     }
                 }
+                .padding(.top)
             }
         }
     }
 }
 
 #Preview{
-        HistoryView(filterMedicine: [
+    HistoryView(filterMedicine: [
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
@@ -85,7 +86,7 @@ struct HistoryView: View {
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)
-                                
+        
     ])
 }
 

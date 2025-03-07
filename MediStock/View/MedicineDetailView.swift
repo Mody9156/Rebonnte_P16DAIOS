@@ -15,7 +15,7 @@ struct MedicineDetailView: View {
     }
     
     @State var animation : Bool = false
-
+    
     var body: some View {
         ZStack {
             Color(.gray)
@@ -47,7 +47,7 @@ struct MedicineDetailView: View {
                 historySection
                 
                 
-               
+                
             }
             .padding(.horizontal)
             .padding(.vertical)
@@ -132,7 +132,7 @@ extension MedicineDetailView {
                             .frame(height: 50)
                             .foregroundStyle(.blue)
                             .opacity(0.8)
-
+                        
                         Image(systemName: "minus")
                             .resizable()
                             .frame(width: 20,height: 4)
@@ -242,7 +242,7 @@ extension MedicineDetailView {
                         .frame(height: 45)
                         .foregroundColor(.blue)
                         .cornerRadius(15)
-                        
+                    
                     Text("Show History")
                         .font(.title3)
                         .foregroundStyle(.white)
