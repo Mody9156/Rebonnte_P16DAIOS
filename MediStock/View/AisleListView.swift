@@ -5,9 +5,8 @@ struct AisleListView: View {
     @AppStorage("email") var identity : String = "email"
     
     var aisles: [String] {
-        medicineStockViewModel.aisles.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+        medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
- 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
@@ -29,10 +28,14 @@ struct AisleListView: View {
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
                         }
-                        .onDelete { IndexSet in
-                            print("Indices reçus pour suppression : \(IndexSet)")
-                            Task{
-                                try? await medicineStockViewModel.deleteAisle(at: IndexSet)
+                        .onDelete { indexSet in
+                            let originalIndices = indexSet.compactMap { indexSet in
+                                medicineStockViewModel.aisles.firstIndex(of: aisles[indexSet])
+                            }
+                            print("Indices reçus pour suppression : \(indexSet)")
+                            
+                            Task {
+                                try? await medicineStockViewModel.deleteAisle(at: IndexSet(originalIndices)) // Supprimer avec les noms réels
                             }
                         }
                     }
