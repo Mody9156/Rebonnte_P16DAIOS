@@ -100,6 +100,7 @@ struct AllMedicinesView: View {
                             .accessibilityHint("Adds a new random medicine to the list.")
                     }
                 }
+                .padding()
                 .navigationBarTitle("All Medicines")
                 .accessibilityLabel("All Medicines View")
                 .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
