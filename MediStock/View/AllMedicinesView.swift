@@ -22,28 +22,33 @@ struct AllMedicinesView: View {
                             .accessibilityHint("Enter the name of the medicine to filter the list.")
                         
                         Spacer()
-                        
-                        Menu("\(Image(systemName: "arrow.up.arrow.down"))") {
-                            ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
-                                Button(index.rawValue){
-                                    Task{
-                                        try await medicineStockViewModel.trieElements(option: index)
-                                    }
-                                }
-                                .accessibilityLabel("Sort by \(index.rawValue)")
-                                .accessibilityHint("Sort the medicines based on \(index.rawValue).")
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.trailing, 10)
-                        .accessibilityLabel("Sorting options")
-                        .accessibilityHint("Tap to choose how to sort the medicines.")
+//                        
+//                        Menu("\(Image(systemName: "arrow.up.arrow.down"))") {
+//                            ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
+//                                Button(index.rawValue){
+//                                    Task{
+//                                        try await medicineStockViewModel.trieElements(option: index)
+//                                    }
+//                                }
+//                                .accessibilityLabel("Sort by \(index.rawValue)")
+//                                .accessibilityHint("Sort the medicines based on \(index.rawValue).")
+//                            }
+//                        }
+//                        .pickerStyle(MenuPickerStyle())
+//                        .padding(.trailing, 10)
+//                        .accessibilityLabel("Sorting options")
+//                        .accessibilityHint("Tap to choose how to sort the medicines.")
                         
                     }
                     .padding(.top, 10)
                     
-                    FilterButton()
-
+                    VStack(alignment:.leading)  {
+                        HStack{
+                            ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
+                                FilterButton(medicineStockViewModel: medicineStockViewModel, index:index.rawValue)
+                            }
+                        }
+                    }
                     // Liste des Médicaments
                     List {
                         ForEach(searchResult, id: \.id) { medicine in
@@ -130,10 +135,13 @@ struct AllMedicinesView: View {
 }
 
 struct FilterButton: View {
+    @StateObject var medicineStockViewModel : MedicineStockViewModel
+    var index : String
+    @State var isSelected : Bool = false
     var body: some View {
         Button {
             Task{
-                try await medicineStockViewModel.trieElements(option: index)
+                try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: index) ?? .noFilter)
             }
         } label: {
             ZStack {
@@ -142,9 +150,15 @@ struct FilterButton: View {
                     .frame(width: 80, height: 44)
                     .cornerRadius(12)
                 
-                Text("CLic here")
+                Text("\(index)")
                     .foregroundStyle(.white)
             }
         }
+        .onAppear {
+            isSelected.toggle()
+        }
+        .accessibilityLabel("Sort by \(index)")
+        .accessibilityHint("Sort the medicines based on \(index).")
+      
     }
 }
