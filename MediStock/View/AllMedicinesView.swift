@@ -4,7 +4,8 @@ struct AllMedicinesView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
-    
+    @State var isSelected : String = ""
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -22,30 +23,14 @@ struct AllMedicinesView: View {
                             .accessibilityHint("Enter the name of the medicine to filter the list.")
                         
                         Spacer()
-//                        
-//                        Menu("\(Image(systemName: "arrow.up.arrow.down"))") {
-//                            ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
-//                                Button(index.rawValue){
-//                                    Task{
-//                                        try await medicineStockViewModel.trieElements(option: index)
-//                                    }
-//                                }
-//                                .accessibilityLabel("Sort by \(index.rawValue)")
-//                                .accessibilityHint("Sort the medicines based on \(index.rawValue).")
-//                            }
-//                        }
-//                        .pickerStyle(MenuPickerStyle())
-//                        .padding(.trailing, 10)
-//                        .accessibilityLabel("Sorting options")
-//                        .accessibilityHint("Tap to choose how to sort the medicines.")
-                        
+
                     }
                     .padding(.top, 10)
                     
                     VStack(alignment:.leading)  {
                         HStack{
                             ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
-                                FilterButton(medicineStockViewModel: medicineStockViewModel, index:index.rawValue)
+                                FilterButton(medicineStockViewModel: medicineStockViewModel, index:index.rawValue, isSelected:$isSelected)
                             }
                         }
                     }
@@ -137,16 +122,19 @@ struct AllMedicinesView: View {
 struct FilterButton: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var index : String
-    @State var isSelected : Bool = false
+    @Binding var isSelected : String
+    
     var body: some View {
         Button {
             Task{
                 try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: index) ?? .noFilter)
             }
+            isSelected = index
+          
         } label: {
             ZStack {
                 Rectangle()
-                    .fill(Color.green)
+                    .fill(isSelected == index ? Color.green : Color.gray)
                     .frame(width: 80, height: 44)
                     .cornerRadius(12)
                 
@@ -154,11 +142,8 @@ struct FilterButton: View {
                     .foregroundStyle(.white)
             }
         }
-        .onAppear {
-            isSelected.toggle()
-        }
+       
         .accessibilityLabel("Sort by \(index)")
         .accessibilityHint("Sort the medicines based on \(index).")
-      
     }
 }
