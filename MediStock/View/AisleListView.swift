@@ -3,7 +3,6 @@ import SwiftUI
 struct AisleListView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("email") var identity : String = "email"
-    
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }

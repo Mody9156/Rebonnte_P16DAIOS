@@ -5,7 +5,7 @@ struct AllMedicinesView: View {
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
-
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -13,7 +13,7 @@ struct AllMedicinesView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
-                VStack {
+                VStack(alignment: .leading){
                     // Filtrage et Tri
                     HStack {
                         TextField("Filter by name", text: $filterText)
@@ -21,19 +21,19 @@ struct AllMedicinesView: View {
                             .padding(.leading, 10)
                             .accessibilityLabel("Filter medicines")
                             .accessibilityHint("Enter the name of the medicine to filter the list.")
-                        
                         Spacer()
-
                     }
                     .padding(.top, 10)
                     
-                    VStack(alignment:.leading)  {
+                    VStack  {
                         HStack{
                             ForEach(MedicineStockViewModel.FilterOption.allCases, id:\.self){ index in
                                 FilterButton(medicineStockViewModel: medicineStockViewModel, index:index.rawValue, isSelected:$isSelected)
                             }
                         }
                     }
+                    .padding()
+                    
                     // Liste des Médicaments
                     List {
                         ForEach(searchResult, id: \.id) { medicine in
@@ -130,11 +130,11 @@ struct FilterButton: View {
                 try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: index) ?? .noFilter)
             }
             isSelected = index
-          
+            
         } label: {
             ZStack {
                 Rectangle()
-                    .fill(isSelected == index ? Color.green : Color.gray)
+                    .fill(isSelected == index ? Color.blue.opacity(0.7) : Color.black.opacity(0.8))
                     .frame(width: 80, height: 44)
                     .cornerRadius(12)
                 
@@ -142,7 +142,6 @@ struct FilterButton: View {
                     .foregroundStyle(.white)
             }
         }
-       
         .accessibilityLabel("Sort by \(index)")
         .accessibilityHint("Sort the medicines based on \(index).")
     }
