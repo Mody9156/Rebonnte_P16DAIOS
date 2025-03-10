@@ -4,7 +4,7 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-    
+    @Environment(\.dismiss) var dismiss
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             return   Medicine.aisle == aisle
@@ -21,7 +21,8 @@ struct MedicineListView: View {
                 Text(aisle)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.blue)
+                
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -40,6 +41,18 @@ struct MedicineListView: View {
                     .onDelete { IndexSet in
                         Task{
                             try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                        }
+                    }
+                }
+            }
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                            Text(aisle)
                         }
                     }
                 }
