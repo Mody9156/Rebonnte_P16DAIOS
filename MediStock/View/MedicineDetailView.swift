@@ -50,20 +50,20 @@ struct MedicineDetailView: View {
             .padding(.horizontal)
             .padding(.vertical)
             .navigationBarTitle("Medicine Details", displayMode: .inline)
-            .onAppear{
-                medicineStockViewModel.fetchHistory(for: medicine)
-                
-            }
-            .onChange(of: medicine) { newMedicine in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if newMedicine == medicine {
-                        medicineStockViewModel.fetchHistory(for: newMedicine)
-                    }
-                }
-            }
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("Medicine Details")
-            .accessibilityHint("Displays detailed information about the medicine.")
+//            .onAppear{
+//                medicineStockViewModel.fetchHistory(for: medicine)
+//                
+//            }
+//            .onChange(of: medicine) { newMedicine in
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                    if newMedicine == medicine {
+//                        medicineStockViewModel.fetchHistory(for: newMedicine)
+//                    }
+//                }
+//            }
+//            .accessibilityElement(children: .contain)
+//            .accessibilityLabel("Medicine Details")
+//            .accessibilityHint("Displays detailed information about the medicine.")
             
         }
     }

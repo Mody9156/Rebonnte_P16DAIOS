@@ -52,7 +52,7 @@ struct AisleListView: View {
                 
                 Circle()
                     .frame(height: 200)
-                    .position(x: 400, y: 700)
+                    .position(x: 400, y: 780)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
                 
@@ -79,7 +79,9 @@ struct AisleListView: View {
         }
         
         .onAppear {
-            medicineStockViewModel.observeAisles()
+            Task{
+                await  medicineStockViewModel.observeAisles()
+            }
         }
         .accessibilityElement(children: .contain)
     }

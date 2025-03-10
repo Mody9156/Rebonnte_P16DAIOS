@@ -47,22 +47,21 @@ struct MedicineListView: View {
                     }
                 }
             }
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action:{
-                        dismiss()
-                    }){
-                        HStack{
-                            Image(systemName: "chevron.left")
-                            Text(aisle)
-                        }
-                    }
-                }
-            }
-            .navigationTitle("")
-            .navigationBarBackButtonHidden()
+//            .navigationTitle("A")
+//            .navigationBarBackButtonHidden()
 //            .navigationBarHidden(true)
-
+//            .toolbar{
+//                ToolbarItem(placement: .topBarLeading) {
+//                    Button(action:{
+//                        dismiss()
+//                    }){
+//                        HStack{
+//                            Image(systemName: "chevron.left")
+//                            Text(aisle)
+//                        }
+//                    }
+//                }
+//            }
 
                 
             Circle()
@@ -97,7 +96,9 @@ struct MedicineListView: View {
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
-                medicineStockViewModel.observeMedicines()
+                Task{
+                        await medicineStockViewModel.observeMedicines()
+                }
             }
             .padding()
         }

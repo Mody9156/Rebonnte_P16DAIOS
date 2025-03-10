@@ -101,7 +101,9 @@ struct AllMedicinesView: View {
             }
         }
         .onAppear {
-            medicineStockViewModel.observeMedicines()
+            Task{
+                await  medicineStockViewModel.observeMedicines()
+            }
         }
     }
     
