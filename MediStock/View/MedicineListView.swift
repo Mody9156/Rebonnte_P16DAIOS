@@ -13,8 +13,10 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color("BackgroundButton")
+            Color(.gray)
                 .ignoresSafeArea()
+                .opacity(0.1)
+            
             VStack {
                 Text(aisle)
                     .font(.largeTitle)
@@ -42,6 +44,21 @@ struct MedicineListView: View {
                     }
                 }
             }
+            .navigationTitle(aisle)
+            .navigationBarHidden(true)
+
+
+            Circle()
+                .frame(height: 200)
+                .position(x: 1, y: -08)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 400, y: 780)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
             
             Button(action: {
                 Task{
