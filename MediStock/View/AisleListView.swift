@@ -39,7 +39,7 @@ struct AisleListView: View {
                             }
                         }
                     }
-                    .navigationBarTitle("")
+                    .navigationBarTitle("Aisle")
                 }
                 
                 Button(action: {
