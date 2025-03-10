@@ -21,13 +21,13 @@ class MedicineStockViewModel: ObservableObject {
         self.medicines = medicines
     }
     
-    func observeMedicines() async {
+    func observeMedicines()  {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
                 self?.medicines = medicines
         }
     }
     
-    func observeAisles() async {
+    func observeAisles() {
         medicineRepository.fetchAisles { [weak self]  aisles in
                 self?.aisles = aisles
         }

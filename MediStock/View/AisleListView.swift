@@ -43,7 +43,7 @@ struct AisleListView: View {
                 }
                 .navigationTitle("Aisle")
                 .navigationBarHidden(true)
-                
+
                 Circle()
                     .frame(height: 200)
                     .position(x: 1, y: -08)
@@ -77,11 +77,8 @@ struct AisleListView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
         }
-        
         .onAppear {
-            Task{
-                await  medicineStockViewModel.observeAisles()
-            }
+                medicineStockViewModel.observeAisles()
         }
         .accessibilityElement(children: .contain)
     }

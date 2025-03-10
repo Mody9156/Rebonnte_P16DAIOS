@@ -47,7 +47,7 @@ struct MedicineListView: View {
                     }
                 }
             }
-            .navigationTitle("A")
+            .navigationTitle("")
             .navigationBarBackButtonHidden()
             .navigationBarHidden(true)
             .toolbar{
@@ -62,7 +62,6 @@ struct MedicineListView: View {
                     }
                 }
             }
-
                 
             Circle()
                 .frame(height: 200)
@@ -96,13 +95,12 @@ struct MedicineListView: View {
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
-                Task{
-                        await medicineStockViewModel.observeMedicines()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
+                    medicineStockViewModel.observeMedicines()
                 }
             }
             .padding()
         }
-        
     }
 }
 
