@@ -14,26 +14,14 @@ struct AisleListView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 1, y: 1)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 400, y: 800)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                
                 VStack {
-//                    Text("Aisle")
-//                        .font(.largeTitle)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.white)
+                    Text("Aisle")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                        .opacity(0.5)
                     
                     List {
-                        Section {
                         ForEach(aisles, id: \.self) { aisle in
                             NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
                                 
@@ -41,7 +29,6 @@ struct AisleListView: View {
                                     .accessibilityLabel("Aisle \(aisle)")
                                     .accessibilityHint("Tap to view medicines in aisle \(aisle).")
                             }
-                        }
                         }
                         .onDelete { indexSet in
                             let originalIndices = indexSet.compactMap { indexSet in
@@ -54,9 +41,22 @@ struct AisleListView: View {
                             }
                         }
                     }
-                    .navigationTitle("Aisle")
-                    .navigationBarTitleDisplayMode(.inline)
+                    
                 }
+                .navigationTitle("Aisle")
+                .navigationBarHidden(true)
+                
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 1, y: 1)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
+                
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 400, y: 800)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
                 
                 Button(action: {
                     Task{
