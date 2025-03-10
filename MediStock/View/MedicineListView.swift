@@ -4,6 +4,7 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
+    @Environment(\.dismiss) private var dismiss
 
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
@@ -46,6 +47,22 @@ struct MedicineListView: View {
                     }
                 }
             }
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action:{
+                        dismiss()
+                    }){
+                        HStack{
+                            Image(systemName: "chevron.left")
+                            Text(aisle)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("")
+            .navigationBarBackButtonHidden()
+//            .navigationBarHidden(true)
+
 
                 
             Circle()
