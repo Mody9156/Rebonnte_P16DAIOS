@@ -32,36 +32,37 @@ struct Profile: View {
 
             
             VStack (alignment: .center){
-                VStack (alignment: .leading){
+                VStack{
                     Text("Account")
                         .foregroundStyle(.blue)
-                        .font(.headline)
+                        .font(.largeTitle)
                         .fontWeight(.heavy)
                         .padding()
                     
-                    ZStack(alignment: .leading){
+                    ZStack{
                         RoundedRectangle(cornerRadius: 12)
-                            .frame(height: 80)
-                            .foregroundStyle(.white)
+                            .frame(height: 110)
+                            .foregroundStyle(.blue)
                             .opacity(0.4)
                         
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
-                                .frame(width: 50,height: 50)
+                                .frame(width: 101,height: 101)
                                 .foregroundStyle(.blue)
+                            
                             Spacer()
+                            
                             VStack(alignment: .leading){
                                 Text("Email Adresse: ")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.blue)
                                 Text(identity)
                                     .foregroundColor(.blue)
                             }
                             Spacer()
                         }
-                        .padding(.horizontal)
+                        .padding()
                     }
-                    .padding()
                 }
                 Spacer()
                 
@@ -70,10 +71,14 @@ struct Profile: View {
                         try await authViewModel.disableAutoLogin()
                     }
                 }) {
-                    Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .resizable()
-                        .frame(width: 50,height: 50)
-                        .foregroundStyle(.blue)
+                    Text("Se Déconnecter")
+                               .font(.headline)
+                               .frame(maxWidth: .infinity)
+                               .padding()
+                               .background(Color.blue)
+                               .foregroundColor(.white)
+                               .cornerRadius(10)
+                               .shadow(radius: 5)
                 }
             }
             .padding()
