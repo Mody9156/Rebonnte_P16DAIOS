@@ -41,7 +41,6 @@ struct AisleListView: View {
                             }
                         }
                     }
-                    
                 }
                 .navigationTitle("Aisle")
                 .navigationBarHidden(true)

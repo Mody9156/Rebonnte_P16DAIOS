@@ -72,13 +72,13 @@ struct AllMedicinesView: View {
                 
                 Circle()
                     .frame(height: 200)
-                    .position(x: 1, y: 1)
+                    .position(x: 1, y: -87)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
                 
                 Circle()
                     .frame(height: 200)
-                    .position(x: 400, y: 700)
+                    .position(x: 400, y: 710)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
                 
