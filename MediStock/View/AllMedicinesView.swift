@@ -132,7 +132,9 @@ struct AllMedicinesView: View {
 struct FilterButton: View {
     var body: some View {
         Button {
-            
+            Task{
+                try await medicineStockViewModel.trieElements(option: index)
+            }
         } label: {
             ZStack {
                 Rectangle()
