@@ -21,7 +21,9 @@ struct MedicineListView: View {
                 Text(aisle)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.blue)
+                    .opacity(0.5)
+                
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -44,6 +46,8 @@ struct MedicineListView: View {
                     }
                 }
             }
+            .navigationTitle("Aisle")
+            .navigationBarHidden(true)
             
             Circle()
                 .frame(height: 200)
