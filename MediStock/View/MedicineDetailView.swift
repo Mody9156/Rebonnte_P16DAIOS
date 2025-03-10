@@ -73,7 +73,7 @@ extension MedicineDetailView {
     private var medicineNameSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Name")) // prise en charge des langues
-                .font(.largeTitle)
+                .font(.title2)
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Name Label")
@@ -117,7 +117,7 @@ extension MedicineDetailView {
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Stock"))
-                .font(.largeTitle)
+                .font(.title2)
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
@@ -176,7 +176,7 @@ extension MedicineDetailView {
     private var medicineAisleSection: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("Aisle"))
-                .font(.largeTitle)
+                .font(.title2)
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Aisle Label")
