@@ -134,7 +134,9 @@ struct FilterButton: View {
         Button {
             
         } label: {
-            
+            ZStack {
+                Text("CLic here")
+            }
         }
     }
 }
