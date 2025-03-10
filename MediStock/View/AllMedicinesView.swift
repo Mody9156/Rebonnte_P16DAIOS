@@ -12,7 +12,6 @@ struct AllMedicinesView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
-             
                 VStack {
                     // Filtrage et Tri
                     HStack {
@@ -68,18 +67,7 @@ struct AllMedicinesView: View {
                     }
                     .accessibilityLabel("List of medicines")
                     .accessibilityHint("Shows all available medicines and their stock.")
-                    .navigationBarItems(trailing: Button(action: {
-                        Task{
-                            try? await medicineStockViewModel.addRandomMedicine(user: identity)
-                        }
-                    }) {
-                        Image(systemName: "plus")
-                            .accessibilityLabel("Add random medicine")
-                            .accessibilityHint("Adds a new random medicine to the list.")
-                    })
-                    .navigationBarTitle("All Medicines")
-                    .accessibilityLabel("All Medicines View")
-                    .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
+                   
                 }
                 
                 Circle()
@@ -93,6 +81,27 @@ struct AllMedicinesView: View {
                     .position(x: 400, y: 700)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
+                
+                Button {
+                    try? await medicineStockViewModel.addRandomMedicine(user: identity)
+                } label: {
+                    ZStack {
+                        Circle()
+                            .frame(height: 60)
+                            .foregroundStyle(.blue)
+                            .opacity(0.9)
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+                            .accessibilityLabel("Add random medicine")
+                            .accessibilityHint("Adds a new random medicine to the list.")
+                    }
+                }
+                .navigationBarTitle("All Medicines")
+                .accessibilityLabel("All Medicines View")
+                .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
+
             }
         }
         .onAppear {
