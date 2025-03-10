@@ -4,8 +4,7 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-    @Environment(\.dismiss) private var dismiss
-
+    
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             return   Medicine.aisle == aisle
@@ -14,17 +13,13 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color(.gray)
+            Color("BackgroundButton")
                 .ignoresSafeArea()
-                .opacity(0.1)
-            
             VStack {
                 Text(aisle)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                    .opacity(0.5)
-                
+                    .foregroundColor(.white)
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -47,33 +42,6 @@ struct MedicineListView: View {
                     }
                 }
             }
-            .navigationTitle("")
-            .navigationBarBackButtonHidden()
-            .navigationBarHidden(true)
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action:{
-                        dismiss()
-                    }){
-                        HStack{
-                            Image(systemName: "chevron.left")
-                            Text(aisle)
-                        }
-                    }
-                }
-            }
-                
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
             
             Button(action: {
                 Task{
@@ -95,12 +63,11 @@ struct MedicineListView: View {
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
-                    medicineStockViewModel.observeMedicines()
-                }
+                medicineStockViewModel.observeMedicines()
             }
             .padding()
         }
+        
     }
 }
 
