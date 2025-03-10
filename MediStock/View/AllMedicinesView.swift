@@ -7,7 +7,7 @@ struct AllMedicinesView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 Color(.gray)
                     .ignoresSafeArea()
                     .opacity(0.1)
@@ -67,7 +67,7 @@ struct AllMedicinesView: View {
                     }
                     .accessibilityLabel("List of medicines")
                     .accessibilityHint("Shows all available medicines and their stock.")
-                   
+                    
                 }
                 
                 Circle()
@@ -83,7 +83,9 @@ struct AllMedicinesView: View {
                     .opacity(0.4)
                 
                 Button {
-                    try? await medicineStockViewModel.addRandomMedicine(user: identity)
+                    Task{
+                        try? await medicineStockViewModel.addRandomMedicine(user: identity)
+                    }
                 } label: {
                     ZStack {
                         Circle()
@@ -101,7 +103,7 @@ struct AllMedicinesView: View {
                 .navigationBarTitle("All Medicines")
                 .accessibilityLabel("All Medicines View")
                 .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
-
+                
             }
         }
         .onAppear {
