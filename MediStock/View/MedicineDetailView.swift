@@ -46,8 +46,6 @@ struct MedicineDetailView: View {
                 // History Section
                 historySection
                 
-                
-                
             }
             .padding(.horizontal)
             .padding(.vertical)
@@ -99,8 +97,8 @@ extension MedicineDetailView {
                             
                             Text(LocalizedStringKey("Name")) // prise en charge des langues
                                 .padding(.horizontal,5)
-                                .background()
                                 .background(.gray.opacity(0.1))
+                                .background()
                                 .foregroundStyle(isTyping  || !medicine.name.isEmpty ? .black : Color.primary)
                                 .padding(.leading)
                                 .offset(y:isTyping ? -27:0)
@@ -255,7 +253,6 @@ extension MedicineDetailView {
         }
         .padding()
     }
-    
 }
 
 #Preview{
