@@ -135,7 +135,13 @@ struct FilterButton: View {
             
         } label: {
             ZStack {
+                Rectangle()
+                    .fill(Color.green)
+                    .frame(width: 80, height: 44)
+                    .cornerRadius(12)
+                
                 Text("CLic here")
+                    .foregroundStyle(.white)
             }
         }
     }
