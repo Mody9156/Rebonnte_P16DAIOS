@@ -47,21 +47,21 @@ struct MedicineListView: View {
                     }
                 }
             }
-//            .navigationTitle("A")
-//            .navigationBarBackButtonHidden()
-//            .navigationBarHidden(true)
-//            .toolbar{
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Button(action:{
-//                        dismiss()
-//                    }){
-//                        HStack{
-//                            Image(systemName: "chevron.left")
-//                            Text(aisle)
-//                        }
-//                    }
-//                }
-//            }
+            .navigationTitle("A")
+            .navigationBarBackButtonHidden()
+            .navigationBarHidden(true)
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action:{
+                        dismiss()
+                    }){
+                        HStack{
+                            Image(systemName: "chevron.left")
+                            Text(aisle)
+                        }
+                    }
+                }
+            }
 
                 
             Circle()
