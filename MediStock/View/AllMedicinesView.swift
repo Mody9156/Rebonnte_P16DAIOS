@@ -41,6 +41,9 @@ struct AllMedicinesView: View {
                         
                     }
                     .padding(.top, 10)
+                    
+                    FilterButton()
+
                     // Liste des Médicaments
                     List {
                         ForEach(searchResult, id: \.id) { medicine in
@@ -124,4 +127,14 @@ struct AllMedicinesView: View {
 
 #Preview {
     AllMedicinesView()
+}
+
+struct FilterButton: View {
+    var body: some View {
+        Button {
+            
+        } label: {
+            
+        }
+    }
 }
