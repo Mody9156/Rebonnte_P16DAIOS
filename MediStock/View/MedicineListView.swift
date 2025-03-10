@@ -4,7 +4,6 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-    
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             return   Medicine.aisle == aisle
@@ -13,13 +12,12 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color("BackgroundButton")
+            Color(.gray)
                 .ignoresSafeArea()
+                .opacity(0.1)
+            
             VStack {
-                Text(aisle)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+                
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -42,6 +40,20 @@ struct MedicineListView: View {
                     }
                 }
             }
+            .navigationTitle(aisle)
+
+
+            Circle()
+                .frame(height: 200)
+                .position(x: 1, y: -83)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
+            
+            Circle()
+                .frame(height: 200)
+                .position(x: 400, y: 710)
+                .foregroundStyle(.blue)
+                .opacity(0.4)
             
             Button(action: {
                 Task{

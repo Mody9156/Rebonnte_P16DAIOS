@@ -21,9 +21,9 @@ class MedicineStockViewModel: ObservableObject {
         self.medicines = medicines
     }
     
-    func observeMedicines() {
+    func observeMedicines()  {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-              self? .medicines = medicines
+                self?.medicines = medicines
         }
     }
     

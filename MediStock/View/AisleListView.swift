@@ -3,21 +3,17 @@ import SwiftUI
 struct AisleListView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("email") var identity : String = "email"
-    
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                Color("BackgroundButton")
+                Color(.gray)
                     .ignoresSafeArea()
+                    .opacity(0.1)
                 
                 VStack {
-                    Text("Aisle")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
                     
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -39,8 +35,20 @@ struct AisleListView: View {
                             }
                         }
                     }
-                    .navigationBarTitle("")
                 }
+                .navigationTitle("Aisle")
+
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 1, y: -140)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
+        
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 400, y: 710)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
                 
                 Button(action: {
                     Task{
@@ -63,9 +71,8 @@ struct AisleListView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
         }
-        
         .onAppear {
-            medicineStockViewModel.observeAisles()
+                medicineStockViewModel.observeAisles()
         }
         .accessibilityElement(children: .contain)
     }
