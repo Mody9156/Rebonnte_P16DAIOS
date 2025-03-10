@@ -34,7 +34,7 @@ struct Profile: View {
             VStack (alignment: .center){
                 VStack (alignment: .leading){
                     Text("Account")
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.blue)
                         .font(.headline)
                         .fontWeight(.heavy)
                         .padding()
