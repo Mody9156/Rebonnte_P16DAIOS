@@ -4,7 +4,6 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-    @Environment(\.dismiss) var dismiss
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             return   Medicine.aisle == aisle
@@ -18,10 +17,6 @@ struct MedicineListView: View {
                 .opacity(0.1)
             
             VStack {
-                Text(aisle)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
                 
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
@@ -45,31 +40,18 @@ struct MedicineListView: View {
                     }
                 }
             }
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text(aisle)
-                        }
-                    }
-                }
-            }
             .navigationTitle(aisle)
-            .navigationBarHidden(true)
 
 
             Circle()
                 .frame(height: 200)
-                .position(x: 1, y: -08)
+                .position(x: 1, y: -83)
                 .foregroundStyle(.blue)
                 .opacity(0.4)
             
             Circle()
                 .frame(height: 200)
-                .position(x: 400, y: 780)
+                .position(x: 400, y: 710)
                 .foregroundStyle(.blue)
                 .opacity(0.4)
             

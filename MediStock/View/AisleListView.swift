@@ -14,11 +14,6 @@ struct AisleListView: View {
                     .opacity(0.1)
                 
                 VStack {
-                    Text("Aisle")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.blue)
-                        .opacity(0.5)
                     
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -42,17 +37,16 @@ struct AisleListView: View {
                     }
                 }
                 .navigationTitle("Aisle")
-                .navigationBarHidden(true)
 
                 Circle()
                     .frame(height: 200)
-                    .position(x: 1, y: -08)
+                    .position(x: 1, y: -140)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
-                
+        
                 Circle()
                     .frame(height: 200)
-                    .position(x: 400, y: 780)
+                    .position(x: 400, y: 710)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
                 
