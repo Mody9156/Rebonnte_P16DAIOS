@@ -6,7 +6,7 @@ struct AisleListView: View {
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
-    @State private var opacity: Double = 0.0
+    @State private var opacity: Double = 1.0
 
    //supprimer après l'utilisation
     @State var fakeBool : Bool = false
@@ -60,7 +60,7 @@ struct AisleListView: View {
                     }
                     if !medicineStockViewModel.errorMessage.isEmpty {
                         withAnimation(.easeInOut(duration: 2)) {
-                                 opacity = opacity == 0.0 ? 1.0 : 0.0
+                            opacity = opacity == 1.0 ? 0.0 : 1.0
                                }
                     }
                 }) {
