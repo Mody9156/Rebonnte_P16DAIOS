@@ -60,7 +60,6 @@ struct AisleListView: View {
                     }
                     if !medicineStockViewModel.errorMessage.isEmpty {
                         withAnimation(.easeInOut(duration: 2)) {
-                            opacity = opacity == 1.0 ? 0.0 : 1.0
                                }
                     }
                 }) {
@@ -82,6 +81,12 @@ struct AisleListView: View {
                 Text(medicineStockViewModel.errorMessage)
                     .foregroundStyle(.red)
                     .opacity(opacity)
+                    .animation(
+                        .easeInOut(duration: 2).repeatForever(autoreverses: false),
+                        value: opacity)
+                    .onAppear{
+                        opacity = 0
+                    }
             }
         }
         .onAppear {
