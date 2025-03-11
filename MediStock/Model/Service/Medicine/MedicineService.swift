@@ -60,7 +60,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
             query.data()["aisle"] as? String
         }))
         
-        let allAisles = Set((0...10).map{"Aisle \($0)"})
+        let allAisles = Set((1...10).map{"Aisle \($0)"})
         let aisles = allAisles.subtracting(snapshot)
         
         guard let getAisles = aisles.randomElement() else {

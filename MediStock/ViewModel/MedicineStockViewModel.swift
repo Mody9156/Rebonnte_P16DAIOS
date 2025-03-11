@@ -33,7 +33,7 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     func addRandomAisle() async throws {
-       
+        let _ = try await medicineRepository.setDataToAisle()
     }
     
     func addRandomMedicine(user: String) async throws {
