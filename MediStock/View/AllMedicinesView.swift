@@ -33,10 +33,8 @@ struct AllMedicinesView: View {
                         }
                     }
                     .padding()
-                    
                     // Liste des Médicaments
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
-                    
                 }
                 
                 Circle()
@@ -73,7 +71,6 @@ struct AllMedicinesView: View {
                 .navigationBarTitle("All Medicines")
                 .accessibilityLabel("All Medicines View")
                 .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
-                
             }
         }
         .onAppear {
@@ -82,8 +79,6 @@ struct AllMedicinesView: View {
             }
         }
     }
-    
-   
 }
 
 

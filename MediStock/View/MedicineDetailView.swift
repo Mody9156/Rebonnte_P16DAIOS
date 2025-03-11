@@ -8,13 +8,13 @@ struct MedicineDetailView: View {
     @FocusState var isTyping : Bool
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
+    @State var animation : Bool = false
+    
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
         }
     }
-    
-    @State var animation : Bool = false
     
     var body: some View {
         ZStack {

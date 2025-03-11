@@ -17,31 +17,9 @@ struct MedicineListView: View {
                 .opacity(0.1)
             
             VStack {
-                
-                List {
-                    ForEach(filterMedicines, id: \.id) { medicine in
-                        NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
-                            VStack(alignment: .leading) {
-                                Text(medicine.name)
-                                    .font(.headline)
-                                    .accessibilityLabel("Medicine Name: \(medicine.name)")
-                                    .accessibilityHint("Tap to view details for \(medicine.name).")
-                                
-                                Text("Stock: \(medicine.stock)")
-                                    .font(.subheadline)
-                                    .accessibilityLabel("Stock available: \(medicine.stock)")
-                            }
-                        }
-                    }
-                    .onDelete { IndexSet in
-                        Task{
-                            try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
-                        }
-                    }
-                }
+                ExtractedView()
             }
             .navigationTitle(aisle)
-
 
             Circle()
                 .frame(height: 200)
@@ -79,10 +57,35 @@ struct MedicineListView: View {
             }
             .padding()
         }
-        
     }
 }
 
 #Preview{
     MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "Aisle", stock: 500, aisle: "Jocker")]), aisle: "Aisle 1").environmentObject(SessionStore())
+}
+
+struct ExtractedView: View {
+    var body: some View {
+        List {
+            ForEach(filterMedicines, id: \.id) { medicine in
+                NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
+                    VStack(alignment: .leading) {
+                        Text(medicine.name)
+                            .font(.headline)
+                            .accessibilityLabel("Medicine Name: \(medicine.name)")
+                            .accessibilityHint("Tap to view details for \(medicine.name).")
+                        
+                        Text("Stock: \(medicine.stock)")
+                            .font(.subheadline)
+                            .accessibilityLabel("Stock available: \(medicine.stock)")
+                    }
+                }
+            }
+            .onDelete { IndexSet in
+                Task{
+                    try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                }
+            }
+        }
+    }
 }
