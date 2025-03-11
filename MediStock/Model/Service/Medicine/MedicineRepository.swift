@@ -67,6 +67,13 @@ class MedicineRepository: ObservableObject {
         }
     }
     
+    func setDataToAisle() async throws -> [Medicine] {
+        do{
+            return try await medicineService.setDataToAisle()
+        }catch{
+            throw MedicineError.invalidSetData
+        }
+    }
     
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         do{

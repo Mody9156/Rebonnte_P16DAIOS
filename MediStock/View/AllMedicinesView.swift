@@ -33,34 +33,8 @@ struct AllMedicinesView: View {
                         }
                     }
                     .padding()
-                    
                     // Liste des Médicaments
-                    List {
-                        ForEach(searchResult, id: \.id) { medicine in
-                            NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
-                                VStack(alignment: .leading) {
-                                    Text(medicine.name)
-                                        .font(.headline)
-                                        .accessibilityLabel("Medicine name: \(medicine.name)")
-                                    
-                                    
-                                    Text("Stock: \(medicine.stock)")
-                                        .font(.subheadline)
-                                        .accessibilityLabel("Stock: \(medicine.stock)")
-                                    
-                                }
-                            }
-                            .accessibilityHint("Tap to see more details about \(medicine.name).")
-                            
-                        }.onDelete { IndexSet in
-                            Task{
-                                try? await medicineStockViewModel.deleteMedicines(at: IndexSet)
-                            }
-                        }
-                    }
-                    .accessibilityLabel("List of medicines")
-                    .accessibilityHint("Shows all available medicines and their stock.")
-                    
+                    ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
                 
                 Circle()
@@ -97,21 +71,12 @@ struct AllMedicinesView: View {
                 .navigationBarTitle("All Medicines")
                 .accessibilityLabel("All Medicines View")
                 .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
-                
             }
         }
         .onAppear {
             Task{
-                await  medicineStockViewModel.observeMedicines()
+                medicineStockViewModel.observeMedicines()
             }
-        }
-    }
-    
-    var searchResult : [Medicine] {
-        if filterText.isEmpty {
-            return medicineStockViewModel.medicines
-        }else{
-            return medicineStockViewModel.medicines.filter{ $0.name.contains(filterText) }
         }
     }
 }
@@ -146,5 +111,45 @@ struct FilterButton: View {
         }
         .accessibilityLabel("Sort by \(index)")
         .accessibilityHint("Sort the medicines based on \(index).")
+    }
+}
+
+struct ListView: View {
+    @StateObject var medicineStockViewModel : MedicineStockViewModel
+    @Binding var filterText : String
+    var body: some View {
+        List {
+            ForEach(searchResult, id: \.id) { medicine in
+                NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
+                    VStack(alignment: .leading) {
+                        Text(medicine.name)
+                            .font(.headline)
+                            .accessibilityLabel("Medicine name: \(medicine.name)")
+                        
+                        
+                        Text("Stock: \(medicine.stock)")
+                            .font(.subheadline)
+                            .accessibilityLabel("Stock: \(medicine.stock)")
+                        
+                    }
+                }
+                .accessibilityHint("Tap to see more details about \(medicine.name).")
+                
+            }.onDelete { IndexSet in
+                Task{
+                    try? await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                }
+            }
+        }
+        .accessibilityLabel("List of medicines")
+        .accessibilityHint("Shows all available medicines and their stock.")
+    }
+    
+    var searchResult : [Medicine] {
+        if filterText.isEmpty {
+            return medicineStockViewModel.medicines
+        }else{
+            return medicineStockViewModel.medicines.filter{ $0.name.contains(filterText) }
+        }
     }
 }

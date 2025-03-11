@@ -6,6 +6,7 @@ struct AisleListView: View {
     var aisles: [String] {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
@@ -14,7 +15,6 @@ struct AisleListView: View {
                     .opacity(0.1)
                 
                 VStack {
-                    
                     List {
                         ForEach(aisles, id: \.self) { aisle in
                             NavigationLink(destination: MedicineListView(medicineStockViewModel: medicineStockViewModel, aisle: aisle)) {
@@ -37,13 +37,13 @@ struct AisleListView: View {
                     }
                 }
                 .navigationTitle("Aisle")
-
+                
                 Circle()
                     .frame(height: 200)
                     .position(x: 1, y: -140)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
-        
+                
                 Circle()
                     .frame(height: 200)
                     .position(x: 400, y: 710)
@@ -52,8 +52,9 @@ struct AisleListView: View {
                 
                 Button(action: {
                     Task{
-                        try await medicineStockViewModel.addRandomMedicine(user: identity)
+                        try await medicineStockViewModel.addRandomAisle()
                     }
+                    
                 }) {
                     ZStack {
                         Circle()
@@ -69,10 +70,11 @@ struct AisleListView: View {
                 .padding()
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
+                
             }
         }
         .onAppear {
-                medicineStockViewModel.observeAisles()
+            medicineStockViewModel.observeAisles()
         }
         .accessibilityElement(children: .contain)
     }

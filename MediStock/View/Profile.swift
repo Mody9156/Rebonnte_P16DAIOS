@@ -29,7 +29,7 @@ struct Profile: View {
                 .position(x: 400, y: 800)
                 .foregroundStyle(.blue)
                 .opacity(0.4)
-
+            
             
             VStack (alignment: .center){
                 VStack{
@@ -72,13 +72,13 @@ struct Profile: View {
                     }
                 }) {
                     Text("Se Déconnecter")
-                               .font(.headline)
-                               .frame(maxWidth: .infinity)
-                               .padding()
-                               .background(Color.blue)
-                               .foregroundColor(.white)
-                               .cornerRadius(10)
-                               .shadow(radius: 5)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                 }
             }
             .padding()

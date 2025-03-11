@@ -20,5 +20,6 @@ protocol MedicineProtocol{
     func trieByName(completion:@escaping([Medicine]) ->Void)
     func trieByStock(completion:@escaping([Medicine]) ->Void)
     func getAllElements(completion:@escaping([Medicine]) -> Void)
-   
+    func setDataToAisle() async throws -> [Medicine] 
+
 }

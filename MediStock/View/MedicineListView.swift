@@ -17,7 +17,6 @@ struct MedicineListView: View {
                 .opacity(0.1)
             
             VStack {
-                
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in
                         NavigationLink(destination: MedicineDetailView(medicine: medicine, medicineStockViewModel: medicineStockViewModel)) {
@@ -34,6 +33,7 @@ struct MedicineListView: View {
                         }
                     }
                     .onDelete { IndexSet in
+                        
                         Task{
                             try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
                         }
@@ -41,7 +41,6 @@ struct MedicineListView: View {
                 }
             }
             .navigationTitle(aisle)
-
 
             Circle()
                 .frame(height: 200)
@@ -79,7 +78,6 @@ struct MedicineListView: View {
             }
             .padding()
         }
-        
     }
 }
 

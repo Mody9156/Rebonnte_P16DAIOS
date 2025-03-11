@@ -14,8 +14,6 @@ class MedicineStockViewModel: ObservableObject {
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
-    @Published var showErrorAlert : Bool = false
-    @Published var errorMessage : String = ""
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
@@ -23,26 +21,44 @@ class MedicineStockViewModel: ObservableObject {
     
     func observeMedicines()  {
         self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-                self?.medicines = medicines
+            self?.medicines = medicines
         }
     }
     
     func observeAisles() {
         medicineRepository.fetchAisles { [weak self]  aisles in
-                self?.aisles = aisles
+            self?.aisles = aisles
+        }
+    }
+    func addRandomAisle() async throws {
+        do{
+            let _ = try await medicineRepository.setDataToAisle()
+            
+        }catch{
+            print("errr")
+            
         }
     }
     
     func addRandomMedicine(user: String) async throws {
+        do{
             try await medicineRepository.setData(user: user)
+            
+        }catch{
+            print("errr")
+        }
     }
     
     func addRandomMedicineToList(user: String, aisle: String) async throws {
-        try await medicineRepository.setDataToList(user: user, aisle: aisle)
+        do{
+            try await medicineRepository.setDataToList(user: user, aisle: aisle)
+        }catch{
+            print("errr")
+        }
     }
     
     func deleteMedicines(at offsets: IndexSet) async throws {
-            try await  medicineRepository.delete(medicines: medicines, at: offsets)
+        try await  medicineRepository.delete(medicines: medicines, at: offsets)
     }
     
     func deleteAisle(at offsets: IndexSet) async throws {
@@ -58,15 +74,15 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int) {
-            self.updateStock(medicine, by: stocks, user: user)
+        self.updateStock(medicine, by: stocks, user: user)
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-            self.medicineRepository.updateStock(medicine, by: amount, user: user)
+        self.medicineRepository.updateStock(medicine, by: amount, user: user)
     }
     
     func increaseStock(_ medicine: Medicine, user: String) {
-            self.updateStock(medicine, by: 1, user: user)
+        self.updateStock(medicine, by: 1, user: user)
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) {
@@ -80,9 +96,9 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func fetchHistory(for medicine: Medicine) {
-           self.medicineRepository.fetchHistory(for: medicine){history in
-                    self.history = history
-                    print("history : \(history)")
+        self.medicineRepository.fetchHistory(for: medicine){history in
+            self.history = history
+            print("history : \(history)")
         }
     }
     
