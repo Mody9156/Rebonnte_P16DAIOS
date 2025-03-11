@@ -14,9 +14,6 @@ class MedicineStockViewModel: ObservableObject {
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
-    @Published var showErrorAlert : Bool = false
-    @Published var errorMessage : String = ""
-    @Published var showMessageError : Bool = false
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
@@ -38,9 +35,7 @@ class MedicineStockViewModel: ObservableObject {
             let _ = try await medicineRepository.setDataToAisle()
 
         }catch{
-            await MainActor.run {
-                errorMessage = "Toutes les allées sont déjà assignées."
-            }
+           print("errr")
         }
     }
     
