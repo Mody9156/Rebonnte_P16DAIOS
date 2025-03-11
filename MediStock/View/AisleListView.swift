@@ -52,7 +52,7 @@ struct AisleListView: View {
                 
                 Button(action: {
                     Task{
-                        try await medicineStockViewModel.addRandomAisle(user: identity)
+                        try await medicineStockViewModel.addRandomAisle()
                     }
                 }) {
                     ZStack {

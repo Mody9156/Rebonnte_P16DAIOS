@@ -32,19 +32,8 @@ class MedicineStockViewModel: ObservableObject {
                 self?.aisles = aisles
         }
     }
-    func addRandomAisle(user: String) async throws {
-        let array = ["0","1","2","3","4","5","6","7","8","9","10"]
-        do{
-            if aisles == array {
-               let _ = try await medicineRepository.setDataToAisle(user: user, aisle: aisles)
-            }else{
-                print("Vous avez atteint le nombre maximal d'étagères possibles : \(aisles)")
-            }
-           
-            
-        }catch{
-            print("voici l'inégralité de \(aisles)")
-        }
+    func addRandomAisle() async throws {
+       
     }
     
     func addRandomMedicine(user: String) async throws {
