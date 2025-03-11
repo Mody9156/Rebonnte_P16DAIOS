@@ -34,7 +34,13 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     func addRandomAisle() async throws {
-        let _ = try await medicineRepository.setDataToAisle()
+        do{
+            let _ = try await medicineRepository.setDataToAisle()
+
+        }catch{
+             showMessageError = true
+            print("vous ne pouvez plus ajouter de de médicament")
+        }
     }
     
     func addRandomMedicine(user: String) async throws {
