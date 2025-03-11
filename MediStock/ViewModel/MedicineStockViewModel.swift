@@ -39,7 +39,7 @@ class MedicineStockViewModel: ObservableObject {
 
         }catch{
              showMessageError = true
-            print("vous ne pouvez plus ajouter de de médicament")
+            errorMessage = "Toutes les allées sont déjà assignées."
         }
     }
     

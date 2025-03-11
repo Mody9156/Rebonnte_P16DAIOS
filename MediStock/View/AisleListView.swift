@@ -69,6 +69,9 @@ struct AisleListView: View {
                 .padding()
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
+                
+                Text(medicineStockViewModel.errorMessage)
+                    .foregroundStyle(.red)
             }
         }
         .onAppear {
