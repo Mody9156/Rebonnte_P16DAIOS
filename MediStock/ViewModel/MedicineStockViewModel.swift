@@ -38,8 +38,9 @@ class MedicineStockViewModel: ObservableObject {
             let _ = try await medicineRepository.setDataToAisle()
 
         }catch{
-             showMessageError = true
-            errorMessage = "Toutes les allées sont déjà assignées."
+            await MainActor.run {
+                errorMessage = "Toutes les allées sont déjà assignées."
+            }
         }
     }
     
