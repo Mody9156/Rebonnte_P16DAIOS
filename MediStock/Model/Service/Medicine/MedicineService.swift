@@ -54,8 +54,8 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     func setDataToAisle(user: String, aisle: [String]) async throws -> [Medicine] {
-        
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10)))")
+        let randomAisles = Int.random(in: 1...10)
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(randomAisles)")
         do {
                 try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
                 print("Graduation vous venez d'ajouter: \(medicine)")
