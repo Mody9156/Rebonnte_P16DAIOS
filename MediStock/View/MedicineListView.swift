@@ -4,11 +4,7 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var aisle: String
     @AppStorage("email") var identity : String = "email"
-    var filterMedicines : [Medicine] {
-        return medicineStockViewModel.medicines.filter({ Medicine in
-            return   Medicine.aisle == aisle
-        })
-    }
+    
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -17,7 +13,7 @@ struct MedicineListView: View {
                 .opacity(0.1)
             
             VStack {
-                ExtractedView()
+                ListForMedecine(medicineStockViewModel: medicineStockViewModel, aisle: aisle)
             }
             .navigationTitle(aisle)
 
@@ -64,7 +60,14 @@ struct MedicineListView: View {
     MedicineListView(medicineStockViewModel: MedicineStockViewModel(medicines: [Medicine(name: "Aisle", stock: 500, aisle: "Jocker")]), aisle: "Aisle 1").environmentObject(SessionStore())
 }
 
-struct ExtractedView: View {
+struct ListForMedecine: View {
+    @State var medicineStockViewModel : MedicineStockViewModel
+    var aisle: String
+    var filterMedicines : [Medicine] {
+        return medicineStockViewModel.medicines.filter({ Medicine in
+            return   Medicine.aisle == aisle
+        })
+    }
     var body: some View {
         List {
             ForEach(filterMedicines, id: \.id) { medicine in
@@ -88,4 +91,6 @@ struct ExtractedView: View {
             }
         }
     }
+    
+    
 }
