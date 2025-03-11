@@ -16,6 +16,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var medicineRepository = MedicineRepository()
     @Published var showErrorAlert : Bool = false
     @Published var errorMessage : String = ""
+    @Published var showMessageError : Bool = false
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
