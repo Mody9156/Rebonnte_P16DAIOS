@@ -10,7 +10,18 @@ import Firebase
 import FirebaseFirestore
 
 enum ValidationError : Error {
-    
+    case setDataThorwError(result:Error)
+    case setDataToAisleThrowError(result:Error)
+    case setDataToListThrowError(result:Error)
+    case deleteThrowError(result:Error)
+    case deleteAisleThroughError
+    case queryIsNotEmpty
+    case updateMedicineThrowError(result:Error)
+    case updateStockThrowError(result:Error)
+    case fetchHistoryThrowError(result:Error)
+    case trieByNameThrowError(result:Error)
+    case trieByStockThrowError(result:Error)
+    case getAllElementsThrowError(result:Error)
 }
 
 class MedicineService: MedicineProtocol, ObservableObject{
@@ -20,7 +31,6 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
                 completion([])
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
@@ -34,7 +44,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func fetchAisles(completion: @escaping ([String]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
+                completion([])
             } else {
                 let allMedicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
@@ -49,10 +59,10 @@ class MedicineService: MedicineProtocol, ObservableObject{
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Graduation vous venez d'ajouter: \(medicine)")
+            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             
         } catch let error {
-            print("Error adding document: \(error)")
+          throw  ValidationError.setDataThorwError(result: error)
         }
         return [medicine]
     }
@@ -75,11 +85,9 @@ class MedicineService: MedicineProtocol, ObservableObject{
         
         do {
                 try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-                print("Graduation vous venez d'ajouter: \(medicine)")
-            
             
         } catch let error {
-            print("Error adding document: \(error)")
+            throw ValidationError.setDataToAisleThrowError(result: error)
         }
         return [medicine]
     }
@@ -89,11 +97,10 @@ class MedicineService: MedicineProtocol, ObservableObject{
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            print("Ajouté : \(medicine)")
             self.medicines.append(medicine) // Ajoute localement pour éviter un délai
             
         } catch {
-            print("Erreur : \(error)")
+            throw  ValidationError.setDataToListThrowError(result: error)
         }
         return [medicine]
     }
@@ -106,36 +113,34 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 db.collection("medicines").document(id).delete { error in
                     
                     if let error = error {
-                        print("Error removing document: \(error)")
+                      let _ =  ValidationError.deleteThrowError(result: error)
                     }
                 }
             }
         }
     }
+    
     //vérifier l'erreur concernant la suppréssion des 💊
     func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
         var updateAisle = aisles
-        
         let medicineDelete = offsets.map { updateAisle[$0]}
-        print("medicineDelete :\(medicineDelete)")
+        
         for aisles in medicineDelete {
-            print("Vous allez supprimer l'id : \(aisles)")
             let query =  try await db.collection("medicines")
                 .whereField("aisle", isEqualTo: aisles)
                 .getDocuments()
             
             if query.documents.isEmpty {
-                print("Aisle sélectionnée n'existe pas")
+              let _ =  ValidationError.queryIsNotEmpty
             }
+            
             for id in query.documents {
                 let documentId = id.documentID
                 
                 do{
                     try await db.collection("medicines").document(documentId).delete()
-
-                    print("✅ Document \(documentId) supprimé avec succès")
                 } catch {
-                    print("❌ Erreur Firebase : \(error.localizedDescription)")
+                  throw  ValidationError.deleteAisleThroughError
                 }
             }
             updateAisle.removeAll {  medicineDelete.contains($0)}
@@ -148,7 +153,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         do {
             try db.collection("medicines").document(id).setData(from: medicine)
         } catch let error {
-            print("Error updating document: \(error)")
+            throw  ValidationError.updateMedicineThrowError(result: error)
         }
         return [medicine]
     }
@@ -160,7 +165,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
             "stock": newStock
         ]) { error in
             if let error = error {
-                print("Error updating stock: \(error)")
+                let _ = ValidationError.updateStockThrowError(result: error)
             } else {
                 if let index = self.medicines.firstIndex(where: { $0.id == id }) {
                     self.medicines[index].stock = newStock
@@ -174,13 +179,12 @@ class MedicineService: MedicineProtocol, ObservableObject{
         guard let id = medicine.id else {return}
         db.collection("history").whereField("medicineId", isEqualTo: id).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting history: \(error)")
+                let _ = ValidationError.fetchHistoryThrowError(result: error)
             } else {
                 let history = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: HistoryEntry.self)
                     
                 } ?? []
-                print("history:\(history)")
                 completion(history)
             }
         }
@@ -189,7 +193,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func trieByName(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").order(by: "name", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
+                let _ = ValidationError.trieByNameThrowError(result: error)
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
@@ -202,7 +206,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func trieByStock(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").order(by: "stock", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
+                let _ = ValidationError.trieByStockThrowError(result: error)
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
@@ -215,7 +219,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     func getAllElements(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error getting documents: \(error)")
+                let _ = ValidationError.getAllElementsThrowError(result: error)
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Medicine.self)
