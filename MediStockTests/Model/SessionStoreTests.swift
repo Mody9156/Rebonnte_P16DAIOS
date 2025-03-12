@@ -92,35 +92,20 @@ class SessionStoreTests: XCTestCase {
             XCTFail("Expected an error but did not get one")
         }catch {
             //Then
-            XCTAssertEqual(error as? AuthError, AuthError.unknown)
+            XCTAssertEqual(error as? AuthError, AuthError.signOutThrowError)
         }
     }
     
-    func testWhenListeningToAuthChangesSuccess(){
-        //Given
-        let mockhandle = "unknown" as AuthStateDidChangeListenerHandle
-        mockAuthService.mockHandle = mockhandle
-        //when
-        sessionStore.stopListeningToAuthChanges()
-        //Then
-        XCTAssertTrue(mockAuthService.didAddListener)
-        XCTAssertNil(sessionStore.handle)
-        XCTAssertNil(sessionStore.error)
-    }
-    
-    func testWhenListeningToAuthChangesSuccess() async throws {
-        //When
+    func testWhenListeningToAuthChangesSuccess() {
+        // Given 
         let user = User(uid: "fakeUIid", email: "exemple@gmail.com")
-        let mock = mockAuthService.mockUser
         mockAuthService.mockUser = user
-        //When
-        mockAuthService.addDidChangeListenerHandle { user in
-            //Then
-            XCTAssertNotNil(user)
-        }
-        //When
+
+        // When
         sessionStore.listen()
-        //Then
+
+        // Then
+        XCTAssertNotNil(sessionStore.session)
         XCTAssertNil(sessionStore.error)
     }
    

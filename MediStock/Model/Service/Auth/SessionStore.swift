@@ -31,7 +31,9 @@ public class SessionStore: ObservableObject {
     func listen()  {
         authService.addDidChangeListenerHandle { [weak self] user in
             self?.session = user
-            self?.error = user == nil ? .unknown : nil
+            if user == nil {
+                self?.error = .userIsEmpty
+            }
         }
     }
     
@@ -62,7 +64,7 @@ public class SessionStore: ObservableObject {
             try await authService.signOut()
             self.session = nil
         } catch {
-            throw AuthError.signInThrowError
+            throw AuthError.signOutThrowError
         }
         
     }
@@ -78,7 +80,7 @@ public class SessionStore: ObservableObject {
 enum AuthError: Error {
     case invalidCredentials
     case userCreationFailed
-    case unknown
+    case userIsEmpty
     case disableAutoLogin
     case signInThrowError
     case signOutThrowError

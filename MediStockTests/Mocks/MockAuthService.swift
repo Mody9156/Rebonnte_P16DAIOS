@@ -13,7 +13,6 @@ import FirebaseFirestore
 
 class MockAuthService: AuthServiceProtocol {
     
-    
     var mockUser: pack.User?
     var shouldThrowError: Bool = false
     var didAddListener : Bool = false
@@ -25,12 +24,12 @@ class MockAuthService: AuthServiceProtocol {
     }
 
     func signIn(email: String, password: String) async throws -> pack.User {
-        if shouldThrowError { throw AuthError.invalidCredentials }
+        if shouldThrowError { throw AuthError.signInThrowError }
         return User(uid: "mockUID", email: email)
     }
 
     func signOut() async throws {
-        if shouldThrowError { throw AuthError.unknown }
+        if shouldThrowError { throw AuthError.signOutThrowError }
     }
 
     func addDidChangeListenerHandle(listener: @escaping (pack.User?) -> Void) {
@@ -42,6 +41,6 @@ class MockAuthService: AuthServiceProtocol {
     }
     
     func disableAutoLogin() async throws {
-        if shouldThrowError {throw AuthError.invalidCredentials}
+        if shouldThrowError {throw AuthError.disableAutoLogin}
     }
 }
