@@ -37,6 +37,7 @@ class MockAuthService: AuthServiceProtocol {
     }
     
     func removeDidChangeListenerHandle(handle: AuthStateDidChangeListenerHandle) {
+        
         didAddListener = true
     }
     

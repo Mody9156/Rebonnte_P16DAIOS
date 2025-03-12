@@ -51,7 +51,7 @@ public class SessionStore: ObservableObject {
     func signIn(email: String, password: String) async throws -> User{
         do{
             let user = try await authService.signIn(email: email, password: password)
-                self.session = user
+            self.session = user
             return user
         }catch{
             throw AuthError.signInThrowError
@@ -59,14 +59,12 @@ public class SessionStore: ObservableObject {
     }
     
     func signOut() async throws  {
-        
         do {
             try await authService.signOut()
             self.session = nil
         } catch {
             throw AuthError.signOutThrowError
         }
-        
     }
     
     func stopListeningToAuthChanges() {

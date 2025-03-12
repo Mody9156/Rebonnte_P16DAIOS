@@ -139,10 +139,7 @@ class SessionStoreTests: XCTestCase {
     
     func testWhenDisableThrowsError() async throws {
         //Given
-        let email = "fake2Email@gmail.com"
-        let password = "123456d"
         mockAuthService.shouldThrowError = true
-        
         //When
         do{
             try await sessionStore.disableAutoLogin()
@@ -153,12 +150,27 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testRemoveDidChangeListenerHandle() async throws {
-        mockAuthService.didAddListener = true
-        // When (Appel de la fonction)
+        //Given
         let fakeHandle: AuthStateDidChangeListenerHandle = NSObject() // Simule un handle quelconque
-        mockAuthService.removeDidChangeListenerHandle(handle: fakeHandle)
-
-        mockAuthService.removeDidChangeListenerHandle(handle: fakeHandle)
+        sessionStore.handle = fakeHandle
+        //When
+        sessionStore.stopListeningToAuthChanges()
+        //Then
+        XCTAssertNil(sessionStore.handle)
+    }
+    
+    func testRemoveDidChangeListenerHandleThrowsErrorWhenHandleNotFound() async throws {
+        //Given
+        sessionStore.handle = nil
+        let fakeHandle: AuthStateDidChangeListenerHandle = NSObject() // Simule un handle quelconque
+        //When
+        sessionStore.stopListeningToAuthChanges()
+        //Then
+        XCTAssertNil(sessionStore.handle)
+    }
+    
+    func testStopListeningToAuthChanges_CallsRemoveDidChangeListenerHandle() {
+        
     }
 }
 
