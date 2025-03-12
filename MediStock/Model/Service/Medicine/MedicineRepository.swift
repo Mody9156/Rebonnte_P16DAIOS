@@ -119,7 +119,7 @@ class MedicineRepository: ObservableObject {
        
         for medicines in medicine {
             let newStock = medicines.stock + amount
-            self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock - amount) to \(newStock)")
+            addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock - amount) to \(newStock)")
         }
     }
     
