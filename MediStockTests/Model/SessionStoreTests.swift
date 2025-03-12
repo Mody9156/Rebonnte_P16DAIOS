@@ -162,7 +162,6 @@ class SessionStoreTests: XCTestCase {
     func testRemoveDidChangeListenerHandleThrowsErrorWhenHandleNotFound() async throws {
         //Given
         sessionStore.handle = nil
-        let fakeHandle: AuthStateDidChangeListenerHandle = NSObject() // Simule un handle quelconque
         //When
         sessionStore.stopListeningToAuthChanges()
         //Then
