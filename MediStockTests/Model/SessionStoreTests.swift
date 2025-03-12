@@ -97,18 +97,18 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testWhenListeningToAuthChangesSuccess() {
-        // Given 
+        // Given
         let user = User(uid: "fakeUIid", email: "exemple@gmail.com")
         mockAuthService.mockUser = user
-
+        
         // When
         sessionStore.listen()
-
+        
         // Then
         XCTAssertNotNil(sessionStore.session)
         XCTAssertNil(sessionStore.error)
     }
-   
+    
     func testWhenListeninToAuthChangesFail() async throws {
         //When
         mockAuthService.mockUser = nil
@@ -146,7 +146,7 @@ class SessionStoreTests: XCTestCase {
         }catch let error as AuthError{
             XCTAssert(error == .disableAutoLogin)
         }
-
+        
     }
     
     func testRemoveDidChangeListenerHandle() async throws {
