@@ -151,5 +151,14 @@ class SessionStoreTests: XCTestCase {
         }
 
     }
+    
+    func testRemoveDidChangeListenerHandle() async throws {
+        mockAuthService.didAddListener = true
+        // When (Appel de la fonction)
+        let fakeHandle: AuthStateDidChangeListenerHandle = NSObject() // Simule un handle quelconque
+        mockAuthService.removeDidChangeListenerHandle(handle: fakeHandle)
+
+        mockAuthService.removeDidChangeListenerHandle(handle: fakeHandle)
+    }
 }
 
