@@ -9,6 +9,10 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+enum ValidationError : Error {
+    
+}
+
 class MedicineService: MedicineProtocol, ObservableObject{
     @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
