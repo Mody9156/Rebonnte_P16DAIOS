@@ -10,15 +10,18 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
+enum AuthThrowErrorType: Error {
+    case userNotFound(result:Error)
+}
+
 final class FirebaseAuthService: AuthServiceProtocol {
     
     func disableAutoLogin() async throws {
         if Auth.auth().currentUser != nil {
             do {
                 try Auth.auth().signOut()
-                print("Déconnexion réussie pour désactiver la persistance.")
             } catch let error {
-                print("Erreur lors de la déconnexion : \(error.localizedDescription)")
+                throw AuthThrowErrorType.userNotFound(result: error)
             }
         }
     }
