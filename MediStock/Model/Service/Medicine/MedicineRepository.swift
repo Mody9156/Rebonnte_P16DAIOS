@@ -28,7 +28,7 @@ class MedicineRepository: ObservableObject {
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         medicineService.fetchMedicines { medicine in
             if medicine.isEmpty {
-                print("\(MedicineError.invalidMedicine)")
+                let _ = MedicineError.medicineIsEmpty
             }else{
                 completion(medicine)
             }
@@ -38,7 +38,7 @@ class MedicineRepository: ObservableObject {
     func fetchAisles(completion:@escaping( [String])->Void) {
         medicineService.fetchAisles { aisles in
             if aisles.isEmpty {
-                print("\(MedicineError.invalidAisles)")
+                let _ = MedicineError.aisleIsEmpty
             }else{
                 completion(aisles)
             }
@@ -49,7 +49,7 @@ class MedicineRepository: ObservableObject {
         do{
             let medicine = try await medicineService.setData(user: user)
             for medicines in medicine {
-                addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+                try? await  addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
             }
         }catch{
             throw MedicineError.invalidSetData
@@ -60,7 +60,7 @@ class MedicineRepository: ObservableObject {
         do{
             let medicine = try await medicineService.setDataToList(user: user, aisle: aisle)
             for medicines in medicine {
-                addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+                try? await  addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
             }
         }catch{
             throw MedicineError.invalidSetData
@@ -77,7 +77,7 @@ class MedicineRepository: ObservableObject {
     
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         do{
-          try await medicineService.delete(medicines: medicines, at: offsets)
+            try await medicineService.delete(medicines: medicines, at: offsets)
             
         } catch{
             throw MedicineError.invalidDelete
@@ -86,7 +86,7 @@ class MedicineRepository: ObservableObject {
     
     func deleteAisle(aisles:[String], at offsets: IndexSet) async throws -> [String] {
         do{
-           return try await medicineService.deleteAisle(aisles: aisles, at: offsets)
+            return try await medicineService.deleteAisle(aisles: aisles, at: offsets)
             
         } catch{
             throw MedicineError.invalidDelete
@@ -94,32 +94,32 @@ class MedicineRepository: ObservableObject {
         
     }
     
-    private func addHistory(action: String, user: String, medicineId: String, details: String) {
+    private func addHistory(action: String, user: String, medicineId: String, details: String) async throws{
         let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
         } catch let error {
-            print("Error adding history: \(error)")
+            throw MedicineError.addHistoryThorughMedicineFailed(result:error)
         }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws {
         do{
-           let medicine = try await medicineService.updateMedicine(medicine, user: user)
+            let medicine = try await medicineService.updateMedicine(medicine, user: user)
             for medicines in medicine {
-                addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details")
+                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details")
             }
         }catch{
             throw MedicineError.invalidMedicine
         }
     }
-
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String) {
-       let medicine = medicineService.updateStock(medicine, by: amount, user: user)
-       
+    
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws  {
+        let medicine = medicineService.updateStock(medicine, by: amount, user: user)
+        
         for medicines in medicine {
             let newStock = medicines.stock + amount
-            self.addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock - amount) to \(newStock)")
+            try? await addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock) to \(newStock)")
         }
     }
     
@@ -128,7 +128,8 @@ class MedicineRepository: ObservableObject {
             completion(historyEntry)
         }
     }
-    //Try here 
+    
+    
     func trieByName(completion:@escaping([Medicine]) ->Void)  {
         medicineService.trieByName { medicine in
             completion(medicine)
@@ -146,47 +147,15 @@ class MedicineRepository: ObservableObject {
             completion(medicine)
         }
     }
-    //
-    //    func checkIfCollectionIsEmpty(collectionName: String, completion: @escaping (Bool) -> Void) {
-    //        let db = Firestore.firestore()
-    //        let collectionRef = db.collection(collectionName)
-    //
-    //        collectionRef.getDocuments { (querySnapshot, error) in
-    //            if let error = error {
-    //                print("Erreur lors de la vérification : \(error)")
-    //                completion(false)
-    //                return
-    //            }
-    //
-    //            if let documents = querySnapshot?.documents, documents.isEmpty {
-    //                print("La collection \(collectionName) est vide.")
-    //                completion(true)
-    //            } else {
-    //                print("La collection \(collectionName) contient encore des documents.")
-    //                completion(false)
-    //            }
-    //        }
-    //    }
-    
 }
 
 
-enum MedicineError: LocalizedError {
+enum MedicineError: Error {
     case invalidDelete
     case invalidMedicine
     case invalidAisles
     case invalidSetData
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidDelete:
-            return "Impossible de se supprimer. Vérifiez vos informations et réessayez."
-        case .invalidMedicine:
-            return "Impossible de récupérer les données du tableau"
-        case .invalidAisles:
-            return "Impossible de récupérer les aisles du tableau"
-        case .invalidSetData:
-            return "Impossible d'ajouter un nouvelle element au tableau"
-        }
-    }
+    case addHistoryThorughMedicineFailed(result:Error)
+    case medicineIsEmpty
+    case aisleIsEmpty
 }

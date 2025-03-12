@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum ShowErrors : Error {
+    case disableAutoLoginThrowError
+    case changeStatusThrowError
+    case loginThrowError
+    case createdNewUserThrowError
+}
+
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
     @Published var messageError : String = ""
@@ -20,18 +27,17 @@ class AuthViewModel : ObservableObject {
             .map { $0 != nil }
             .assign(to: &$isAuthenticated)
     }
+    
     @MainActor
     func login(email:String, password:String) async throws {
         do {
             let user = try await session.signIn(email: email, password: password)
             UserDefaults.standard.set(user.email, forKey: "email")
-            print("Utilisateur connecté avec succès : \(user.email ?? "inconnu")")
             self.messageError = ""
             onLoginSucceed?()
         }catch{
-            print(self.messageError )
-            
             self.messageError = "Erreur lors de la connection de l'utilisateur"
+            throw ShowErrors.loginThrowError
         }
     }
     
@@ -39,21 +45,26 @@ class AuthViewModel : ObservableObject {
         do{
             let user = try await session.signUp(email: email, password: password)
             self.messageError = ""
-            print("Utilisateur créé avec succès : \(user.email ?? "inconnu")")
         }catch{
             self.messageError = "Erreur lors de la création de l'utilisateur"
+            throw ShowErrors.createdNewUserThrowError
         }
     }
     
-    func changeStatus()  {
-         session.listen()
+    func changeStatus() async throws {
+        do{
+            try await session.listen()
+        }catch{
+            throw ShowErrors.changeStatusThrowError
+        }
     }
     
     func disableAutoLogin() async throws {
-            try? await session.disableAutoLogin()
-    }
-    
-    func stopListeningToAuthChanges(){
-        session.stopListeningToAuthChanges()
+        do{
+            try await session.disableAutoLogin()
+
+        }catch{
+            throw ShowErrors.disableAutoLoginThrowError
+        }
     }
 }

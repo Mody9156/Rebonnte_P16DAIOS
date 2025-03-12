@@ -44,7 +44,7 @@ struct MedicineListView: View {
                 }
             }
             .navigationTitle(aisle)
-
+            
             Circle()
                 .frame(height: 200)
                 .position(x: 1, y: -83)
