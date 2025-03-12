@@ -28,6 +28,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     @Published var medicines: [Medicine] = []
     private var db : Firestore = Firestore.firestore()
     
+    // Récupérer l'intégralité des 💊
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -41,6 +42,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
+    // Récupérer la liste des allées disponibles
     func fetchAisles(completion: @escaping ([String]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -55,6 +57,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
+    // Ajouter un médicament aléatoire
     func setData(user: String) async throws -> [Medicine] {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
         do {
@@ -62,13 +65,14 @@ class MedicineService: MedicineProtocol, ObservableObject{
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             
         } catch let error {
-          throw  ValidationError.setDataThorwError(result: error)
+            throw  ValidationError.setDataThorwError(result: error)
         }
         return [medicine]
     }
     
+    // Ajouter un médicament à une allée disponible
     func setDataToAisle() async throws -> [Medicine] {
-            
+        
         let collection =  try await db.collection("medicines").getDocuments()
         let snapshot = Set(collection.documents.compactMap({ query in
             query.data()["aisle"] as? String
@@ -81,10 +85,10 @@ class MedicineService: MedicineProtocol, ObservableObject{
             throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
         }
         
-            let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: getAisles)
+        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: getAisles)
         
         do {
-                try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             
         } catch let error {
             throw ValidationError.setDataToAisleThrowError(result: error)
@@ -92,7 +96,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-    
+    // Supprimer un médicament
     func setDataToList(user: String, aisle: String) async throws -> [Medicine] {
         let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
         do {
@@ -105,7 +109,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
-  
+    // Vérifier l'erreur concernant la suppression des 💊
     func delete(medicines: [Medicine], at offsets: IndexSet) async throws {
         offsets.map { medicines[$0] }.forEach { medicine in
             if let id = medicine.id {
@@ -113,7 +117,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 db.collection("medicines").document(id).delete { error in
                     
                     if let error = error {
-                      let _ =  ValidationError.deleteThrowError(result: error)
+                        let _ =  ValidationError.deleteThrowError(result: error)
                     }
                 }
             }
@@ -131,7 +135,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 .getDocuments()
             
             if query.documents.isEmpty {
-              let _ =  ValidationError.queryIsNotEmpty
+                let _ =  ValidationError.queryIsNotEmpty
             }
             
             for id in query.documents {
@@ -140,7 +144,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
                 do{
                     try await db.collection("medicines").document(documentId).delete()
                 } catch {
-                  throw  ValidationError.deleteAisleThroughError
+                    throw  ValidationError.deleteAisleThroughError
                 }
             }
             updateAisle.removeAll {  medicineDelete.contains($0)}
@@ -148,6 +152,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return updateAisle
     }
     
+    // Met à jour les informations d'un médicament spécifique dans la base de données 💊
     func updateMedicine(_ medicine: Medicine, user: String) async throws -> [Medicine] {
         guard let id = medicine.id else { return [medicine]}
         do {
@@ -158,6 +163,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
+    // Met à jour le stock d'un médicament en ajoutant ou en retirant une quantité spécifique 💊
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) -> [Medicine] {
         guard let id = medicine.id else { return [medicine]}
         let newStock = medicine.stock + amount
@@ -175,6 +181,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         return [medicine]
     }
     
+    // Récupère l'historique des transactions d'un médicament spécifique 💊
     func fetchHistory(for medicine: Medicine, completion: @escaping ([HistoryEntry]) -> Void) {
         guard let id = medicine.id else {return}
         db.collection("history").whereField("medicineId", isEqualTo: id).order(by: "timestamp", descending: true).addSnapshotListener { (querySnapshot, error) in
@@ -190,6 +197,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
+    // Trie les médicaments par nom en ordre décroissant 🔤
     func trieByName(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").order(by: "name", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -203,6 +211,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
+    // Trie les médicaments par stock en ordre décroissant 📦
     func trieByStock(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").order(by: "stock", descending: true).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
@@ -216,6 +225,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
+    // Récupère tous les médicaments disponibles en base de données 💊
     func getAllElements(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
