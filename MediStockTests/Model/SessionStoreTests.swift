@@ -45,7 +45,7 @@ class SessionStoreTests: XCTestCase {
             XCTFail("Expected an error but did not get one")
         } catch {
             //Then
-            XCTAssertEqual(error as? AuthError, AuthError.invalidCredentials)
+            XCTAssertEqual(error as? AuthError, AuthError.signInThrowError)
         }
     }
     

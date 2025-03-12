@@ -23,7 +23,6 @@ public class SessionStore: ObservableObject {
     func disableAutoLogin() async throws {
         do{
             try await authService.disableAutoLogin()
-            print("Déconnexion réussie pour désactiver la persistance.")
         }catch {
             throw AuthError.disableAutoLogin
         }
@@ -53,7 +52,7 @@ public class SessionStore: ObservableObject {
                 self.session = user
             return user
         }catch{
-            throw error
+            throw AuthError.signInThrowError
         }
     }
     
@@ -62,10 +61,8 @@ public class SessionStore: ObservableObject {
         do {
             try await authService.signOut()
             self.session = nil
-            print("Déconnexion réussie pour désactiver la persistance.")
         } catch {
-            print("Erreur lors de la déconnexion : \(error.localizedDescription)")
-            throw error
+            throw AuthError.signInThrowError
         }
         
     }
@@ -78,22 +75,11 @@ public class SessionStore: ObservableObject {
     }
 }
 
-enum AuthError: LocalizedError {
+enum AuthError: Error {
     case invalidCredentials
     case userCreationFailed
     case unknown
     case disableAutoLogin
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidCredentials:
-            return "Impossible de se connecter. Vérifiez vos informations et réessayez."
-        case .userCreationFailed:
-            return "Impossible de créer un compte. Vérifiez vos informations et réessayez."
-        case .unknown:
-            return "Une erreur inconnue est survenue."
-        case .disableAutoLogin:
-            return "Impossible de reintitialisé l'authentification automatique. Veuillez vous déconnecter et réessayer."
-        }
-    }
+    case signInThrowError
+    case signOutThrowError
 }
