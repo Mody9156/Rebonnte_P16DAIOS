@@ -216,13 +216,17 @@ extension MedicineDetailView {
     
     private func decreaseStock() {
         guard let id = medicine.id else { return }
-        medicineStockViewModel.decreaseStock(medicine, user: id)
+        Task{
+            try? await medicineStockViewModel.decreaseStock(medicine, user: id)
+        }
         medicine.stock = max(0, medicine.stock - 1)
     }
     
     private func increaseStock() {
         guard let id = medicine.id else { return }
-        medicineStockViewModel.increaseStock(medicine, user: id)
+        Task{
+            try? await medicineStockViewModel.increaseStock(medicine, user: id)
+    }
         medicine.stock += 1
     }
     
