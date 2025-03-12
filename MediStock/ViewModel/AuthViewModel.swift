@@ -9,6 +9,9 @@ import Foundation
 
 enum ShowErrors : Error {
     case disableAutoLoginThrowError
+    case changeStatusThrowError
+    case loginThrowError
+    case createdNewUserThrowError
 }
 
 class AuthViewModel : ObservableObject {
@@ -34,6 +37,7 @@ class AuthViewModel : ObservableObject {
             onLoginSucceed?()
         }catch{
             self.messageError = "Erreur lors de la connection de l'utilisateur"
+            throw ShowErrors.loginThrowError
         }
     }
     
@@ -43,18 +47,24 @@ class AuthViewModel : ObservableObject {
             self.messageError = ""
         }catch{
             self.messageError = "Erreur lors de la création de l'utilisateur"
+            throw ShowErrors.createdNewUserThrowError
         }
     }
     
-    func changeStatus()  {
-         session.listen()
+    func changeStatus() async throws {
+        do{
+            try await session.listen()
+        }catch{
+            throw ShowErrors.changeStatusThrowError
+        }
     }
     
     func disableAutoLogin() async throws {
-            try? await session.disableAutoLogin()
-    }
-    
-    func stopListeningToAuthChanges(){
-        session.stopListeningToAuthChanges()
+        do{
+            try await session.disableAutoLogin()
+
+        }catch{
+            throw ShowErrors.disableAutoLoginThrowError
+        }
     }
 }

@@ -28,7 +28,7 @@ public class SessionStore: ObservableObject {
         }
     }
     
-    func listen()  {
+    func listen() async throws {
         authService.addDidChangeListenerHandle { [weak self] user in
             self?.session = user
             if user == nil {
