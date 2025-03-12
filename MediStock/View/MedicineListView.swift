@@ -32,16 +32,19 @@ struct MedicineListView: View {
                             }
                         }
                     }
-                    .onDelete { IndexSet in
-                        
+                    .onDelete { Index in
+                        let originalIndicesArray = Index.compactMap { index in
+                            medicineStockViewModel.medicines.firstIndex(of: filterMedicines[index])
+                        }
+                        let originalIndices = IndexSet(originalIndicesArray)
                         Task{
-                            try?  await medicineStockViewModel.deleteMedicines(at: IndexSet)
+                            try?  await medicineStockViewModel.deleteMedicines(at: originalIndices)
                         }
                     }
                 }
             }
             .navigationTitle(aisle)
-
+            
             Circle()
                 .frame(height: 200)
                 .position(x: 1, y: -83)

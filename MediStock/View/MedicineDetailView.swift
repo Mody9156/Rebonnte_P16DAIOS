@@ -168,7 +168,6 @@ extension MedicineDetailView {
                 .accessibilityHint("Increase the stock quantity by 1.")
                 Spacer()
             }
-            
         }
     }
     

@@ -82,7 +82,9 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func increaseStock(_ medicine: Medicine, user: String) {
-        self.updateStock(medicine, by: 1, user: user)
+        DispatchQueue.global(qos: .background).async{
+            self.updateStock(medicine, by: 1, user: user)
+        }
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) {
