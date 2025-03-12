@@ -170,7 +170,13 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testStopListeningToAuthChanges_CallsRemoveDidChangeListenerHandle() {
-        
+        //Given
+        let fakeHandle: AuthStateDidChangeListenerHandle = NSObject() // Simule un handle quelconque
+        sessionStore.handle = fakeHandle
+        //When
+        sessionStore.stopListeningToAuthChanges()
+        //Then
+        XCTAssertTrue(mockAuthService.didAddListener)
     }
 }
 
