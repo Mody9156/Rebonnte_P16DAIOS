@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddANewAisle: View {
-    var iterateAisles : [String] = ["Analgesics and Anti-inflammatory drugs"]
+    let iterateAisles : [String] = ["Analgesics and Anti-inflammatory drugs"]
     var body: some View {
         Text("Hello, World!")
             
