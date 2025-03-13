@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct AddANewAisle: View {
-    let iterateAisles : [String] = ["Analgesics and Anti-inflammatory drugs"]
+    @State private var iterateAisles : [String] = ["Analgesics and Anti-inflammatory drugs"]
     var body: some View {
         Text("Hello, World!")
+        Picker("", selection: $iterateAisles) {
             
+        }
     }
 }
 
