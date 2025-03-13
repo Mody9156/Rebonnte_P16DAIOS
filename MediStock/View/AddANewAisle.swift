@@ -7,43 +7,6 @@
 
 import SwiftUI
 
-enum SelectAisleList: String, CaseIterable, Identifiable {
-    
-    case Analgesics = "Analgesics and Anti-inflammatory drugs"
-    case Antibiotics = "Antibiotics and Antibacterials"
-    case Antituberculosi = "Antituberculosis drugs"
-    
-    var id: String  { self.rawValue }
-}
-
-enum SelectNameOfMedicineList: String, CaseIterable, Identifiable {
-    
-    case Peripherally = "Peripherally acting analgesics"
-    case Centrally = "Centrally acting analgesics"
-    case NonSteroidal = "Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)"
-    case Steroidal = "Steroidal Anti-Inflammatory Drugs (Corticosteroids)"
-    
-    var id: String  { self.rawValue }
-}
-
-enum SelectNameOfMedicineListTwo: String, CaseIterable, Identifiable {
-    
-    case Beta = "Beta-lactams"
-    case Aminoglycosides = "Aminoglycosides"
-    case Macrolides = "Macrolides and related compounds"
-    case Antibiotics = "Antibiotics with retained antistaphylococcal activity"
-    case Tetracyclines = "Tetracyclines (Cyclines)"
-    case casePhenicols = "casePhenicols"
-    case Cyclic = "Cyclic polypeptides (Polymyxins)"
-    case Sulfonamides = "Sulfonamides and Diaminopyrimidines"
-    case Quinolones = "Quinolones"
-    case Nitroimidazole = "Nitroimidazole derivatives"
-    case Miscellaneous = "Miscellaneous antibiotics"
-    case antibacterials =  "antibacterials"
-    
-    var id: String  { self.rawValue }
-}
-
 struct AddANewAisle: View {
     @State private var iterate : SelectAisleList = SelectAisleList.allCases.first!
     @State private var stock : [Int] = Array(0...100)
@@ -103,17 +66,17 @@ struct AddANewAisle: View {
                         .font(.headline)
                         .fontWeight(.bold)
                     
+//                    Picker("Medicine", selection: $nameInAisleMEdicine) {
+//                        ForEach(SelectNameOfMedicineList.allCases) { name in
+//                            Text(name.rawValue.capitalized)
+//                        }
+//                    }.pickerStyle(.menu)
+//                    
                     Picker("Medicine", selection: $nameInAisleMEdicine) {
-                        ForEach(SelectNameOfMedicineList.allCases) { name in
-                            Text(name.rawValue.capitalized)
+                        ForEach(getOptionMedical()) { name in
+                            Text(name.displayName)
                         }
-                    }.pickerStyle(.menu)
-                    
-                    Picker("Medicine", selection: $nameInAisleMEdicine) {
-                        ForEach(SelectNameOfMedicineListTwo.allCases) { name in
-                            Text(name.rawValue.capitalized)
-                        }
-                    }.pickerStyle(.menu)
+                    }.pickerStyle(.wheel)
                     
                     Button {
                         dismiss()
@@ -126,6 +89,17 @@ struct AddANewAisle: View {
                 }
                 .padding()
             }
+        }
+    }
+    
+    func getOptionMedical() -> [TypeOF] {
+        switch  nameInAisle {
+        case "Analgesics and Anti-inflammatory drugs":
+            return  [.TypeOne(.Centrally),.TypeOne(.NonSteroidal),.TypeOne(.Peripherally),.TypeOne(.Steroidal)]
+        case "Antibiotics and Antibacterials":
+            return [.TypeTwo(.Aminoglycosides),.TypeTwo(.Antibiotics),.TypeTwo(.Beta),.TypeTwo(.Cyclic),.TypeTwo(.Macrolides),.TypeTwo(.Tetracyclines),.TypeTwo(.casePhenicols),.TypeTwo(.antibacterials),.TypeTwo(.Tetracyclines),.TypeTwo(.Sulfonamides),.TypeTwo(.Quinolones),.TypeTwo(.Nitroimidazole),.TypeTwo(.Miscellaneous),.TypeTwo(.antibacterials)]
+        default:
+            return []
         }
     }
 }
