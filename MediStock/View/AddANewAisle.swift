@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AddANewAisle: View {
-    @State private var iterate : SelectAisleList = SelectAisleList.allCases.first!
+    @State private var iterate : SelectedAisles = SelectedAisles.allCases.first!
     @State private var stock : [Int] = Array(0...100)
     @State private var stockSelected : Int = 0
-    @State private var selectNameOfMedicineList : SelectNameOfMedicineList = SelectNameOfMedicineList.allCases.first!
+    @State private var selectNameOfMedicineList : SelectNameOfMedicineListAnalgesics_andAntiInflammatory = SelectNameOfMedicineListAnalgesics_andAntiInflammatory.allCases.first!
     @State private var nameInAisle : String = ""
-    @State private var selectNameOfMedicineListTwo : SelectNameOfMedicineListTwo = .allCases.first!
+    @State private var selectNameOfMedicineListTwo : SelectNameOfMedicineListAntibioticsAndAntibacterials = .allCases.first!
     @State private var nameInAisleMEdicine : String = ""
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -46,7 +46,7 @@ struct AddANewAisle: View {
                         .fontWeight(.bold)
                     
                     Picker("Aisles", selection: $nameInAisle) {
-                        ForEach(SelectAisleList.allCases) { aisle in
+                        ForEach(SelectedAisles.allCases) { aisle in
                             Text(aisle.rawValue.capitalized)
                         }
                     }
@@ -66,12 +66,7 @@ struct AddANewAisle: View {
                         .font(.headline)
                         .fontWeight(.bold)
                     
-//                    Picker("Medicine", selection: $nameInAisleMEdicine) {
-//                        ForEach(SelectNameOfMedicineList.allCases) { name in
-//                            Text(name.rawValue.capitalized)
-//                        }
-//                    }.pickerStyle(.menu)
-//                    
+
                     Picker("Medicine", selection: $nameInAisleMEdicine) {
                         ForEach(getOptionMedical()) { name in
                             Text(name.displayName)

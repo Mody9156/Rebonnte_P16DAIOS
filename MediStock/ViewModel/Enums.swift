@@ -8,14 +8,24 @@
 import Foundation
 
 enum TypeOF: Identifiable {
-    case TypeOne(SelectNameOfMedicineList)
-    case TypeTwo(SelectNameOfMedicineListTwo)
+    case TypeOne(SelectNameOfMedicineListAnalgesics_andAntiInflammatory)
+    case TypeTwo(SelectNameOfMedicineListAntibioticsAndAntibacterials)
+    case TypeThree(SelectNameOfMedicineListAntibioticsAndAntibacterials)
+    case TypeFour(SelectNameOfMedicineListDermatology)
+    case TypeFive(SelectNameOfMedicineOncology)
+    
     
     var id: String {
             switch self {
             case .TypeOne(let medicine):
                 return medicine.rawValue
             case .TypeTwo(let medicine):
+                return medicine.rawValue
+            case .TypeThree(let medicine):
+                return medicine.rawValue
+            case .TypeFour(let medicine):
+                return medicine.rawValue
+            case .TypeFive(let medicine):
                 return medicine.rawValue
             }
         }
@@ -26,19 +36,28 @@ enum TypeOF: Identifiable {
                 return medicine.rawValue
             case .TypeTwo(let medicine):
                 return medicine.rawValue
+            case .TypeThree(let medicine):
+                return medicine.rawValue
+            case .TypeFour(let medicine):
+                return medicine.rawValue
+            case .TypeFive(let medicine):
+                return medicine.rawValue
             }
         }
 }
-enum SelectAisleList: String, CaseIterable, Identifiable {
+enum SelectedAisles: String, CaseIterable, Identifiable {
     
     case Analgesics = "Analgesics and Anti-inflammatory drugs"
     case Antibiotics = "Antibiotics and Antibacterials"
+    case AntituberculosisAndAntileprosy = "Antituberculosis and Antileprosy drugs"
+    case Dermatology = "Dermatology"
+    case Oncology = "Oncology"
 //    case Antituberculosi = "Antituberculosis drugs"
     
     var id: String  { self.rawValue }
 }
 
-enum SelectNameOfMedicineList: String, CaseIterable, Identifiable {
+enum SelectNameOfMedicineListAnalgesics_andAntiInflammatory: String, CaseIterable, Identifiable {
     
     case Peripherally = "Peripherally acting analgesics"
     case Centrally = "Centrally acting analgesics"
@@ -48,7 +67,7 @@ enum SelectNameOfMedicineList: String, CaseIterable, Identifiable {
     var id: String  { self.rawValue }
 }
 
-enum SelectNameOfMedicineListTwo: String, CaseIterable, Identifiable {
+enum SelectNameOfMedicineListAntibioticsAndAntibacterials: String, CaseIterable, Identifiable {
     
     case Beta = "Beta-lactams"
     case Aminoglycosides = "Aminoglycosides"
@@ -63,5 +82,32 @@ enum SelectNameOfMedicineListTwo: String, CaseIterable, Identifiable {
     case Miscellaneous = "Miscellaneous antibiotics"
     case antibacterials =  "antibacterials"
     
+    var id: String  { self.rawValue }
+}
+
+
+enum SelectNameOfMedicineListAntituberculosisAndAntileprosy: String, CaseIterable, Identifiable {
+    
+    case Antituberculosis = "Antituberculosis drugs"
+    case Topical = "Topical antibiotics in dermatology"
+    
+    var id: String  { self.rawValue }
+}
+
+enum SelectNameOfMedicineListDermatology: String, CaseIterable, Identifiable {
+    
+    case Anti = "Anti-acne drugs"
+    case Antileprosy = "Antileprosy drugs"
+    case dermatology = "Topical antivirals in dermatology: Antiherpetic drugs"
+    var id: String  { self.rawValue }
+}
+
+
+enum SelectNameOfMedicineOncology: String, CaseIterable, Identifiable {
+    
+    case Antimetabolites = "Antimetabolites"
+    case Alkylating  = "Alkylating agents"
+    case Tubulin = "Tubulin-interacting drugs"
+    case Intercalating = "Intercalating agents"
     var id: String  { self.rawValue }
 }
