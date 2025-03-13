@@ -10,7 +10,7 @@ import Foundation
 enum TypeOF: Identifiable {
     case TypeOne(SelectNameOfMedicineListAnalgesics_andAntiInflammatory)
     case TypeTwo(SelectNameOfMedicineListAntibioticsAndAntibacterials)
-    case TypeThree(SelectNameOfMedicineListAntibioticsAndAntibacterials)
+    case TypeThree(SelectNameOfMedicineListAntituberculosisAndAntileprosy)
     case TypeFour(SelectNameOfMedicineListDermatology)
     case TypeFive(SelectNameOfMedicineOncology)
     
