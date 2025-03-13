@@ -43,7 +43,7 @@ class AuthViewModel : ObservableObject {
     
     func createdNewUser(email: String, password: String) async throws {
         do{
-            let user = try await session.signUp(email: email, password: password)
+            _ = try await session.signUp(email: email, password: password)
             self.messageError = ""
         }catch{
             self.messageError = "Erreur lors de la création de l'utilisateur"

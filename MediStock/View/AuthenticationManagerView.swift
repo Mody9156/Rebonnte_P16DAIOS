@@ -20,11 +20,13 @@ struct AuthenticationManagerView: View {
             .onAppear{
                 Task{
                     try await authViewModel.disableAutoLogin()
-                    authViewModel.changeStatus()
+                    try? await authViewModel.changeStatus()
                 }
             }
             .onDisappear {
-                authViewModel.stopListeningToAuthChanges()
+                Task{
+                    try? await  authViewModel.changeStatus()
+                }
             }
         }
         .accessibilityElement(children: .contain)
