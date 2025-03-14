@@ -72,20 +72,20 @@ class MedicineService: MedicineProtocol, ObservableObject{
     
     // Ajouter un médicament à une allée disponible
     func setDataToAisle(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
+//        
+//        let collection =  try await db.collection("medicines").getDocuments()
+//        let snapshot = Set(collection.documents.compactMap({ query in
+//            query.data()["aisle"] as? String
+//        }))
+//        
+//        let allAisles = Set((1...10).map{"Aisle \($0)"})
+//        let aisles = allAisles.subtracting(snapshot)
+//        
+//        guard let getAisles = aisles.randomElement() else {
+//            throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
+//        }
         
-        let collection =  try await db.collection("medicines").getDocuments()
-        let snapshot = Set(collection.documents.compactMap({ query in
-            query.data()["aisle"] as? String
-        }))
-        
-        let allAisles = Set((1...10).map{"Aisle \($0)"})
-        let aisles = allAisles.subtracting(snapshot)
-        
-        guard let getAisles = aisles.randomElement() else {
-            throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
-        }
-        
-        let medicine = Medicine(name: name, stock: stock, aisle: getAisles)
+        let medicine = Medicine(name: name, stock: stock, aisle: aisle)
         
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)

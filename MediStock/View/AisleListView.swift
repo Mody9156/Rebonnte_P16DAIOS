@@ -54,9 +54,6 @@ struct AisleListView: View {
                 .navigationTitle("Aisle")
            
                 Button(action: {
-//                    Task{
-//                        try await medicineStockViewModel.addRandomAisle()
-//                    }
                     activeView = true
                 }) {
                     ZStack {
