@@ -178,7 +178,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     // Met à jour le stock d'un médicament en ajoutant ou en retirant une quantité spécifique 💊
     func updateStock(_ medicine: Medicine, by amount: Int, user: String) -> [Medicine] {
         guard let id = medicine.id else { return [medicine]}
-        let newStock = medicine.stock + amount
+        let newStock = medicine.stock 
         db.collection("medicines").document(id).updateData([
             "stock": newStock
         ]) { error in
