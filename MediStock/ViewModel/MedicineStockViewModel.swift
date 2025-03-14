@@ -30,9 +30,9 @@ class MedicineStockViewModel: ObservableObject {
             self?.aisles = aisles
         }
     }
-    func addRandomAisle() async throws {
+    func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
         do{
-            let _ = try await medicineRepository.setDataToAisle()
+            let _ = try await medicineRepository.setDataToAisle(name: name, stock: stock, aisle: aisle)
             
         }catch{
             print("errr")
