@@ -51,10 +51,6 @@ struct MedicineDetailView: View {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         
                     }
-                    if medicineStockViewModel.messageEror == nil {
-                        dismiss()
-                    }
-                   
                 } label: {
                     Text("Validate")
                         .foregroundColor(.white)
