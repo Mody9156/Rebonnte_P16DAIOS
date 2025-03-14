@@ -35,9 +35,15 @@ class MedicineStockViewModel: ObservableObject {
             self?.aisles = aisles
         }
     }
+    
     func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
-        guard name.isEmpty == false || aisle.isEmpty == false else {
-            return messageEror = "Veuillez remplire toutes les informations"
+        
+        guard aisle.isEmpty == false else {
+            return messageEror = "Veuillez intégrer une catégorie"
+        }
+        
+        guard name.isEmpty == false else {
+            return messageEror = "Veuillez remplire le nom du médicament"
         }
         
         do{
