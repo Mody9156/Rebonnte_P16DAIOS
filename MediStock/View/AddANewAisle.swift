@@ -62,7 +62,7 @@ struct AddANewAisle: View {
                         .font(.headline)
                         .fontWeight(.bold)
                     
-
+                    
                     Picker("Medicine", selection: $nameInAisleMEdicine) {
                         ForEach(getOptionMedical()) { name in
                             Text(name.displayName)
@@ -73,9 +73,9 @@ struct AddANewAisle: View {
                         dismiss()
                     } label: {
                         Text("Validate")
-                        .foregroundStyle(.white)
-                        .background(Color.blue)
-                        .frame(height: 40)
+                            .foregroundStyle(.white)
+                            .background(Color.blue)
+                            .frame(height: 40)
                     }
                 }
                 .padding()
