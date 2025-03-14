@@ -31,7 +31,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     // Récupérer l'intégralité des 💊
     func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
+            if error != nil {
                 completion([])
             } else {
                 let medicines = querySnapshot?.documents.compactMap { document in
@@ -45,7 +45,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     // Récupérer la liste des allées disponibles
     func fetchAisles(completion: @escaping ([String]) -> Void) {
         db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
+            if error != nil {
                 completion([])
             } else {
                 let allMedicines = querySnapshot?.documents.compactMap { document in

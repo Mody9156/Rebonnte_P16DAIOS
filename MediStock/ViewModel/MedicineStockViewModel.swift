@@ -36,6 +36,7 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
         
         guard aisle.isEmpty == false else {

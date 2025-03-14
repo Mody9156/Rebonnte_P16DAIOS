@@ -91,7 +91,7 @@ struct AddANewAisle: View {
                                 .frame(height: 150))
                     Button {
                         Task{
-                            try? await medicineStockViewModel.addRandomAisle(name: nameInAisle, stock: (Int(stock)), aisle: nameInAisleMEdicine)
+                            try? await medicineStockViewModel.addRandomAisle(name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle)
                         }
                         
                         if medicineStockViewModel.messageEror != nil {
