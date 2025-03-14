@@ -89,23 +89,11 @@ extension MedicineDetailView {
                             .padding(.leading)
                             .frame(height: 55)
                             .focused($isTyping)
-                            .foregroundStyle(isTyping ? .black : Color.clear)
                             .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .accessibilityLabel("Medicine Name Field")
                             .accessibilityHint("Edit the name of the medicine.")
-                            
-                            Text(LocalizedStringKey("Name")) // prise en charge des langues
-                                .padding(.horizontal, 5)
-                                .background(.gray.opacity(0.1))
-                                .foregroundStyle(isTyping || !medicine.name.isEmpty ? .black : Color.primary)
-                                .padding(.leading)
-                                .offset(y: isTyping ? -27 : 0)
-                                .onTapGesture {
-                                    isTyping.toggle()
-                                }
-                                .accessibilityLabel("Name Label")
+                         
                         }
-                        .animation(.linear(duration: 0.2), value: isTyping)
                     }
                 }
             }
@@ -181,7 +169,6 @@ extension MedicineDetailView {
             
             VStack {
                 VStack(alignment: .leading) {
-                    ZStack (alignment: .leading) {
                         TextField("", text: $medicine.aisle)
                             .onChange(of: medicine) { _ in
                                 Task {
@@ -192,23 +179,8 @@ extension MedicineDetailView {
                             .frame(height: 55)
                             .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
                             .focused($isTypingMedicine)
-                            .foregroundStyle(isTypingMedicine ? .black : .clear)
                             .accessibilityLabel("Aisle Field")
                             .accessibilityHint("Edit the aisle where the medicine is located.")
-                        
-                        Text(LocalizedStringKey("Name")) // prise en charge des langues
-                            .padding(.horizontal, 5)
-                            .background(.gray.opacity(0.1))
-                            .foregroundStyle(isTypingMedicine || !medicine.aisle.isEmpty ? .black : .black)
-                            .padding(.leading)
-                            .offset(y: isTypingMedicine ? -27 : 0)
-                            .onTapGesture {
-                                isTypingMedicine.toggle()
-                            }
-                            .accessibilityLabel("Aisle Label")
-                    }
-                    .animation(.linear(duration: 0.2), value: isTyping)
-                    
                 }
             }
         }
