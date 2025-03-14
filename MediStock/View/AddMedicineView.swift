@@ -75,7 +75,7 @@ struct AddMedicineView: View {
                     Button {
                         
                         Task{
-                            try? await medicineStockViewModel.addRandomMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle) // Remplacez par l'utilisateur actuel
+                            try? await medicineStockViewModel.insertMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle) // Remplacez par l'utilisateur actuel
                         }
                         if medicineStockViewModel.messageEror != nil {
                             dismiss()

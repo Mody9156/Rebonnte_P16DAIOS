@@ -11,8 +11,8 @@ class MedicineStockViewModel: ObservableObject {
     
     enum ThrowsErrorReason: Error {
         case addRandomAisleThrowsError
-        case addRandomMedicineToListThrowsError
-        case addRandomMedicineThrowError
+        case insertAisleThrowsError
+        case insertMedicineToListThrowError
     }
     
     @Published var filterOption : FilterOption? = .noFilter
@@ -46,15 +46,15 @@ class MedicineStockViewModel: ObservableObject {
         }
         
         guard name.isEmpty == false else {
-            return messageEror = "Veuillez remplire le nom du médicament"
+            return messageEror = "Please enter the medicine name."
         }
         
         do{
             let _ = try await medicineRepository.setDataToAisle(name: name, stock: stock, aisle: aisle)
             messageEror = nil
         }catch{
-            messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
-            throw ThrowsErrorReason.addRandomAisleThrowsError
+            messageEror = "An error occurred while adding a new medicine. Please check that it is not already present."
+            throw ThrowsErrorReason.insertAisleThrowsError
         }
     }
     
@@ -64,12 +64,12 @@ class MedicineStockViewModel: ObservableObject {
             try await medicineRepository.setData(user: user)
             
         }catch{
-            throw ThrowsErrorReason.addRandomMedicineThrowError
+//            throw ThrowsErrorReason.addRandomMedicineThrowError
         }
     }
     
     @MainActor
-    func addRandomMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
+    func insertMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
         guard aisle.isEmpty == false else {
             return messageEror = "Veuillez intégrer une catégorie"
         }
@@ -79,7 +79,7 @@ class MedicineStockViewModel: ObservableObject {
             messageEror = nil
         }catch{
             messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
-           
+            throw ThrowsErrorReason.insertMedicineToListThrowError
         }
     }
     
