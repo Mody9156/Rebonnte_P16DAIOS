@@ -15,7 +15,7 @@ struct AddANewAisle: View {
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
-
+    
     var body: some View {
         ZStack {
             Color(.gray)
