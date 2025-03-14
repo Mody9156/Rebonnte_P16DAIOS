@@ -39,7 +39,7 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     @MainActor
-    func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
+    func insertAisle(name: String, stock: Int, aisle: String) async throws {
         
         guard aisle.isEmpty == false else {
             return messageEror = "Veuillez intégrer une catégorie"
@@ -68,6 +68,7 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func addRandomMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
         guard aisle.isEmpty == false else {
             return messageEror = "Veuillez intégrer une catégorie"
