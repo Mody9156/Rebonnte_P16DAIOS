@@ -5,7 +5,8 @@ struct AllMedicinesView: View {
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
-    
+    @State private var activeView: Bool = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
