@@ -9,7 +9,8 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-
+    @State var stocks : Bool = false
+    
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
@@ -63,7 +64,7 @@ struct MedicineDetailView: View {
                 
                 // History Section
                 historySection
-              
+                
             }
             .padding(.horizontal)
             .padding(.vertical)
@@ -99,12 +100,12 @@ extension MedicineDetailView {
                 ZStack(alignment: .leading) {
                     VStack {
                         TextField("", text: $medicine.name)
-                        .padding(.leading)
-                        .frame(height: 55)
-                        .focused($isTyping)
-                        .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
-                        .accessibilityLabel("Medicine Name Field")
-                        .accessibilityHint("Edit the name of the medicine.")
+                            .padding(.leading)
+                            .frame(height: 55)
+                            .focused($isTyping)
+                            .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                            .accessibilityLabel("Medicine Name Field")
+                            .accessibilityHint("Edit the name of the medicine.")
                     }
                 }
             }
@@ -121,7 +122,7 @@ extension MedicineDetailView {
             
             HStack {
                 Spacer()
-                Button(action: decreaseStock) {
+                Button(action:{ medicine.stock -= 1}) {
                     ZStack {
                         Circle()
                             .frame(height: 50)
@@ -149,7 +150,7 @@ extension MedicineDetailView {
                     .accessibilityLabel("Stock Field")
                     .accessibilityHint("Enter the current stock of the medicine.")
                 
-                Button(action: increaseStock) {
+                Button(action:{medicine.stock += 1}) {
                     ZStack {
                         Circle()
                             .frame(height: 50)
