@@ -97,7 +97,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     // Supprimer un médicament
-    func setDataToList(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
+    func setDataToList(user: String,name:String, stock:Int, aisle:String) async throws -> [Medicine] {
         let collection = try await db.collection("medicines").getDocuments()
 
         let snapshot = Set(collection.documents.compactMap { query in

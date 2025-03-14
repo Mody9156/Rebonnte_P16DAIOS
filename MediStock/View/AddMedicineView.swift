@@ -15,7 +15,8 @@ struct AddMedicineView: View {
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
-    
+    @AppStorage("email") var identity : String = "email"
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -73,9 +74,9 @@ struct AddMedicineView: View {
                                 .frame(height: 150))
                     Button {
  
-                        //                Task{
-                        //                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
-                        //                }
+                                        Task{
+                                            try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+                                        }
                         if medicineStockViewModel.messageEror != nil {
                             dismiss()
                         }

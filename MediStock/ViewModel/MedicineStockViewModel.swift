@@ -11,6 +11,8 @@ class MedicineStockViewModel: ObservableObject {
     
     enum ThrowsErrorReason: Error {
         case addRandomAisleThrowsError
+        case addRandomMedicineToListThrowsError
+        case addRandomMedicineThrowError
     }
     
     @Published var filterOption : FilterOption? = .noFilter
@@ -57,19 +59,25 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func addRandomMedicine(user: String) async throws {
+        
         do{
             try await medicineRepository.setData(user: user)
             
         }catch{
-            print("errr")
+            throw ThrowsErrorReason.addRandomMedicineThrowError
         }
     }
     
-    func addRandomMedicineToList(user: String, aisle: String) async throws {
+    func addRandomMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
+        guard aisle.isEmpty == false else {
+            return messageEror = "Veuillez intégrer une catégorie"
+        }
+        
         do{
-            try await medicineRepository.setDataToList(user: user, aisle: aisle)
+            try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle)
         }catch{
-            print("errr")
+            messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
+           
         }
     }
     

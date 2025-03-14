@@ -4,7 +4,6 @@ struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     @State private var activeView: Bool = false
     var aisle: String
-    @AppStorage("email") var identity : String = "email"
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
             return   Medicine.aisle == aisle
