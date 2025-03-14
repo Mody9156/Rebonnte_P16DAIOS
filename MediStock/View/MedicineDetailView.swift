@@ -9,7 +9,6 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    @Environment(\.dismiss) var dismiss
 
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
