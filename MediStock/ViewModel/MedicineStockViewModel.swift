@@ -37,7 +37,7 @@ class MedicineStockViewModel: ObservableObject {
     }
     func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
         guard name.isEmpty == false || aisle.isEmpty == false else {
-            return print("name ne peux pas être Vide")
+            return messageEror = "Veuillez remplire toutes les informations"
         }
         
         do{
