@@ -74,6 +74,10 @@ class MedicineStockViewModel: ObservableObject {
             return messageEror = "Please select a category to proceed."
         }
         
+        guard name.isEmpty == false else {
+            return messageEror = "Please enter the medicine name."
+        }
+        
         do{
             try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle)
             messageEror = nil

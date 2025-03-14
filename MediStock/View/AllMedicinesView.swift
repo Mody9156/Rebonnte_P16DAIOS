@@ -5,7 +5,7 @@ struct AllMedicinesView: View {
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
-
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -50,8 +50,6 @@ struct AllMedicinesView: View {
                     // Liste des Médicaments
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
-                
-            
             }
         }
         .onAppear {
