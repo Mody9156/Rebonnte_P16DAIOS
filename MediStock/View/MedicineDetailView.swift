@@ -44,10 +44,13 @@ struct MedicineDetailView: View {
                 // Medicine Aisle
                 medicineAisleSection
                 
-                // History Section
-                historySection
                 
                 Button {
+                    Task{
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        
+                    }
                     if medicineStockViewModel.messageEror == nil {
                         dismiss()
                     }
@@ -61,7 +64,11 @@ struct MedicineDetailView: View {
                         .shadow(radius: 3)
                         .padding(.top, 10)
                 }
-
+                
+                
+                // History Section
+                historySection
+              
             }
             .padding(.horizontal)
             .padding(.vertical)
@@ -96,11 +103,7 @@ extension MedicineDetailView {
             VStack {
                 ZStack(alignment: .leading) {
                     VStack {
-                        TextField("", text: $medicine.name, onCommit: {
-                            Task {
-                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                            }
-                        })
+                        TextField("", text: $medicine.name)
                         .padding(.leading)
                         .frame(height: 55)
                         .focused($isTyping)
@@ -183,11 +186,6 @@ extension MedicineDetailView {
             VStack {
                 VStack(alignment: .leading) {
                     TextField("", text: $medicine.aisle)
-                        .onChange(of: medicine) { _ in
-                            Task {
-                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                            }
-                        }
                         .padding(.leading)
                         .frame(height: 55)
                         .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
