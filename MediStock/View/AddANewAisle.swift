@@ -14,6 +14,8 @@ struct AddANewAisle: View {
     @State private var nameInAisleMEdicine : String = ""
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -88,6 +90,9 @@ struct AddANewAisle: View {
                                 .pickerStyle(.wheel)
                                 .frame(height: 150))
                     Button {
+                        Task{
+                            try? await medicineStockViewModel.addRandomAisle(name: nameInAisle, stock: (Int(stock)), aisle: nameInAisleMEdicine)
+                        }
                         dismiss()
                     } label: {
                         Text("Validate")
