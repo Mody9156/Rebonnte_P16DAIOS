@@ -71,14 +71,14 @@ class MedicineStockViewModel: ObservableObject {
     @MainActor
     func insertMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
         guard aisle.isEmpty == false else {
-            return messageEror = "Veuillez intégrer une catégorie"
+            return messageEror = "Please select a category to proceed."
         }
         
         do{
             try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle)
             messageEror = nil
         }catch{
-            messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
+            messageEror = "An error occurred while adding a new medicine. Please check that it is not already present."
             throw ThrowsErrorReason.insertMedicineToListThrowError
         }
     }
