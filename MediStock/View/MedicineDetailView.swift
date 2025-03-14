@@ -9,7 +9,8 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    
+    @Environment(\.dismiss) var dismiss
+
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
@@ -46,6 +47,18 @@ struct MedicineDetailView: View {
                 // History Section
                 historySection
                 
+                Button {
+                    dismiss
+                } label: {
+                    Text("Validate")
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 40)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .shadow(radius: 3)
+                        .padding(.top, 10)
+                }
+
             }
             .padding(.horizontal)
             .padding(.vertical)
