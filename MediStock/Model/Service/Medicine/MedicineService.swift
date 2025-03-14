@@ -76,7 +76,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
         let collection = try await db.collection("medicines").getDocuments()
 
         let snapshot = Set(collection.documents.compactMap { query in
-            query.data()["aisle"] as? String
+            query.data()["name"] as? String
         })
 
         let allAisles = Set(aisle.map{"\($0)"})
