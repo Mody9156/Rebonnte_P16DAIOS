@@ -51,7 +51,7 @@ class MedicineStockViewModel: ObservableObject {
         
         do{
             let _ = try await medicineRepository.setDataToAisle(name: name, stock: stock, aisle: aisle)
-            
+            messageEror = nil
         }catch{
             messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
             throw ThrowsErrorReason.addRandomAisleThrowsError
@@ -75,6 +75,7 @@ class MedicineStockViewModel: ObservableObject {
         
         do{
             try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle)
+            messageEror = nil
         }catch{
             messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
            
