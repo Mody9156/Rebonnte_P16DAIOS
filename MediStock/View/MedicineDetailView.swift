@@ -80,20 +80,17 @@ extension MedicineDetailView {
             VStack {
                 ZStack(alignment: .leading) {
                     VStack {
-                        ZStack(alignment: .leading) {
-                            TextField("", text: $medicine.name, onCommit: {
-                                Task {
-                                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                                }
-                            })
-                            .padding(.leading)
-                            .frame(height: 55)
-                            .focused($isTyping)
-                            .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
-                            .accessibilityLabel("Medicine Name Field")
-                            .accessibilityHint("Edit the name of the medicine.")
-                         
-                        }
+                        TextField("", text: $medicine.name, onCommit: {
+                            Task {
+                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                            }
+                        })
+                        .padding(.leading)
+                        .frame(height: 55)
+                        .focused($isTyping)
+                        .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                        .accessibilityLabel("Medicine Name Field")
+                        .accessibilityHint("Edit the name of the medicine.")
                     }
                 }
             }
@@ -169,18 +166,18 @@ extension MedicineDetailView {
             
             VStack {
                 VStack(alignment: .leading) {
-                        TextField("", text: $medicine.aisle)
-                            .onChange(of: medicine) { _ in
-                                Task {
-                                    try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                                }
+                    TextField("", text: $medicine.aisle)
+                        .onChange(of: medicine) { _ in
+                            Task {
+                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                             }
-                            .padding(.leading)
-                            .frame(height: 55)
-                            .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
-                            .focused($isTypingMedicine)
-                            .accessibilityLabel("Aisle Field")
-                            .accessibilityHint("Edit the aisle where the medicine is located.")
+                        }
+                        .padding(.leading)
+                        .frame(height: 55)
+                        .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+                        .focused($isTypingMedicine)
+                        .accessibilityLabel("Aisle Field")
+                        .accessibilityHint("Edit the aisle where the medicine is located.")
                 }
             }
         }
@@ -198,7 +195,7 @@ extension MedicineDetailView {
         guard let id = medicine.id else { return }
         Task{
             try? await medicineStockViewModel.increaseStock(medicine, user: id)
-    }
+        }
         medicine.stock += 1
     }
     
