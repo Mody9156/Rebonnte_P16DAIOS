@@ -9,6 +9,10 @@ class MedicineStockViewModel: ObservableObject {
         case stock
     }
     
+    enum ThrowsErrorReason: Error {
+        case addRandomAisleThrowsError
+    }
+    
     @Published var filterOption : FilterOption? = .noFilter
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
@@ -32,12 +36,16 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     func addRandomAisle(name: String, stock: Int, aisle: String) async throws {
+        guard name.isEmpty == false || aisle.isEmpty == false else {
+            return print("name ne peux pas être Vide")
+        }
+        
         do{
             let _ = try await medicineRepository.setDataToAisle(name: name, stock: stock, aisle: aisle)
             
         }catch{
-            print("errr")
-            
+            messageEror = "Une erreur est survenue lors de l'ajout d'un nouveau médicaments"
+            throw ThrowsErrorReason.addRandomAisleThrowsError
         }
     }
     
