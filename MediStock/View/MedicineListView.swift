@@ -59,9 +59,10 @@ struct MedicineListView: View {
                 .opacity(0.4)
             
             Button(action: {
-                Task{
-                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
-                }
+//                Task{
+//                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+//                }
+                activeView = true
             }) {
                 ZStack {
                     Circle()
@@ -76,7 +77,7 @@ struct MedicineListView: View {
                 }
             }
             .sheet(isPresented: $activeView) {
-                AddMedicineView()
+                AddMedicineView(nameInAisle: aisle)
             }
             .padding()
             .accessibilityLabel("Aisle List")
