@@ -5,7 +5,6 @@ struct AllMedicinesView: View {
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
-    @State private var activeView: Bool = false
 
     var body: some View {
         NavigationView {
@@ -49,29 +48,7 @@ struct AllMedicinesView: View {
                     .position(x: 400, y: 710)
                     .foregroundStyle(.blue)
                     .opacity(0.4)
-                
-                Button {
-                    Task{
-                        try? await medicineStockViewModel.addRandomMedicine(user: identity)
-                    }
-                } label: {
-                    ZStack {
-                        Circle()
-                            .frame(height: 60)
-                            .foregroundStyle(.blue)
-                            .opacity(0.9)
-                        Image(systemName: "plus")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.white)
-                            .accessibilityLabel("Add random medicine")
-                            .accessibilityHint("Adds a new random medicine to the list.")
-                    }
-                }
-                .padding()
-                .navigationBarTitle("All Medicines")
-                .accessibilityLabel("All Medicines View")
-                .accessibilityHint("Displays a list of all medicines and allows filtering or sorting.")
+             
             }
         }
         .onAppear {
