@@ -58,16 +58,16 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    func addRandomMedicine(user: String) async throws {
-        
-        do{
-            try await medicineRepository.setData(user: user)
-            
-        }catch{
-//            throw ThrowsErrorReason.addRandomMedicineThrowError
-        }
-    }
-    
+//    func addRandomMedicine(user: String) async throws {
+//        
+//        do{
+//            try await medicineRepository.setData(user: user)
+//            
+//        }catch{
+////            throw ThrowsErrorReason.addRandomMedicineThrowError
+//        }
+//    }
+//    
     @MainActor
     func insertMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
         guard aisle.isEmpty == false else {
