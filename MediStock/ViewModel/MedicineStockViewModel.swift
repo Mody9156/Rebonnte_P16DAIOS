@@ -42,7 +42,7 @@ class MedicineStockViewModel: ObservableObject {
     func insertAisle(name: String, stock: Int, aisle: String) async throws {
         
         guard aisle.isEmpty == false else {
-            return messageEror = "Veuillez intégrer une catégorie"
+            return messageEror = "Please select a category to proceed."
         }
         
         guard name.isEmpty == false else {
