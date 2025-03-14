@@ -79,7 +79,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
             query.data()["name"] as? String
         })
 
-        let allAisles = Set(aisle.map{"\($0)"})
+        let allAisles = Set([aisle])
 
         guard snapshot.isDisjoint(with: allAisles) else {
             throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
