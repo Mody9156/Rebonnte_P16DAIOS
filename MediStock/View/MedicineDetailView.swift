@@ -147,7 +147,7 @@ extension MedicineDetailView {
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
-                        stocks = newValue
+                        stocks = newValue - newValue
                     }
                     .multilineTextAlignment(.center)
                     .accessibilityLabel("Stock Field")
