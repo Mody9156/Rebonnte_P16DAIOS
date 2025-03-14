@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
+    @State private var activeView: Bool = false
     var aisle: String
     @AppStorage("email") var identity : String = "email"
     var filterMedicines : [Medicine] {
@@ -74,6 +75,12 @@ struct MedicineListView: View {
                         .accessibilityHint("Adds a random medicine to the current aisle.")
                 }
             }
+            .sheet(isPresented: $activeView) {
+                AddMedicineView()
+            }
+            .padding()
+            .accessibilityLabel("Aisle List")
+            .accessibilityHint("Displays a list of aisles containing medicines.")
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {

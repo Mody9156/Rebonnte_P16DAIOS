@@ -10,7 +10,7 @@ import SwiftUI
 struct AddMedicineView: View {
     @State private var stock : Double = 0.0
     @State private var stockSelected : Int = 0
-    @State private var nameInAisle : String 
+    @State  var nameInAisle : String
     @State private var nameInAisleMEdicine : String = ""
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
@@ -122,5 +122,5 @@ struct AddMedicineView: View {
 }
 
 #Preview {
-    AddMedicineView()
+    AddMedicineView(nameInAisle: "Onocology")
 }
