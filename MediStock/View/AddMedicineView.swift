@@ -16,7 +16,7 @@ struct AddMedicineView: View {
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("email") var identity : String = "email"
-
+    
     var body: some View {
         ZStack {
             Color(.gray)
@@ -73,10 +73,10 @@ struct AddMedicineView: View {
                                 .pickerStyle(.wheel)
                                 .frame(height: 150))
                     Button {
- 
-                                        Task{
-                                            try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
-                                        }
+                        
+                        Task{
+                            try? await medicineStockViewModel.addRandomMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle) // Remplacez par l'utilisateur actuel
+                        }
                         if medicineStockViewModel.messageEror != nil {
                             dismiss()
                         }
@@ -119,7 +119,7 @@ struct AddMedicineView: View {
             return []
         }
     }
-
+    
 }
 
 #Preview {
