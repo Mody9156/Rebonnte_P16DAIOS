@@ -67,9 +67,9 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func setDataToAisle() async throws -> [Medicine] {
+    func setDataToAisle(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
         do{
-            return try await medicineService.setDataToAisle()
+            return try await medicineService.setDataToAisle(name: name, stock: stock, aisle: aisle)
         }catch{
             throw MedicineError.invalidSetData
         }
