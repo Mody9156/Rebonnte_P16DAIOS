@@ -54,7 +54,7 @@ struct MedicineDetailView: View {
                 } label: {
                     Text("Validate")
                         .foregroundColor(.white)
-                        .frame(width: 200, height: 40)
+                        .frame(height: 40)
                         .background(Color.blue)
                         .cornerRadius(10)
                         .shadow(radius: 3)
