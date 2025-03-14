@@ -71,7 +71,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     // Ajouter un médicament à une allée disponible
-    func setDataToAisle() async throws -> [Medicine] {
+    func setDataToAisle(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
         
         let collection =  try await db.collection("medicines").getDocuments()
         let snapshot = Set(collection.documents.compactMap({ query in
