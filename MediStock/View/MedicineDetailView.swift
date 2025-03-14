@@ -48,7 +48,10 @@ struct MedicineDetailView: View {
                 historySection
                 
                 Button {
-                    dismiss
+                    if medicineStockViewModel.messageEror == nil {
+                        dismiss()
+                    }
+                   
                 } label: {
                     Text("Validate")
                         .foregroundColor(.white)
