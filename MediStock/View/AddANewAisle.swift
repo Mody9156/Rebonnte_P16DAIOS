@@ -93,7 +93,11 @@ struct AddANewAisle: View {
                         Task{
                             try? await medicineStockViewModel.addRandomAisle(name: nameInAisle, stock: (Int(stock)), aisle: nameInAisleMEdicine)
                         }
-                        dismiss()
+                        
+                        if ((medicineStockViewModel.messageEror?.isEmpty) != nil){
+                            dismiss()
+                        }
+                        
                     } label: {
                         Text("Validate")
                             .foregroundColor(.white)
@@ -102,6 +106,12 @@ struct AddANewAisle: View {
                             .cornerRadius(10)
                             .shadow(radius: 3)
                             .padding(.top, 10)
+                    }
+                    
+                    if let message = medicineStockViewModel.messageEror {
+                        Text(message)
+                            .foregroundStyle(.red)
+                            .font(.headline)
                     }
                     
                 }
