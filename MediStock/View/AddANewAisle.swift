@@ -20,69 +20,85 @@ struct AddANewAisle: View {
                 .ignoresSafeArea()
                 .opacity(0.1)
             
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
+            GeometryReader { geometry in
+                Circle()
+                    .frame(width: 200, height: 200)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
+                    .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                
+                Circle()
+                    .frame(width: 200, height: 200)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
+                    .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
+            }
             
             ScrollView {
-                VStack {
-                    
+                VStack(spacing: 20){
                     Text("Aisle")
-                        .font(.headline)
+                        .font(.title2)
                         .fontWeight(.bold)
+                        .padding()
                     
-                    Picker("Aisles", selection: $nameInAisle) {
-                        ForEach(SelectedAisles.allCases) { aisle in
-                            Text(aisle.rawValue.capitalized)
-                        }
-                    }
-                    .pickerStyle(.menu)
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .shadow(radius: 3)
+                        .frame(height: 160)
+                        .overlay(
+                            Picker("Aisles", selection: $nameInAisle) {
+                                ForEach(SelectedAisles.allCases) { aisle in
+                                    Text(aisle.rawValue.capitalized)
+                                }
+                            }
+                                .pickerStyle(.wheel)
+                                .frame(height: 150))
                     
-                    Text("Stock")
-                        .font(.headline)
+                    Text("Stock: \((Int(stock)))")
+                        .font(.title2)
                         .fontWeight(.bold)
-
+                        .padding()
+                    
                     Slider(
                         value: $stock,
-                           in: 0...100,
+                        in: 0...100,
                         step: 1
-                       ) {
-                           Text("Speed")
-                       } minimumValueLabel: {
-                           Text("0")
-                       } maximumValueLabel: {
-                           Text("100")
-                       }
- 
-                       Text("\(Int(stock))")
-                  
+                    ) {
+                        Text("Speed")
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("100")
+                    }
+                    
                     Text("Medicine")
-                        .font(.headline)
+                        .font(.title2)
                         .fontWeight(.bold)
-                    
-                    
-                    Picker("Medicine", selection: $nameInAisleMEdicine) {
-                        ForEach(getOptionMedical()) { name in
-                            Text(name.displayName)
-                        }
-                    }.pickerStyle(.wheel)
-                    
+                        .padding()
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .shadow(radius: 3)
+                        .frame(height: 160)
+                        .overlay(
+                            Picker("Medicine", selection: $nameInAisleMEdicine) {
+                                ForEach(getOptionMedical()) { name in
+                                    Text(name.displayName)
+                                }
+                            }
+                                .pickerStyle(.wheel)
+                                .frame(height: 150))
                     Button {
                         dismiss()
                     } label: {
                         Text("Validate")
-                            .foregroundStyle(.white)
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 40)
                             .background(Color.blue)
-                            .frame(height: 40)
+                            .cornerRadius(10)
+                            .shadow(radius: 3)
+                            .padding(.top, 10)
                     }
+                    
                 }
                 .padding()
             }

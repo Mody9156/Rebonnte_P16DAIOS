@@ -15,6 +15,20 @@ struct AisleListView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
+                GeometryReader { geometry in
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                    
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
+                }
+                
                 VStack {
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -38,19 +52,7 @@ struct AisleListView: View {
                     }
                 }
                 .navigationTitle("Aisle")
-                
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 1, y: -140)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 400, y: 710)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                
+           
                 Button(action: {
 //                    Task{
 //                        try await medicineStockViewModel.addRandomAisle()
