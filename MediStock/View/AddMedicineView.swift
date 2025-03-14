@@ -72,10 +72,10 @@ struct AddMedicineView: View {
                                 .pickerStyle(.wheel)
                                 .frame(height: 150))
                     Button {
-                        Task{
-                            try? await medicineStockViewModel.addRandomAisle(name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle)
-                        }
-                        
+ 
+                        //                Task{
+                        //                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
+                        //                }
                         if medicineStockViewModel.messageEror != nil {
                             dismiss()
                         }

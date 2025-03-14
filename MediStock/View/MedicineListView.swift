@@ -59,9 +59,6 @@ struct MedicineListView: View {
                 .opacity(0.4)
             
             Button(action: {
-//                Task{
-//                    try? await medicineStockViewModel.addRandomMedicineToList(user: identity, aisle: aisle) // Remplacez par l'utilisateur actuel
-//                }
                 activeView = true
             }) {
                 ZStack {

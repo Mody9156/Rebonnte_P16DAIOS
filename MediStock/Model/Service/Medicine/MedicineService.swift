@@ -97,8 +97,20 @@ class MedicineService: MedicineProtocol, ObservableObject{
     }
     
     // Supprimer un médicament
-    func setDataToList(user: String, aisle: String) async throws -> [Medicine] {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: aisle)
+    func setDataToList(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
+        let collection = try await db.collection("medicines").getDocuments()
+
+        let snapshot = Set(collection.documents.compactMap { query in
+            query.data()["name"] as? String
+        })
+
+        let allAisles = Set([name])
+
+        guard snapshot.isDisjoint(with: allAisles) else {
+            throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
+        }
+        
+        let medicine = Medicine(name: name, stock: stock, aisle: aisle)
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
             self.medicines.append(medicine) // Ajoute localement pour éviter un délai
