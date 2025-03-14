@@ -58,16 +58,16 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-//    func addRandomMedicine(user: String) async throws {
-//        
-//        do{
-//            try await medicineRepository.setData(user: user)
-//            
-//        }catch{
-////            throw ThrowsErrorReason.addRandomMedicineThrowError
-//        }
-//    }
-//    
+    //    func addRandomMedicine(user: String) async throws {
+    //
+    //        do{
+    //            try await medicineRepository.setData(user: user)
+    //
+    //        }catch{
+    ////            throw ThrowsErrorReason.addRandomMedicineThrowError
+    //        }
+    //    }
+    //
     @MainActor
     func insertMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
         guard aisle.isEmpty == false else {
@@ -104,15 +104,15 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws {
-          try await medicineRepository.updateStock(medicine, by: amount, user: user)
+        try await medicineRepository.updateStock(medicine, by: amount, user: user)
     }
     
     func increaseStock(_ medicine: Medicine, user: String) async throws {
-            try await updateStock(medicine, by: 1, user: user)
+        try await updateStock(medicine, by: 1, user: user)
     }
     
     func decreaseStock(_ medicine: Medicine, user: String) async throws {
-            try await updateStock(medicine, by: -1, user: user)
+        try await updateStock(medicine, by: -1, user: user)
     }
     
     func updateMedicine(_ medicine: Medicine, user: String) async throws {

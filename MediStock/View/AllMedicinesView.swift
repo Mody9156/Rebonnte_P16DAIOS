@@ -13,6 +13,20 @@ struct AllMedicinesView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
+                GeometryReader { geometry in
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                    
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
+                }
+                
                 VStack(alignment: .leading){
                     // Filtrage et Tri
                     HStack {
@@ -37,18 +51,7 @@ struct AllMedicinesView: View {
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
                 
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 1, y: -87)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                
-                Circle()
-                    .frame(height: 200)
-                    .position(x: 400, y: 710)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-             
+            
             }
         }
         .onAppear {
