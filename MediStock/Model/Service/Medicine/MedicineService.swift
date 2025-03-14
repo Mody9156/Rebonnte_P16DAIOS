@@ -57,19 +57,19 @@ class MedicineService: MedicineProtocol, ObservableObject{
         }
     }
     
-    // Ajouter un médicament aléatoire
-    func setData(user: String) async throws -> [Medicine] {
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
-        do {
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
-            
-        } catch let error {
-            throw  ValidationError.setDataThorwError(result: error)
-        }
-        return [medicine]
-    }
-    
+//    // Ajouter un médicament aléatoire
+//    func setData(user: String) async throws -> [Medicine] {
+//        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: "Aisle \(Int.random(in: 1...10))")
+//        do {
+//            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+//            try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
+//            
+//        } catch let error {
+//            throw  ValidationError.setDataThorwError(result: error)
+//        }
+//        return [medicine]
+//    }
+//    
     // Ajouter un médicament à une allée disponible
     func setDataToAisle(name:String, stock:Int, aisle:String) async throws -> [Medicine] {
         

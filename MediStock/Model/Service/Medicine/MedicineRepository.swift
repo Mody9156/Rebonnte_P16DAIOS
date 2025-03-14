@@ -44,17 +44,17 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-    
-    func setData(user: String) async throws {
-        do{
-            let medicine = try await medicineService.setData(user: user)
-            for medicines in medicine {
-                try? await  addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
-            }
-        }catch{
-            throw MedicineError.invalidSetData
-        }
-    }
+//    
+//    func setData(user: String) async throws {
+//        do{
+//            let medicine = try await medicineService.setData(user: user)
+//            for medicines in medicine {
+//                try? await  addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+//            }
+//        }catch{
+//            throw MedicineError.invalidSetData
+//        }
+//    }
     
     func setDataToList(user: String,name:String, stock:Int, aisle:String) async throws {
         do{
