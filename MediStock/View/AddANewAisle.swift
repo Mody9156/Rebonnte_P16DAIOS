@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AddANewAisle: View {
-    @State private var stock : [Int] = Array(0...100)
+    @State private var stock : Double = 0.0
     @State private var stockSelected : Int = 0
     @State private var nameInAisle : String = ""
     @State private var nameInAisleMEdicine : String = ""
     @Environment(\.dismiss) var dismiss
-    
+    @State var isEditing : Bool = false
     var body: some View {
         ZStack {
             Color(.gray)
@@ -49,13 +49,21 @@ struct AddANewAisle: View {
                     Text("Stock")
                         .font(.headline)
                         .fontWeight(.bold)
-                    
-                    Picker("Aisles", selection: $stockSelected) {
-                        ForEach(stock,id: \.self){ number in
-                            Text("\(number)")
-                        }
-                    }.pickerStyle(.menu)
-                    
+
+                    Slider(
+                        value: $stock,
+                           in: 0...100,
+                        step: 1
+                       ) {
+                           Text("Speed")
+                       } minimumValueLabel: {
+                           Text("0")
+                       } maximumValueLabel: {
+                           Text("100")
+                       }
+ 
+                       Text("\(Int(stock))")
+                  
                     Text("Medicine")
                         .font(.headline)
                         .fontWeight(.bold)
