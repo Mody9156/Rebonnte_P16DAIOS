@@ -85,7 +85,7 @@ class MedicineService: MedicineProtocol, ObservableObject{
             throw NSError(domain: "com.example.medicine", code: 1, userInfo: [NSLocalizedDescriptionKey: "Toutes les allées sont déjà assignées."])
         }
         
-        let medicine = Medicine(name: "Medicine \(Int.random(in: 1...100))", stock: Int.random(in: 1...100), aisle: getAisles)
+        let medicine = Medicine(name: name, stock: stock, aisle: getAisles)
         
         do {
             try db.collection("medicines").document(medicine.id ?? UUID().uuidString).setData(from: medicine)
