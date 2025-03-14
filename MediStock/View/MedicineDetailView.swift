@@ -9,7 +9,7 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    @State var stocks : Bool = false
+    @State var stocks : Int = 0
     
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
@@ -50,7 +50,7 @@ struct MedicineDetailView: View {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         guard let id = medicine.id else { return }
-                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: medicine.stock/2)
+                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stocks)
                         
                     }
                 } label: {
@@ -147,6 +147,7 @@ extension MedicineDetailView {
                     .keyboardType(.numberPad)
                     .onChange(of: medicine.stock) { newValue in
                         if newValue < 0 { medicine.stock = 0 }
+                        stocks = newValue
                     }
                     .multilineTextAlignment(.center)
                     .accessibilityLabel("Stock Field")
