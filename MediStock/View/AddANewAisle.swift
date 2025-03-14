@@ -94,7 +94,7 @@ struct AddANewAisle: View {
                             try? await medicineStockViewModel.addRandomAisle(name: nameInAisle, stock: (Int(stock)), aisle: nameInAisleMEdicine)
                         }
                         
-                        if ((medicineStockViewModel.messageEror?.isEmpty) != nil){
+                        if medicineStockViewModel.messageEror != nil {
                             dismiss()
                         }
                         
