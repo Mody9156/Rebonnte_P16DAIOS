@@ -68,7 +68,7 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    func autoConnectionState(_ state:Bool){
+    func saveAutoConnectionState(_ state:Bool){
        return UserDefaults.standard.set(state, forKey: "autoLogin")
     }
     
