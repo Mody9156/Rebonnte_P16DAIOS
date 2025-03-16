@@ -56,7 +56,10 @@ struct LoginView: View {
                         }
                         
                         Button {
-                            selectedAutoConnection.toggle()
+                            withAnimation {
+                                selectedAutoConnection.toggle()
+                            }
+                          
                         } label: {
                             ZStack {
                                 Rectangle()
