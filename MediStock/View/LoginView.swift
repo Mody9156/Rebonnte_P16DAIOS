@@ -58,10 +58,12 @@ struct LoginView: View {
                         Button {
                             selectedAutoConnection.toggle()
                         } label: {
-                            Rectangle()
-                                .frame(width: 20,height: 20)
-                                .foregroundStyle(.white)
-                                .border(.blue,width: 2)
+                            ZStack {
+                                Rectangle()
+                                    .frame(width: 20,height: 20)
+                                    .foregroundStyle(.white)
+                                    .border(.blue,width: 2)
+                            }
                         }
 
                     }
