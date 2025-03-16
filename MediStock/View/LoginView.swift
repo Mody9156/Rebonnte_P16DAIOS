@@ -5,6 +5,7 @@ struct LoginView: View {
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
     
+    
     var body: some View {
         ZStack {
             Color(.gray)
@@ -58,7 +59,9 @@ struct LoginView: View {
                             
                         } label: {
                             Rectangle()
-                                .frame(width: 50,height: 50)
+                                .frame(width: 20,height: 20)
+                                .foregroundStyle(.white)
+                                .border(.blue,width: 2)
                         }
 
                     }
