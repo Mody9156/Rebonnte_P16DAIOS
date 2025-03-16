@@ -72,11 +72,6 @@ class AuthViewModel : ObservableObject {
        return UserDefaults.standard.set(state, forKey: "autoLogin")
     }
     
-    func loadAutoConnectionState() -> Bool{
-        UserDefaults.standard.bool(forKey: "autoLogin")
-        
-    }
-    
     func autotoLogin() async throws {
         if let saveEmail = UserDefaults.standard.string(forKey: "email"),
            let savePassword = UserDefaults.standard.string(forKey: "password"){
