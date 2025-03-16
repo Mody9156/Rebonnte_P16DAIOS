@@ -20,7 +20,11 @@ struct AuthenticationManagerView: View {
             }
             .onAppear{
                 Task{
-                    try? await authViewModel.disableAutoLogin()
+                    if  selectedAutoConnection {
+                      try await authViewModel.autotoLogin()
+                    }else{
+                        try? await authViewModel.disableAutoLogin()
+                    }
                     try? await authViewModel.changeStatus()
                 }
             }
