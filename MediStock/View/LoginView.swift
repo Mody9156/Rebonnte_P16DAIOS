@@ -4,7 +4,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
-    @Binding private var selectedAutoConnection : Bool 
+    @Binding  var selectedAutoConnection : Bool 
     
     var body: some View {
         ZStack {
@@ -93,8 +93,15 @@ struct LoginView: View {
 }
 
 #Preview{
-    LoginView().environmentObject(SessionStore())
-}
+    struct PreviewWrapper: View {
+        @State var selected : Bool = false
+        var body: some View
+        {
+            LoginView(selectedAutoConnection: $selected).environmentObject(SessionStore())
+        }
+    }
+    return PreviewWrapper()
+   }
 
 struct ButtonForUpdateSession: View {
     @Binding var email : String

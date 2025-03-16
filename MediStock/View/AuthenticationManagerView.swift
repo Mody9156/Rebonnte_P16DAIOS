@@ -3,6 +3,7 @@ import SwiftUI
 struct AuthenticationManagerView: View {
     @EnvironmentObject var session: SessionStore
     @StateObject var authViewModel = AuthViewModel()
+    @State  var selectedAutoConnection : Bool = false
     
     var body: some View {
         VStack {
@@ -12,14 +13,16 @@ struct AuthenticationManagerView: View {
                         .accessibilityLabel("Main Application View")
                         .accessibilityHint("Navigates to the main application content.")
                 } else {
-                    LoginView()
+                    LoginView(selectedAutoConnection: $selectedAutoConnection)
                         .accessibilityLabel("Login Scrren")
                         .accessibilityHint("Allows you to log in to your account.")
                 }
             }
             .onAppear{
                 Task{
-                    try? await authViewModel.disableAutoLogin()
+                    if selectedAutoConnection == false {
+                        try? await authViewModel.disableAutoLogin()
+                    }
                     try? await authViewModel.changeStatus()
                 }
             }
