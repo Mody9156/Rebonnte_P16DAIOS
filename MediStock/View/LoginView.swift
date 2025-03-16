@@ -59,7 +59,7 @@ struct LoginView: View {
                             withAnimation {
                                 selectedAutoConnection.toggle()
                             }
-                          
+                            
                         } label: {
                             ZStack {
                                 Rectangle()
@@ -68,10 +68,10 @@ struct LoginView: View {
                                     .border(.blue,width: 2)
                                 if selectedAutoConnection {
                                     Image(systemName: "xmark")
+                                        .fontWeight(.bold)
                                 }
                             }
                         }
-
                     }
                 }
                 .padding()
