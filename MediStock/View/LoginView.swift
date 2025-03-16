@@ -4,7 +4,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
-    
+    @State private var selectedAutoConnection : Bool = false 
     
     var body: some View {
         ZStack {
