@@ -53,6 +53,14 @@ struct LoginView: View {
                                 .cornerRadius(3)
                                 .padding()
                         }
+                        
+                        Button {
+                            
+                        } label: {
+                            Rectangle()
+                                .frame(width: 50,height: 50)
+                        }
+
                     }
                 }
                 .padding()
