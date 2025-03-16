@@ -3,8 +3,8 @@ import SwiftUI
 struct AuthenticationManagerView: View {
     @EnvironmentObject var session: SessionStore
     @StateObject var authViewModel = AuthViewModel()
-    @State  var selectedAutoConnection : Bool = false
-    
+    @State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
+
     var body: some View {
         VStack {
             Group {
