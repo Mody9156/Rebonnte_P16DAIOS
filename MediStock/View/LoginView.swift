@@ -60,15 +60,18 @@ struct LoginView: View {
                                 }
                                 
                             } label: {
-                                ZStack {
-                                    Rectangle()
-                                        .frame(width: 20,height: 20)
-                                        .foregroundStyle(.white)
-                                        .border(.blue,width: 2)
-                                    if selectedAutoConnection {
-                                        Image(systemName: "xmark")
-                                            .fontWeight(.bold)
+                                VStack {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: 20,height: 20)
+                                            .foregroundStyle(.white)
+                                            .border(.blue,width: 2)
+                                        if selectedAutoConnection {
+                                            Image(systemName: "xmark")
+                                                .fontWeight(.bold)
+                                        }
                                     }
+                                    
                                 }
                             }
                             .padding(.leading)
