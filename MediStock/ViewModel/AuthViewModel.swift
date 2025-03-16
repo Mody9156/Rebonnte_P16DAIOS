@@ -67,4 +67,13 @@ class AuthViewModel : ObservableObject {
             throw ShowErrors.disableAutoLoginThrowError
         }
     }
+    
+    func autoConnectionState(_ state:Bool){
+       return UserDefaults.standard.set(state, forKey: "autoLogin")
+    }
+    
+    func loadAutoConnectionState() -> Bool{
+        UserDefaults.standard.bool(forKey: "autoLogin")
+        
+    }
 }
