@@ -53,24 +53,25 @@ struct LoginView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .cornerRadius(3)
                                 .padding()
-                        }
-                        
-                        Button {
-                            withAnimation {
-                                selectedAutoConnection.toggle()
-                            }
                             
-                        } label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(width: 20,height: 20)
-                                    .foregroundStyle(.white)
-                                    .border(.blue,width: 2)
-                                if selectedAutoConnection {
-                                    Image(systemName: "xmark")
-                                        .fontWeight(.bold)
+                            Button {
+                                withAnimation {
+                                    selectedAutoConnection.toggle()
+                                }
+                                
+                            } label: {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(width: 20,height: 20)
+                                        .foregroundStyle(.white)
+                                        .border(.blue,width: 2)
+                                    if selectedAutoConnection {
+                                        Image(systemName: "xmark")
+                                            .fontWeight(.bold)
+                                    }
                                 }
                             }
+                            .padding(.leading)
                         }
                     }
                 }
