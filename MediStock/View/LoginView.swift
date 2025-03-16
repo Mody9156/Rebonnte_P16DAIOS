@@ -60,7 +60,7 @@ struct LoginView: View {
                                 }
                                 
                             } label: {
-                                VStack {
+                                HStack {
                                     ZStack {
                                         Rectangle()
                                             .frame(width: 20,height: 20)
@@ -72,6 +72,8 @@ struct LoginView: View {
                                         }
                                     }
                                     
+                                   Text("Stay signed in")
+                                        .foregroundStyle(.white)
                                 }
                             }
                             .padding(.leading)
