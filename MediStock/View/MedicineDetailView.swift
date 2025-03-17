@@ -120,7 +120,6 @@ extension MedicineDetailView {
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
             
-            
             Slider(
                 value: $stock,
                 in: 0...100,
@@ -132,6 +131,9 @@ extension MedicineDetailView {
             } maximumValueLabel: {
                 Text("100")
             }
+            .onChange(of: medicine.stock) { newValue in
+                medicine.stock = newValue
+               }
             .accessibilityLabel("Stock Slider")
                 .accessibilityHint("Adjust the stock quantity with a slider.")
             
