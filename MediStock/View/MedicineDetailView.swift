@@ -9,16 +9,14 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    @State private var stockValue: Double = 0.0
+    @State private var stockValue: Double = 50
    
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
         }
     }
-    
-   
-    
+        
     var body: some View {
         ZStack {
             Color(.gray)
@@ -52,7 +50,6 @@ struct MedicineDetailView: View {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         guard let id = medicine.id else { return }
                         try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: Int(stockValue))
-                        
                     }
                 } label: {
                     Text("Validate")
@@ -125,11 +122,17 @@ extension MedicineDetailView {
             Slider(
                 value: $stockValue,
                 in: 0...100,
-                step: 1,onEditingChanged: { _ in
+                step: 1
+            ){
+                    Text("Speed")
+                } minimumValueLabel: {
+                    Text("0")
+                } maximumValueLabel: {
+                    Text("100")
+                } onEditingChanged: { _ in
                     medicine.stock = Int(stockValue)
                 }
-            )
-            .accessibilityLabel("Stock Slider")
+                .accessibilityLabel("Stock Slider")
                 .accessibilityHint("Adjust the stock quantity with a slider.")
             
 //            HStack {
