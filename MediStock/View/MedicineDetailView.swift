@@ -184,6 +184,12 @@ extension MedicineDetailView {
     
     private var historySection: some View {
         VStack(alignment: .leading) {
+            Text("Hystory")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundStyle(.black)
+                .accessibilityLabel("History Section")
+            
             Button(action: {
                 isPresented = true
             }) {
