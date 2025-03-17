@@ -190,23 +190,28 @@ extension MedicineDetailView {
                 .foregroundStyle(.black)
                 .accessibilityLabel("History Section")
             
-            Button(action: {
-                isPresented = true
-            }) {
-                ZStack {
-                    Rectangle()
-                        .frame(height: 45)
-                        .foregroundColor(.blue)
-                        .cornerRadius(15)
-                    
-                    Text("Show History")
-                        .font(.title3)
-                        .foregroundStyle(.white)
+            if filterMedicine.isEmpty {
+                
+            }else{
+                Button(action: {
+                    isPresented = true
+                }) {
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 45)
+                            .foregroundColor(.blue)
+                            .cornerRadius(15)
+                        
+                        Text("Show History")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                    }
+                }
+                .sheet(isPresented: $isPresented) {
+                    HistoryView(filterMedicine: filterMedicine)
                 }
             }
-            .sheet(isPresented: $isPresented) {
-                HistoryView(filterMedicine: filterMedicine)
-            }
+            
         }
         .padding()
     }
