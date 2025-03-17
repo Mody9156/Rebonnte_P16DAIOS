@@ -11,7 +11,8 @@ struct MedicineDetailView: View {
     @State var animation : Bool = false
     @State private var stockValue: Double = 0.0
     @State private var stockChange: Int = 0
-
+    @State private var previewStrock: Int = 0
+    var step = 1
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
@@ -48,6 +49,11 @@ struct MedicineDetailView: View {
                 
                 Button {
                     Task{
+                        let oldValue = Int(stockValue)
+                        stockChange =  oldValue - previewStrock
+                        previewStrock = oldValue
+                        
+                        
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         guard let id = medicine.id else { return }
@@ -123,25 +129,25 @@ extension MedicineDetailView {
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
-            
+                
             Slider(
                 value: $stockValue,
                 in: 0...100,
-                step: 1
-            ){
-                Text("Speed")
-            } minimumValueLabel: {
-                Text("0")
-            } maximumValueLabel: {
-                Text("100")
-            } .onChange(of: stockValue ){ _ in
-                medicine.stock = Int(stockValue)
+                step: 1,
+                label: { Text("Stock") },
+                minimumValueLabel: { Text("0")},
+                maximumValueLabel: { Text("100")}
+            )
+            .onChange(of: stockValue) { newValue in
+                let stockValue = Int(stockValue)
+                self.medicine.stock = Int(Double(stockValue))
             }
             .accessibilityLabel("Stock Slider")
             .accessibilityHint("Adjust the stock quantity with a slider.")
         }
         .onAppear{
             stockValue = Double(medicine.stock)
+            previewStrock = medicine.stock
         }
     }
     
@@ -166,22 +172,7 @@ extension MedicineDetailView {
             }
         }
     }
-    
-    private func decreaseStock() {
-        guard let id = medicine.id else { return }
-        Task{
-            try? await medicineStockViewModel.decreaseStock(medicine, user: id)
-        }
-        medicine.stock = max(0, medicine.stock - 1)
-    }
-    
-    private func increaseStock() {
-        guard let id = medicine.id else { return }
-        Task{
-            try? await medicineStockViewModel.increaseStock(medicine, user: id)
-        }
-        medicine.stock += 1
-    }
+
     
     private var historySection: some View {
         VStack(alignment: .leading) {
@@ -207,9 +198,9 @@ extension MedicineDetailView {
                             
                             Spacer()
                             
-                            Text("Stock:\(medicine.stock > 0 ? "+" : "")")
+                            Text("Stock:\(stockChange > 0 ? "+" : "")\(stockChange))")
                                 .font(.subheadline)
-                                .foregroundStyle(medicine.stock > 0 ? .green : .red)
+                                .foregroundStyle(stockChange > 0 ? .green : .red)
                         }
                     }
                 }
