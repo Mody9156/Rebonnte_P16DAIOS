@@ -114,7 +114,7 @@ extension MedicineDetailView {
     
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Stock"))
+            Text(LocalizedStringKey("Stock: \(Int(stock))"))
                 .font(.title2)
                 .font(.headline)
                 .foregroundStyle(.black)
@@ -132,6 +132,8 @@ extension MedicineDetailView {
             } maximumValueLabel: {
                 Text("100")
             }
+            .accessibilityLabel("Stock Slider")
+                .accessibilityHint("Adjust the stock quantity with a slider.")
             
 //            HStack {
 //                Spacer()
