@@ -198,11 +198,17 @@ extension MedicineDetailView {
             }else{
                 
                 VStack(alignment: .leading) {
-                    ForEach(filterMedicine.prefix(3)){ medicine in
+                    ForEach(filterMedicine.prefix(3)) { history in
                         HStack{
+                            Text(history.timestamp.formatted(date: .numeric, time: .shortened))
+                                .font(.subheadline)
+                                .foregroundStyle(.gray)
                             
+                            Spacer()
+                            
+                            Text("Stock:\(medicine.stock)")
+                                .font(.subheadline)
                         }
-                        .padding(.vertical, 2)
                     }
                 }
                 
