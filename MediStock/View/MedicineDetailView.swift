@@ -198,7 +198,9 @@ extension MedicineDetailView {
             }else{
                 
                 VStack(alignment: .leading) {
-                    
+                    ForEach(filterMedicine.prefix(3)){ medicine in
+                        
+                    }
                 }
                 
                 Button(action: {
