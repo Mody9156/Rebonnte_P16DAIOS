@@ -22,6 +22,7 @@ struct MedicineDetailView: View {
             Color(.gray)
                 .ignoresSafeArea()
                 .opacity(0.1)
+            
             Circle()
                 .frame(height: 200)
                 .position(x: 1, y: 1)
@@ -52,13 +53,16 @@ struct MedicineDetailView: View {
                         try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: Int(stockValue))
                     }
                 } label: {
-                    Text("Validate")
-                        .foregroundColor(.white)
-                        .frame(height: 40)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .shadow(radius: 3)
-                        .padding(.top, 10)
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 45)
+                            .foregroundColor(.blue)
+                            .cornerRadius(15)
+                        
+                        Text("Validate")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                    }
                 }
                 
                 // History Section
