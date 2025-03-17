@@ -221,7 +221,7 @@ extension MedicineDetailView {
                             .foregroundColor(.blue)
                             .cornerRadius(15)
                         
-                        Text("Show History")
+                        Text("Show: \(medicine.stock > 0 ? "+":"")")
                             .font(.title3)
                             .foregroundStyle(.white)
                     }
