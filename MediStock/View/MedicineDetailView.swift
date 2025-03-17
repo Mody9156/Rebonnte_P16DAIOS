@@ -9,13 +9,15 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    @State private var stock : Double = 0.0
-
+    @State private var stockValue: Double = 0.0
+   
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
         }
     }
+    
+   
     
     var body: some View {
         ZStack {
@@ -49,7 +51,7 @@ struct MedicineDetailView: View {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         guard let id = medicine.id else { return }
-                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: medicine.stock)
+                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: Int(stockValue))
                         
                     }
                 } label: {
@@ -114,26 +116,19 @@ extension MedicineDetailView {
     
     private var medicineStockSection: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Stock: \(Int(stock))"))
+            Text(LocalizedStringKey("Stock: \(Int(medicine.stock))"))
                 .font(.title2)
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
             
             Slider(
-                value: $stock,
+                value: $stockValue,
                 in: 0...100,
-                step: 1
-            ) {
-                Text("Speed")
-            } minimumValueLabel: {
-                Text("0")
-            } maximumValueLabel: {
-                Text("100")
-            }
-            .onChange(of: medicine.stock) { newValue in
-                medicine.stock = newValue
-               }
+                step: 1,onEditingChanged: { _ in
+                    medicine.stock = Int(stockValue)
+                }
+            )
             .accessibilityLabel("Stock Slider")
                 .accessibilityHint("Adjust the stock quantity with a slider.")
             
@@ -253,5 +248,5 @@ extension MedicineDetailView {
 #Preview {
     let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
     let sampleViewModel = MedicineStockViewModel()
-    MedicineDetailView(medicine: sampleMedicine, medicineStockViewModel: sampleViewModel).environmentObject(SessionStore())
+    MedicineDetailView(medicine: Medicine(name: "Paracetamol", stock: 44, aisle: "Anti-inflammatory"), medicineStockViewModel: MedicineStockViewModel()).environmentObject(SessionStore())
 }
