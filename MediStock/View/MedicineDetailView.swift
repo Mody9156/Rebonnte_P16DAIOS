@@ -220,7 +220,7 @@ extension MedicineDetailView {
                     }
                 }
                 .sheet(isPresented: $isPresented) {
-                    HistoryView(filterMedicine: filterMedicine)
+                    HistoryView(filterMedicine: filterMedicine, stock: stockChange)
                 }
             }
         }

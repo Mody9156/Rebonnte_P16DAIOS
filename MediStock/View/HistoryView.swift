@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
+    var stock : Int
     
     var body: some View {
         ZStack {
@@ -57,6 +58,16 @@ struct HistoryView: View {
                                 TextForShowDetails(value: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
                                 
+                                HStack {
+                                    Text("Stock:")
+                                        .fontWeight(.bold)
+                                    
+                                    Text("Stock change: \(stock > 0 ? "Added +" : "Removed ")\(abs(stock)) units")
+                                        .font(.subheadline)
+                                        .foregroundStyle(stock > 0 ? .green : .red)
+
+                                }
+                                
                             }
                             .padding()
                             .cornerRadius(10)
@@ -87,7 +98,7 @@ struct HistoryView: View {
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
         HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)
         
-    ])
+    ], stock: 55)
 }
 
 struct TextForShowDetails: View {
