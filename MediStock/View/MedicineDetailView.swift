@@ -199,7 +199,10 @@ extension MedicineDetailView {
                 
                 VStack(alignment: .leading) {
                     ForEach(filterMedicine.prefix(3)){ medicine in
-                        
+                        HStack{
+                            
+                        }
+                        .padding(.vertical, 2)
                     }
                 }
                 
