@@ -9,7 +9,8 @@ struct MedicineDetailView: View {
     @FocusState var isTypingMedicine : Bool
     @State var isPresented : Bool = false
     @State var animation : Bool = false
-    
+    @State private var stock : Double = 0.0
+
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
@@ -119,54 +120,67 @@ extension MedicineDetailView {
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
             
-            HStack {
-                Spacer()
-                Button(action:{ medicine.stock -= 1}) {
-                    ZStack {
-                        Circle()
-                            .frame(height: 50)
-                            .foregroundStyle(.blue)
-                            .opacity(0.8)
-                        
-                        Image(systemName: "minus")
-                            .resizable()
-                            .frame(width: 20, height: 4)
-                            .font(.title)
-                            .foregroundStyle(.white)
-                    }
-                }
-                .accessibilityLabel("Decrease stock")
-                .accessibilityHint("Reduce the stock quantity by 1.")
-                
-                TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
-                    .frame(width: 100, height: 55)
-                    .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .onChange(of: medicine.stock) { newValue in
-                        if newValue < 0 { medicine.stock = 0 }
-                    }
-                    .multilineTextAlignment(.center)
-                    .accessibilityLabel("Stock Field")
-                    .accessibilityHint("Enter the current stock of the medicine.")
-                
-                Button(action:{medicine.stock += 1}) {
-                    ZStack {
-                        Circle()
-                            .frame(height: 50)
-                            .foregroundStyle(.blue)
-                            .opacity(0.8)
-                        
-                        Image(systemName: "plus")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
-                }
-                .accessibilityLabel("Increase stock")
-                .accessibilityHint("Increase the stock quantity by 1.")
-                Spacer()
+            
+            Slider(
+                value: $stock,
+                in: 0...100,
+                step: 1
+            ) {
+                Text("Speed")
+            } minimumValueLabel: {
+                Text("0")
+            } maximumValueLabel: {
+                Text("100")
             }
+            
+//            HStack {
+//                Spacer()
+//                Button(action:{ medicine.stock -= 1}) {
+//                    ZStack {
+//                        Circle()
+//                            .frame(height: 50)
+//                            .foregroundStyle(.blue)
+//                            .opacity(0.8)
+//                        
+//                        Image(systemName: "minus")
+//                            .resizable()
+//                            .frame(width: 20, height: 4)
+//                            .font(.title)
+//                            .foregroundStyle(.white)
+//                    }
+//                }
+//                .accessibilityLabel("Decrease stock")
+//                .accessibilityHint("Reduce the stock quantity by 1.")
+//                
+//                TextField("Stock", value: $medicine.stock, formatter: NumberFormatter())
+//                    .frame(width: 100, height: 55)
+//                    .background(.black, in: RoundedRectangle(cornerRadius: 14).stroke(lineWidth: 1))
+//                    .keyboardType(.numberPad)
+//                    .onChange(of: medicine.stock) { newValue in
+//                        if newValue < 0 { medicine.stock = 0 }
+//                    }
+//                    .multilineTextAlignment(.center)
+//                    .accessibilityLabel("Stock Field")
+//                    .accessibilityHint("Enter the current stock of the medicine.")
+//                
+//                Button(action:{medicine.stock += 1}) {
+//                    ZStack {
+//                        Circle()
+//                            .frame(height: 50)
+//                            .foregroundStyle(.blue)
+//                            .opacity(0.8)
+//                        
+//                        Image(systemName: "plus")
+//                            .resizable()
+//                            .frame(width: 20, height: 20)
+//                            .font(.title)
+//                            .foregroundColor(.white)
+//                    }
+//                }
+//                .accessibilityLabel("Increase stock")
+//                .accessibilityHint("Increase the stock quantity by 1.")
+//                Spacer()
+//            }
         }
     }
     
