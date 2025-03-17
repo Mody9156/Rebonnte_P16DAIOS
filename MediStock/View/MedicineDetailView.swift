@@ -10,7 +10,8 @@ struct MedicineDetailView: View {
     @State var isPresented : Bool = false
     @State var animation : Bool = false
     @State private var stockValue: Double = 0.0
-    
+    @State private var stockChange: Int = 0
+
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
             $0.medicineId == medicine.id
@@ -206,8 +207,9 @@ extension MedicineDetailView {
                             
                             Spacer()
                             
-                            Text("Stock:\(medicine.stock)")
+                            Text("Stock:\(medicine.stock > 0 ? "+" : "")")
                                 .font(.subheadline)
+                                .foregroundStyle(medicine.stock > 0 ? .green : .red)
                         }
                     }
                 }
@@ -221,7 +223,7 @@ extension MedicineDetailView {
                             .foregroundColor(.blue)
                             .cornerRadius(15)
                         
-                        Text("Show: \(medicine.stock > 0 ? "+":"")")
+                        Text("Show history")
                             .font(.title3)
                             .foregroundStyle(.white)
                     }
