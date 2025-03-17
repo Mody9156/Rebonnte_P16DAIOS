@@ -191,7 +191,9 @@ extension MedicineDetailView {
                 .accessibilityLabel("History Section")
             
             if filterMedicine.isEmpty {
-                
+                Text("No history available")
+                   .foregroundColor(.gray)
+                   .font(.subheadline)
             }else{
                 Button(action: {
                     isPresented = true
