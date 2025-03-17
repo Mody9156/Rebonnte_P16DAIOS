@@ -129,7 +129,7 @@ extension MedicineDetailView {
                 Text("0")
             } maximumValueLabel: {
                 Text("100")
-            } onEditingChanged: { _ in
+            } .onChange(of: stockValue ){ _ in
                 medicine.stock = Int(stockValue)
             }
             .accessibilityLabel("Stock Slider")
