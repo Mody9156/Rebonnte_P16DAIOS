@@ -57,7 +57,7 @@ struct MedicineDetailView: View {
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
                         guard let id = medicine.id else { return }
-                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: Int(stockValue))
+                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange)
                     }
                 } label: {
                     ZStack {
