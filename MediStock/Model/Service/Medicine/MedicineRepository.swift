@@ -56,11 +56,11 @@ class MedicineRepository: ObservableObject {
 //        }
 //    }
     
-    func setDataToList(user: String,name:String, stock:Int, aisle:String) async throws {
+    func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws {
         do{
             let medicine = try await medicineService.setDataToList(user: user, name:name, stock:stock, aisle:aisle)
             for medicines in medicine {
-                try? await  addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+                try? await  addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine", stock: stockValue)
             }
         }catch{
             throw MedicineError.invalidSetData
@@ -94,8 +94,8 @@ class MedicineRepository: ObservableObject {
         
     }
     
-    private func addHistory(action: String, user: String, medicineId: String, details: String) async throws{
-        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details)
+    private func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
+        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details, stock: stock)
         do {
             try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
         } catch let error {
@@ -103,23 +103,23 @@ class MedicineRepository: ObservableObject {
         }
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String) async throws {
+    func updateMedicine(_ medicine: Medicine, user: String, stock:Int) async throws {
         do{
             let medicine = try await medicineService.updateMedicine(medicine, user: user)
-            for medicines in medicine {
-                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details")
-            }
+//            for medicines in medicine {
+//                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details", stock: stock)
+//            }
         }catch{
             throw MedicineError.invalidMedicine
         }
     }
     
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws  {
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String, stock:Int) async throws  {
         let medicine = medicineService.updateStock(medicine, by: amount, user: user)
         
         for medicines in medicine {
             let newStock = medicines.stock  + amount
-            try? await addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock) to \(newStock)")
+            try? await addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock) to \(newStock)", stock: stock)
         }
     }
     

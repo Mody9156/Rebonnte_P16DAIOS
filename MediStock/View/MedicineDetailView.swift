@@ -53,11 +53,10 @@ struct MedicineDetailView: View {
                         stockChange =  oldValue - previewStrock
                         previewStrock = oldValue
                         
-                        
-                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
-                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "")
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
+                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
                         guard let id = medicine.id else { return }
-                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange)
+                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange, stockValue: stockChange)
                     }
                 } label: {
                     ZStack {
@@ -220,7 +219,7 @@ extension MedicineDetailView {
                     }
                 }
                 .sheet(isPresented: $isPresented) {
-                    HistoryView(filterMedicine: filterMedicine, stock: stockChange)
+                    HistoryView(filterMedicine: filterMedicine)
                 }
             }
         }

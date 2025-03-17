@@ -69,7 +69,7 @@ class MedicineStockViewModel: ObservableObject {
     //    }
     //
     @MainActor
-    func insertMedicineToList(user: String,name:String, stock:Int, aisle:String) async throws {
+    func insertMedicineToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws {
         guard aisle.isEmpty == false else {
             return messageEror = "Please select a category to proceed."
         }
@@ -79,7 +79,7 @@ class MedicineStockViewModel: ObservableObject {
         }
         
         do{
-            try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle)
+            try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle, stockValue: stockValue)
             messageEror = nil
         }catch{
             messageEror = "An error occurred while adding a new medicine. Please check that it is not already present."
@@ -103,24 +103,24 @@ class MedicineStockViewModel: ObservableObject {
         
     }
     
-    func changeStock(_ medicine: Medicine, user: String, stocks:Int) async throws {
-        try await updateStock(medicine, by: stocks, user: user)
+    func changeStock(_ medicine: Medicine, user: String, stocks:Int,stockValue:Int) async throws {
+        try await updateStock(medicine, by: stocks, user: user, stock: stockValue)
     }
     
-    private func updateStock(_ medicine: Medicine, by amount: Int, user: String) async throws {
-        try await medicineRepository.updateStock(medicine, by: amount, user: user)
+    private func updateStock(_ medicine: Medicine, by amount: Int, user: String, stock:Int) async throws {
+        try await medicineRepository.updateStock(medicine, by: amount, user: user, stock: stock)
     }
     
-    func increaseStock(_ medicine: Medicine, user: String) async throws {
-        try await updateStock(medicine, by: 1, user: user)
+    func increaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
+        try await updateStock(medicine, by: 1, user: user, stock: stock)
     }
     
-    func decreaseStock(_ medicine: Medicine, user: String) async throws {
-        try await updateStock(medicine, by: -1, user: user)
+    func decreaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
+        try await updateStock(medicine, by: -1, user: user, stock: stock)
     }
     
-    func updateMedicine(_ medicine: Medicine, user: String) async throws {
-        try await medicineRepository.updateMedicine(medicine, user: user)
+    func updateMedicine(_ medicine: Medicine, user: String,stock:Int) async throws {
+        try await medicineRepository.updateMedicine(medicine, user: user, stock: stock)
     }
     
     func fetchHistory(for medicine: Medicine) {

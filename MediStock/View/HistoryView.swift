@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-    var stock : Int
     
     var body: some View {
         ZStack {
@@ -58,15 +57,26 @@ struct HistoryView: View {
                                 TextForShowDetails(value: entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
                                 
+                                
                                 HStack {
                                     Text("Stock:")
                                         .fontWeight(.bold)
-                                    
-                                    Text("Stock change: \(stock > 0 ? "Added +" : "Removed ")\(abs(stock)) units")
+                                    Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
                                         .font(.subheadline)
-                                        .foregroundStyle(stock > 0 ? .green : .red)
-
+                                        .foregroundStyle(entry.stock > 0 ? .green : .red)
+                                        .accessibilityLabel("Stock: \(String(entry.stock))")
                                 }
+                                
+                             
+//                                HStack {
+//                                    Text("Stock:")
+//                                        .fontWeight(.bold)
+//                                    
+//                                    Text("Stock change: \(stock > 0 ? "Added +" : "Removed ")\(abs(stock)) units")
+//                                        .font(.subheadline)
+//                                        .foregroundStyle(stock > 0 ? .green : .red)
+//
+//                                }
                                 
                             }
                             .padding()
@@ -86,19 +96,19 @@ struct HistoryView: View {
 
 #Preview{
     HistoryView(filterMedicine: [
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now),
-        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now)
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 4),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 64),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 94),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 4),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 84),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 74),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 34),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 24),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 14),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 44),
+        HistoryEntry(medicineId: "48f949df", user: "James@gmail.com", action: "Update", details: "change stock with new values", timestamp: Date.now, stock: 47)
         
-    ], stock: 55)
+    ])
 }
 
 struct TextForShowDetails: View {
