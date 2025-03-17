@@ -194,7 +194,13 @@ extension MedicineDetailView {
                 Text("No history available")
                    .foregroundColor(.gray)
                    .font(.subheadline)
+                
             }else{
+                
+                VStack(alignment: .leading) {
+                    
+                }
+                
                 Button(action: {
                     isPresented = true
                 }) {
@@ -213,7 +219,6 @@ extension MedicineDetailView {
                     HistoryView(filterMedicine: filterMedicine)
                 }
             }
-            
         }
         .padding()
     }
