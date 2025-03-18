@@ -111,13 +111,13 @@ class MedicineStockViewModel: ObservableObject {
         try await medicineRepository.updateStock(medicine, by: amount, user: user, stock: stock)
     }
     
-    func increaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
-        try await updateStock(medicine, by: 1, user: user, stock: stock)
-    }
-    
-    func decreaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
-        try await updateStock(medicine, by: -1, user: user, stock: stock)
-    }
+//    func increaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
+//        try await updateStock(medicine, by: 1, user: user, stock: stock)
+//    }
+//    
+//    func decreaseStock(_ medicine: Medicine, user: String,stock:Int) async throws {
+//        try await updateStock(medicine, by: -1, user: user, stock: stock)
+//    }
     
     func updateMedicine(_ medicine: Medicine, user: String,stock:Int) async throws {
         try await medicineRepository.updateMedicine(medicine, user: user, stock: stock)

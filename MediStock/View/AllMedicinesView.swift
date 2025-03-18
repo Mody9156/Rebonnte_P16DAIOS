@@ -37,7 +37,6 @@ struct AllMedicinesView: View {
                     
                     // Liste des Médicaments
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
-                    
                 }
             }
         }
