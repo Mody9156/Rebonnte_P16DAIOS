@@ -7,14 +7,14 @@ struct AisleListView: View {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
     @State private var activeView: Bool = false
-    
+    @State private var isAnimating = false
+
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                Color(.gray)
-                    .ignoresSafeArea()
-                    .opacity(0.1)
-                            
+               
+                    
+                
                 VStack {
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -67,7 +67,7 @@ struct AisleListView: View {
                             .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
                     }
                 }
-
+                
                 
                 Button(action: {
                     activeView = true
@@ -91,8 +91,8 @@ struct AisleListView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
                 
             }
-           
-
+            
+            
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
