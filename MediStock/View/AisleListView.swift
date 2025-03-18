@@ -15,19 +15,7 @@ struct AisleListView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
-                GeometryReader { geometry in
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(.blue)
-                        .opacity(0.4)
-                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
-                    
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(.blue)
-                        .opacity(0.4)
-                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
-                }
+               
                 
                 VStack {
                     List {
@@ -52,7 +40,21 @@ struct AisleListView: View {
                     }
                 }
                 .navigationTitle("Aisle")
-           
+                
+                GeometryReader { geometry in //permet d'obtenir les dimensions et la position de son parent
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                    
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.blue)
+                        .opacity(0.4)
+                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
+                }
+                
                 Button(action: {
                     activeView = true
                 }) {

@@ -197,7 +197,7 @@ extension MedicineDetailView {
                             
                             Spacer()
                             
-                            Text("\(String(history.stock > 0 ? "Added +" : "Removed "))\(abs(history.stock))")
+                            Text("Stock: \(String(history.stock > 0 ? "Added +" : "Removed "))\(abs(history.stock))")
                                 .font(.subheadline)
                                 .foregroundStyle(history.stock > 0 ? .green : .red)
                         }
