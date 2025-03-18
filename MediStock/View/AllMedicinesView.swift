@@ -5,7 +5,8 @@ struct AllMedicinesView: View {
     @State private var filterText: String = ""
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
-
+    @State private var filterSection : Bool = false
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -27,9 +28,8 @@ struct AllMedicinesView: View {
                     
                     VStack  {
                         HStack{
-                            ForEach(MedicineStockViewModel.FilterOption.AllCases(arrayLiteral: .name,.stock), id:\.self){ index in
-                                FilterButton(medicineStockViewModel: medicineStockViewModel, index:index.rawValue, isSelected:$isSelected)
-                            }
+                           
+                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSection)
                         }
                     }
                     .padding()
@@ -58,18 +58,21 @@ struct FilterButton: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     var index : String
     @Binding var isSelected : String
-    
+    @Binding var filterSection : Bool
+   
     var body: some View {
         Button {
             Task{
-                try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: index) ?? .noFilter)
+                try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: filterSection ? index : MedicineStockViewModel.FilterOption.noFilter.rawValue) ?? .noFilter)
             }
+            
+            filterSection.toggle()
             isSelected = index
             
         } label: {
             ZStack {
                 Rectangle()
-                    .fill(isSelected == index ? Color.blue.opacity(0.7) : Color.black.opacity(0.8))
+                    .fill(filterSection ? Color.blue.opacity(0.7) : Color.black.opacity(0.8))
                     .frame(width: 80, height: 44)
                     .cornerRadius(12)
                 
