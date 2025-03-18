@@ -53,7 +53,7 @@ struct Profile: View {
                         .padding()
                     }
                     
-                    Toggle("DarkMode", isOn: $toggleDarkMode)
+                    Toggle(toggleDarkMode ? "Light":"Dark", isOn: $toggleDarkMode)
                         .preferredColorScheme(toggleDarkMode ? .dark : .light)
 
                 }
