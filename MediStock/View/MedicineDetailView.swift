@@ -21,69 +21,69 @@ struct MedicineDetailView: View {
     }
     
     var body: some View {
-            ZStack {
-                Color(.gray)
-                    .ignoresSafeArea()
-                    .opacity(0.1)
-                
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Medicine Name
-                        medicineNameSection
-                        
-                        // Medicine Stock
-                        medicineStockSection
-                        
-                        // Medicine Aisle
-                        medicineAisleSection
-                        
-                        Button {
-                            Task{
-                                let oldValue = Int(stockValue)
-                                stockChange =  oldValue - previewStrock
-                                previewStrock = oldValue
-                                
-                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
-                                try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
-                                guard let id = medicine.id else { return }
-                                try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange, stockValue: stockChange)
-                            }
-                        } label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(height: 45)
-                                    .foregroundColor(.blue)
-                                    .cornerRadius(15)
-                                
-                                Text("Validate")
-                                    .font(.title3)
-                                    .foregroundStyle(.white)
-                            }
+        ZStack {
+            Color(.gray)
+                .ignoresSafeArea()
+                .opacity(0.1)
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    // Medicine Name
+                    medicineNameSection
+                    
+                    // Medicine Stock
+                    medicineStockSection
+                    
+                    // Medicine Aisle
+                    medicineAisleSection
+                    
+                    Button {
+                        Task{
+                            let oldValue = Int(stockValue)
+                            stockChange =  oldValue - previewStrock
+                            previewStrock = oldValue
+                            
+                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
+                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
+                            guard let id = medicine.id else { return }
+                            try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange, stockValue: stockChange)
                         }
-                        
-                        // History Section
-                        historySection
-                        
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical)
-                    .navigationBarTitle("Medicine Details", displayMode: .inline)
-                    .onAppear {
-                        medicineStockViewModel.fetchHistory(for: medicine)
-                    }
-                    .onChange(of: medicine) { newMedicine in
-                        if newMedicine != medicine {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                medicineStockViewModel.fetchHistory(for: newMedicine)
-                            }
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(height: 45)
+                                .foregroundColor(.blue)
+                                .cornerRadius(15)
+                            
+                            Text("Validate")
+                                .font(.title3)
+                                .foregroundStyle(.white)
                         }
                     }
-                    .accessibilityElement(children: .contain)
-                    .accessibilityLabel("Medicine Details")
-                    .accessibilityHint("Displays detailed information about the medicine.")
+                    
+                    // History Section
+                    historySection
+                    
                 }
-                
+                .padding(.horizontal)
+                .padding(.vertical)
+                .navigationBarTitle("Medicine Details", displayMode: .inline)
+                .onAppear {
+                    medicineStockViewModel.fetchHistory(for: medicine)
+                }
+                .onChange(of: medicine) { newMedicine in
+                    if newMedicine != medicine {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            medicineStockViewModel.fetchHistory(for: newMedicine)
+                        }
+                    }
+                }
+                .accessibilityElement(children: .contain)
+                .accessibilityLabel("Medicine Details")
+                .accessibilityHint("Displays detailed information about the medicine.")
             }
+            
+        }
     }
 }
 
@@ -179,20 +179,42 @@ extension MedicineDetailView {
                 
             }else{
                 
-                VStack(alignment: .leading) {
-                    ForEach(filterMedicine.prefix(3)) { history in
-                        HStack{
-                            Text(history.timestamp.formatted(date: .numeric, time: .shortened))
-                                .font(.subheadline)
-                                .foregroundStyle(.gray)
-                            
-                            Spacer()
-                            
-                            Text("Stock:\(stockChange > 0 ? "+" : "")\(stockChange))")
-                                .font(.subheadline)
-                                .foregroundStyle(stockChange > 0 ? .green : .red)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 15) {
+                        ForEach(filterMedicine.prefix(3)) { entry in
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.blue.opacity(0.2))
+                                .frame(width: 250, height: 150)
+                                .overlay(
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack {
+                                            Image(systemName: "circle.fill")
+                                                .foregroundColor(.blue)
+                                            Text(entry.action)
+                                                .font(.headline)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.blue)
+                                        }
+                                        
+                                        TextForShowDetails(value: entry.user, text: "User:")
+                                        TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
+                                        TextForShowDetails(value: entry.details, text: "Details:")
+                                        
+                                        HStack {
+                                            Text("Stock:")
+                                                .fontWeight(.bold)
+                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
+                                                .font(.subheadline)
+                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
+                                        }
+                                    }
+                                        .padding()
+                                )
+                                .accessibilityElement(children: .combine)
+                                .accessibilityHint("Details of this history entry.")
                         }
                     }
+                    .padding(.horizontal)
                 }
                 
                 Button(action: {
@@ -213,43 +235,7 @@ extension MedicineDetailView {
                     HistoryView(filterMedicine: filterMedicine)
                 }
                 
-//                ScrollView(.horizontal, showsIndicators: false) {
-//                    LazyHStack(spacing: 15) {
-//                        ForEach(filterMedicine) { entry in
-//                            RoundedRectangle(cornerRadius: 12)
-//                                .fill(Color.blue.opacity(0.2))
-//                                .frame(width: 250, height: 150)
-//                                .overlay(
-//                                    VStack(alignment: .leading, spacing: 8) {
-//                                        HStack {
-//                                            Image(systemName: "circle.fill")
-//                                                .foregroundColor(.blue)
-//                                            Text(entry.action)
-//                                                .font(.headline)
-//                                                .fontWeight(.bold)
-//                                                .foregroundColor(.blue)
-//                                        }
-//                                        
-//                                        TextForShowDetails(value: entry.user, text: "User:")
-//                                        TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
-//                                        TextForShowDetails(value: entry.details, text: "Details:")
-//                                        
-//                                        HStack {
-//                                            Text("Stock:")
-//                                                .fontWeight(.bold)
-//                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
-//                                                .font(.subheadline)
-//                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
-//                                        }
-//                                    }
-//                                        .padding()
-//                                )
-//                                .accessibilityElement(children: .combine)
-//                                .accessibilityHint("Details of this history entry.")
-//                        }
-//                    }
-//                    .padding(.horizontal)
-//                }
+                
             }
         }
         .padding()
