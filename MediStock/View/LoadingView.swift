@@ -12,9 +12,11 @@ struct LoadingView: View {
     @State private var loeadView : Bool = false
     var body: some View {
         ZStack {
-            Color.brown.ignoresSafeArea()
             VStack {
-                Text("Await")
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(2)
+                    .padding()
             }
         }
     }

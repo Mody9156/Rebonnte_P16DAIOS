@@ -10,9 +10,21 @@ struct AuthenticationManagerView: View {
         VStack {
             Group {
                 if authViewModel.isAuthenticated {
-                    MainTabView()
-                        .accessibilityLabel("Main Application View")
-                        .accessibilityHint("Navigates to the main application content.")
+                    if selectedAutoConnection {
+                        LoadingView()
+                            .onAppear{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                    withAnimation {
+                                        selectedAutoConnection = false
+                                    }
+                                }
+                            }
+                    }else {
+                        MainTabView()
+                            .accessibilityLabel("Main Application View")
+                            .accessibilityHint("Navigates to the main application content.")
+                    }
+                   
                 } else {
                     LoginView(selectedAutoConnection: $selectedAutoConnection)
                         .accessibilityLabel("Login Scrren")
@@ -41,6 +53,7 @@ struct AuthenticationManagerView: View {
         .accessibilityLabel("Authentication Manager")
         .accessibilityHint("Determines if the user is logged in or needs to log in.")
     }
+    
 }
 
 
