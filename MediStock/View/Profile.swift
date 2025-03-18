@@ -11,12 +11,13 @@ struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
     @AppStorage("email") var identity : String = "email"
     var use : User
+    @State private var toggleDarkMode : Bool = false 
     
     var body: some View {
         ZStack {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.1)
+                .opacity(0.5)
           
             
             VStack (alignment: .center){
@@ -31,7 +32,7 @@ struct Profile: View {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(height: 110)
                             .foregroundStyle(.blue)
-                            .opacity(0.1)
+                            .opacity(0.4)
                         
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
@@ -51,6 +52,12 @@ struct Profile: View {
                         }
                         .padding()
                     }
+                    Button {
+                        <#code#>
+                    } label: {
+                        <#code#>
+                    }
+
                 }
                 Spacer()
                 
