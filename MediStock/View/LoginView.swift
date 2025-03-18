@@ -6,6 +6,7 @@ struct LoginView: View {
     @StateObject private var authViewModel = AuthViewModel()
     @Binding  var selectedAutoConnection : Bool 
     @State private var isAnimating = false
+    
     var body: some View {
         ZStack {
             Color(.gray)
