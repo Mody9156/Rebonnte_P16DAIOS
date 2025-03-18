@@ -41,6 +41,27 @@ struct AllMedicinesView: View {
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
             }
+            
+            Button(action: {
+                activeView = true
+            }) {
+                ZStack {
+                    Circle()
+                        .frame(height: 60)
+                        .foregroundStyle(.blue)
+                        .opacity(0.9)
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.white)
+                }
+            }
+            .sheet(isPresented: $activeView) {
+                AddANewAisle()
+            }
+            .padding()
+            .accessibilityLabel("Aisle List")
+            .accessibilityHint("Displays a list of aisles containing medicines.")
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .onAppear {
