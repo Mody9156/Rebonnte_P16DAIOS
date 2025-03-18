@@ -41,19 +41,35 @@ struct AisleListView: View {
                 }
                 .navigationTitle("Aisle")
                 
-                GeometryReader { geometry in //permet d'obtenir les dimensions et la position de son parent
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(.blue)
-                        .opacity(0.4)
-                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
-                    
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(.blue)
-                        .opacity(0.4)
-                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
+                GeometryReader { geometry in
+                    ZStack {
+                        Circle()
+                            .frame(width: 200, height: 200)
+                            .foregroundStyle(Color.blue.opacity(0.2))
+                            .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                        
+                        Circle()
+                            .frame(width: 200, height: 200)
+                            .foregroundStyle(Color.blue.opacity(0.4))
+                            .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
+                        
+                        Circle()
+                            .frame(width: 150, height: 150)
+                            .foregroundStyle(Color.blue.opacity(0.6))
+                            .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.1)
+                        
+                        Circle()
+                            .frame(width: 150, height: 150)
+                            .foregroundStyle(Color.blue.opacity(0.8))
+                            .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
+                        
+                        Circle()
+                            .frame(width: 180, height: 180)
+                            .foregroundStyle(Color.blue.opacity(1.0))
+                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
+                    }
                 }
+
                 
                 Button(action: {
                     activeView = true
