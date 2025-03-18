@@ -241,25 +241,6 @@ extension MedicineDetailView {
                     }
                     .padding(.horizontal)
                 }
-
-                
-//                Button(action: {
-//                    isPresented = true
-//                }) {
-//                    ZStack {
-//                        Rectangle()
-//                            .frame(height: 45)
-//                            .foregroundColor(.blue)
-//                            .cornerRadius(15)
-//                        
-//                        Text("Show history")
-//                            .font(.title3)
-//                            .foregroundStyle(.white)
-//                    }
-//                }
-//                .sheet(isPresented: $isPresented) {
-//                    HistoryView(filterMedicine: filterMedicine)
-//                }
             }
         }
         .padding()
