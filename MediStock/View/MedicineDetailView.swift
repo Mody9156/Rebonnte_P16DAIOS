@@ -189,7 +189,7 @@ extension MedicineDetailView {
             }else{
                 
                 VStack(alignment: .leading) {
-                    ForEach(filterMedicine.suffix(3)) { history in
+                    ForEach(filterMedicine.prefix(3)) { history in
                         HStack{
                             Text(history.timestamp.formatted(date: .numeric, time: .shortened))
                                 .font(.subheadline)
@@ -197,9 +197,9 @@ extension MedicineDetailView {
                             
                             Spacer()
                             
-                            Text("Stock:\(stockChange > 0 ? "+" : "")\(stockChange))")
+                            Text("\(String(history.stock > 0 ? "Added +" : "Removed "))\(abs(history.stock))")
                                 .font(.subheadline)
-                                .foregroundStyle(stockChange > 0 ? .green : .red)
+                                .foregroundStyle(history.stock > 0 ? .green : .red)
                         }
                     }
                 }
