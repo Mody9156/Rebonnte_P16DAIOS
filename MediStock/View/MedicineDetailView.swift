@@ -128,7 +128,7 @@ extension MedicineDetailView {
                 .font(.headline)
                 .foregroundStyle(.black)
                 .accessibilityLabel("Stock Label")
-                
+            
             Slider(
                 value: $stockValue,
                 in: 0...100,
@@ -171,7 +171,7 @@ extension MedicineDetailView {
             }
         }
     }
-
+    
     
     private var historySection: some View {
         VStack(alignment: .leading) {
@@ -183,26 +183,10 @@ extension MedicineDetailView {
             
             if filterMedicine.isEmpty {
                 Text("No history available")
-                   .foregroundColor(.gray)
-                   .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .font(.subheadline)
                 
             }else{
-                
-                VStack(alignment: .leading) {
-                    ForEach(filterMedicine.prefix(3)) { history in
-                        HStack{
-                            Text(history.timestamp.formatted(date: .numeric, time: .shortened))
-                                .font(.subheadline)
-                                .foregroundStyle(.gray)
-                            
-                            Spacer()
-                            
-                            Text("Stock: \(String(history.stock > 0 ? "Added +" : "Removed "))\(abs(history.stock))")
-                                .font(.subheadline)
-                                .foregroundStyle(history.stock > 0 ? .green : .red)
-                        }
-                    }
-                }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 15) {
@@ -233,7 +217,7 @@ extension MedicineDetailView {
                                                 .foregroundStyle(entry.stock > 0 ? .green : .red)
                                         }
                                     }
-                                    .padding()
+                                        .padding()
                                 )
                                 .accessibilityElement(children: .combine)
                                 .accessibilityHint("Details of this history entry.")
@@ -256,14 +240,14 @@ extension MedicineDetailView {
 
 struct TextForShowDetails:View {
     var value: String
-       var text: String
-
-       var body: some View {
-           HStack {
-               Text(text)
-                   .fontWeight(.bold)
-               Text(value)
-                   .foregroundColor(.gray)
-           }
-       }
+    var text: String
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .fontWeight(.bold)
+            Text(value)
+                .foregroundColor(.gray)
+        }
+    }
 }
