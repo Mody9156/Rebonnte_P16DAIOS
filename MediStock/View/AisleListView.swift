@@ -14,14 +14,7 @@ struct AisleListView: View {
                 Color(.gray)
                     .ignoresSafeArea()
                     .opacity(0.1)
-                
-                GeometryReader { geometry in
-                        Circle()
-                            .frame(width: 180, height: 180)
-                            .foregroundStyle(Color.blue.opacity(0.2))
-                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
-                }
-                
+                            
                 VStack {
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -67,6 +60,11 @@ struct AisleListView: View {
                             .frame(width: 150, height: 150)
                             .foregroundStyle(Color.blue.opacity(0.8))
                             .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
+                        
+                        Circle()
+                            .frame(width: 180, height: 180)
+                            .foregroundStyle(Color.blue.opacity(0.2))
+                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
                     }
                 }
 
