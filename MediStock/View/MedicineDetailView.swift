@@ -271,3 +271,18 @@ extension MedicineDetailView {
     let sampleViewModel = MedicineStockViewModel()
     MedicineDetailView(medicine: Medicine(name: "Paracetamol", stock: 44, aisle: "Anti-inflammatory"), medicineStockViewModel: MedicineStockViewModel()).environmentObject(SessionStore())
 }
+
+
+struct TextForShowDetails:View {
+    var value: String
+       var text: String
+
+       var body: some View {
+           HStack {
+               Text(text)
+                   .fontWeight(.bold)
+               Text(value)
+                   .foregroundColor(.gray)
+           }
+       }
+}
