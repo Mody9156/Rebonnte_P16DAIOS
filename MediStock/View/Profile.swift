@@ -52,11 +52,9 @@ struct Profile: View {
                         }
                         .padding()
                     }
-                    Button {
-                        toggleDarkMode.toggle()
-                    } label: {
-                        <#code#>
-                    }
+                    
+                    Toggle("DarkMode", isOn: $toggleDarkMode)
+                        .preferredColorScheme(toggleDarkMode ? .dark : .light)
 
                 }
                 Spacer()
