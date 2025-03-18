@@ -109,6 +109,7 @@ struct MedicineDetailView: View {
                 .navigationBarTitle("Medicine Details", displayMode: .inline)
                 .onAppear {
                     medicineStockViewModel.fetchHistory(for: medicine)
+                    isAnimating = true
                 }
                 .onChange(of: medicine) { newMedicine in
                     if newMedicine != medicine {
