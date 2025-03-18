@@ -189,7 +189,7 @@ extension MedicineDetailView {
             }else{
                 
                 VStack(alignment: .leading) {
-                    ForEach(filterMedicine.prefix(3)) { history in
+                    ForEach(filterMedicine.suffix(3)) { history in
                         HStack{
                             Text(history.timestamp.formatted(date: .numeric, time: .shortened))
                                 .font(.subheadline)
