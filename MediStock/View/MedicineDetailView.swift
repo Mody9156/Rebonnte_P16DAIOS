@@ -20,78 +20,80 @@ struct MedicineDetailView: View {
     }
     
     var body: some View {
-        ZStack {
-            Color(.gray)
-                .ignoresSafeArea()
-                .opacity(0.1)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            VStack(alignment: .leading, spacing: 20) {
-                // Medicine Name
-                medicineNameSection
+        ScrollView {
+            ZStack {
+                Color(.gray)
+                    .ignoresSafeArea()
+                    .opacity(0.1)
                 
-                // Medicine Stock
-                medicineStockSection
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 1, y: 1)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
                 
-                // Medicine Aisle
-                medicineAisleSection
+                Circle()
+                    .frame(height: 200)
+                    .position(x: 400, y: 800)
+                    .foregroundStyle(.blue)
+                    .opacity(0.4)
                 
-                Button {
-                    Task{
-                        let oldValue = Int(stockValue)
-                        stockChange =  oldValue - previewStrock
-                        previewStrock = oldValue
-                        
-                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
-                        try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
-                        guard let id = medicine.id else { return }
-                        try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange, stockValue: stockChange)
+                VStack(alignment: .leading, spacing: 20) {
+                    // Medicine Name
+                    medicineNameSection
+                    
+                    // Medicine Stock
+                    medicineStockSection
+                    
+                    // Medicine Aisle
+                    medicineAisleSection
+                    
+                    Button {
+                        Task{
+                            let oldValue = Int(stockValue)
+                            stockChange =  oldValue - previewStrock
+                            previewStrock = oldValue
+                            
+                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
+                            try? await medicineStockViewModel.updateMedicine(medicine, user: session.session?.uid ?? "", stock: stockChange)
+                            guard let id = medicine.id else { return }
+                            try? await  medicineStockViewModel.changeStock(medicine, user: id, stocks: stockChange, stockValue: stockChange)
+                        }
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(height: 45)
+                                .foregroundColor(.blue)
+                                .cornerRadius(15)
+                            
+                            Text("Validate")
+                                .font(.title3)
+                                .foregroundStyle(.white)
+                        }
                     }
-                } label: {
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 45)
-                            .foregroundColor(.blue)
-                            .cornerRadius(15)
-                        
-                        Text("Validate")
-                            .font(.title3)
-                            .foregroundStyle(.white)
+                    
+                    // History Section
+                    historySection
+                    
+                }
+                .padding(.horizontal)
+                .padding(.vertical)
+                .navigationBarTitle("Medicine Details", displayMode: .inline)
+                .onAppear {
+                    medicineStockViewModel.fetchHistory(for: medicine)
+                }
+                .onChange(of: medicine) { newMedicine in
+                    if newMedicine != medicine {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            medicineStockViewModel.fetchHistory(for: newMedicine)
+                        }
                     }
                 }
+                .accessibilityElement(children: .contain)
+                .accessibilityLabel("Medicine Details")
+                .accessibilityHint("Displays detailed information about the medicine.")
                 
-                // History Section
-                historySection
-                
             }
-            .padding(.horizontal)
-            .padding(.vertical)
-            .navigationBarTitle("Medicine Details", displayMode: .inline)
-            .onAppear {
-                medicineStockViewModel.fetchHistory(for: medicine)
-            }
-            .onChange(of: medicine) { newMedicine in
-                if newMedicine != medicine {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        medicineStockViewModel.fetchHistory(for: newMedicine)
-                    }
-                }
-            }
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("Medicine Details")
-            .accessibilityHint("Displays detailed information about the medicine.")
-            
         }
     }
 }
