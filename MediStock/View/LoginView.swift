@@ -11,7 +11,7 @@ struct LoginView: View {
         ZStack {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.2)
             
             VStack {
                 ZStack{

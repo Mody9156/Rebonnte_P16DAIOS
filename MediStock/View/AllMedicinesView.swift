@@ -62,8 +62,6 @@ struct AllMedicinesView: View {
                 .accessibilityLabel("Aisle List")
                 .accessibilityHint("Displays a list of aisles containing medicines.")
             }
-            
-            
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .onAppear {
