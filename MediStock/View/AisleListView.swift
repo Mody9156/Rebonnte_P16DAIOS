@@ -7,7 +7,6 @@ struct AisleListView: View {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
     @State private var activeView: Bool = false
-    @State private var isAnimating = false
 
     var body: some View {
         NavigationStack {
@@ -40,46 +39,6 @@ struct AisleListView: View {
                 }
                 .navigationTitle("Aisle")
                 
-                GeometryReader { geometry in
-                    ZStack {
-                        Circle()
-                            .frame(width: 200, height: 200)
-                            .foregroundStyle(Color.blue.opacity(0.2))
-                            .scaleEffect(isAnimating ? 1.2:1)
-                            .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                            .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
-                        
-                        Circle()
-                            .frame(width: 200, height: 200)
-                            .foregroundStyle(Color.blue.opacity(0.4))
-                            .scaleEffect(isAnimating ? 1.2:1)
-                            .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                            .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
-                        
-                        Circle()
-                            .frame(width: 150, height: 150)
-                            .foregroundStyle(Color.blue.opacity(0.6))
-                            .scaleEffect(isAnimating ? 1.2:1)
-                            .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                            .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.1)
-                        
-                        Circle()
-                            .frame(width: 150, height: 150)
-                            .foregroundStyle(Color.blue.opacity(0.8))
-                            .scaleEffect(isAnimating ? 1.2:1)
-                            .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                            .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
-                        
-                        Circle()
-                            .frame(width: 180, height: 180)
-                            .foregroundStyle(Color.blue.opacity(0.2))
-                            .scaleEffect(isAnimating ? 1.2:1)
-                            .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
-                    }
-                }
-                
-                
                 Button(action: {
                     activeView = true
                 }) {
@@ -107,7 +66,6 @@ struct AisleListView: View {
         }
         .onAppear {
             medicineStockViewModel.observeAisles()
-            isAnimating = true
         }
         .accessibilityElement(children: .contain)
     }
