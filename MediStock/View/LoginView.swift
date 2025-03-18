@@ -5,6 +5,7 @@ struct LoginView: View {
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
     @Binding  var selectedAutoConnection : Bool 
+    @State private var isAnimating = false
     
     var body: some View {
         ZStack {
@@ -16,6 +17,8 @@ struct LoginView: View {
                     Circle()
                         .frame(width: 180, height: 180)
                         .foregroundStyle(Color.blue.opacity(0.2))
+                        .scaleEffect(isAnimating ? 1.2:1)
+                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true), value: isAnimating)
                         .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
             }
             
@@ -110,6 +113,9 @@ struct LoginView: View {
                    
                 }
             }
+        }
+        .onAppear{
+            isAnimating = true
         }
     }
 }
