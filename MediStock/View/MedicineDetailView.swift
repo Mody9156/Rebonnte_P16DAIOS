@@ -204,23 +204,62 @@ extension MedicineDetailView {
                     }
                 }
                 
-                Button(action: {
-                    isPresented = true
-                }) {
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 45)
-                            .foregroundColor(.blue)
-                            .cornerRadius(15)
-                        
-                        Text("Show history")
-                            .font(.title3)
-                            .foregroundStyle(.white)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 15) {
+                        ForEach(filterMedicine) { entry in
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.blue.opacity(0.2))
+                                .frame(width: 250, height: 150)
+                                .overlay(
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack {
+                                            Image(systemName: "circle.fill")
+                                                .foregroundColor(.blue)
+                                            Text(entry.action)
+                                                .font(.headline)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.blue)
+                                        }
+                                        
+                                        TextForShowDetails(value: entry.user, text: "User:")
+                                        TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
+                                        TextForShowDetails(value: entry.details, text: "Details:")
+                                        
+                                        HStack {
+                                            Text("Stock:")
+                                                .fontWeight(.bold)
+                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
+                                                .font(.subheadline)
+                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
+                                        }
+                                    }
+                                    .padding()
+                                )
+                                .accessibilityElement(children: .combine)
+                                .accessibilityHint("Details of this history entry.")
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .sheet(isPresented: $isPresented) {
-                    HistoryView(filterMedicine: filterMedicine)
-                }
+
+                
+//                Button(action: {
+//                    isPresented = true
+//                }) {
+//                    ZStack {
+//                        Rectangle()
+//                            .frame(height: 45)
+//                            .foregroundColor(.blue)
+//                            .cornerRadius(15)
+//                        
+//                        Text("Show history")
+//                            .font(.title3)
+//                            .foregroundStyle(.white)
+//                    }
+//                }
+//                .sheet(isPresented: $isPresented) {
+//                    HistoryView(filterMedicine: filterMedicine)
+//                }
             }
         }
         .padding()
