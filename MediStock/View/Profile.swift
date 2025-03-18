@@ -16,20 +16,8 @@ struct Profile: View {
         ZStack {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.1)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
                 .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
+          
             
             VStack (alignment: .center){
                 VStack{

@@ -12,8 +12,9 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-               
-                    
+                Color(.gray)
+                    .ignoresSafeArea()
+                    .opacity(0.4)
                 
                 VStack {
                     List {

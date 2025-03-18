@@ -21,21 +21,7 @@ struct AddMedicineView: View {
         ZStack {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.1)
-            
-            GeometryReader { geometry in
-                Circle()
-                    .frame(width: 200, height: 200)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                    .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
-                
-                Circle()
-                    .frame(width: 200, height: 200)
-                    .foregroundStyle(.blue)
-                    .opacity(0.4)
-                    .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
-            }
+                .opacity(0.4)
             
             ScrollView {
                 VStack(spacing: 20){

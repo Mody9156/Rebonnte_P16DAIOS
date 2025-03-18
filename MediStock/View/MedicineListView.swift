@@ -14,7 +14,7 @@ struct MedicineListView: View {
         ZStack(alignment: .bottomTrailing) {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.1)
+                .opacity(0.4)
             
             VStack {
                 List {
@@ -44,19 +44,7 @@ struct MedicineListView: View {
                 }
             }
             .navigationTitle(aisle)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: -83)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 710)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
+      
             Button(action: {
                 activeView = true
             }) {

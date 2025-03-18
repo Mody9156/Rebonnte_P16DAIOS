@@ -5,22 +5,12 @@ struct LoginView: View {
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
     @Binding  var selectedAutoConnection : Bool 
-    @State private var isAnimating = false
     
     var body: some View {
         ZStack {
             Color(.gray)
                 .ignoresSafeArea()
-                .opacity(0.1)
-         
-            GeometryReader { geometry in
-                    Circle()
-                        .frame(width: 180, height: 180)
-                        .foregroundStyle(Color.blue.opacity(0.2))
-                        .scaleEffect(isAnimating ? 1.2:1)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                        .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
-            }
+                .opacity(0.4)
             
             VStack {
                 ZStack{
@@ -87,40 +77,7 @@ struct LoginView: View {
                 
             }
             .padding()
-            
-            GeometryReader { geometry in
-                ZStack {
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(Color.blue.opacity(0.2))
-                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
-                        .scaleEffect(isAnimating ? 1.2:1)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-
-                    Circle()
-                        .frame(width: 200, height: 200)
-                        .foregroundStyle(Color.blue.opacity(0.4))
-                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
-                        .scaleEffect(isAnimating ? 1.2:1)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                    Circle()
-                        .frame(width: 150, height: 150)
-                        .foregroundStyle(Color.blue.opacity(0.6))
-                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.1)
-                        .scaleEffect(isAnimating ? 1.2:1)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                    Circle()
-                        .frame(width: 150, height: 150)
-                        .foregroundStyle(Color.blue.opacity(0.8))
-                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
-                        .scaleEffect(isAnimating ? 1.2:1)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true),value: isAnimating)
-                   
-                }
-            }
-        }
-        .onAppear{
-            isAnimating = true
+          
         }
     }
 }
