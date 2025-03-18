@@ -6,6 +6,7 @@ struct AllMedicinesView: View {
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
     @State private var filterSection : Bool = false
+    @State private var filterSectionStock : Bool = false
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
     
     var body: some View {
@@ -30,7 +31,7 @@ struct AllMedicinesView: View {
                     VStack  {
                         HStack{
                             
-                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSection)
+                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSectionStock)
                             FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.stock.rawValue, isSelected: $isSelected, filterSection: $filterSection)
                         }
                     }
