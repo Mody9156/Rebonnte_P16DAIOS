@@ -22,8 +22,9 @@ struct AuthenticationManagerView: View {
             .onAppear{
                 Task{
                     if  selectedAutoConnection {
-                      try await authViewModel.autotoLogin()
-                    }else{
+                        try await authViewModel.autotoLogin()
+                    }
+                    else{
                         try? await authViewModel.disableAutoLogin()
                     }
                     try? await authViewModel.changeStatus()
@@ -41,6 +42,8 @@ struct AuthenticationManagerView: View {
         .accessibilityHint("Determines if the user is logged in or needs to log in.")
     }
 }
+
+
 
 #Preview {
     AuthenticationManagerView()

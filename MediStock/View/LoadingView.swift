@@ -11,8 +11,11 @@ struct LoadingView: View {
     @State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
     @State private var loeadView : Bool = false
     var body: some View {
-        VStack {
-            Text("Await")
+        ZStack {
+            Color.brown.ignoresSafeArea()
+            VStack {
+                Text("Await")
+            }
         }
     }
 }
