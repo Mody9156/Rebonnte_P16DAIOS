@@ -15,7 +15,12 @@ struct AisleListView: View {
                     .ignoresSafeArea()
                     .opacity(0.1)
                 
-               
+                GeometryReader { geometry in
+                        Circle()
+                            .frame(width: 180, height: 180)
+                            .foregroundStyle(Color.blue.opacity(0.2))
+                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
+                }
                 
                 VStack {
                     List {
