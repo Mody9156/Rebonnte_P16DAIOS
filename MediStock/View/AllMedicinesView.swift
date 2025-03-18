@@ -30,6 +30,7 @@ struct AllMedicinesView: View {
                         HStack{
                            
                             FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSection)
+                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.stock.rawValue, isSelected: $isSelected, filterSection: $filterSection)
                         }
                     }
                     .padding()
