@@ -21,11 +21,10 @@ struct MedicineDetailView: View {
     }
     
     var body: some View {
-        ScrollView {
             ZStack {
                 Color(.gray)
                     .ignoresSafeArea()
-                    .opacity(0.4)
+                    .opacity(0.1)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     // Medicine Name
@@ -83,7 +82,6 @@ struct MedicineDetailView: View {
                 .accessibilityHint("Displays detailed information about the medicine.")
                 
             }
-        }
     }
 }
 
