@@ -179,43 +179,77 @@ extension MedicineDetailView {
                 
             }else{
                 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 15) {
-                        ForEach(filterMedicine) { entry in
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.blue.opacity(0.2))
-                                .frame(width: 250, height: 150)
-                                .overlay(
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        HStack {
-                                            Image(systemName: "circle.fill")
-                                                .foregroundColor(.blue)
-                                            Text(entry.action)
-                                                .font(.headline)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.blue)
-                                        }
-                                        
-                                        TextForShowDetails(value: entry.user, text: "User:")
-                                        TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
-                                        TextForShowDetails(value: entry.details, text: "Details:")
-                                        
-                                        HStack {
-                                            Text("Stock:")
-                                                .fontWeight(.bold)
-                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
-                                                .font(.subheadline)
-                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
-                                        }
-                                    }
-                                        .padding()
-                                )
-                                .accessibilityElement(children: .combine)
-                                .accessibilityHint("Details of this history entry.")
+                VStack(alignment: .leading) {
+                    ForEach(filterMedicine.prefix(3)) { history in
+                        HStack{
+                            Text(history.timestamp.formatted(date: .numeric, time: .shortened))
+                                .font(.subheadline)
+                                .foregroundStyle(.gray)
+                            
+                            Spacer()
+                            
+                            Text("Stock:\(stockChange > 0 ? "+" : "")\(stockChange))")
+                                .font(.subheadline)
+                                .foregroundStyle(stockChange > 0 ? .green : .red)
                         }
                     }
-                    .padding(.horizontal)
                 }
+                
+                Button(action: {
+                    isPresented = true
+                }) {
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 45)
+                            .foregroundColor(.blue)
+                            .cornerRadius(15)
+                        
+                        Text("Show history")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                    }
+                }
+                .sheet(isPresented: $isPresented) {
+                    HistoryView(filterMedicine: filterMedicine)
+                }
+                
+//                ScrollView(.horizontal, showsIndicators: false) {
+//                    LazyHStack(spacing: 15) {
+//                        ForEach(filterMedicine) { entry in
+//                            RoundedRectangle(cornerRadius: 12)
+//                                .fill(Color.blue.opacity(0.2))
+//                                .frame(width: 250, height: 150)
+//                                .overlay(
+//                                    VStack(alignment: .leading, spacing: 8) {
+//                                        HStack {
+//                                            Image(systemName: "circle.fill")
+//                                                .foregroundColor(.blue)
+//                                            Text(entry.action)
+//                                                .font(.headline)
+//                                                .fontWeight(.bold)
+//                                                .foregroundColor(.blue)
+//                                        }
+//                                        
+//                                        TextForShowDetails(value: entry.user, text: "User:")
+//                                        TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
+//                                        TextForShowDetails(value: entry.details, text: "Details:")
+//                                        
+//                                        HStack {
+//                                            Text("Stock:")
+//                                                .fontWeight(.bold)
+//                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
+//                                                .font(.subheadline)
+//                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
+//                                        }
+//                                    }
+//                                        .padding()
+//                                )
+//                                .accessibilityElement(children: .combine)
+//                                .accessibilityHint("Details of this history entry.")
+//                        }
+//                    }
+//                    .padding(.horizontal)
+//                }
             }
         }
         .padding()
