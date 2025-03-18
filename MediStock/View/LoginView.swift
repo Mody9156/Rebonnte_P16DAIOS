@@ -5,7 +5,8 @@ struct LoginView: View {
     @State private var password = ""
     @StateObject private var authViewModel = AuthViewModel()
     @Binding  var selectedAutoConnection : Bool 
-    
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -79,6 +80,7 @@ struct LoginView: View {
             .padding()
           
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

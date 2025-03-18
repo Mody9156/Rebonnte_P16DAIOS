@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HistoryView: View {
     var filterMedicine : [HistoryEntry]
-    
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -66,18 +67,6 @@ struct HistoryView: View {
                                         .foregroundStyle(entry.stock > 0 ? .green : .red)
                                         .accessibilityLabel("Stock: \(String(entry.stock))")
                                 }
-                                
-                             
-//                                HStack {
-//                                    Text("Stock:")
-//                                        .fontWeight(.bold)
-//
-//                                    Text("Stock change: \(stock > 0 ? "Added +" : "Removed ")\(abs(stock)) units")
-//                                        .font(.subheadline)
-//                                        .foregroundStyle(stock > 0 ? .green : .red)
-//
-//                                }
-                                
                             }
                             .padding()
                             .cornerRadius(10)
@@ -91,6 +80,7 @@ struct HistoryView: View {
                 .padding(.top)
             }
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

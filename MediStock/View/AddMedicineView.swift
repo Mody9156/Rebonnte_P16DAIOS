@@ -16,7 +16,8 @@ struct AddMedicineView: View {
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("email") var identity : String = "email"
-    
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -87,6 +88,7 @@ struct AddMedicineView: View {
                 .padding()
             }
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
     
     func getOptionMedical() -> [TypeOF] {

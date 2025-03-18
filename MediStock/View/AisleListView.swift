@@ -7,6 +7,7 @@ struct AisleListView: View {
         medicineStockViewModel.aisles.sorted{$0.localizedStandardCompare( $1) == .orderedAscending }
     }
     @State private var activeView: Bool = false
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
 
     var body: some View {
         NavigationStack {
@@ -67,6 +68,7 @@ struct AisleListView: View {
         .onAppear {
             medicineStockViewModel.observeAisles()
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .accessibilityElement(children: .contain)
     }
 }

@@ -15,7 +15,8 @@ struct AddANewAisle: View {
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
-    
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+
     var body: some View {
         ZStack {
             Color(.gray)
@@ -104,6 +105,7 @@ struct AddANewAisle: View {
                 .padding()
             }
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
     
     func getOptionMedical() -> [TypeOF] {

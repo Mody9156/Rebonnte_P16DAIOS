@@ -3,6 +3,7 @@ import SwiftUI
 struct MedicineListView: View {
     @StateObject var medicineStockViewModel : MedicineStockViewModel
     @State private var activeView: Bool = false
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
     var aisle: String
     var filterMedicines : [Medicine] {
         return medicineStockViewModel.medicines.filter({ Medicine in
@@ -71,8 +72,10 @@ struct MedicineListView: View {
             .onAppear {
                 medicineStockViewModel.observeMedicines()
             }
+            
             .padding()
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

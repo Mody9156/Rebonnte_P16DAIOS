@@ -6,6 +6,7 @@ struct AllMedicinesView: View {
     @AppStorage("email") var identity : String = "email"
     @State var isSelected : String = ""
     @State private var filterSection : Bool = false
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
     
     var body: some View {
         NavigationView {
@@ -40,6 +41,7 @@ struct AllMedicinesView: View {
                 }
             }
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .onAppear {
             Task{
                 medicineStockViewModel.observeMedicines()

@@ -13,6 +13,7 @@ struct MedicineDetailView: View {
     @State private var stockChange: Int = 0
     @State private var previewStrock: Int = 0
     @State private var isAnimating = false
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
     var step = 1
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
@@ -79,6 +80,7 @@ struct MedicineDetailView: View {
                             }
                         }
                     }
+                    .preferredColorScheme(toggleDarkMode ? .dark : .light)
                     .accessibilityElement(children: .contain)
                     .accessibilityLabel("Medicine Details")
                     .accessibilityHint("Displays detailed information about the medicine.")

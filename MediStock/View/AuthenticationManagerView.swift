@@ -4,7 +4,8 @@ struct AuthenticationManagerView: View {
     @EnvironmentObject var session: SessionStore
     @StateObject var authViewModel = AuthViewModel()
     @State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
-
+    @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+    
     var body: some View {
         VStack {
             Group {
@@ -34,6 +35,7 @@ struct AuthenticationManagerView: View {
                 }
             }
         }
+        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Authentication Manager")
         .accessibilityHint("Determines if the user is logged in or needs to log in.")
