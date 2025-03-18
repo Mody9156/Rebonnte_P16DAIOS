@@ -8,6 +8,7 @@ struct AllMedicinesView: View {
     @State private var filterSection : Bool = false
     @State private var filterSectionStock : Bool = false
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+    @State private var activeView : Bool = false
     
     var body: some View {
         NavigationView {
