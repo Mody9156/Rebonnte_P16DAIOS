@@ -110,16 +110,3 @@ struct HistoryView: View {
         
     ])
 }
-
-struct TextForShowDetails: View {
-    var value : String
-    var text : String
-    var body: some View {
-        HStack {
-            Text(text)
-                .fontWeight(.bold)
-            Text(value)
-                .font(.subheadline)
-        }
-    }
-}
