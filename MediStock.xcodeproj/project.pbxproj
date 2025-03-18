@@ -40,6 +40,7 @@
 		4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */; };
 		4F3FF56F2D67AB43003EB6D8 /* pack-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4E2D5BE07B00E461BE /* pack-Info.plist */; };
 		4FBE3D082D84716B00D1BC23 /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */; };
+		4FC3E2AA2D89C2FB0066841D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2A92D89C2FB0066841D /* HistoryView.swift */; };
 		4FD6DADE2D661571006E7FE5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90414E2D53666100BA4690 /* FirebaseAnalytics */; };
 		4FD6DADF2D661571006E7FE5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041502D53666100BA4690 /* FirebaseAnalyticsSwift */; };
 		4FD6DAE02D661571006E7FE5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041522D53666100BA4690 /* FirebaseAuth */; };
@@ -102,6 +103,7 @@
 		4F3BBACA2D83557A0077F9DD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
+		4FC3E2A92D89C2FB0066841D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */,
 				4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */,
 				4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */,
+				4FC3E2A92D89C2FB0066841D /* HistoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */,
 				237E0A872D300A4F00EEC056 /* User.swift in Sources */,
 				230CD2052D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift in Sources */,
+				4FC3E2AA2D89C2FB0066841D /* HistoryView.swift in Sources */,
 				4FBE3D082D84716B00D1BC23 /* AddMedicineView.swift in Sources */,
 				53E0D8DC2C06099C00DE1134 /* Medicine.swift in Sources */,
 				23026F2E2D4CD5DD00F017B0 /* MedicineProtocol.swift in Sources */,
