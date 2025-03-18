@@ -11,18 +11,13 @@ struct LoginView: View {
             Color(.gray)
                 .ignoresSafeArea()
                 .opacity(0.1)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
+         
+            GeometryReader { geometry in
+                    Circle()
+                        .frame(width: 180, height: 180)
+                        .foregroundStyle(Color.blue.opacity(0.2))
+                        .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
+            }
             
             VStack {
                 ZStack{
@@ -30,7 +25,7 @@ struct LoginView: View {
                         .fill(.blue)
                         .frame(height: 250)
                         .foregroundColor(Color("BackgroundButton"))
-                        .opacity(0.6)
+                        .opacity(0.8)
                     
                     VStack{
                         VStack(alignment: .leading){
@@ -89,6 +84,32 @@ struct LoginView: View {
                 
             }
             .padding()
+            
+            GeometryReader { geometry in
+                ZStack {
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(Color.blue.opacity(0.2))
+                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.1)
+                    
+                    Circle()
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(Color.blue.opacity(0.4))
+                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 1.0)
+                    
+                    Circle()
+                        .frame(width: 150, height: 150)
+                        .foregroundStyle(Color.blue.opacity(0.6))
+                        .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.1)
+                    
+                    Circle()
+                        .frame(width: 150, height: 150)
+                        .foregroundStyle(Color.blue.opacity(0.8))
+                        .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
+                    
+                   
+                }
+            }
         }
     }
 }

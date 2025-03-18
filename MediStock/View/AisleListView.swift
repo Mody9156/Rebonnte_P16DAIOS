@@ -62,11 +62,6 @@ struct AisleListView: View {
                             .frame(width: 150, height: 150)
                             .foregroundStyle(Color.blue.opacity(0.8))
                             .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.9)
-                        
-                        Circle()
-                            .frame(width: 180, height: 180)
-                            .foregroundStyle(Color.blue.opacity(1.0))
-                            .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
                     }
                 }
 
