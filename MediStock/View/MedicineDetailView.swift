@@ -12,6 +12,7 @@ struct MedicineDetailView: View {
     @State private var stockValue: Double = 0.0
     @State private var stockChange: Int = 0
     @State private var previewStrock: Int = 0
+    @State private var isAnimating = false
     var step = 1
     var filterMedicine : [HistoryEntry] {
         return  medicineStockViewModel.history.filter {
