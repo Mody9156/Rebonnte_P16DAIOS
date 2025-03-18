@@ -11,7 +11,7 @@ struct Profile: View {
     @StateObject var authViewModel : AuthViewModel
     @AppStorage("email") var identity : String = "email"
     var use : User
-    @State private var toggleDarkMode : Bool = false 
+    @State private var toggleDarkMode : Bool = false
     
     var body: some View {
         ZStack {
@@ -53,7 +53,7 @@ struct Profile: View {
                         .padding()
                     }
                     Button {
-                        <#code#>
+                        toggleDarkMode.toggle()
                     } label: {
                         <#code#>
                     }
