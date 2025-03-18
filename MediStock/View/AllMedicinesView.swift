@@ -28,7 +28,7 @@ struct AllMedicinesView: View {
                     
                     VStack  {
                         HStack{
-                           
+                            
                             FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSection)
                             FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.stock.rawValue, isSelected: $isSelected, filterSection: $filterSection)
                         }
@@ -39,7 +39,6 @@ struct AllMedicinesView: View {
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                     
                 }
-               
             }
         }
         .onAppear {
@@ -60,7 +59,7 @@ struct FilterButton: View {
     var index : String
     @Binding var isSelected : String
     @Binding var filterSection : Bool
-   
+    
     var body: some View {
         Button {
             Task{
