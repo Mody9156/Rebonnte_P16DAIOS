@@ -16,7 +16,7 @@ struct AddANewAisle: View {
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
-    @State private var selectedMedicines : String  = ""
+    @State private var selectedAisles : String  = ""
     @State private var selectedCategory : String = ""
 
     var body: some View {
@@ -37,9 +37,9 @@ struct AddANewAisle: View {
                         .shadow(radius: 3)
                         .frame(height: 160)
                         .overlay(
-                            Picker("Aisles", selection: $selectedCategory) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [], id:\.self) { aisle in
-                                    Text(aisle)
+                            Picker("Aisles", selection: $nameInAisle) {
+                                ForEach(SelectedAisles.allCases) { aisle in
+                                    Text(aisle.rawValue.capitalized)
                                 }
                             }
                                 .pickerStyle(.wheel)
@@ -71,8 +71,8 @@ struct AddANewAisle: View {
                         .shadow(radius: 3)
                         .frame(height: 160)
                         .overlay(
-                            Picker("Medicine", selection: $selectedMedicines) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments[selectedCategory] ?? [], id:\.self) { name in
+                            Picker("Medicine", selection: $nameInAisleMEdicine) {
+                                ForEach(getOptionMedical()) { name in
                                     Text(name.displayName)
                                 }
                             }
@@ -109,10 +109,27 @@ struct AddANewAisle: View {
         }
         .onAppear{
             if let index = medicineStockViewModel.medicineListed?.medicaments.keys.sorted().first {
-                selectedCategory = index
+                nameInAisle = index
             }
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
+    }
+    
+    func getOptionMedical() -> [TypeOF] {
+        switch  nameInAisle {
+        case "Analgesics and Anti-inflammatory drugs":
+            return  [.TypeOne(.Centrally),.TypeOne(.NonSteroidal),.TypeOne(.Peripherally),.TypeOne(.Steroidal)]
+        case "Antibiotics and Antibacterials":
+            return [.TypeTwo(.Aminoglycosides),.TypeTwo(.Antibiotics),.TypeTwo(.Beta),.TypeTwo(.Cyclic),.TypeTwo(.Macrolides),.TypeTwo(.Tetracyclines),.TypeTwo(.casePhenicols),.TypeTwo(.antibacterials),.TypeTwo(.Tetracyclines),.TypeTwo(.Sulfonamides),.TypeTwo(.Quinolones),.TypeTwo(.Nitroimidazole),.TypeTwo(.Miscellaneous),.TypeTwo(.antibacterials)]
+        case "Antituberculosis and Antileprosy drugs" :
+            return [.TypeThree(.Antituberculosis),.TypeThree(.Topical)]
+        case "Dermatology" :
+            return  [.TypeFour(.Anti),.TypeFour(.Antileprosy),.TypeFour(.dermatology)]
+        case "Oncology" :
+            return [.TypeFive(.Alkylating),.TypeFive(.Antimetabolites),.TypeFive(.Intercalating),.TypeFive(.Tubulin)]
+        default:
+            return []
+        }
     }
 }
 
