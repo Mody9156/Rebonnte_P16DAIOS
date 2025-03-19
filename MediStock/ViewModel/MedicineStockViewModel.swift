@@ -21,10 +21,12 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
     @Published var messageEror : String? = nil
-    @Published var medicineListed: [MedicationsData] = ModelData.chargement("Source.json")
+    
+    @Published var medicineListed: MedicationsData? = ModelData.chargement("Source.json")
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
+
     }
     
     
