@@ -1,0 +1,17 @@
+[
+    {
+      "medicaments": {
+        "Analgesic": ["Paracetamol", "Tramadol", "Codeine", "Morphine", "Fentanyl"],
+        "Anti-inflammatory": ["Ibuprofen", "Diclofenac", "Naproxen", "Celecoxib", "Indomethacin", "Meloxicam"],
+        "Antibiotic": ["Amoxicillin", "Azithromycin", "Ciprofloxacin", "Doxycycline", "Clarithromycin", "Penicillin V", "Cephalexin", "Rifampin"],
+        "Antidiabetic": ["Metformin", "Insulin", "Glibenclamide", "Sitagliptin", "Pioglitazone", "Glipizide", "Dapagliflozin"],
+        "Proton pump inhibitor": ["Omeprazole", "Pantoprazole", "Lansoprazole", "Esomeprazole", "Rabeprazole"],
+        "Antihistamine": ["Loratadine", "Cetirizine", "Desloratadine", "Fexofenadine", "Hydroxyzine", "Diphenhydramine"],
+        "Antiplatelet": ["Aspirin", "Clopidogrel", "Ticagrelor", "Prasugrel", "Eptifibatide"],
+        "Bronchodilator": ["Salbutamol", "Budesonide", "Formoterol", "Tiotropium", "Ipratropium"],
+        "Hypolipidemic": ["Atorvastatin", "Rosuvastatin", "Simvastatin", "Pravastatin", "Ezetimibe"],
+        "Anxiolytic": ["Diazepam", "Alprazolam", "Lorazepam", "Clonazepam", "Oxazepam"],
+        "Antidepressant": ["Sertraline", "Fluoxetine", "Paroxetine", "Citalopram", "Escitalopram", "Mirtazapine", "Venlafaxine"]
+      }
+    }
+]
