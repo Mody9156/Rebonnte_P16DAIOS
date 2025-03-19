@@ -36,7 +36,6 @@
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */; };
 		4F3BBAC92D82E8BA0077F9DD /* AddANewAisle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */; };
-		4F3BBACB2D83557A0077F9DD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3BBACA2D83557A0077F9DD /* Enums.swift */; };
 		4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */; };
 		4F3FF56F2D67AB43003EB6D8 /* pack-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4E2D5BE07B00E461BE /* pack-Info.plist */; };
 		4F8F68802D8ACCE000486DBF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F687F2D8ACCE000486DBF /* ModelData.swift */; };
@@ -105,7 +104,6 @@
 		4F159B4E2D5BE07B00E461BE /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "pack-Info.plist"; sourceTree = "<group>"; };
 		4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddANewAisle.swift; sourceTree = "<group>"; };
-		4F3BBACA2D83557A0077F9DD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F8F687F2D8ACCE000486DBF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 			children = (
 				53E0D8DD2C0609A800DE1134 /* MedicineStockViewModel.swift */,
 				237E0A882D300FBB00EEC056 /* AuthViewModel.swift */,
-				4F3BBACA2D83557A0077F9DD /* Enums.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -520,7 +517,6 @@
 				230CD2072D4BE4DA009C3F05 /* FirestoreQuerySnapshotAdapter.swift in Sources */,
 				4F8F68842D8AD20300486DBF /* MedicationsData.swift in Sources */,
 				2301D6792D4A3DE60032B5DF /* FirestoreServiceProtocol {.swift in Sources */,
-				4F3BBACB2D83557A0077F9DD /* Enums.swift in Sources */,
 				53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */,
 				53E0D8E82C066F6500DE1134 /* MedicineDetailView.swift in Sources */,
 				2301D6772D4A3A570032B5DF /* MedicineServiceProtocol.swift in Sources */,
