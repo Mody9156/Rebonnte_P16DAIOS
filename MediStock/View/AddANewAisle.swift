@@ -114,23 +114,6 @@ struct AddANewAisle: View {
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
-    
-    func getOptionMedical() -> [TypeOF] {
-        switch  nameInAisle {
-        case "Analgesics and Anti-inflammatory drugs":
-            return  [.TypeOne(.Centrally),.TypeOne(.NonSteroidal),.TypeOne(.Peripherally),.TypeOne(.Steroidal)]
-        case "Antibiotics and Antibacterials":
-            return [.TypeTwo(.Aminoglycosides),.TypeTwo(.Antibiotics),.TypeTwo(.Beta),.TypeTwo(.Cyclic),.TypeTwo(.Macrolides),.TypeTwo(.Tetracyclines),.TypeTwo(.casePhenicols),.TypeTwo(.antibacterials),.TypeTwo(.Tetracyclines),.TypeTwo(.Sulfonamides),.TypeTwo(.Quinolones),.TypeTwo(.Nitroimidazole),.TypeTwo(.Miscellaneous),.TypeTwo(.antibacterials)]
-        case "Antituberculosis and Antileprosy drugs" :
-            return [.TypeThree(.Antituberculosis),.TypeThree(.Topical)]
-        case "Dermatology" :
-            return  [.TypeFour(.Anti),.TypeFour(.Antileprosy),.TypeFour(.dermatology)]
-        case "Oncology" :
-            return [.TypeFive(.Alkylating),.TypeFive(.Antimetabolites),.TypeFive(.Intercalating),.TypeFive(.Tubulin)]
-        default:
-            return []
-        }
-    }
 }
 
 #Preview {
