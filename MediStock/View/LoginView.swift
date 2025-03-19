@@ -43,35 +43,37 @@ struct LoginView: View {
                                 .cornerRadius(3)
                                 .padding()
                             
-                            HStack {
-                                Button {
-                                    withAnimation {
-                                        selectedAutoConnection.toggle()
-                                        authViewModel.saveAutoConnectionState(selectedAutoConnection)
-                                    }
-                                    
-                                } label: {
-                                    ZStack {
-                                        Rectangle()
-                                            .frame(width: 20,height: 20)
-                                            .foregroundStyle(.white)
-                                            .border(.white,width: 2)
-                                        
-                                        if selectedAutoConnection {
-                                            Image(systemName: "xmark")
-                                                .fontWeight(.bold)
-                                        }
-                                    }
-                                }
-                                .padding(.leading)
-                                
-                                Text("Stay signed in")
-                                    .foregroundStyle(.white)
-                            }
+                         
                         }
                     }
                 }
                 .padding()
+                
+                HStack {
+                    Button {
+                        withAnimation {
+                            selectedAutoConnection.toggle()
+                            authViewModel.saveAutoConnectionState(selectedAutoConnection)
+                        }
+                        
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(width: 20,height: 20)
+                                .foregroundStyle(.white)
+                                .border(.white,width: 2)
+                            
+                            if selectedAutoConnection {
+                                Image(systemName: "xmark")
+                                    .fontWeight(.bold)
+                            }
+                        }
+                    }
+                    .padding(.leading)
+                    
+                    Text("Stay signed in")
+                        .foregroundStyle(.white)
+                }
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
