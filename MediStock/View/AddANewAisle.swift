@@ -16,8 +16,6 @@ struct AddANewAisle: View {
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
-    @State private var selectedAisles : String  = ""
-    @State private var selectedCategory : String = ""
 
     var body: some View {
         ZStack {
