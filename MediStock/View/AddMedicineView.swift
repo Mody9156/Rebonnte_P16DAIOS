@@ -60,12 +60,11 @@ struct AddMedicineView: View {
                                 .pickerStyle(.wheel)
                                 .frame(height: 150))
                     Button {
-                        
                         Task{
                             try? await medicineStockViewModel.insertMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle, stockValue: Int(stock))
-                        }
-                        if medicineStockViewModel.messageEror != nil {
-                            dismiss()
+                            if medicineStockViewModel.messageEror == nil {
+                                dismiss()
+                            }
                         }
                         
                     } label: {
@@ -85,7 +84,6 @@ struct AddMedicineView: View {
                     }
                     
                 }
-               
                 .padding()
             }
         }

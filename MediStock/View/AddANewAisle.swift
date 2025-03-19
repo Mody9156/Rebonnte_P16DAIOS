@@ -79,11 +79,12 @@ struct AddANewAisle: View {
                     Button {
                         Task{
                             try? await medicineStockViewModel.insertAisle(name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle)
+                            if medicineStockViewModel.messageEror == nil {
+                                dismiss()
+                            }
                         }
                         
-                        if medicineStockViewModel.messageEror != nil {
-                            dismiss()
-                        }
+                       
                         
                     } label: {
                         Text("Validate")
