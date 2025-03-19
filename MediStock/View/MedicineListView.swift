@@ -13,9 +13,8 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color(.gray)
+            Color("BackgroundColor_LD")
                 .ignoresSafeArea()
-                .opacity(0.4)
             
             VStack {
                 List {
@@ -52,13 +51,13 @@ struct MedicineListView: View {
                 ZStack {
                     Circle()
                         .frame(height: 60)
+                        .foregroundStyle(Color("ButtonBackgroundColor"))
+                        .opacity(0.9)
                     
                     Image(systemName: "plus")
                         .resizable()
                         .frame(width: 40, height: 40)
                         .foregroundColor(.white)
-                        .accessibilityLabel("Add random medicine")
-                        .accessibilityHint("Adds a random medicine to the current aisle.")
                 }
             }
             .sheet(isPresented: $activeView) {

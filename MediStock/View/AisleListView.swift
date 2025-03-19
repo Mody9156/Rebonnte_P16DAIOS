@@ -12,10 +12,8 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                Color(.gray)
+                Color("BackgroundColor_LD")
                     .ignoresSafeArea()
-                    .opacity(0.4)
-                
                 VStack {
                     List {
                         ForEach(aisles, id: \.self) { aisle in
@@ -38,6 +36,7 @@ struct AisleListView: View {
                         }
                     }
                 }
+                .listStyle(.insetGrouped)
                 .navigationTitle("Aisle")
                 
                 Button(action: {
@@ -46,7 +45,7 @@ struct AisleListView: View {
                     ZStack {
                         Circle()
                             .frame(height: 60)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color("ButtonBackgroundColor"))
                             .opacity(0.9)
                         Image(systemName: "plus")
                             .resizable()
