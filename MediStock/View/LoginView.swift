@@ -19,12 +19,12 @@ struct LoginView: View {
                 Text("Sign In")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.green)
+                    .foregroundColor(Color("LightDark"))
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("BackgroundGreen"))
+                        .fill(.green)
                         .opacity(0.8)
                         .frame(height: 200)
                     
@@ -125,11 +125,11 @@ struct ButtonForUpdateSession: View {
                 Text(text)
                     .foregroundColor(text == "Login" ? .white : .green)
                     .frame(maxWidth: .infinity, minHeight: 50)
-                    .background(text == "Login" ? Color("BackgroundGreen") : Color.clear) 
+                    .background(text == "Login" ? Color("LightDark") : Color.clear)
                     .cornerRadius(12)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color("BackgroundGreen"), lineWidth: 2)
+                            .stroke(Color("LightDark"), lineWidth: 2)
                     )
             }
             .padding(.horizontal, 20)
