@@ -31,7 +31,7 @@ struct LoginView: View {
                     VStack(spacing: 15) {
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Email")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("TexfieldDarkMode"))
                                 .padding(.leading, 10)
                             
                             TextField("Email", text: $email)
@@ -41,7 +41,7 @@ struct LoginView: View {
                         
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Password")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("TexfieldDarkMode"))
                                 .padding(.leading, 10)
                             
                             SecureField("Password", text: $password)
@@ -62,13 +62,13 @@ struct LoginView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 20, height: 20)
-                                .foregroundStyle(.white)
-                                .border(.green, width: 2)
+                                .foregroundStyle(toggleDarkMode ? .white:Color("2E5E4E"))
+                                .border(Color("LightDark"), width: 2)
                                 .cornerRadius(2)
                             
                             if selectedAutoConnection {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(Color("LightDark"))
                                     .font(.system(size: 14, weight: .bold))
                             }
                         }
