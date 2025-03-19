@@ -9,28 +9,25 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            Color("BackgroundColor_LD")
-                .ignoresSafeArea()
-            
+       
             VStack(alignment: .leading) {
-                
                 
                 Text("Sign In")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(Color("LightDark"))
+                    .foregroundColor(Color("TextColor"))
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("LightDark"))
+                        .fill(Color("TextColor"))
                         .opacity(0.8)
                         .frame(height: 200)
                     
                     VStack(spacing: 15) {
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Email")
-                                .foregroundColor(Color("TexfieldDarkMode"))
+                                .foregroundColor(Color("RectangleDarkMode"))
                                 .padding(.leading, 10)
                             
                             TextField("Email", text: $email)
@@ -40,7 +37,7 @@ struct LoginView: View {
                         
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Password")
-                                .foregroundColor(Color("TexfieldDarkMode"))
+                                .foregroundColor(Color("RectangleDarkMode"))
                                 .padding(.leading, 10)
                             
                             SecureField("Password", text: $password)
@@ -61,13 +58,13 @@ struct LoginView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 20, height: 20)
-                                .foregroundStyle(toggleDarkMode ? .white:Color("2E5E4E"))
-                                .border(Color("LightDark"), width: 2)
+                                .foregroundStyle(Color("RectangleDarkMode"))
+                                .border(Color("TextColor"), width: 2)
                                 .cornerRadius(2)
                             
                             if selectedAutoConnection {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(Color("LightDark"))
+                                    .foregroundColor(Color("TextColor"))
                                     .font(.system(size: 14, weight: .bold))
                             }
                         }
@@ -75,7 +72,7 @@ struct LoginView: View {
                     .padding(.leading)
                     
                     Text("Stay signed in")
-                        .foregroundColor(Color("LightDark"))
+                        .foregroundColor(Color("TextColor"))
                         .font(.system(size: 16))
                         .padding(.leading, 5)
                 }
@@ -122,13 +119,13 @@ struct ButtonForUpdateSession: View {
                 }
             }) {
                 Text(text)
-                    .foregroundColor(text == "Login" ? Color("TexfieldDarkMode") : Color("LightDark"))
+                    .foregroundColor(text == "Login" ? Color("RectangleDarkMode") : Color("TextColor"))
                     .frame(maxWidth: .infinity, minHeight: 50)
-                    .background(text == "Login" ? Color("LightDark") : Color.clear)
+                    .background(text == "Login" ? Color("TextColor") : Color.clear)
                     .cornerRadius(12)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color("LightDark"), lineWidth: 2)
+                            .stroke(Color("TextColor"), lineWidth: 2)
                     )
             }
             .padding(.horizontal, 20)

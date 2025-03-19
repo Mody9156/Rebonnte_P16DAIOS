@@ -23,8 +23,7 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
-            Color("BackgroundColor_LD")
-                .ignoresSafeArea()
+            
             ScrollView {
                 ZStack {
                     ScrollView {
