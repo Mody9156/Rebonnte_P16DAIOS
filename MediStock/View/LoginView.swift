@@ -13,41 +13,43 @@ struct LoginView: View {
                 .ignoresSafeArea()
                 .opacity(0.2)
             
-            VStack {
+            Text("Sign In")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .center) // Centrer le titre
+            
+            
+            VStack(alignment: .leading) {
                 ZStack{
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.blue)
-                        .frame(height: 250)
-                        .foregroundColor(Color("BackgroundButton"))
+                        .fill(Color("BackgroundButton"))
                         .opacity(0.8)
+                        .frame(height: 250)
                     
-                    VStack{
-                        VStack(alignment: .leading){
+                    VStack(spacing:15){
+                        VStack(alignment: .leading, spacing: 5){
                             Text("Email")
                                 .foregroundColor(.white)
-                                .padding(.leading)
+                                .padding(.leading, 10)
                             
                             TextField("Email", text: $email)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .cornerRadius(3)
-                                .padding()
+                                .padding(.horizontal, 10)
                         }
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 5){
                             Text("Password")
                                 .foregroundColor(.white)
-                                .padding(.leading)
+                                .padding(.leading, 10)
                             
                             SecureField("Password", text: $password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .cornerRadius(3)
-                                .padding()
-                            
-                         
+                                .padding(.horizontal, 10)
                         }
                     }
+                    .padding()
                 }
-                .padding()
                 
                 HStack {
                     Button {
@@ -59,22 +61,25 @@ struct LoginView: View {
                     } label: {
                         ZStack {
                             Rectangle()
-                                .frame(width: 20,height: 20)
+                                .frame(width: 20, height: 20)
                                 .foregroundStyle(.white)
-                                .border(.blue,width: 2)
+                                .border(.blue, width: 2)
                                 .cornerRadius(2)
                             
                             if selectedAutoConnection {
                                 Image(systemName: "xmark")
-                                    .fontWeight(.bold)
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: 14, weight: .bold))
                             }
                         }
                     }
-                    .padding(.leading)
                     
                     Text("Stay signed in")
-                        .foregroundStyle(.blue)
+                        .foregroundColor(.blue)
+                        .font(.system(size: 16))
+                        .padding(.leading, 5)
                 }
+                .padding(.horizontal,20)
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
                 ButtonForUpdateSession(email: $email, password: $password, text:"Sign Up")
@@ -106,7 +111,7 @@ struct ButtonForUpdateSession: View {
     var text : String
     
     var body: some View {
-        VStack{
+        VStack(spacing: 8){
             Button(action: {
                 Task{
                     if text == "Login" {
@@ -121,23 +126,22 @@ struct ButtonForUpdateSession: View {
             }) {
                 Text(text)
                     .foregroundColor(text == "Login" ? .white : .blue)
-                    .opacity(text == "Login" ? 1 : 0.6)
-                    .frame(width: 100, height: 40)
+                    .frame(maxWidth: .infinity, minHeight: 50)
                     .background(text == "Login" ? Color("BackgroundButton") : Color.clear)
                     .cornerRadius(12)
-                    .overlay {
+                    .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color("BackgroundButton"), lineWidth: 2)
-                    }
+                            .stroke(Color("BackgroundButton"), lineWidth: 2))
             }
-            .padding()
+            .padding(.horizontal, 20)
             
             if visible && !authViewModel.messageError.isEmpty{
                 Text(authViewModel.messageError)
                     .foregroundColor(.red)
                     .font(.headline)
-                    .opacity(visible ? 1 :0)
-                    .animation(.easeOut(duration: 0.7),value:visible)
+                    .padding(.horizontal, 10)
+                    .transition(.opacity)
+                    .animation(.easeOut(duration: 0.7), value: visible)
             }
         }
         .onChange(of: authViewModel.messageError){ newValue in
