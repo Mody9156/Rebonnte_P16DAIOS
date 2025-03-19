@@ -214,6 +214,7 @@
 		23F6C9962D2FBCF700CD0A42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4F8F687E2D8ACCB700486DBF /* Json */,
 				230CD2012D4BBB59009C3F05 /* Extension */,
 				23FD05582D43C2650089DB5C /* Protocols */,
 				237E0A852D3008C800EEC056 /* Service */,
@@ -298,6 +299,13 @@
 				2301D67C2D4A44850032B5DF /* MockMedicineService.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		4F8F687E2D8ACCB700486DBF /* Json */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Json;
 			sourceTree = "<group>";
 		};
 		4FBE3D062D84087B00D1BC23 /* Recovered References */ = {
