@@ -9,7 +9,7 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            Color(.gray)
+            Color("BackgroundColor_LD")
                 .ignoresSafeArea()
                 .opacity(0.2)
             
@@ -24,7 +24,7 @@ struct LoginView: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.green)
+                        .fill(Color("LightDark"))
                         .opacity(0.8)
                         .frame(height: 200)
                     
@@ -76,7 +76,7 @@ struct LoginView: View {
                     .padding(.leading)
                     
                     Text("Stay signed in")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color("LightDark"))
                         .font(.system(size: 16))
                         .padding(.leading, 5)
                 }
@@ -123,7 +123,7 @@ struct ButtonForUpdateSession: View {
                 }
             }) {
                 Text(text)
-                    .foregroundColor(text == "Login" ? .white : .green)
+                    .foregroundColor(text == "Login" ? .white : Color("LightDark"))
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .background(text == "Login" ? Color("LightDark") : Color.clear)
                     .cornerRadius(12)
