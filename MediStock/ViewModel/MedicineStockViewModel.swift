@@ -21,7 +21,7 @@ class MedicineStockViewModel: ObservableObject {
     @Published var history: [HistoryEntry] = []
     @Published var medicineRepository = MedicineRepository()
     @Published var messageEror : String? = nil
-    
+    @Published var medicineListed: []
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
     }
