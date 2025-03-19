@@ -9,5 +9,5 @@ import Foundation
 
 
 struct MedicationsData : Codable {
-    var medicaments : [String:[String]]
+    var medications : [String:[String]]
 }
