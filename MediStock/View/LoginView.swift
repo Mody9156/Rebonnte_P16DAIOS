@@ -123,7 +123,7 @@ struct ButtonForUpdateSession: View {
                 }
             }) {
                 Text(text)
-                    .foregroundColor(text == "Login" ? .white : Color("LightDark"))
+                    .foregroundColor(text == "Login" ? Color("TexfieldDarkMode") : Color("LightDark"))
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .background(text == "Login" ? Color("LightDark") : Color.clear)
                     .cornerRadius(12)
