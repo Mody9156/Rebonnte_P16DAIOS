@@ -107,6 +107,11 @@ struct AddANewAisle: View {
                 .padding()
             }
         }
+        .onAppear{
+            if let index = medicineStockViewModel.medicineListed?.medicaments.keys.sorted().first {
+                selectedCategory = index
+            }
+        }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
     
