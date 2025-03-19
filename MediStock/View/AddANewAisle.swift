@@ -37,9 +37,9 @@ struct AddANewAisle: View {
                         .shadow(radius: 3)
                         .frame(height: 160)
                         .overlay(
-                            Picker("Aisles", selection: $nameInAisle) {
-                                ForEach(SelectedAisles.allCases) { aisle in
-                                    Text(aisle.rawValue.capitalized)
+                            Picker("Aisles", selection: $selectedCategory) {
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? []) { aisle in
+                                    Text(aisle)
                                 }
                             }
                                 .pickerStyle(.wheel)
