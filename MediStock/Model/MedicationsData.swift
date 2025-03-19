@@ -7,7 +7,6 @@
 
 import Foundation
 
-
-struct MedicationsData : Codable {
+struct MedicationsData : Codable, Hashable {
     var medications : [String:[String]]
 }

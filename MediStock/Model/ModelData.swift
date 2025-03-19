@@ -13,20 +13,20 @@ struct ModelData {
         
         guard let file = Bundle.main.url(forResource: nomFichier, withExtension: nil)
         else {
-            fatalError("Impossible de trouver \(nomFichier) dans le main bundle.")
+            nil
         }
         
         do {
             data = try Data(contentsOf: file)
         } catch {
-            fatalError("Impossible de charger \(nomFichier) depuis le main bundle:\n\(error)")
+            nil
         }
         
         do {
             let decoder = JSONDecoder()
             return try decoder.decode(T.self, from: data)
         } catch {
-            fatalError("Impossible de parser \(nomFichier) en tant que \(T.self):\n\(error)")
+            nil
         }
     }
 }
