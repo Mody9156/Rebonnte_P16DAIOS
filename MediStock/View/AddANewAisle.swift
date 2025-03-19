@@ -38,7 +38,7 @@ struct AddANewAisle: View {
                         .frame(height: 160)
                         .overlay(
                             Picker("Aisles", selection: $selectedCategory) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? []) { aisle in
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [], id:\.self) { aisle in
                                     Text(aisle)
                                 }
                             }
