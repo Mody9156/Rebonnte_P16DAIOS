@@ -71,8 +71,8 @@ struct AddANewAisle: View {
                         .shadow(radius: 3)
                         .frame(height: 160)
                         .overlay(
-                            Picker("Medicine", selection: $nameInAisleMEdicine) {
-                                ForEach(getOptionMedical()) { name in
+                            Picker("Medicine", selection: $selectedMedicines) {
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments[selectedCategory] ?? [], id:\.self) { name in
                                     Text(name.displayName)
                                 }
                             }
