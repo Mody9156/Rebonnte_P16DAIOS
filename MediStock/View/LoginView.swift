@@ -60,8 +60,8 @@ struct LoginView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 20,height: 20)
-                                .foregroundStyle(.white)
-                                .border(.white,width: 2)
+                                .foregroundStyle(.blue)
+                                .border(.blue,width: 2)
                             
                             if selectedAutoConnection {
                                 Image(systemName: "xmark")
