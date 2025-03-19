@@ -60,8 +60,9 @@ struct LoginView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 20,height: 20)
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(.white)
                                 .border(.blue,width: 2)
+                                .cornerRadius(2)
                             
                             if selectedAutoConnection {
                                 Image(systemName: "xmark")
@@ -72,7 +73,7 @@ struct LoginView: View {
                     .padding(.leading)
                     
                     Text("Stay signed in")
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.blue)
                 }
                 
                 ButtonForUpdateSession(email: $email, password: $password, text:"Login")
