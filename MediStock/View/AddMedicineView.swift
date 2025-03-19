@@ -53,8 +53,8 @@ struct AddMedicineView: View {
                         .frame(height: 160)
                         .overlay(
                             Picker("Medicine", selection: $nameInAisleMEdicine) {
-                                ForEach(getOptionMedical()) { name in
-                                    Text(name.displayName)
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id: \.self) { name in
+                                    Text(name)
                                 }
                             }
                                 .pickerStyle(.wheel)
@@ -85,6 +85,7 @@ struct AddMedicineView: View {
                     }
                     
                 }
+               
                 .padding()
             }
         }
