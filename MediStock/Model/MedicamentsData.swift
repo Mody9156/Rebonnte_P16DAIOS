@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+
+struct MedicamentsData : Codable {
+    var medicaments : [String:[String]]
+}
