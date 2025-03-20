@@ -48,7 +48,6 @@ struct AuthenticationManagerView: View {
                 }
             }
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Authentication Manager")
         .accessibilityHint("Determines if the user is logged in or needs to log in.")

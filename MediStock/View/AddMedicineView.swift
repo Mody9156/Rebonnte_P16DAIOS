@@ -87,7 +87,6 @@ struct AddMedicineView: View {
                 .padding()
             }
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 
     

@@ -111,7 +111,6 @@ struct AddANewAisle: View {
                 nameInAisle = index
             }
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

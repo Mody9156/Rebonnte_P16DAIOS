@@ -83,7 +83,6 @@ struct LoginView: View {
             }
             .padding()
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

@@ -67,7 +67,6 @@ struct AisleListView: View {
         .onAppear {
             medicineStockViewModel.observeAisles()
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .accessibilityElement(children: .contain)
     }
 }

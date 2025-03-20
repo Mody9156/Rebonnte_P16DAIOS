@@ -78,7 +78,6 @@ struct MedicineDetailView: View {
                                 }
                             }
                         }
-                        .preferredColorScheme(toggleDarkMode ? .dark : .light)
                         .accessibilityElement(children: .contain)
                         .accessibilityLabel("Medicine Details")
                         .accessibilityHint("Displays detailed information about the medicine.")

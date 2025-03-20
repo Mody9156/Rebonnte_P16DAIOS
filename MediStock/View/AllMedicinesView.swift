@@ -60,7 +60,6 @@ struct AllMedicinesView: View {
                 }
             }
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .onAppear {
             Task{
                 medicineStockViewModel.observeMedicines()

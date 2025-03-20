@@ -65,7 +65,6 @@ struct HistoryView: View {
                 .padding(.top)
             }
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

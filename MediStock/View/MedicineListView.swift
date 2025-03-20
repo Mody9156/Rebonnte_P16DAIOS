@@ -74,7 +74,6 @@ struct MedicineListView: View {
             
             .padding()
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
     }
 }
 

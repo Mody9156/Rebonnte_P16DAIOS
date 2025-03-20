@@ -12,6 +12,8 @@ struct Profile: View {
     @AppStorage("email") var identity : String = "email"
     var use : User
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
+    @AppStorage("hasUserChosenMode") private var hasUserChosenMode : Bool = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
@@ -51,11 +53,10 @@ struct Profile: View {
                         .padding()
                     }
                     
-                    Toggle(toggleDarkMode ? "Light":"Dark", isOn: $toggleDarkMode)
+                    Toggle(toggleDarkMode ? "Light Mode":"Dark Mode", isOn: $toggleDarkMode)
                         .padding()
-                        
-
                 }
+                
                 Spacer()
                 
                 Button(action:{
@@ -76,7 +77,7 @@ struct Profile: View {
             .padding()
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
-        .animation(.easeInOut, value: toggleDarkMode) 
+        .animation(.easeInOut, value: toggleDarkMode)
     }
 }
 
