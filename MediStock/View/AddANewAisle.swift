@@ -32,7 +32,7 @@ struct AddANewAisle: View {
                                             Text(aisle)
                                         }
                                     }
-                                        .pickerStyle(.wheel)
+                                        .pickerStyle(.navigationLink)
                                         .frame(height: 150))
                             
                        
@@ -51,19 +51,11 @@ struct AddANewAisle: View {
                             Text("\(Int(stock))")
                         
                     
-                    HStack {
-                        Text("Medicines : \(nameInAisleMEdicine)")
-                        NavigationLink(">") {
+                        NavigationLink("Chose Medicine") {
                             NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
-                        }
-                        .frame(width: 50,height: 50)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(style: StrokeStyle(lineWidth: 3))
-                        }
+                       
                     }
-                            
-                        
+
                 
                     Button {
                         Task{
