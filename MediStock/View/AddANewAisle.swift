@@ -30,6 +30,7 @@ struct AddANewAisle: View {
                                 }
                             }
                             .pickerStyle(.navigationLink)
+                            Text("Fruit sélectionné : \(nameInAisle)")
                         } header : { Text("Aisle")}
                         
                         Section {

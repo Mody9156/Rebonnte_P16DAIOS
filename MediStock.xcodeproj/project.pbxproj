@@ -45,6 +45,7 @@
 		4FC3E2AA2D89C2FB0066841D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2A92D89C2FB0066841D /* HistoryView.swift */; };
 		4FC3E2AC2D89DC810066841D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2AB2D89DC810066841D /* LoadingView.swift */; };
 		4FCFC79C2D8C5913006835D2 /* NewMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */; };
+		4FCFC79E2D8C8339006835D2 /* NewAislesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCFC79D2D8C8339006835D2 /* NewAislesView.swift */; };
 		4FD6DADE2D661571006E7FE5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90414E2D53666100BA4690 /* FirebaseAnalytics */; };
 		4FD6DADF2D661571006E7FE5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041502D53666100BA4690 /* FirebaseAnalyticsSwift */; };
 		4FD6DAE02D661571006E7FE5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041522D53666100BA4690 /* FirebaseAuth */; };
@@ -112,6 +113,7 @@
 		4FC3E2A92D89C2FB0066841D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		4FC3E2AB2D89DC810066841D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicineView.swift; sourceTree = "<group>"; };
+		4FCFC79D2D8C8339006835D2 /* NewAislesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAislesView.swift; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				4FC3E2A92D89C2FB0066841D /* HistoryView.swift */,
 				4FC3E2AB2D89DC810066841D /* LoadingView.swift */,
 				4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */,
+				4FCFC79D2D8C8339006835D2 /* NewAislesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				230CD2092D4C0E06009C3F05 /* FirestoreQueryAdapter.swift in Sources */,
 				53E0D8EA2C066F7A00DE1134 /* HistoryEntry.swift in Sources */,
 				53E0D8E02C0609B900DE1134 /* SessionStore.swift in Sources */,
+				4FCFC79E2D8C8339006835D2 /* NewAislesView.swift in Sources */,
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */,
 				237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */,
