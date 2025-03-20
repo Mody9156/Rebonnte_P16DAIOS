@@ -11,10 +11,16 @@ struct NewMedicineView: View {
     @Binding  var nameInAisle : String 
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
     }
 }
 
 #Preview {
-    NewMedicineView()
+    struct PreviewWrapper: View {
+        @State var nameInAisle : String = "Test"
+        var body: some View {
+            NewMedicineView(nameInAisle: $nameInAisle)
+        }
+    }
+    PreviewWrapper()
 }
