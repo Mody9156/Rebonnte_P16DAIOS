@@ -53,7 +53,7 @@ struct AddANewAisle: View {
                                 Text("100")
                         }
                       
-                        } header : {Text("Stock:\(stock)")}
+                        } header : {Text("Stock:\(Int(stock))")}
                         
                         
                         NavigationLink("Medicine") {
