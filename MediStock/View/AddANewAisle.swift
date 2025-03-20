@@ -11,7 +11,7 @@ struct AddANewAisle: View {
     @State private var stock : Double = 0.0
     @State private var stockSelected : Int = 0
     @State var nameInAisle : String = ""
-    @State var nameInAisleMEdicine : String = ""
+    @State var nameInAisleMedicine : String = ""
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
@@ -21,51 +21,46 @@ struct AddANewAisle: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20){
-                    
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.white)
-                                .shadow(radius: 3)
-                                .frame(height: 160)
-                                .overlay(
-                                    Picker("Aisles", selection: $nameInAisle) {
-                                        ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
-                                            Text(aisle)
-                                        }
-                                    }
-                                        .pickerStyle(.navigationLink)
-                                        .frame(height: 150))
-                            
-                       
-                            Slider(
-                                value: $stock,
-                                in: 0...100,
-                                step: 1
-                            ) {
-                                Text("Speed")
-                            } minimumValueLabel: {
-                                Text("0")
-                            } maximumValueLabel: {
-                                Text("100")
+                    List {
+                        Section {
+                            Picker("Aisles", selection: $nameInAisle) {
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
+                                    Text(aisle)
+                                }
                             }
-                            
-                            Text("\(Int(stock))")
+                            .pickerStyle(.navigationLink)
+                        } header : { Text("Aisle")}
                         
+                        Section {
+                            Text("\(Int(stock))")
+                        Slider(
+                            value: $stock,
+                            in: 0...100,
+                            step: 1
+                        ) {
+                            Text("Speed")
+                        } minimumValueLabel: {
+                            Text("0")
+                        } maximumValueLabel: {
+                            Text("100")
+                        }
+                        } header : {Text("Stock")}
+                        
+                        Section{
+                            NavigationLink(nameInAisleMedicine.isEmpty ? "Chose Medicine" : nameInAisleMedicine ) {
+                                NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
+                            }
+                        } header : {Text("Medicine")}
                     
-                        NavigationLink("Chose Medicine") {
-                            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
-                       
-                    }
-
-                
+                }
+                    
                     Button {
                         Task{
-                            try? await medicineStockViewModel.insertAisle(name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle)
+                            try? await medicineStockViewModel.insertAisle(name: nameInAisleMedicine, stock: (Int(stock)), aisle: nameInAisle)
                             if medicineStockViewModel.messageEror == nil {
                                 dismiss()
                             }
                         }
-                        
-                        
                         
                     } label: {
                         Text("Validate")
@@ -82,10 +77,8 @@ struct AddANewAisle: View {
                             .foregroundStyle(.red)
                             .font(.headline)
                     }
-                    
                 }
                 .padding()
-                
             }
             .onAppear{
                 if let index = medicineStockViewModel.medicineListed?.medicaments.keys.sorted().first {

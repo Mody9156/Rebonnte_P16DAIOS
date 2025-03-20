@@ -11,27 +11,32 @@ struct NewMedicineView: View {
     @Binding var nameInAisle : String
     @Binding var nameInAisleMEdicine : String
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
+    @State var search : String = ""
     
     var body: some View {
         
         VStack {
-            Text("Medicine")
-                .font(.title2)
-                .fontWeight(.bold)
-                .padding()
-        }
-        
-        List {
-            Picker("Medicine", selection: $nameInAisleMEdicine) {
-                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id:\.self) { name in
-                    Text(name)
+            List {
+                Picker("Medicine", selection: $nameInAisleMEdicine) {
+                    ForEach(filter,id:\.self) { name in
+                        Text(name)
+                    }
                 }
+                .pickerStyle(.inline)
             }
-            .pickerStyle(.inline)
+
         }
-          
+        .navigationTitle("Medicine")
+        .searchable(text: $search)
+  }
+    
+    var filter : [String] {
+        if search.isEmpty {
+            return medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? []
+        }else{
+            return medicineStockViewModel.medicineListed?.medicaments[nameInAisle]?.filter{$0.contains(search)} ?? []
+        }
     }
-   
 }
 
 #Preview {
