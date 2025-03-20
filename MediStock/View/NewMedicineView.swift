@@ -20,6 +20,7 @@ struct NewMedicineView: View {
                 .fontWeight(.bold)
                 .padding()
         }
+        
         RoundedRectangle(cornerRadius: 10)
             .fill(.white)
             .shadow(radius: 3)
