@@ -18,7 +18,7 @@ struct NewMedicineView: View {
         VStack {
             List {
                 Picker("Medicine", selection: $nameInAisleMEdicine) {
-                    ForEach(filter,id:\.self) { name in
+                    ForEach(filter.sorted(),id:\.self) { name in
                         Text(name)
                     }
                 }

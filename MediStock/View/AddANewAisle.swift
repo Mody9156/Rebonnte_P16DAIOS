@@ -16,7 +16,8 @@ struct AddANewAisle: View {
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
-    
+    @State private var isLoading = false
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -32,18 +33,17 @@ struct AddANewAisle: View {
                         } header : { Text("Aisle")}
                         
                         Section {
-                            Text("\(Int(stock))")
-                        Slider(
-                            value: $stock,
-                            in: 0...100,
-                            step: 1
-                        ) {
-                            Text("Speed")
-                        } minimumValueLabel: {
-                            Text("0")
-                        } maximumValueLabel: {
-                            Text("100")
-                        }
+                           
+                            HStack {
+                                Text("\(Int(stock))")
+                                Spacer()
+                                Slider(
+                                    value: $stock,
+                                    in: 0...100,
+                                    step: 1
+                                )
+                                .frame(width: 150)
+                            }
                         } header : {Text("Stock")}
                         
                         Section{
@@ -55,21 +55,32 @@ struct AddANewAisle: View {
                 }
                     
                     Button {
+                        isLoading = true
                         Task{
-                            try? await medicineStockViewModel.insertAisle(name: nameInAisleMedicine, stock: (Int(stock)), aisle: nameInAisle)
-                            if medicineStockViewModel.messageEror == nil {
-                                dismiss()
-                            }
+                                try? await medicineStockViewModel.insertAisle(name: nameInAisleMedicine, stock: (Int(stock)), aisle: nameInAisle)
+                                if medicineStockViewModel.messageEror == nil {
+                                    dismiss()
+                                }
+                           
+                            isLoading = false
                         }
                         
                     } label: {
-                        Text("Validate")
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 40)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .shadow(radius: 3)
-                            .padding(.top, 10)
+                        
+                        if isLoading {
+                            ProgressView()
+                                .frame(width: 200,height: 40)
+                        }else{
+                            Text("Validate")
+                                .foregroundColor(.white)
+                                .frame(width: 200, height: 40)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .shadow(radius: 3)
+                                .padding(.top, 10)
+                        }
+                        
+                      
                     }
                     
                     if let message = medicineStockViewModel.messageEror {
@@ -81,8 +92,8 @@ struct AddANewAisle: View {
                 .padding()
             }
             .onAppear{
-                if let index = medicineStockViewModel.medicineListed?.medicaments.keys.sorted().first {
-                    nameInAisle = index
+                if let aisles = medicineStockViewModel.medicineListed?.medicaments.keys.sorted(),!aisles.isEmpty   {
+                    nameInAisle = aisles.first!
                 }
             }
         }
