@@ -10,8 +10,8 @@ import SwiftUI
 struct AddANewAisle: View {
     @State private var stock : Double = 0.0
     @State private var stockSelected : Int = 0
-    @State private var nameInAisle : String = ""
-    @State private var nameInAisleMEdicine : String = ""
+    @State var nameInAisle : String = ""
+    @State var nameInAisleMEdicine : String = ""
     @Environment(\.dismiss) var dismiss
     @State var isEditing : Bool = false
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
@@ -59,23 +59,27 @@ struct AddANewAisle: View {
                     } maximumValueLabel: {
                         Text("100")
                     }
+                    Text(nameInAisleMEdicine)
                     
-                    Text("Medicine")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding()
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .shadow(radius: 3)
-                        .frame(height: 160)
-                        .overlay(
-                            Picker("Medicine", selection: $nameInAisleMEdicine) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id:\.self) { name in
-                                    Text(name)
-                                }
-                            }
-                                .pickerStyle(.wheel)
-                                .frame(height: 150))
+                    NavigationLink("Medicine") {
+                        NewMedicineView(nameInAisle: $nameInAisleMEdicine, nameInAisleMEdicine: $nameInAisleMEdicine)
+                    }
+//                    Text("Medicine")
+//                        .font(.title2)
+//                        .fontWeight(.bold)
+//                        .padding()
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .fill(.white)
+//                        .shadow(radius: 3)
+//                        .frame(height: 160)
+//                        .overlay(
+//                            Picker("Medicine", selection: $nameInAisleMEdicine) {
+//                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id:\.self) { name in
+//                                    Text(name)
+//                                }
+//                            }
+//                                .pickerStyle(.wheel)
+//                                .frame(height: 150))
                     Button {
                         Task{
                             try? await medicineStockViewModel.insertAisle(name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle)

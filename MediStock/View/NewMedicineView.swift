@@ -9,18 +9,33 @@ import SwiftUI
 
 struct NewMedicineView: View {
     @Binding  var nameInAisle : String 
+    @Binding  var nameInAisleMEdicine : String
+    @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
 
     var body: some View {
-        Text("Hello, World!")
-    }
-}
-
-#Preview {
-    struct PreviewWrapper: View {
-        @State var nameInAisle : String = "Test"
-        var body: some View {
-            NewMedicineView(nameInAisle: $nameInAisle)
+        
+        VStack {
+            Text("Medicine")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding()
         }
+        RoundedRectangle(cornerRadius: 10)
+            .fill(.white)
+            .shadow(radius: 3)
+            .frame(height: 160)
+            .overlay(
+                Picker("Medicine", selection: $nameInAisleMEdicine) {
+                    ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id:\.self) { name in
+                        Text(name)
+                    }
+                }
+                    .pickerStyle(.wheel)
+                    .frame(height: 150))
     }
-    PreviewWrapper()
 }
+//
+//#Preview {
+//    NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $medicineStockViewModel)
+//
+//}
