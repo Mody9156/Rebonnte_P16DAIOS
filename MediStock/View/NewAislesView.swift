@@ -10,9 +10,10 @@ import SwiftUI
 struct NewAislesView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @Binding var nameInAisle: String
+    @State var search : String = ""
     
     var body: some View {
-        VStack {
+        List {
             Picker("Aisles", selection: $nameInAisle) {
                 ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
                     Text(aisle)
@@ -21,6 +22,7 @@ struct NewAislesView: View {
             .pickerStyle(.inline)
         }
     }
+    
 }
 
 #Preview {
@@ -32,5 +34,4 @@ struct NewAislesView: View {
         }
     }
     return NEwPreviewWrapper()
-    
 }
