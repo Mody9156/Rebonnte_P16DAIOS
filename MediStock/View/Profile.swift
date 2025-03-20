@@ -61,7 +61,6 @@ struct Profile: View {
                         }
                     ))
                     .padding()
-                    
                 }
                 
                 Spacer()
@@ -83,7 +82,7 @@ struct Profile: View {
             }
             .padding()
         }
-        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : colorScheme)
+//        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : colorScheme)
         .animation(.easeInOut, value: toggleDarkMode)
     }
 }
