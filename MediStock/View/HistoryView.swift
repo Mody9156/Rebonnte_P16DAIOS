@@ -13,21 +13,6 @@ struct HistoryView: View {
 
     var body: some View {
         ZStack {
-            Color(.gray)
-                .ignoresSafeArea()
-                .opacity(0.1)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 1, y: 1)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
-            
-            Circle()
-                .frame(height: 200)
-                .position(x: 400, y: 800)
-                .foregroundStyle(.blue)
-                .opacity(0.4)
             
             ScrollView {
                 VStack (alignment:.leading){
@@ -35,17 +20,17 @@ struct HistoryView: View {
                         HStack {
                             VStack {
                                 Image(systemName: "circle.fill")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(Color("TextColor"))
                                 HStack {
                                     Divider()
                                         .frame(width:4)
-                                        .overlay(.blue)
+                                        .overlay(Color("TextColor"))
                                 }
                             }
                             
                             VStack(alignment: .leading,spacing: 5) {
                                 Text(entry.action)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(Color("TextColor"))
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .accessibilityLabel("Action: \(entry.action)")

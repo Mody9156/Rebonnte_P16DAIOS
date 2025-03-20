@@ -51,13 +51,13 @@ struct MedicineListView: View {
                 ZStack {
                     Circle()
                         .frame(height: 60)
-                        .foregroundStyle(Color("ButtonBackgroundColor"))
+                        .foregroundStyle(Color("TextColor"))
                         .opacity(0.9)
                     
                     Image(systemName: "plus")
                         .resizable()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("RectangleDarkMode"))
                 }
             }
             .sheet(isPresented: $activeView) {

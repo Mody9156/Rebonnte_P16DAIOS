@@ -52,12 +52,12 @@ struct MedicineDetailView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(height: 45)
-                                        .foregroundColor(Color("ButtonBackgroundColor"))
+                                        .foregroundColor(Color("TextColor"))
                                         .cornerRadius(15)
                                     
                                     Text("Validate")
                                         .font(.title3)
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(Color("RectangleDarkMode"))
                                 }
                             }
                             
@@ -131,7 +131,7 @@ extension MedicineDetailView {
                 minimumValueLabel: { Text("0")},
                 maximumValueLabel: { Text("100")}
             )
-            .tint(Color("ButtonBackgroundColor"))
+            .tint(Color("TextColor"))
             .onChange(of: stockValue) { newValue in
                 let stockValue = Int(stockValue)
                 self.medicine.stock = Int(Double(stockValue))
@@ -227,12 +227,12 @@ extension MedicineDetailView {
                     ZStack {
                         Rectangle()
                             .frame(height: 45)
-                            .foregroundColor(Color("ButtonBackgroundColor"))
+                            .foregroundColor(Color("RectangleDarkMode"))
                             .cornerRadius(15)
                         
                         Text("Show history")
                             .font(.title3)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color("RectangleDarkMode"))
                     }
                 }
                 .sheet(isPresented: $isPresented) {
