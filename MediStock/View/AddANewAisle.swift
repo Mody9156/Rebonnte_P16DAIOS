@@ -20,10 +20,7 @@ struct AddANewAisle: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.gray)
-                    .ignoresSafeArea()
-                    .opacity(0.4)
-                
+            
                 ScrollView {
                     VStack(spacing: 20){
                         Text("Aisle")
