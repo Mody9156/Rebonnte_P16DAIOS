@@ -12,17 +12,33 @@ struct NewAislesView: View {
     @Binding var nameInAisle: String
     @State var search : String = ""
     
-    var body: some View {
-        List {
-            Picker("Aisles", selection: $nameInAisle) {
-                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
-                    Text(aisle)
-                }
-            }
-            .pickerStyle(.inline)
-        }
+    var filter : [String] {
+        let medicine = medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? []
+        return search.isEmpty  ? medicine : medicine.filter{$0.localizedStandardContains(search)}
     }
     
+//    var grouped : [String:[String]] {
+//        Dictionary(grouping: filter) { element in
+//            String(element.prefix(1))
+//        }
+//    }
+
+    var body: some View {
+        VStack {
+            List {
+                Picker("Aisles", selection: $nameInAisle) {
+                    ForEach(filter,id: \.self) { aisle in
+                       Text(aisle)
+                    }
+                }
+                .pickerStyle(.inline)
+            }
+        }
+        .searchable(text: $search)
+    }
+    
+   
+  
 }
 
 #Preview {
