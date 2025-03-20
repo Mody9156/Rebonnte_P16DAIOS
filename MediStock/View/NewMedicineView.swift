@@ -31,7 +31,7 @@ struct NewMedicineView: View {
                         Text(name)
                     }
                 }
-                    .pickerStyle(.wheel)
+                    .pickerStyle(.inline)
                     .frame(height: 150))
     }
 }
