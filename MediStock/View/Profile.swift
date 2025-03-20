@@ -53,8 +53,15 @@ struct Profile: View {
                         .padding()
                     }
                     
-                    Toggle(toggleDarkMode ? "Light Mode":"Dark Mode", isOn: $toggleDarkMode)
-                        .padding()
+                    Toggle(toggleDarkMode ? "Light Mode":"Dark Mode", isOn: Binding(
+                        get: { toggleDarkMode },
+                        set:{newValue in
+                            toggleDarkMode = newValue
+                            hasUserChosenMode = true
+                        }
+                    ))
+                    .padding()
+                    
                 }
                 
                 Spacer()
@@ -76,7 +83,7 @@ struct Profile: View {
             }
             .padding()
         }
-        .preferredColorScheme(toggleDarkMode ? .dark : .light)
+        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : colorScheme)
         .animation(.easeInOut, value: toggleDarkMode)
     }
 }
