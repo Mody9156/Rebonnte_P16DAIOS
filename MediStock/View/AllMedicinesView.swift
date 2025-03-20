@@ -41,28 +41,24 @@ struct AllMedicinesView: View {
                     // Liste des Médicaments
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
-                Button(action: {
-                    activeView = true
-                }) {
-                    ZStack {
-                        Circle()
-                            .frame(height: 60)
-                            .foregroundStyle(.blue)
-                            .opacity(0.9)
-                        Image(systemName: "plus")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.white)
-                    }
-                }
-                .sheet(isPresented: $activeView) {
-                    AddANewAisle()
-                }
-                .padding()
-                .accessibilityLabel("Aisle List")
-                .accessibilityHint("Displays a list of aisles containing medicines.")
+
             }
             .navigationTitle("All Medicines")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                                    Button(action: {
+                                        activeView = true
+                                    }) {
+                                        Image(systemName: "plus")
+                                    }
+                                    .sheet(isPresented: $activeView) {
+                                        AddANewAisle()
+                                    }
+                                    .padding()
+                                    .accessibilityLabel("Aisle List")
+                                    .accessibilityHint("Displays a list of aisles containing medicines.")
+                }
+            }
         }
         .preferredColorScheme(toggleDarkMode ? .dark : .light)
         .onAppear {
@@ -96,12 +92,12 @@ struct FilterButton: View {
         } label: {
             ZStack {
                 Rectangle()
-                    .fill(filterSection ? Color.blue.opacity(0.7) : Color.black.opacity(0.8))
+                    .fill(filterSection ? Color.blue.opacity(0.7) : Color("TextColor"))
                     .frame(width: 80, height: 44)
                     .cornerRadius(12)
                 
                 Text("\(index)")
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color("RectangleDarkMode"))
             }
         }
         .accessibilityLabel("Sort by \(index)")

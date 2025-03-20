@@ -45,12 +45,12 @@ struct AisleListView: View {
                     ZStack {
                         Circle()
                             .frame(height: 60)
-                            .foregroundStyle(Color("TextColor"))
+                            .foregroundStyle(.blue)
                             .opacity(0.9)
                         Image(systemName: "plus")
                             .resizable()
                             .frame(width: 40, height: 40)
-                            .foregroundColor(Color("RectangleDarkMode"))
+                            .foregroundColor(.white)
                     }
                 }
                 .sheet(isPresented: $activeView) {

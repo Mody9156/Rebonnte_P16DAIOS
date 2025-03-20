@@ -15,15 +15,14 @@ struct Profile: View {
     
     var body: some View {
         ZStack {
-            Color(.gray)
+            Color
+                .gray.opacity(0.1)
                 .ignoresSafeArea()
-                .opacity(0.5)
-          
             
             VStack (alignment: .center){
                 VStack{
                     Text("Account")
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(Color("TextColor"))
                         .font(.largeTitle)
                         .fontWeight(.heavy)
                         .padding()
@@ -31,22 +30,21 @@ struct Profile: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 12)
                             .frame(height: 110)
-                            .foregroundStyle(.blue)
-                            .opacity(0.4)
+                            .foregroundStyle(Color("TextColor"))
                         
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
                                 .frame(width: 101,height: 101)
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(Color("RectangleDarkMode"))
                             
                             Spacer()
                             
                             VStack(alignment: .leading){
                                 Text("Email Adresse: ")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(Color("RectangleDarkMode"))
                                 Text(identity)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(Color("RectangleDarkMode"))
                             }
                             Spacer()
                         }
