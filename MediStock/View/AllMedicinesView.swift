@@ -41,22 +41,22 @@ struct AllMedicinesView: View {
                     // Liste des Médicaments
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
-
+                
             }
             .navigationTitle("All Medicines")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                                    Button(action: {
-                                        activeView = true
-                                    }) {
-                                        Image(systemName: "plus")
-                                    }
-                                    .sheet(isPresented: $activeView) {
-                                        AddANewAisle()
-                                    }
-                                    .padding()
-                                    .accessibilityLabel("Aisle List")
-                                    .accessibilityHint("Displays a list of aisles containing medicines.")
+                    Button(action: {
+                        activeView = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                    .sheet(isPresented: $activeView) {
+                        AddANewAisle()
+                    }
+                    .padding()
+                    .accessibilityLabel("Aisle List")
+                    .accessibilityHint("Displays a list of aisles containing medicines.")
                 }
             }
         }
