@@ -17,28 +17,28 @@ struct AddANewAisle: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
     @State private var isLoading = false
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20){
                     List {
                         Section {
-//                            Picker("Aisles", selection: $nameInAisle) {
-//                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
-//                                    Text(aisle)
-//                                }
-//                            }
-//                            .pickerStyle(.navigationLink)
-                            
-                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
-                                NewAislesView(nameInAisle: $nameInAisle)
+                            Picker("Aisles", selection: $nameInAisle) {
+                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
+                                    Text(aisle)
+                                }
                             }
-
+                            .pickerStyle(.navigationLink)
+                            
+                            //                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
+                            //                                NewAislesView(nameInAisle: $nameInAisle)
+                            //                            }
+                            
                         } header : { Text("Aisle")}
                         
                         Section {
-                           
+                            
                             HStack {
                                 Text("\(Int(stock))")
                                 Spacer()
@@ -56,17 +56,17 @@ struct AddANewAisle: View {
                                 NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
                             }
                         } header : {Text("Medicine")}
-                    
-                }
+                        
+                    }
                     
                     Button {
                         isLoading = true
                         Task{
-                                try? await medicineStockViewModel.insertAisle(name: nameInAisleMedicine, stock: (Int(stock)), aisle: nameInAisle)
-                                if medicineStockViewModel.messageEror == nil {
-                                    dismiss()
-                                }
-                           
+                            try? await medicineStockViewModel.insertAisle(name: nameInAisleMedicine, stock: (Int(stock)), aisle: nameInAisle)
+                            if medicineStockViewModel.messageEror == nil {
+                                dismiss()
+                            }
+                            
                             isLoading = false
                         }
                         
@@ -85,7 +85,7 @@ struct AddANewAisle: View {
                                 .padding(.top, 10)
                         }
                         
-                      
+                        
                     }
                     
                     if let message = medicineStockViewModel.messageEror {
@@ -95,11 +95,6 @@ struct AddANewAisle: View {
                     }
                 }
                 .padding()
-            }
-            .onAppear{
-                if let aisles = medicineStockViewModel.medicineListed?.medicaments.keys.sorted(),!aisles.isEmpty   {
-                    nameInAisle = aisles.first!
-                }
             }
         }
     }
