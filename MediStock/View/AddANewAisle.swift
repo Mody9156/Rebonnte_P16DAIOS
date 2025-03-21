@@ -24,13 +24,17 @@ struct AddANewAisle: View {
                 VStack(spacing: 20){
                     List {
                         Section {
-                            Picker("Aisles", selection: $nameInAisle) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
-                                    Text(aisle)
-                                }
+//                            Picker("Aisles", selection: $nameInAisle) {
+//                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
+//                                    Text(aisle)
+//                                }
+//                            }
+//                            .pickerStyle(.navigationLink)
+                            
+                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
+                                NewAislesView(nameInAisle: $nameInAisle)
                             }
-                            .pickerStyle(.navigationLink)
-                            Text("Fruit sélectionné : \(nameInAisle)")
+
                         } header : { Text("Aisle")}
                         
                         Section {
