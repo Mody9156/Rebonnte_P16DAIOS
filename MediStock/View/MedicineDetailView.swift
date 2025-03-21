@@ -124,11 +124,11 @@ extension MedicineDetailView {
             
             Slider(
                 value: $stockValue,
-                in: 0...100,
+                in: 0...500,
                 step: 1,
                 label: { Text("Stock") },
                 minimumValueLabel: { Text("0")},
-                maximumValueLabel: { Text("100")}
+                maximumValueLabel: { Text("500")}
             )
             .tint(Color("TextColor"))
             .onChange(of: stockValue) { newValue in

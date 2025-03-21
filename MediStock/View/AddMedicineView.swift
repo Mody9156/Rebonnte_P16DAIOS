@@ -33,14 +33,14 @@ struct AddMedicineView: View {
                     
                     Slider(
                         value: $stock,
-                        in: 0...100,
+                        in: 0...500,
                         step: 1
                     ) {
                         Text("Speed")
                     } minimumValueLabel: {
                         Text("0")
                     } maximumValueLabel: {
-                        Text("100")
+                        Text("500")
                     }
                     
                     Text("Medicine")

@@ -21,7 +21,6 @@ struct AddANewAisle: View {
             ZStack {
                 
                 VStack(spacing: 20) {
-                    
                     Text("Add a New Aisle")
                         .font(.title)
                         .bold()
@@ -32,13 +31,21 @@ struct AddANewAisle: View {
                             .font(.headline)
                             .foregroundColor(.blue)
                         
-                        NavigationLink(nameInAisle.isEmpty ? "Choose Aisle" : nameInAisle) {
+                        NavigationLink {
                             NewAislesView(nameInAisle: $nameInAisle)
+                        } label: {
+                            HStack {
+                                Text(nameInAisle.isEmpty ? "Choose Aisle" : nameInAisle)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
+
                     }
                     .padding(.horizontal)
                     
