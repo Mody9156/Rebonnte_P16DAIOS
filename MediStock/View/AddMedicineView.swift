@@ -23,6 +23,7 @@ struct AddMedicineView: View {
             ZStack {
                 ScrollView {
                     VStack(spacing: 20){
+                            
                         VStack(alignment: .center, spacing: 8) {
                             Text("Stock")
                                 .font(.headline)
@@ -44,24 +45,7 @@ struct AddMedicineView: View {
                             }
                         }
                         .padding(.horizontal)
-                        //                    
-                        //                    Text("Medicine")
-                        //                        .font(.title2)
-                        //                        .fontWeight(.bold)
-                        //                        .padding()
-                        //                    RoundedRectangle(cornerRadius: 10)
-                        //                        .fill(.white)
-                        //                        .shadow(radius: 3)
-                        //                        .frame(height: 160)
-                        //                        .overlay(
-                        //                            Picker("Medicine", selection: $nameInAisleMEdicine) {
-                        //                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id: \.self) { name in
-                        //                                    Text(name)
-                        //                                }
-                        //                            }
-                        //                                .pickerStyle(.wheel)
-                        //                                .frame(height: 150))
-                        //                    
+                   
                         VStack(alignment: .center, spacing: 8) {
                             Text("Medicine")
                                 .font(.headline)
@@ -110,6 +94,7 @@ struct AddMedicineView: View {
                         }
                         
                     }
+                    .navigationTitle("New Medicine")
                     .padding()
                 }
             }
