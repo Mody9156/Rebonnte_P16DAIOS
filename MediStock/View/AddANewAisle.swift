@@ -22,15 +22,20 @@ struct AddANewAisle: View {
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Aisle")
+                            .font(.title2)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color("TextColor"))
+                            .accessibilityLabel("Stock Label")
                         
                         NavigationLink {
                             NewAislesView(nameInAisle: $nameInAisle)
                         } label: {
                             HStack {
                                 Text(nameInAisle.isEmpty ? "Choose Aisle" : nameInAisle)
+                                    .foregroundStyle(.gray)
+                                
                                 Spacer()
+                                
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
@@ -39,16 +44,17 @@ struct AddANewAisle: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(10)
                         }
-                        
                     }
                     .padding(.horizontal)
                     
                     Divider()
                     
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading) {
                         Text("Stock")
+                            .font(.title2)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color("TextColor"))
+                            .accessibilityLabel("Stock Label")
                         
                         HStack {
                             UpdateStock(nameIcone: "minus", stock: $stock)
@@ -64,6 +70,7 @@ struct AddANewAisle: View {
                             
                             UpdateStock(nameIcone: "plus", stock: $stock)
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
                     .padding(.horizontal)
                     
@@ -71,14 +78,18 @@ struct AddANewAisle: View {
                     
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Medicine")
+                            .font(.title2)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color("TextColor"))
+                            .accessibilityLabel("Stock Label")
                         
                         NavigationLink {
                             NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
                         } label: {
                             HStack {
                                 Text(nameInAisleMedicine.isEmpty ? "Choose Medicine" : nameInAisleMedicine)
+                                    .foregroundStyle(.gray)
+                                
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
@@ -88,7 +99,6 @@ struct AddANewAisle: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(10)
                         }
-                        
                     }
                     .padding(.horizontal)
                     
@@ -161,7 +171,8 @@ struct UpdateStock: View {
                 .scaledToFit()
                 .frame(width: 20, height: 20)
                 .padding()
-                .background(nameIcone == "plus" ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
+                .background(Color.blue)
+                .foregroundStyle(.white)
                 .clipShape(Circle())
                 .shadow(radius: 2)
         }
