@@ -5,41 +5,42 @@
 //  Created by Modibo on 21/03/2025.
 //
 
-import Testing
 @testable import pack
 
-struct MockAuthViewModel : AuthViewModelProtocol{
+class MockAuthViewModel : AuthViewModelProtocol{
     
-    var isAuthenticated: Bool
+    var isAuthenticated: Bool = false
     
-    var messageError: String
+    var messageError: String = ""
     
     var onLoginSucceed: (() -> Void)?
     
-    func login(email: String, password: String) async throws {
-        <#code#>
+     func login(email: String, password: String) async throws {
+        if email == "joe@gmail.com" && password == "123456" {
+            isAuthenticated = true
+        }else {
+            throw ShowErrors.loginThrowError
+        }
     }
     
     func createdNewUser(email: String, password: String) async throws {
-        <#code#>
+        
     }
     
     func changeStatus() async throws {
-        <#code#>
+        
     }
     
     func disableAutoLogin() async throws {
-        <#code#>
+        
     }
     
     func saveAutoConnectionState(_ state: Bool) {
-        <#code#>
+        
     }
     
     func autotoLogin() async throws {
-        <#code#>
+        
     }
-    
-
 
 }
