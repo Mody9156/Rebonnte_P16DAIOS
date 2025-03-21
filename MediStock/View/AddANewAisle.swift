@@ -61,6 +61,7 @@ struct AddANewAisle: View {
                     } header : {Text("Medicine")}
                 }
                     .scrollContentBackground(.hidden)
+                    .background(Color(.systemGray6))
                     
                     Button {
                         isLoading = true
