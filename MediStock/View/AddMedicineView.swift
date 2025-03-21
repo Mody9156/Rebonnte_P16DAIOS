@@ -26,8 +26,10 @@ struct AddMedicineView: View {
                             
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Stock")
+                                .font(.title2)
                                 .font(.headline)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(Color("TextColor"))
+                                .accessibilityLabel("Stock Label")
                             
                             HStack {
                                 UpdateStock(nameIcone: "minus", stock: $stock)
@@ -43,13 +45,16 @@ struct AddMedicineView: View {
                                 
                                 UpdateStock(nameIcone: "plus", stock: $stock)
                             }
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                         .padding(.horizontal)
                    
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Medicine")
+                                .font(.title2)
                                 .font(.headline)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(Color("TextColor"))
+                                .accessibilityLabel("Stock Label")
                             
                             NavigationLink {
                                 NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
