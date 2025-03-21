@@ -121,22 +121,47 @@ extension MedicineDetailView {
                 .font(.headline)
                 .foregroundStyle(Color("TextColor"))
                 .accessibilityLabel("Stock Label")
+//            
+//            
+//            
+//            
+//            
+//            Slider(
+//                value: $stockValue,
+//                in: 0...500,
+//                step: 1,
+//                label: { Text("Stock") },
+//                minimumValueLabel: { Text("0")},
+//                maximumValueLabel: { Text("500")}
+//            )
+//            .tint(Color("TextColor"))
+//            .onChange(of: stockValue) { newValue in
+//                let stockValue = Int(stockValue)
+//                self.medicine.stock = Int(Double(stockValue))
+//            }
+//            .accessibilityLabel("Stock Slider")
+//            .accessibilityHint("Adjust the stock quantity with a slider.")
+           
+                HStack {
+                    UpdateStock(nameIcone: "minus", stock: $stockValue)
+                    
+                    TextField("Enter stock", value: $stockValue, format: .number)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 80)
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .onChange(of: stockValue) { newValue in
+                            let stockValue = Int(stockValue)
+                            self.medicine.stock = Int(Double(stockValue))
+                        }
+                        .accessibilityLabel("Stock Slider")
+                        .accessibilityHint("Adjust the stock quantity with a slider.")
+                    
+                    UpdateStock(nameIcone: "plus", stock: $stockValue)
+                }
+        
             
-            Slider(
-                value: $stockValue,
-                in: 0...500,
-                step: 1,
-                label: { Text("Stock") },
-                minimumValueLabel: { Text("0")},
-                maximumValueLabel: { Text("500")}
-            )
-            .tint(Color("TextColor"))
-            .onChange(of: stockValue) { newValue in
-                let stockValue = Int(stockValue)
-                self.medicine.stock = Int(Double(stockValue))
-            }
-            .accessibilityLabel("Stock Slider")
-            .accessibilityHint("Adjust the stock quantity with a slider.")
+            
         }
         .onAppear{
             stockValue = Double(medicine.stock)

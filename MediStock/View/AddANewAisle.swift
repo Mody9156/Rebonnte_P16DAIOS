@@ -20,7 +20,7 @@ struct AddANewAisle: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20) {
-                    VStack(alignment: .center, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Aisle")
                             .font(.headline)
                             .foregroundColor(.blue)
@@ -45,7 +45,7 @@ struct AddANewAisle: View {
                     
                     Divider()
                     
-                    VStack(alignment: .center, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Stock")
                             .font(.headline)
                             .foregroundColor(.blue)
@@ -69,7 +69,7 @@ struct AddANewAisle: View {
                     
                     Divider()
                     
-                    VStack(alignment: .center, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Medicine")
                             .font(.headline)
                             .foregroundColor(.blue)
