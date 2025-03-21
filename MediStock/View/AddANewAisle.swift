@@ -18,109 +18,112 @@ struct AddANewAisle: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
+            ZStack {
                 
-                Text("Add a New Aisle")
-                    .font(.title)
-                    .bold()
-                    .padding(.top, 20)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Aisle")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-
-                    NavigationLink(nameInAisle.isEmpty ? "Choose Aisle" : nameInAisle) {
-                        NewAislesView(nameInAisle: $nameInAisle)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                }
-                .padding(.horizontal)
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Stock")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-
-                    HStack {
-                        UpdateStock(nameIcone: "minus", stock: $stock)
-
-                        TextField("Enter stock", value: $stock, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                            .multilineTextAlignment(.center)
-                            .keyboardType(.numberPad)
-                            .onChange(of: stock) { newValue in
-                                stock = min(max(0, newValue), 100)
-                            }
-
-                        UpdateStock(nameIcone: "plus", stock: $stock)
-                    }
-                }
-                .padding(.horizontal)
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Medicine")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-
-                    NavigationLink(nameInAisleMedicine.isEmpty ? "Choose Medicine" : nameInAisleMedicine) {
-                        NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                }
-                .padding(.horizontal)
-
-                Spacer()
-
-                Button {
-                    isLoading = true
-                    Task {
-                        try? await medicineStockViewModel.insertAisle(
-                            name: nameInAisleMedicine,
-                            stock: Int(stock),
-                            aisle: nameInAisle
-                        )
-                        if medicineStockViewModel.messageEror == nil {
-                            dismiss()
+                VStack(spacing: 20) {
+                    
+                    Text("Add a New Aisle")
+                        .font(.title)
+                        .bold()
+                        .padding(.top, 20)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Aisle")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                        
+                        NavigationLink(nameInAisle.isEmpty ? "Choose Aisle" : nameInAisle) {
+                            NewAislesView(nameInAisle: $nameInAisle)
                         }
-                        isLoading = false
-                    }
-                } label: {
-                    if isLoading {
-                        ProgressView()
-                            .frame(width: 200, height: 40)
-                    } else {
-                        Text("Validate")
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 40)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .shadow(radius: 3)
-                    }
-                }
-                .padding(.top, 10)
-
-                if let message = medicineStockViewModel.messageEror {
-                    Text(message)
-                        .foregroundColor(.red)
-                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
+                    
+                    Divider()
+                    
+                    VStack(alignment: .center, spacing: 8) {
+                        Text("Stock")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                        
+                        HStack {
+                            UpdateStock(nameIcone: "minus", stock: $stock)
+                            
+                            TextField("Enter stock", value: $stock, format: .number)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(width: 80)
+                                .multilineTextAlignment(.center)
+                                .keyboardType(.numberPad)
+                                .onChange(of: stock) { newValue in
+                                    stock = min(max(0, newValue), 500)
+                                }
+                            
+                            UpdateStock(nameIcone: "plus", stock: $stock)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    Divider()
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Medicine")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                        
+                        NavigationLink(nameInAisleMedicine.isEmpty ? "Choose Medicine" : nameInAisleMedicine) {
+                            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    Button {
+                        isLoading = true
+                        Task {
+                            try? await medicineStockViewModel.insertAisle(
+                                name: nameInAisleMedicine,
+                                stock: Int(stock),
+                                aisle: nameInAisle
+                            )
+                            if medicineStockViewModel.messageEror == nil {
+                                dismiss()
+                            }
+                            isLoading = false
+                        }
+                    } label: {
+                        if isLoading {
+                            ProgressView()
+                                .frame(width: 200, height: 40)
+                        } else {
+                            Text("Validate")
+                                .foregroundColor(.white)
+                                .frame(width: 200, height: 40)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .shadow(radius: 3)
+                        }
+                    }
+                    .padding(.top, 10)
+                    
+                    if let message = medicineStockViewModel.messageEror {
+                        Text(message)
+                            .foregroundColor(.red)
+                            .font(.headline)
+                            .padding()
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .padding()
             }
-            .padding()
         }
     }
 }
@@ -136,7 +139,7 @@ struct UpdateStock: View {
     var body: some View {
         Button {
             withAnimation {
-                if nameIcone == "plus", stock < 100 {
+                if nameIcone == "plus", stock < 500 {
                     stock += 1
                 } else if nameIcone == "minus", stock > 0 {
                     stock -= 1
