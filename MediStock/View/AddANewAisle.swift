@@ -42,7 +42,7 @@ struct AddANewAisle: View {
 //                                )
 //                                .frame(width: 150)
 //                            }
-                            ExtractedView()
+                            UpdateStock()
                             
                         } header : {Text("Stock")}
                         
@@ -96,7 +96,8 @@ struct AddANewAisle: View {
     AddANewAisle()
 }
 
-struct ExtractedView: View {
+struct UpdateStock: View {
+    
     var body: some View {
         Button("") {
             
