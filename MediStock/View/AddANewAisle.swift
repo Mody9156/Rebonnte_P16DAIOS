@@ -97,10 +97,17 @@ struct AddANewAisle: View {
 }
 
 struct UpdateStock: View {
+    var nameIcone : String
     
     var body: some View {
-        Button("") {
-            
+        
+        VStack {
+            Button {
+                
+            } label: {
+                Text(nameIcone)
+            }
         }
+
     }
 }
