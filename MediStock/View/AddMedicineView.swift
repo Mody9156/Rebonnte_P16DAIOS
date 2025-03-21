@@ -31,17 +31,27 @@ struct AddMedicineView: View {
                         .fontWeight(.bold)
                         .padding()
                     
-                    Slider(
-                        value: $stock,
-                        in: 0...500,
-                        step: 1
-                    ) {
-                        Text("Speed")
-                    } minimumValueLabel: {
-                        Text("0")
-                    } maximumValueLabel: {
-                        Text("500")
+                    VStack(alignment: .center, spacing: 8) {
+                        Text("Stock")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                        
+                        HStack {
+                            UpdateStock(nameIcone: "minus", stock: $stock)
+                            
+                            TextField("Enter stock", value: $stock, format: .number)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(width: 80)
+                                .multilineTextAlignment(.center)
+                                .keyboardType(.numberPad)
+                                .onChange(of: stock) { newValue in
+                                    stock = min(max(0, newValue), 500)
+                                }
+                            
+                            UpdateStock(nameIcone: "plus", stock: $stock)
+                        }
                     }
+                    .padding(.horizontal)
                     
                     Text("Medicine")
                         .font(.title2)

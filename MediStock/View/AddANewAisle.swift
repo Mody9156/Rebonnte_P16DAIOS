@@ -15,12 +15,12 @@ struct AddANewAisle: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("toggleDarkMode") private var toggleDarkMode: Bool = false
     @State private var isLoading = false
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20) {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .center, spacing: 8) {
                         Text("Aisle")
                             .font(.headline)
                             .foregroundColor(.blue)
@@ -39,7 +39,7 @@ struct AddANewAisle: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(10)
                         }
-
+                        
                     }
                     .padding(.horizontal)
                     
@@ -69,11 +69,11 @@ struct AddANewAisle: View {
                     
                     Divider()
                     
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .center, spacing: 8) {
                         Text("Medicine")
                             .font(.headline)
                             .foregroundColor(.blue)
-                    
+                        
                         NavigationLink {
                             NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
                         } label: {
@@ -88,7 +88,7 @@ struct AddANewAisle: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(10)
                         }
-
+                        
                     }
                     .padding(.horizontal)
                     
@@ -145,7 +145,7 @@ struct AddANewAisle: View {
 struct UpdateStock: View {
     var nameIcone: String
     @Binding var stock: Double
-
+    
     var body: some View {
         Button {
             withAnimation {
