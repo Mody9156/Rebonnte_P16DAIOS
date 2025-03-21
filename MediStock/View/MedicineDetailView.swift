@@ -229,7 +229,7 @@ extension MedicineDetailView {
                     ZStack {
                         Rectangle()
                             .frame(height: 45)
-                            .foregroundColor(Color("RectangleDarkMode"))
+                            .foregroundColor(.blue)
                             .cornerRadius(15)
                         
                         Text("Show history")

@@ -122,12 +122,15 @@ struct AddANewAisle: View {
                             ProgressView()
                                 .frame(width: 200, height: 40)
                         } else {
-                            Text("Validate")
-                                .foregroundColor(.white)
-                                .frame(width: 200, height: 40)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .shadow(radius: 3)
+                            ZStack {
+                                Rectangle()
+                                    .frame(height: 45)
+                                    .foregroundColor(.blue)
+                                    .cornerRadius(15)
+                                Text("Validate")
+                                    .font(.title3)
+                                    .foregroundStyle(Color("RectangleDarkMode"))
+                            }
                         }
                     }
                     .padding(.top, 10)
