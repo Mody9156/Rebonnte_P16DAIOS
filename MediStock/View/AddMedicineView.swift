@@ -19,85 +19,99 @@ struct AddMedicineView: View {
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
 
     var body: some View {
-        ZStack {
-            
-            ScrollView {
-                VStack(spacing: 20){
-                    Text("Stock: \((Int(stock)))")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding()
-                    
-                    VStack(alignment: .center, spacing: 8) {
-                        Text("Stock")
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                        
-                        HStack {
-                            UpdateStock(nameIcone: "minus", stock: $stock)
+        NavigationStack {
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 20){
+                        VStack(alignment: .center, spacing: 8) {
+                            Text("Stock")
+                                .font(.headline)
+                                .foregroundColor(.blue)
                             
-                            TextField("Enter stock", value: $stock, format: .number)
-                                .textFieldStyle(.roundedBorder)
-                                .frame(width: 80)
-                                .multilineTextAlignment(.center)
-                                .keyboardType(.numberPad)
-                                .onChange(of: stock) { newValue in
-                                    stock = min(max(0, newValue), 500)
-                                }
-                            
-                            UpdateStock(nameIcone: "plus", stock: $stock)
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    VStack(alignment: .center, spacing: 8) {
-                        Text("Medicine")
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                        
-                        NavigationLink {
-                            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
-                        } label: {
                             HStack {
-                                Text(nameInAisleMEdicine.isEmpty ? "Choose Medicine" : nameInAisleMEdicine)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
+                                UpdateStock(nameIcone: "minus", stock: $stock)
+                                
+                                TextField("Enter stock", value: $stock, format: .number)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(width: 80)
+                                    .multilineTextAlignment(.center)
+                                    .keyboardType(.numberPad)
+                                    .onChange(of: stock) { newValue in
+                                        stock = min(max(0, newValue), 500)
+                                    }
+                                
+                                UpdateStock(nameIcone: "plus", stock: $stock)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
+                        }
+                        .padding(.horizontal)
+                        //                    
+                        //                    Text("Medicine")
+                        //                        .font(.title2)
+                        //                        .fontWeight(.bold)
+                        //                        .padding()
+                        //                    RoundedRectangle(cornerRadius: 10)
+                        //                        .fill(.white)
+                        //                        .shadow(radius: 3)
+                        //                        .frame(height: 160)
+                        //                        .overlay(
+                        //                            Picker("Medicine", selection: $nameInAisleMEdicine) {
+                        //                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id: \.self) { name in
+                        //                                    Text(name)
+                        //                                }
+                        //                            }
+                        //                                .pickerStyle(.wheel)
+                        //                                .frame(height: 150))
+                        //                    
+                        VStack(alignment: .center, spacing: 8) {
+                            Text("Medicine")
+                                .font(.headline)
+                                .foregroundColor(.blue)
+                            
+                            NavigationLink {
+                                NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
+                            } label: {
+                                HStack {
+                                    Text(nameInAisleMEdicine.isEmpty ? "Choose Medicine" : nameInAisleMEdicine)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                            }
+                            
+                        }
+                        .padding(.horizontal)
+                        
+                        Button {
+                            Task{
+                                try? await medicineStockViewModel.insertMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle, stockValue: Int(stock))
+                                if medicineStockViewModel.messageEror == nil {
+                                    dismiss()
+                                }
+                            }
+                            
+                        } label: {
+                            Text("Validate")
+                                .foregroundColor(.white)
+                                .frame(width: 200, height: 40)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .shadow(radius: 3)
+                                .padding(.top, 10)
+                        }
+                        
+                        if let message = medicineStockViewModel.messageEror {
+                            Text(message)
+                                .foregroundStyle(.red)
+                                .font(.headline)
                         }
                         
                     }
-                    .padding(.horizontal)
-                    Button {
-                        Task{
-                            try? await medicineStockViewModel.insertMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle, stockValue: Int(stock))
-                            if medicineStockViewModel.messageEror == nil {
-                                dismiss()
-                            }
-                        }
-                        
-                    } label: {
-                        Text("Validate")
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 40)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .shadow(radius: 3)
-                            .padding(.top, 10)
-                    }
-                    
-                    if let message = medicineStockViewModel.messageEror {
-                        Text(message)
-                            .foregroundStyle(.red)
-                            .font(.headline)
-                    }
-                    
+                    .padding()
                 }
-                .padding()
             }
         }
     }
