@@ -52,7 +52,7 @@ struct MedicineDetailView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(height: 45)
-                                        .foregroundColor(Color("TextColor"))
+                                        .foregroundColor(.blue)
                                         .cornerRadius(15)
                                     
                                     Text("Validate")
@@ -63,7 +63,7 @@ struct MedicineDetailView: View {
                             
                             // History Section
                             historySection
-                            
+                        
                         }
                         .padding(.horizontal)
                         .padding(.vertical)

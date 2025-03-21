@@ -32,8 +32,15 @@ struct AllMedicinesView: View {
                     VStack  {
                         HStack{
                             
-                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSectionStock)
-                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.stock.rawValue, isSelected: $isSelected, filterSection: $filterSection)
+                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.name.rawValue, isSelected: $isSelected, filterSection: $filterSectionStock){
+                                filterSectionStock.toggle()
+                                filterSection = false
+                            }
+                            
+                            FilterButton(medicineStockViewModel: medicineStockViewModel, index:MedicineStockViewModel.FilterOption.stock.rawValue, isSelected: $isSelected, filterSection: $filterSection){
+                                filterSectionStock = false
+                                filterSection.toggle()
+                            }
                         }
                     }
                     .padding()
@@ -78,14 +85,14 @@ struct FilterButton: View {
     var index : String
     @Binding var isSelected : String
     @Binding var filterSection : Bool
+    var action : () -> Void
     
     var body: some View {
         Button {
             Task{
                 try await medicineStockViewModel.trieElements(option: MedicineStockViewModel.FilterOption(rawValue: filterSection ? index : MedicineStockViewModel.FilterOption.noFilter.rawValue) ?? .noFilter)
             }
-            
-            filterSection.toggle()
+            action()
             isSelected = index
             
         } label: {

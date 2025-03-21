@@ -17,9 +17,6 @@ struct Profile: View {
     
     var body: some View {
         ZStack {
-            Color
-                .gray.opacity(0.1)
-                .ignoresSafeArea()
             
             VStack (alignment: .center){
                 VStack{
@@ -32,13 +29,13 @@ struct Profile: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 12)
                             .frame(height: 110)
-                            .foregroundStyle(Color("TextColor"))
+                            .foregroundStyle(.gray)
                         
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
                                 .frame(width: 101,height: 101)
-                                .foregroundStyle(Color("RectangleDarkMode"))
+                                .foregroundStyle(.black)
                             
                             Spacer()
                             
