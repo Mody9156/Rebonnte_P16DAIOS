@@ -94,6 +94,7 @@ struct AddANewAisle: View {
                         Text(message)
                             .foregroundStyle(.red)
                             .font(.headline)
+                            .padding()
                     }
                 }
                 .padding()
@@ -130,6 +131,7 @@ struct UpdateStock: View {
                     .padding()
                     .background(nameIcone == "plus" ? Color.gray.opacity(0.3): Color.red.opacity(0.3))
                     .clipShape(Circle())
+                    .shadow(radius: 2)
             }
             .frame(width: 50,height: 50)
         }
