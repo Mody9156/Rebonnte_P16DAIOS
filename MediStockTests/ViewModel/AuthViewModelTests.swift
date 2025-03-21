@@ -13,12 +13,26 @@ final class AuthViewModelTests {
     @Test func loginWithRighValues() async throws {
         //given
         let mockAuthService =  MockAuthViewModel()
-        let login = AuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
         //when
-         try? await mockAuthService.login(email: "joe@gmail.com", password: "123456")
+        let login = try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
         //Then
-        #expect(mockAuthService.messageError.isEmpty)
+        #expect(authViewModel.messageError.isEmpty)
         #expect(mockAuthService.isAuthenticated)
+        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    }
+    
+    
+    @Test func emailOrPasswordIsInvalid() async throws {
+        //given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //when
+         let login = try? await authViewModel.login(email: "joe@gmail.com", password: "")
+        //Then
+        #expect(mockAuthService.messageError == "Erreur lors de la connection de l'utilisateur")
+//        #expect(login  == ShowErrors.loginThrowError )
+        #expect(!mockAuthService.isAuthenticated)
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
 
