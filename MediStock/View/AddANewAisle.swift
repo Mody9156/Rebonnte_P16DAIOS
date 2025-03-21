@@ -23,39 +23,43 @@ struct AddANewAisle: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20){
-                                      
+                    
+                    Text("Add a New Aisle")
+                        .font(.title)
+                        .bold()
+                        .padding()
+                    
+                    List{
                     Section {
-                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
-                                NewAislesView(nameInAisle: $nameInAisle)
-                            }
-                            
-                        } header : { Text("Aisle")}
-                    
+                        NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
+                            NewAislesView(nameInAisle: $nameInAisle)
+                        }
                         
-                        Section {
-                            HStack {
-                                UpdateStock(nameIcone: "minus", stock: $stock)
-                                TextField("Enter your score", value: $stock, format: .number)
-                                               .textFieldStyle(.roundedBorder)
-                                               .frame(width: 80)
-                                               .multilineTextAlignment(.center)
-                                               .keyboardType(.numberPad)
-                                               .onChange(of: stock) { newValue in
-                                                   stock = min(max(0,newValue),100)
-                                               }
-                                
-                                UpdateStock(nameIcone: "plus", stock: $stock)
-                            }
+                    } header : { Text("Aisle")}
+                    
+                    Section {
+                        HStack {
+                            UpdateStock(nameIcone: "minus", stock: $stock)
+                            TextField("Enter your score", value: $stock, format: .number)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(width: 80)
+                                .multilineTextAlignment(.center)
+                                .keyboardType(.numberPad)
+                                .onChange(of: stock) { newValue in
+                                    stock = min(max(0,newValue),100)
+                                }
                             
-                        } header : {Text("Stock")}
+                            UpdateStock(nameIcone: "plus", stock: $stock)
+                        }
                         
-                        Section{
-                            NavigationLink(nameInAisleMedicine.isEmpty ? "Chose Medicine" : nameInAisleMedicine ) {
-                                NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
-                            }
-                        } header : {Text("Medicine")}
+                    } header : {Text("Stock")}
                     
-                    
+                    Section{
+                        NavigationLink(nameInAisleMedicine.isEmpty ? "Chose Medicine" : nameInAisleMedicine ) {
+                            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
+                        }
+                    } header : {Text("Medicine")}
+                }
                     Button {
                         isLoading = true
                         Task{
@@ -91,15 +95,6 @@ struct AddANewAisle: View {
                 }
                 .padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Add a New Aisle")
-                        .font(.title)
-                        .bold()
-                        .padding()
-                }
-            }
-            
         }
     }
 }
