@@ -17,13 +17,13 @@ struct AddMedicineView: View {
     @ObservedObject var medicineStockViewModel = MedicineStockViewModel()
     @AppStorage("email") var identity : String = "email"
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 ScrollView {
-                    VStack(spacing: 20){
-                            
+                    VStack{
+                        
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Stock")
                                 .font(.title2)
@@ -48,7 +48,9 @@ struct AddMedicineView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                         }
                         .padding(.horizontal)
-                   
+                        
+                        Divider()
+                        
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Medicine")
                                 .font(.title2)
@@ -61,7 +63,10 @@ struct AddMedicineView: View {
                             } label: {
                                 HStack {
                                     Text(nameInAisleMEdicine.isEmpty ? "Choose Medicine" : nameInAisleMEdicine)
+                                        .foregroundColor(.gray)
+                                    
                                     Spacer()
+                                    
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.gray)
                                 }
@@ -73,6 +78,8 @@ struct AddMedicineView: View {
                             
                         }
                         .padding(.horizontal)
+                        
+                        Spacer()
                         
                         Button {
                             Task{
@@ -105,8 +112,6 @@ struct AddMedicineView: View {
             }
         }
     }
-
-    
 }
 
 #Preview {
