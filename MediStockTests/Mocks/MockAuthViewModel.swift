@@ -18,7 +18,9 @@ class MockAuthViewModel : AuthViewModelProtocol{
      func login(email: String, password: String) async throws {
         if email == "joe@gmail.com" && password == "123456" {
             isAuthenticated = true
+            messageError = ""
         }else {
+            messageError = "Erreur lors de la connexion"
             throw ShowErrors.loginThrowError
         }
     }
