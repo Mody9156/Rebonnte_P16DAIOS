@@ -20,9 +20,6 @@ struct AddMedicineView: View {
 
     var body: some View {
         ZStack {
-            Color(.gray)
-                .ignoresSafeArea()
-                .opacity(0.4)
             
             ScrollView {
                 VStack(spacing: 20){
@@ -52,23 +49,29 @@ struct AddMedicineView: View {
                         }
                     }
                     .padding(.horizontal)
-                    
-                    Text("Medicine")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding()
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .shadow(radius: 3)
-                        .frame(height: 160)
-                        .overlay(
-                            Picker("Medicine", selection: $nameInAisleMEdicine) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments[nameInAisle] ?? [],id: \.self) { name in
-                                    Text(name)
-                                }
+
+                    VStack(alignment: .center, spacing: 8) {
+                        Text("Medicine")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                        
+                        NavigationLink {
+                            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
+                        } label: {
+                            HStack {
+                                Text(nameInAisleMEdicine.isEmpty ? "Choose Medicine" : nameInAisleMEdicine)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
                             }
-                                .pickerStyle(.wheel)
-                                .frame(height: 150))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                        }
+                        
+                    }
+                    .padding(.horizontal)
                     Button {
                         Task{
                             try? await medicineStockViewModel.insertMedicineToList(user: identity, name: nameInAisleMEdicine, stock: (Int(stock)), aisle: nameInAisle, stockValue: Int(stock))
