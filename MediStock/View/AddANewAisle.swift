@@ -131,7 +131,7 @@ struct AddANewAisle: View {
                     
                     Spacer()
                 }
-                .navigationTitle("Add a New Aisle")
+                .navigationTitle("New Aisle")
                 .padding()
             }
         }
