@@ -14,7 +14,7 @@ enum ShowErrors : Error {
     case createdNewUserThrowError
 }
 
-class AuthViewModel : ObservableObject {
+class AuthViewModel : ObservableObject, AuthViewModelProtocol {
     @Published var session: SessionStore
     @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
