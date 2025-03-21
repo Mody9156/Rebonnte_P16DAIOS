@@ -8,5 +8,14 @@
 import Foundation
 
 protocol AuthViewModelProtocol {
-    
+       var isAuthenticated: Bool { get set }
+       var messageError: String { get set }
+       var onLoginSucceed: (() -> Void)? { get set }
+
+       func login(email: String, password: String) async throws
+       func createdNewUser(email: String, password: String) async throws
+       func changeStatus() async throws
+       func disableAutoLogin() async throws
+       func saveAutoConnectionState(_ state: Bool)
+       func autotoLogin() async throws
 }
