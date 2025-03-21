@@ -60,6 +60,8 @@ struct AddANewAisle: View {
                         }
                     } header : {Text("Medicine")}
                 }
+                    .scrollContentBackground(.hidden)
+                    
                     Button {
                         isLoading = true
                         Task{
