@@ -142,7 +142,6 @@ struct AddANewAisle: View {
                             .padding()
                     }
                     
-                    Spacer()
                 }
                 .navigationTitle("New Aisle")
                 .padding()

@@ -42,6 +42,7 @@
 		4F8F68822D8ACE6400486DBF /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F68812D8ACE6400486DBF /* Source.json */; };
 		4F8F68842D8AD20300486DBF /* MedicationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F68832D8AD20300486DBF /* MedicationsData.swift */; };
 		4FBE3D082D84716B00D1BC23 /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */; };
+		4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */; };
 		4FC3E2AA2D89C2FB0066841D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2A92D89C2FB0066841D /* HistoryView.swift */; };
 		4FC3E2AC2D89DC810066841D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2AB2D89DC810066841D /* LoadingView.swift */; };
 		4FCFC79C2D8C5913006835D2 /* NewMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */; };
@@ -110,6 +111,7 @@
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
+		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3E2A92D89C2FB0066841D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		4FC3E2AB2D89DC810066841D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicineView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		23A693A12D4821ED00B74332 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -276,9 +279,8 @@
 		23FD05582D43C2650089DB5C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
-				2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */,
-				23026F2D2D4CD5DD00F017B0 /* MedicineProtocol.swift */,
+				4FC3B8332D8DC9B100918ABF /* Model */,
+				4FC3B8322D8DC9A200918ABF /* ViewModel */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -326,6 +328,23 @@
 				4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		4FC3B8322D8DC9A200918ABF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4FC3B8332D8DC9B100918ABF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				23026F2D2D4CD5DD00F017B0 /* MedicineProtocol.swift */,
+				2301D6762D4A3A570032B5DF /* MedicineServiceProtocol.swift */,
+				23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		53E0D88A2C06084700DE1134 = {
@@ -485,6 +504,7 @@
 				2301D67B2D4A444C0032B5DF /* MedicineRepositoryTests.swift in Sources */,
 				2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
+				4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

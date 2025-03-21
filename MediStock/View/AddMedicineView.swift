@@ -20,17 +20,17 @@ struct AddMedicineView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                ScrollView {
                     VStack{
-                        
+                     
                         VStack(alignment: .leading) {
+                            
                             Text("Stock")
                                 .font(.title2)
                                 .font(.headline)
                                 .foregroundStyle(Color("TextColor"))
                                 .accessibilityLabel("Stock Label")
                             
+                           
                             HStack {
                                 UpdateStock(nameIcone: "minus", stock: $stock)
                                 
@@ -50,7 +50,7 @@ struct AddMedicineView: View {
                         .padding()
                         
                         Divider()
-                        
+                                                
                         VStack(alignment: .leading) {
                             Text("Medicine")
                                 .font(.title2)
@@ -107,11 +107,12 @@ struct AddMedicineView: View {
                                 .foregroundStyle(.red)
                                 .font(.headline)
                         }
+                        
                     }
                     .navigationTitle("New Medicine")
                     .padding()
-                }
-            }
+                
+            
         }
     }
 }
