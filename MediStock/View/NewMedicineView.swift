@@ -18,8 +18,8 @@ struct NewMedicineView: View {
         VStack {
             if nameInAisle.isEmpty {
                 Text("Aucun médicament sélectionné. Veuillez choisir une allée.")
+                    .foregroundColor(.gray)
                     .font(.subheadline)
-                    .foregroundColor(.red)
             }
             
             List {

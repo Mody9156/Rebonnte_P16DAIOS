@@ -115,58 +115,37 @@ extension MedicineDetailView {
     }
     
     private var medicineStockSection: some View {
-        VStack(alignment: .leading) {
-            Text(LocalizedStringKey("Stock: \(Int(medicine.stock))"))
-                .font(.title2)
-                .font(.headline)
-                .foregroundStyle(Color("TextColor"))
-                .accessibilityLabel("Stock Label")
-//            
-//            
-//            
-//            
-//            
-//            Slider(
-//                value: $stockValue,
-//                in: 0...500,
-//                step: 1,
-//                label: { Text("Stock") },
-//                minimumValueLabel: { Text("0")},
-//                maximumValueLabel: { Text("500")}
-//            )
-//            .tint(Color("TextColor"))
-//            .onChange(of: stockValue) { newValue in
-//                let stockValue = Int(stockValue)
-//                self.medicine.stock = Int(Double(stockValue))
-//            }
-//            .accessibilityLabel("Stock Slider")
-//            .accessibilityHint("Adjust the stock quantity with a slider.")
-           
-                HStack {
-                    UpdateStock(nameIcone: "minus", stock: $stockValue)
-                    
-                    TextField("Enter stock", value: $stockValue, format: .number)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 80)
-                        .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
-                        .onChange(of: stockValue) { newValue in
-                            let stockValue = Int(stockValue)
-                            self.medicine.stock = Int(Double(stockValue))
-                        }
-                        .accessibilityLabel("Stock Slider")
-                        .accessibilityHint("Adjust the stock quantity with a slider.")
-                    
-                    UpdateStock(nameIcone: "plus", stock: $stockValue)
-                }
         
-            
-            
-        }
-        .onAppear{
-            stockValue = Double(medicine.stock)
-            previewStrock = medicine.stock
-        }
+        VStack(alignment: .leading) {
+                Text(LocalizedStringKey("Stock"))
+                    .font(.title2)
+                    .font(.headline)
+                    .foregroundStyle(Color("TextColor"))
+                    .accessibilityLabel("Stock Label")
+                
+                    HStack {
+                        UpdateStock(nameIcone: "minus", stock: $stockValue)
+                        
+                        TextField("Enter stock", value: $stockValue, format: .number)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 80)
+                            .multilineTextAlignment(.center)
+                            .keyboardType(.numberPad)
+                            .onChange(of: stockValue) { newValue in
+                                let stockValue = Int(stockValue)
+                                self.medicine.stock = Int(Double(stockValue))
+                            }
+                            .accessibilityLabel("Stock Slider")
+                            .accessibilityHint("Adjust the stock quantity with a slider.")
+                        
+                        UpdateStock(nameIcone: "plus", stock: $stockValue)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .onAppear{
+                stockValue = Double(medicine.stock)
+                previewStrock = medicine.stock
+            }
     }
     
     private var medicineAisleSection: some View {
