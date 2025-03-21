@@ -24,7 +24,7 @@ struct AddMedicineView: View {
                 ScrollView {
                     VStack{
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading) {
                             Text("Stock")
                                 .font(.title2)
                                 .font(.headline)
@@ -47,11 +47,11 @@ struct AddMedicineView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
                         }
-                        .padding(.horizontal)
+                        .padding()
                         
                         Divider()
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading) {
                             Text("Medicine")
                                 .font(.title2)
                                 .font(.headline)
@@ -77,7 +77,7 @@ struct AddMedicineView: View {
                             }
                             
                         }
-                        .padding(.horizontal)
+                        .padding()
                         
                         Spacer()
                         
@@ -90,13 +90,16 @@ struct AddMedicineView: View {
                             }
                             
                         } label: {
-                            Text("Validate")
-                                .foregroundColor(.white)
-                                .frame(width: 200, height: 40)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .shadow(radius: 3)
-                                .padding(.top, 10)
+                            ZStack {
+                                Rectangle()
+                                    .frame(height: 45)
+                                    .foregroundColor(.blue)
+                                    .cornerRadius(15)
+                                
+                                Text("Validate")
+                                    .font(.title3)
+                                    .foregroundStyle(Color("RectangleDarkMode"))
+                            }
                         }
                         
                         if let message = medicineStockViewModel.messageEror {
@@ -104,7 +107,6 @@ struct AddMedicineView: View {
                                 .foregroundStyle(.red)
                                 .font(.headline)
                         }
-                        
                     }
                     .navigationTitle("New Medicine")
                     .padding()

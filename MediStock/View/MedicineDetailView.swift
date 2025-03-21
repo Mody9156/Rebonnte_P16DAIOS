@@ -170,7 +170,6 @@ extension MedicineDetailView {
         }
     }
     
-    
     private var historySection: some View {
         VStack(alignment: .leading) {
             Text("Hystory")
