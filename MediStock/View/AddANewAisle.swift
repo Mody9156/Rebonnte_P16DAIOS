@@ -24,31 +24,26 @@ struct AddANewAisle: View {
                 VStack(spacing: 20){
                     List {
                         Section {
-                            Picker("Aisles", selection: $nameInAisle) {
-                                ForEach(medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? [],id: \.self) { aisle in
-                                    Text(aisle)
-                                }
+                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
+                                NewAislesView(nameInAisle: $nameInAisle)
                             }
-                            .pickerStyle(.navigationLink)
-                            
-                            //                            NavigationLink(nameInAisle.isEmpty ? "Chose Medicine" : nameInAisle) {
-                            //                                NewAislesView(nameInAisle: $nameInAisle)
-                            //                            }
                             
                         } header : { Text("Aisle")}
                         
                         Section {
                             
-                            HStack {
-                                Text("\(Int(stock))")
-                                Spacer()
-                                Slider(
-                                    value: $stock,
-                                    in: 0...100,
-                                    step: 1
-                                )
-                                .frame(width: 150)
-                            }
+//                            HStack {
+//                                Text("\(Int(stock))")
+//                                Spacer()
+//                                Slider(
+//                                    value: $stock,
+//                                    in: 0...100,
+//                                    step: 1
+//                                )
+//                                .frame(width: 150)
+//                            }
+                            ExtractedView()
+                            
                         } header : {Text("Stock")}
                         
                         Section{
@@ -56,7 +51,6 @@ struct AddANewAisle: View {
                                 NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
                             }
                         } header : {Text("Medicine")}
-                        
                     }
                     
                     Button {
@@ -84,8 +78,6 @@ struct AddANewAisle: View {
                                 .shadow(radius: 3)
                                 .padding(.top, 10)
                         }
-                        
-                        
                     }
                     
                     if let message = medicineStockViewModel.messageEror {
@@ -102,4 +94,12 @@ struct AddANewAisle: View {
 
 #Preview {
     AddANewAisle()
+}
+
+struct ExtractedView: View {
+    var body: some View {
+        Button("") {
+            
+        }
+    }
 }
