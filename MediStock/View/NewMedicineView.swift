@@ -16,6 +16,12 @@ struct NewMedicineView: View {
     var body: some View {
         
         VStack {
+            if nameInAisle.isEmpty {
+                Text("Aucun médicament sélectionné. Veuillez choisir une allée.")
+                    .font(.subheadline)
+                    .foregroundColor(.red)
+            }
+            
             List {
                 Picker("Medicine", selection: $nameInAisleMEdicine) {
                     ForEach(filter.sorted(),id:\.self) { name in

@@ -79,14 +79,22 @@ struct AddANewAisle: View {
                         Text("Medicine")
                             .font(.headline)
                             .foregroundColor(.blue)
-                        
-                        NavigationLink(nameInAisleMedicine.isEmpty ? "Choose Medicine" : nameInAisleMedicine) {
+                    
+                        NavigationLink {
                             NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMedicine)
+                        } label: {
+                            HStack {
+                                Text(nameInAisleMedicine.isEmpty ? "Choose Medicine" : nameInAisleMedicine)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
+
                     }
                     .padding(.horizontal)
                     
@@ -129,6 +137,7 @@ struct AddANewAisle: View {
                     
                     Spacer()
                 }
+                .navigationTitle("Add a New Aisle")
                 .padding()
             }
         }
