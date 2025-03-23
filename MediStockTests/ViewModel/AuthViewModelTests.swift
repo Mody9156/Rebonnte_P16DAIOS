@@ -76,4 +76,17 @@ final class AuthViewModelTests {
             try await authViewModel.disableAutoLogin()
         }
     }
+    
+    @Test func disableThrowError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //When
+        try? await authViewModel.disableAutoLogin()
+        //Then
+        #expect(mockAuthService.messageError == "erreur de deconnexion")
+        await #expect(throws:ShowErrors.disableAutoLoginThrowError){
+            try await authViewModel.disableAutoLogin()
+        }
+    }
 }
