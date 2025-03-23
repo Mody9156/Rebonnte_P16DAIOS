@@ -81,6 +81,7 @@ final class AuthViewModelTests {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
+        mockAuthService.isAuthenticated = true
         //When
         try? await authViewModel.disableAutoLogin()
         //Then
@@ -88,5 +89,18 @@ final class AuthViewModelTests {
         await #expect(throws:ShowErrors.disableAutoLoginThrowError){
             try await authViewModel.disableAutoLogin()
         }
+    }
+    
+    @Test func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticated() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //When
+        try? await authViewModel.changeStatus()
+        //Given
+        await #expect(throws:Never.self){
+            try await authViewModel.changeStatus()
+        }
+        #expect(mockAuthService.messageError == "")
     }
 }
