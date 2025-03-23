@@ -63,4 +63,17 @@ final class AuthViewModelTests {
             try await authViewModel.createdNewUser(email: "joe@gmail.com", password: "123456")
         }
     }
+    
+    @Test func disableNoThrowError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //When
+        try? await authViewModel.disableAutoLogin()
+        //Then
+        #expect(mockAuthService.messageError == "")
+        await #expect(throws:Never.self){
+            try await authViewModel.disableAutoLogin()
+        }
+    }
 }
