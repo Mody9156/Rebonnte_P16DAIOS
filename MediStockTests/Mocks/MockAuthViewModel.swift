@@ -36,7 +36,10 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func changeStatus() async throws {
-        
+        if isAuthenticated {
+            messageError = "erreur de deconnexion"
+            throw ShowErrors.disableAutoLoginThrowError
+        }
     }
     
     func disableAutoLogin() async throws {
