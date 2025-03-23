@@ -7,6 +7,7 @@
 
 import Testing
 @testable import pack
+import Foundation
 
 final class AuthViewModelTests {
     
@@ -118,4 +119,19 @@ final class AuthViewModelTests {
         #expect(mockAuthService.messageError == "erreur lors de la persistance de donné de l'utilisateur")
     }
     
+    @Test func whenYouWantSaveUserWithClickOnButtton() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        let saveUser = UserDefaults.standard.bool(forKey: "autoConnection")
+        //When
+        authViewModel.saveAutoConnectionState(saveUser)
+        //Then
+        #expect(throws:Never.self){
+            authViewModel.saveAutoConnectionState(saveUser)
+        }
+    }
+    
 }
+//@State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
+//return UserDefaults.standard.set(state, forKey: "autoLogin")

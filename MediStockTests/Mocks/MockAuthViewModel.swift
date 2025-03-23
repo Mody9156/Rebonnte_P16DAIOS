@@ -6,13 +6,12 @@
 //
 
 @testable import pack
+import Foundation
 
 class MockAuthViewModel : AuthViewModelProtocol{
-    
+    var saveUser : Bool  = UserDefaults.standard.bool(forKey: "autoConnection")
     var isAuthenticated: Bool = false
-    
     var messageError: String = ""
-    
     var onLoginSucceed: (() -> Void)?
     
      func login(email: String, password: String) async throws {
@@ -50,6 +49,10 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func saveAutoConnectionState(_ state: Bool) {
+        
+        if isAuthenticated {
+            
+        }
     }
     
     func autotoLogin() async throws {
