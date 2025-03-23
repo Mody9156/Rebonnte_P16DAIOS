@@ -27,6 +27,12 @@ class MockAuthViewModel : AuthViewModelProtocol{
     
     func createdNewUser(email: String, password: String) async throws {
         
+        if email != "joe@gmail.com" && password != "123456" {
+            messageError = ""
+        }else {
+            messageError = "Erreur lors de la création de l'utilisateur"
+            throw ShowErrors.createdNewUserThrowError
+        }
     }
     
     func changeStatus() async throws {
