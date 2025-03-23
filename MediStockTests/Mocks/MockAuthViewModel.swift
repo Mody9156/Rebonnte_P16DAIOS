@@ -8,13 +8,29 @@
 @testable import pack
 import Foundation
 
+class SaveAutoUser {
+    var saveUser : [String:Any] = [:]
+    
+    func set(_ value: Any?, forKey Key : String) {
+        saveUser[Key] = value
+    }
+    
+    func bool(forKey Key : String) -> Bool {
+       return saveUser[Key] as? Bool ?? false
+    }
+}
+
 class MockAuthViewModel : AuthViewModelProtocol{
-    var saveUser : Bool  = UserDefaults.standard.bool(forKey: "autoConnection")
+    private var saveUser : SaveAutoUser
     var isAuthenticated: Bool = false
     var messageError: String = ""
     var onLoginSucceed: (() -> Void)?
     
-     func login(email: String, password: String) async throws {
+    init(saveUser: SaveAutoUser) {
+        self.saveUser = saveUser
+    }
+    
+    func login(email: String, password: String) async throws {
         if email == "joe@gmail.com" && password == "123456" {
             isAuthenticated = true
             messageError = ""
@@ -50,9 +66,7 @@ class MockAuthViewModel : AuthViewModelProtocol{
     
     func saveAutoConnectionState(_ state: Bool) {
         
-        if isAuthenticated {
-            
-        }
+        saveUser.set(saveUser, forKey: "autoConnection")
     }
     
     func autotoLogin() async throws {
