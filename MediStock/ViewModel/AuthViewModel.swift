@@ -16,9 +16,15 @@ enum ShowErrors : Error {
 
 class AuthViewModel : ObservableObject {
     @Published var session: AuthViewModelProtocol
-    @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
-    @Published var isAuthenticated : Bool = false
+    
+    var isAuthenticated: Bool {
+           session.isAuthenticated
+       }
+       
+       var messageError: String {
+           session.messageError
+       }
     
     init(session : AuthViewModelProtocol = ManagementAuthViewModel(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
@@ -31,11 +37,7 @@ class AuthViewModel : ObservableObject {
     func login(email:String, password:String) async throws {
         do {
              try await session.login(email: email, password: password)
-            isAuthenticated = session.isAuthenticated
-            self.messageError = ""
         }catch{
-            self.messageError = "Erreur lors de la connection de l'utilisateur"
-            isAuthenticated = false
             throw ShowErrors.loginThrowError
         }
     }
@@ -43,9 +45,7 @@ class AuthViewModel : ObservableObject {
     func createdNewUser(email: String, password: String) async throws {
         do{
             _ = try await session.createdNewUser(email: email, password: password)
-            self.messageError = ""
         }catch{
-            self.messageError = "Erreur lors de la création de l'utilisateur"
             throw ShowErrors.createdNewUserThrowError
         }
     }
