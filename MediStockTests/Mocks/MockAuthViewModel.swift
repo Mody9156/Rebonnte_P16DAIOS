@@ -8,28 +8,11 @@
 @testable import pack
 import Foundation
 
-class SaveAutoUser {
-    var saveUser : [String:Any] = [:]
-    
-    func set(_ value: Any?, forKey Key : String) {
-        saveUser[Key] = value
-    }
-    
-    func bool(forKey Key : String) -> Bool {
-       return saveUser[Key] as? Bool ?? false
-    }
-}
-
 class MockAuthViewModel : AuthViewModelProtocol{
-    private var saveUser : SaveAutoUser
     var isAuthenticated: Bool = false
     var messageError: String = ""
     var onLoginSucceed: (() -> Void)?
-    
-    init(saveUser: SaveAutoUser) {
-        self.saveUser = saveUser
-    }
-    
+
     func login(email: String, password: String) async throws {
         if email == "joe@gmail.com" && password == "123456" {
             isAuthenticated = true
@@ -65,8 +48,12 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func saveAutoConnectionState(_ state: Bool) {
-        
-        saveUser.set(saveUser, forKey: "autoConnection")
+        if state {
+            messageError = ""
+            UserDefaults.standard.set(state, forKey: "autoConnection")
+        }else{
+            messageError = "Veuillez vérifier que le bouton de connection automatique est coché"
+        }
     }
     
     func autotoLogin() async throws {

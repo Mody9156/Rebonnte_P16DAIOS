@@ -13,7 +13,7 @@ final class AuthViewModelTests {
     
     @Test func loginWithRighValues() async throws {
         //given
-        let mockAuthService =  MockAuthViewModel()
+        let mockAuthService =  MockAuthViewModel( )
         let authViewModel = AuthViewModel(session: mockAuthService)
         //when
          try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
@@ -123,13 +123,23 @@ final class AuthViewModelTests {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
-        let saveUser = UserDefaults.standard.bool(forKey: "autoConnection")
         //When
-        authViewModel.saveAutoConnectionState(saveUser)
+        authViewModel.saveAutoConnectionState(true)
         //Then
-        #expect(throws:Never.self){
-            authViewModel.saveAutoConnectionState(saveUser)
-        }
+        let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
+        #expect(mockAuthService.messageError == "")
+        #expect(userDefault == true)
+    }
+    
+    @Test func whenYouWantSaveUserWithNotClickOnButtton() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //When
+        authViewModel.saveAutoConnectionState(false)
+        //Then
+        let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
+        #expect(userDefault == false)
     }
     
 }
