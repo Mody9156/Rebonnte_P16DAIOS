@@ -38,16 +38,16 @@ final class AuthViewModelTests {
     }
 
     
-    @Test func createdNewUser() async throws {
+    @Test func testCreatedNewUserDoesNotThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
         //When
         try? await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
         //Then
-        await #expect(throws: Never, performing: {
-        try? await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
-        })
-        #expect(mockAuthService.messageError == "Erreur lors de la création de l'utilisateur")
+        await #expect(throws:Never.self) {
+        try await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
+        }
+        #expect(mockAuthService.messageError.isEmpty)
     }
 }

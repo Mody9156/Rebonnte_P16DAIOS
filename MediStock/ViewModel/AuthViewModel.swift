@@ -29,8 +29,6 @@ class AuthViewModel : ObservableObject {
     init(session : AuthViewModelProtocol = ManagementAuthViewModel(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-
-        
     }
     
     @MainActor
