@@ -32,10 +32,9 @@ final class AuthViewModelTests {
         //Then
         #expect(mockAuthService.messageError == "Erreur lors de la connexion")
         await #expect(throws: (ShowErrors.loginThrowError), performing: {
-            try? await authViewModel.login(email: "joe@gmail.com", password: "")
+            try await authViewModel.login(email: "joe@gmail.com", password: "whrongPassword")
         })
         #expect(!mockAuthService.isAuthenticated)
     }
-    
 
 }

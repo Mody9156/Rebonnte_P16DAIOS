@@ -37,7 +37,7 @@ class ManagementAuthViewModel: AuthViewModelProtocol {
     @MainActor
     func createdNewUser(email: String, password: String) async throws {
         do {
-           try await session.signUp(email: email, password: password)
+           let _ = try await session.signUp(email: email, password: password)
             messageError = ""
         } catch {
             messageError = "Erreur lors de la création de l'utilisateur"
