@@ -15,7 +15,7 @@ final class AuthViewModelTests {
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
         //when
-        let login = try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
+         try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
         //Then
         #expect(authViewModel.messageError.isEmpty)
         #expect(mockAuthService.isAuthenticated)
@@ -28,12 +28,14 @@ final class AuthViewModelTests {
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
         //when
-         let login = try? await authViewModel.login(email: "joe@gmail.com", password: "")
+        try? await authViewModel.login(email: "joe@gmail.com", password: "")
         //Then
-        #expect(mockAuthService.messageError == "Erreur lors de la connection de l'utilisateur")
-//        #expect(login  == ShowErrors.loginThrowError )
+        #expect(mockAuthService.messageError == "Erreur lors de la connexion")
+        await #expect(throws: (ShowErrors.loginThrowError), performing: {
+            try? await authViewModel.login(email: "joe@gmail.com", password: "")
+        })
         #expect(!mockAuthService.isAuthenticated)
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
+    
 
 }
