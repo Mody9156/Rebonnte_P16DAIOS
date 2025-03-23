@@ -50,4 +50,17 @@ final class AuthViewModelTests {
         }
         #expect(mockAuthService.messageError.isEmpty)
     }
+    
+    @Test func testCreatedNewUserWithSameEmailThrowError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        //when
+        try? await authViewModel.createdNewUser(email: "joe@gmail.com", password: "123456")
+        //Then
+        #expect(mockAuthService.messageError != "Erreur lors de la création de l'utilisateur")
+        await  #expect(throws: ShowErrors.createdNewUserThrowError) {
+            try await authViewModel.createdNewUser(email: "joe@gmail.com", password: "123456")
+        }
+    }
 }
