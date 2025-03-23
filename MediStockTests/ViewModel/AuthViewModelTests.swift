@@ -103,4 +103,19 @@ final class AuthViewModelTests {
         }
         #expect(mockAuthService.messageError == "")
     }
+    
+    @Test func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticatedThrowError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        mockAuthService.isAuthenticated = true
+        //When
+        try? await authViewModel.changeStatus()
+        //Given
+        await #expect(throws:ShowErrors.changeStatusThrowError){
+            try await authViewModel.changeStatus()
+        }
+        #expect(mockAuthService.messageError == "erreur lors de la persistance de donné de l'utilisateur")
+    }
+    
 }
