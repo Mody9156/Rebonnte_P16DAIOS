@@ -41,6 +41,7 @@
 		4F8F68822D8ACE6400486DBF /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F68812D8ACE6400486DBF /* Source.json */; };
 		4F8F68842D8AD20300486DBF /* MedicationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F68832D8AD20300486DBF /* MedicationsData.swift */; };
 		4FB7A5B02D91870300A4978E /* MedicineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */; };
+		4FB7A5B42D91888F00A4978E /* MedicinesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */; };
 		4FBE3D082D84716B00D1BC23 /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */; };
 		4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */; };
 		4FC3B8352D8DC9F700918ABF /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */; };
@@ -113,6 +114,7 @@
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
 		4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
+		4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesExtension.swift; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		23FC3B0A2D47CBA0005A2C34 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				4FB7A5B02D91870300A4978E /* MedicineRepositoryTests.swift in Sources */,
+				4FB7A5B42D91888F00A4978E /* MedicinesExtension.swift in Sources */,
 				4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
