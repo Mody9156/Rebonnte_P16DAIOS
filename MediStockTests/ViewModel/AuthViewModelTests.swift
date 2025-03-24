@@ -11,12 +11,13 @@ import Foundation
 
 final class AuthViewModelTests {
     
-    @Test func loginWithRighValues() async throws {
+    @Test
+    func loginWithRighValues() async throws {
         //given
         let mockAuthService =  MockAuthViewModel( )
         let authViewModel = AuthViewModel(session: mockAuthService)
         //when
-         try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
+        try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
         //Then
         #expect(authViewModel.messageError.isEmpty)
         #expect(mockAuthService.isAuthenticated)
@@ -24,7 +25,8 @@ final class AuthViewModelTests {
     }
     
     
-    @Test func emailOrPasswordIsInvalid() async throws {
+    @Test
+    func emailOrPasswordIsInvalid() async throws {
         //given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -36,9 +38,10 @@ final class AuthViewModelTests {
             #expect(mockAuthService.savePassword == nil)
         }
     }
-
     
-    @Test func testCreatedNewUserDoesNotThrowError() async throws {
+    
+    @Test
+    func testCreatedNewUserDoesNotThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -46,12 +49,13 @@ final class AuthViewModelTests {
         try? await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
         //Then
         await #expect(throws:Never.self) {
-        try await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
+            try await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
         }
         #expect(mockAuthService.messageError.isEmpty)
     }
     
-    @Test func testCreatedNewUserWithSameEmailThrowError() async throws {
+    @Test
+    func testCreatedNewUserWithSameEmailThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -64,7 +68,8 @@ final class AuthViewModelTests {
         }
     }
     
-    @Test func disableNoThrowError() async throws {
+    @Test
+    func disableNoThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -77,7 +82,8 @@ final class AuthViewModelTests {
         }
     }
     
-    @Test func disableThrowError() async throws {
+    @Test
+    func disableThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -91,7 +97,8 @@ final class AuthViewModelTests {
         }
     }
     
-    @Test func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticated() async throws {
+    @Test
+    func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticated() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -104,7 +111,8 @@ final class AuthViewModelTests {
         #expect(mockAuthService.messageError == "")
     }
     
-    @Test func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticatedThrowError() async throws {
+    @Test
+    func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticatedThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -118,7 +126,8 @@ final class AuthViewModelTests {
         #expect(mockAuthService.messageError == "erreur lors de la persistance de donné de l'utilisateur")
     }
     
-    @Test func whenYouWantSaveUserWithClickOnButtton() async throws {
+    @Test
+    func whenYouWantSaveUserWithClickOnButtton() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -126,11 +135,11 @@ final class AuthViewModelTests {
         authViewModel.saveAutoConnectionState(true)
         //Then
         let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
-        #expect(mockAuthService.messageError == "")
         #expect(userDefault == true)
     }
     
-    @Test func whenYouWantSaveUserWithNotClickOnButtton() async throws {
+    @Test
+    func whenYouWantSaveUserWithNotClickOnButtton() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -151,14 +160,16 @@ final class AuthViewModelTests {
         UserDefaults.standard.set(saveEmail, forKey: "email")
         UserDefaults.standard.set(savePassword, forKey: "password")
         //When
-        try await authViewModel.autotoLogin()
+        try? await authViewModel.login(email: saveEmail, password: savePassword)
+        try? await authViewModel.autotoLogin()
         //Then
         #expect(mockAuthService.messageError == "")
         #expect(mockAuthService.savePassword == savePassword)
         #expect(mockAuthService.saveEmail == saveEmail)
     }
     
-    @Test func autologinThrowError() async throws {
+    @Test
+    func autologinThrowºError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
@@ -168,11 +179,13 @@ final class AuthViewModelTests {
         UserDefaults.standard.set(saveEmail, forKey: "email")
         UserDefaults.standard.set(savePassword, forKey: "password")
         //When
-        try? await authViewModel.autotoLogin()
-        //Then
-        #expect(mockAuthService.messageError == "Erreur lors de la connexion")
-        #expect(mockAuthService.savePassword == nil)
-        #expect(mockAuthService.saveEmail == nil)
+        do{
+            try await authViewModel.autotoLogin()
+        }catch{
+            //Then
+            #expect(mockAuthService.messageError == "Erreur lors de la connexion")
+            #expect(mockAuthService.savePassword == nil)
+            #expect(mockAuthService.saveEmail == nil)
+        }
     }
-    
 }

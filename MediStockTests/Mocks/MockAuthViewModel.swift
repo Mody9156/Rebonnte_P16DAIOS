@@ -4,7 +4,7 @@
 //
 //  Created by Modibo on 21/03/2025.
 //
-
+import Testing
 @testable import pack
 import Foundation
 
@@ -18,7 +18,7 @@ class MockAuthViewModel : AuthViewModelProtocol{
     func login(email: String, password: String) async throws {
         isAuthenticated = true
         
-        if !email.isEmpty || !password.isEmpty{
+        if email == "joe@gmail.com" && password == "123456" {
             isAuthenticated = true
             messageError = ""
             saveEmail = email
@@ -53,12 +53,11 @@ class MockAuthViewModel : AuthViewModelProtocol{
         }
     }
     
-    func saveAutoConnectionState(_ state: Bool) {
-        if state {
-            messageError = ""
-            UserDefaults.standard.set(state, forKey: "autoConnection")
+     func saveAutoConnectionState(_ state: Bool) {
+        if state  {
+            UserDefaults.standard.set(true, forKey: "autoConnection")
         }else{
-            messageError = "Veuillez vérifier que le bouton de connection automatique est coché"
+            UserDefaults.standard.set(false, forKey: "autoConnection")
         }
     }
     
@@ -72,12 +71,11 @@ class MockAuthViewModel : AuthViewModelProtocol{
       
         guard !email.isEmpty, !password.isEmpty else {
             messageError = "Veuillez remplir tous les champs"
-            saveEmail = nil
-            savePassword = nil
+            saveEmail = ""
+            savePassword = ""
             return
         }
-        saveEmail = email
-        savePassword = password
+
         messageError = ""
 
         do {
