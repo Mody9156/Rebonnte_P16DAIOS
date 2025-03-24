@@ -150,7 +150,7 @@ class MedicineRepository: ObservableObject {
 }
 
 
-enum MedicineError: Error {
+enum MedicineError: Error, Equatable {
     case invalidDelete
     case invalidMedicine
     case invalidAisles
