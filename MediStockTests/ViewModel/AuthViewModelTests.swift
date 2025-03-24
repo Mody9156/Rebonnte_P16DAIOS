@@ -142,17 +142,17 @@ final class AuthViewModelTests {
         #expect(userDefault == false)
     }
     
-    @Test func autologinNothrowError() async throws {
+    @Test
+    func autologinNothrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
-        let saveEmail = "fakeEmail@gmail.com"
-        let savePassword = "fakepassword"
+        let saveEmail = "joe@gmail.com"
+        let savePassword = "123456"
         UserDefaults.standard.set(saveEmail, forKey: "email")
         UserDefaults.standard.set(savePassword, forKey: "password")
         //When
-        try? await authViewModel.login(email: saveEmail, password: savePassword)
-        try? await authViewModel.autotoLogin()
+        try await authViewModel.autotoLogin()
         //Then
         #expect(mockAuthService.messageError == "")
         #expect(mockAuthService.savePassword == savePassword)
@@ -163,12 +163,17 @@ final class AuthViewModelTests {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
+        mockAuthService.isAuthenticated = false
+        let saveEmail = ""
+        let savePassword = ""
+        UserDefaults.standard.set(saveEmail, forKey: "email")
+        UserDefaults.standard.set(savePassword, forKey: "password")
         //When
-        try await authViewModel.autotoLogin()
+        try? await authViewModel.autotoLogin()
         //Then
-        #expect(mockAuthService.messageError != "")
+        #expect(mockAuthService.messageError == "Erreur lors de la connexion")
+        #expect(mockAuthService.savePassword == nil)
+        #expect(mockAuthService.saveEmail == nil)
     }
     
 }
-//@State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
-//return UserDefaults.standard.set(state, forKey: "autoLogin")

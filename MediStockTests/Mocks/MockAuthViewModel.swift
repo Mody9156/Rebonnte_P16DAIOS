@@ -16,9 +16,13 @@ class MockAuthViewModel : AuthViewModelProtocol{
     var savePassword : String?
     
     func login(email: String, password: String) async throws {
+        isAuthenticated = true
+        
         if email == "joe@gmail.com" && password == "123456" {
             isAuthenticated = true
             messageError = ""
+            saveEmail = email
+            savePassword = password
         }else {
             messageError = "Erreur lors de la connexion"
             throw ShowErrors.loginThrowError
@@ -59,11 +63,13 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func autotoLogin() async throws {
+
         guard let email = UserDefaults.standard.string(forKey: "email"),
-           let password = UserDefaults.standard.string(forKey: "password")else {
+              let password = UserDefaults.standard.string(forKey: "password") else {
             messageError = "Veuillez remplir tous les champs"
             return
         }
+      
         guard !email.isEmpty, !password.isEmpty else {
             messageError = "Veuillez remplir tous les champs"
             saveEmail = nil
@@ -72,11 +78,12 @@ class MockAuthViewModel : AuthViewModelProtocol{
         }
         saveEmail = email
         savePassword = password
-        
+        messageError = ""
+
         do {
-               try await login(email: email, password: password)
-           } catch {
-               messageError = "Erreur lors de la connexion : \(error.localizedDescription)"
-           }
+            try await login(email: email, password: password)
+        } catch {
+            messageError = "Erreur lors de la connexion (sauvegarde echouée)"
+        }
     }
 }
