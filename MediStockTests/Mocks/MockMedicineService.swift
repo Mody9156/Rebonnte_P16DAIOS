@@ -21,11 +21,19 @@ class MockMedicineService: MedicineProtocol{
     }
 
     func fetchAisles(completion: @escaping ([String]) -> Void) {
-        <#code#>
+        if showErrors {
+            medicines = Medicine.emptyMedicine
+        }else{
+            medicines = Medicine.testMedicine
+        }
     }
 
     func setDataToList(user: String, name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
-        <#code#>
+        if showErrors {
+            throw MedicineError.invalidSetData
+        } else {
+            
+        }
     }
 
     func delete(medicines: [pack.Medicine], at offsets: IndexSet) async throws {

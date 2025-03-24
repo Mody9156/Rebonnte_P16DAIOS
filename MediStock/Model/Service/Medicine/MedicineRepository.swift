@@ -28,7 +28,7 @@ class MedicineRepository: ObservableObject {
     func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
         medicineService.fetchMedicines { medicine in
             if medicine.isEmpty {
-                let _ = MedicineError.medicineIsEmpty
+                completion([])
             }else{
                 completion(medicine)
             }
@@ -38,7 +38,7 @@ class MedicineRepository: ObservableObject {
     func fetchAisles(completion:@escaping( [String])->Void) {
         medicineService.fetchAisles { aisles in
             if aisles.isEmpty {
-                let _ = MedicineError.aisleIsEmpty
+                completion([])
             }else{
                 completion(aisles)
             }

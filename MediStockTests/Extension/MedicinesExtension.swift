@@ -22,3 +22,13 @@ extension pack.Medicine {
         return []
     }
 }
+
+extension pack.HistoryEntry {
+    static var testHistoryEntry: [HistoryEntry]{
+        return [HistoryEntry(medicineId: "fakeId", user: "Fake@gmail.com", action: "Update", details: "Change items", stock: 50)]
+    }
+    
+    static var emptyHistoryEntry: [HistoryEntry] {
+        return []
+    }
+}
