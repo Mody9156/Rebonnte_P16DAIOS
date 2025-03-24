@@ -7,19 +7,20 @@
 
 import Foundation
 
-class ManagementAuthViewModel: AuthViewModelProtocol {
-    
-    @Published var isAuthenticated: Bool = false
-    @Published var messageError: String = ""
+class ManagementAuthViewModel: AuthViewModelProtocol, ObservableObject {
+    @Published var _isAuthenticated : Bool = false
+    @Published var _messageError : String = ""
     @Published var onLoginSucceed: (() -> Void)?
-    
     private var session: SessionStore
-    
+ 
+    var isAuthenticated : Bool {_isAuthenticated}
+    var messageError : String {_messageError}
     init(session: SessionStore = SessionStore()) {
         self.session = session
         session.$session
             .map { $0 != nil }
-            .assign(to: &$isAuthenticated)
+            .assign(to: &$_isAuthenticated)
+
     }
     
     @MainActor
@@ -27,12 +28,9 @@ class ManagementAuthViewModel: AuthViewModelProtocol {
         do {
             let user = try await session.signIn(email: email, password: password)
             UserDefaults.standard.set(user.email, forKey: "email")
-            messageError = ""
-            isAuthenticated = true
             onLoginSucceed?()
         } catch {
-            messageError = "Erreur lors de la connexion de l'utilisateur"
-            isAuthenticated = false
+            _messageError = "Erreur lors de la connexion de l'utilisateur"
             throw ShowErrors.loginThrowError
         }
     }
@@ -40,10 +38,11 @@ class ManagementAuthViewModel: AuthViewModelProtocol {
     @MainActor
     func createdNewUser(email: String, password: String) async throws {
         do {
-           let _ = try await session.signUp(email: email, password: password)
-            messageError = ""
+           let user = try await session.signUp(email: email, password: password)
+            UserDefaults.standard.set(user.email, forKey: "email")
+            _messageError = ""
         } catch {
-            messageError = "Erreur lors de la création de l'utilisateur"
+            _messageError = "Erreur lors de la création de l'utilisateur"
             throw ShowErrors.createdNewUserThrowError
         }
     }
@@ -52,6 +51,7 @@ class ManagementAuthViewModel: AuthViewModelProtocol {
     func changeStatus() async throws {
         do {
             try await session.listen()
+            _isAuthenticated =  session.session != nil
         } catch {
             throw ShowErrors.changeStatusThrowError
         }

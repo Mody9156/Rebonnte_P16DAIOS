@@ -15,7 +15,7 @@ final class AuthViewModelTests {
     func loginWithRighValues() async throws {
         //given
         let mockAuthService =  MockAuthViewModel( )
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //when
         try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
         //Then
@@ -28,7 +28,7 @@ final class AuthViewModelTests {
     func emailOrPasswordIsInvalid() async throws {
         //given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When/Then
         await #expect(throws: (ShowErrors.loginThrowError)){
             try await authViewModel.login(email: "", password: "")
@@ -43,7 +43,7 @@ final class AuthViewModelTests {
     func testCreatedNewUserDoesNotThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When
         try? await authViewModel.createdNewUser(email: "Jdoe@gmail.com", password: "fakePassword")
         //Then
@@ -57,7 +57,7 @@ final class AuthViewModelTests {
     func testCreatedNewUserWithSameEmailThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //when
         try? await authViewModel.createdNewUser(email: "joe@gmail.com", password: "123456")
         //Then
@@ -71,7 +71,7 @@ final class AuthViewModelTests {
     func disableNoThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When
         try? await authViewModel.disableAutoLogin()
         //Then
@@ -85,7 +85,7 @@ final class AuthViewModelTests {
     func disableThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         mockAuthService.isAuthenticated = true
         //When
         try? await authViewModel.disableAutoLogin()
@@ -100,7 +100,7 @@ final class AuthViewModelTests {
     func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticated() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When
         try? await authViewModel.changeStatus()
         //Given
@@ -114,7 +114,7 @@ final class AuthViewModelTests {
     func whenChangeStatusIsAuthenticatedThenCallOnChangeStatusAuthenticatedThrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         mockAuthService.isAuthenticated = true
         //When
         try? await authViewModel.changeStatus()
@@ -129,7 +129,7 @@ final class AuthViewModelTests {
     func whenYouWantSaveUserWithClickOnButtton() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When
         authViewModel.saveAutoConnectionState(true)
         //Then
@@ -141,7 +141,7 @@ final class AuthViewModelTests {
     func whenYouWantSaveUserWithNotClickOnButtton() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         //When
         authViewModel.saveAutoConnectionState(false)
         //Then
@@ -153,7 +153,7 @@ final class AuthViewModelTests {
     func autologinNothrowError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         let saveEmail = "joe@gmail.com"
         let savePassword = "123456"
         UserDefaults.standard.set(saveEmail, forKey: "email")
@@ -170,7 +170,7 @@ final class AuthViewModelTests {
     func autologinThrowºError() async throws {
         //Given
         let mockAuthService =  MockAuthViewModel()
-        let authViewModel = AuthViewModel(session: mockAuthService)
+        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
         mockAuthService.isAuthenticated = false
         let saveEmail = ""
         let savePassword = ""

@@ -32,3 +32,12 @@ extension pack.HistoryEntry {
         return []
     }
 }
+
+extension pack.User {
+    static var testUser: [User] {
+        return [User(uid: "fakeUid", email: "fakeEmail@gmail.com")]
+    }
+    static var emptyUser: [User] {
+        return []
+    }
+}

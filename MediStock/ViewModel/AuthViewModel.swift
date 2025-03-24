@@ -1,9 +1,3 @@
-//
-//  AuthViewModel.swift
-//  pack
-//
-//  Created by KEITA on 09/01/2025.
-//
 
 import Foundation
 
@@ -15,51 +9,56 @@ enum ShowErrors : Error {
 }
 
 class AuthViewModel : ObservableObject {
-    @Published var session: AuthViewModelProtocol
+    @Published var session: SessionStore
+    var authViewModelProtocol : AuthViewModelProtocol
+    @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
+    @Published var isAuthenticated : Bool = false
     
-    var isAuthenticated: Bool {
-           session.isAuthenticated
-       }
-       
-       var messageError: String {
-           session.messageError
-       }
-    
-    init(session : AuthViewModelProtocol = ManagementAuthViewModel(),onLoginSucceed : (()-> Void)? = nil ){
+    init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ,authViewModelProtocol : AuthViewModelProtocol = ManagementAuthViewModel()){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-        print("📢 AuthViewModel initialisé")
+        self.authViewModelProtocol = authViewModelProtocol
+        session.$session
+            .map { $0 != nil }
+            .assign(to: &$isAuthenticated)
     }
     
     @MainActor
     func login(email:String, password:String) async throws {
-        print("📢 Début de login() avec \(email) / \(password)")
         do {
-            print("✅ Utilisateur connecté: \(email)")
-             try await session.login(email: email, password: password)
-            
+           try await authViewModelProtocol.login(
+                email: email,
+                password: password
+            )
+          
+            messageError = ""
+            isAuthenticated = true
+            onLoginSucceed?()
         }catch{
-            print("📢 Début de login() avec \(email) / \(password)")
+            messageError = "Erreur lors de la connexion de l'utilisateur"
+            isAuthenticated = false
             throw ShowErrors.loginThrowError
         }
-       
     }
     
+    @MainActor
     func createdNewUser(email: String, password: String) async throws {
-        print("📢 Début de createdNewUser() avec \(email) / \(password)")
         do{
-            print("✅ Utilisateur connecté: \(email)")
-            _ = try await session.createdNewUser(email: email, password: password)
+            _ = try await authViewModelProtocol
+                .createdNewUser(email: email, password: password)
+            messageError = ""
         }catch{
-            print("📢 Début de Utilisateur() avec \(email) / \(password)")
+            messageError = "Erreur lors de la création de l'utilisateur"
             throw ShowErrors.createdNewUserThrowError
         }
     }
     
+    @MainActor
     func changeStatus() async throws {
         do{
-            try await session.changeStatus()
+            try await authViewModelProtocol.changeStatus()
+         
         }catch{
             throw ShowErrors.changeStatusThrowError
         }
@@ -67,7 +66,7 @@ class AuthViewModel : ObservableObject {
     
     func disableAutoLogin() async throws {
         do{
-            try await session.disableAutoLogin()
+            try await authViewModelProtocol.disableAutoLogin()
 
         }catch{
             throw ShowErrors.disableAutoLoginThrowError
@@ -79,15 +78,12 @@ class AuthViewModel : ObservableObject {
     }
     
     func autotoLogin() async throws {
-        print("📢 autotoLogin() a été appelé") // Vérifie si la fonction est bien déclenchée
 
         if let saveEmail = UserDefaults.standard.string(forKey: "email"),
            let savePassword = UserDefaults.standard.string(forKey: "password"){
-            print("📢 Tentative de connexion avec: \(saveEmail) / \(savePassword)")
 
-            try await session.login(email: saveEmail, password: savePassword)
+            try await login(email: saveEmail, password: savePassword)
         }else{
-         print("❌ Aucune donnée trouvée dans UserDefaults")
         }
     }
 }
