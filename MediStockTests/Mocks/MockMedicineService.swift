@@ -30,6 +30,7 @@ class MockMedicineService: MedicineProtocol{
 
     func setDataToList(user: String, name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
         if showErrors {
+            Medicine.emptyMedicine
             throw MedicineError.invalidSetData
         } else {
             

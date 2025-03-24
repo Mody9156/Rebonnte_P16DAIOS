@@ -56,12 +56,14 @@ class MedicineRepository: ObservableObject {
     //        }
     //    }
     
-    func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws {
+    func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws -> [Medicine]{
         do{
             let medicine = try await medicineService.setDataToList(user: user, name:name, stock:stock, aisle:aisle)
             for medicines in medicine {
                 try? await  addHistory(action: "Added \(medicines.name)", user: user, medicineId: medicines.id ?? "Unknow", details: "Added new medicine", stock: stockValue)
             }
+            return medicine
+            
         }catch{
             throw MedicineError.invalidSetData
         }
