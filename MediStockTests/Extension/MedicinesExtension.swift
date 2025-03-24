@@ -17,4 +17,8 @@ extension pack.Medicine {
     static var emptyStockMedicine: [Medicine] {
         return [Medicine(name: "Ibuprofen", stock: 0, aisle: "B1")]
     }
+    
+    static var emptyMedicine: [Medicine] {
+        return []
+    }
 }
