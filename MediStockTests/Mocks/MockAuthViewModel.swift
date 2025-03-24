@@ -55,9 +55,7 @@ class MockAuthViewModel : AuthViewModelProtocol{
     
      func saveAutoConnectionState(_ state: Bool) {
         if state  {
-            UserDefaults.standard.set(true, forKey: "autoConnection")
-        }else{
-            UserDefaults.standard.set(false, forKey: "autoConnection")
+            UserDefaults.standard.set(state, forKey: "autoConnection")
         }
     }
     

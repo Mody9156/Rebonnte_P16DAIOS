@@ -19,12 +19,12 @@ class AuthViewModel : ObservableObject {
     @Published var onLoginSucceed : (()-> Void)?
     
     var isAuthenticated: Bool {
-           session.isAuthenticated
-       }
-       
-       var messageError: String {
-           session.messageError
-       }
+        session.isAuthenticated
+    }
+    
+    var messageError: String {
+        session.messageError
+    }
     
     init(session : AuthViewModelProtocol = ManagementAuthViewModel(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
@@ -34,7 +34,7 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func login(email:String, password:String) async throws {
         do {
-             try await session.login(email: email, password: password)
+            try await session.login(email: email, password: password)
         }catch{
             throw ShowErrors.loginThrowError
         }
@@ -59,14 +59,14 @@ class AuthViewModel : ObservableObject {
     func disableAutoLogin() async throws {
         do{
             try await session.disableAutoLogin()
-
+            
         }catch{
             throw ShowErrors.disableAutoLoginThrowError
         }
     }
     
     func saveAutoConnectionState(_ state:Bool){
-       return UserDefaults.standard.set(state, forKey: "autoLogin")
+        return UserDefaults.standard.set(state, forKey: "autoLogin")
     }
     
     func autotoLogin() async throws {

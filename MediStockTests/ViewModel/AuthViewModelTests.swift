@@ -24,7 +24,6 @@ final class AuthViewModelTests {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
     
-    
     @Test
     func emailOrPasswordIsInvalid() async throws {
         //given
@@ -160,7 +159,6 @@ final class AuthViewModelTests {
         UserDefaults.standard.set(saveEmail, forKey: "email")
         UserDefaults.standard.set(savePassword, forKey: "password")
         //When
-        try? await authViewModel.login(email: saveEmail, password: savePassword)
         try? await authViewModel.autotoLogin()
         //Then
         #expect(mockAuthService.messageError == "")
