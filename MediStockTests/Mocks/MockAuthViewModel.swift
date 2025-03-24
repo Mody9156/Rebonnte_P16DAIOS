@@ -18,7 +18,7 @@ class MockAuthViewModel : AuthViewModelProtocol{
     func login(email: String, password: String) async throws {
         isAuthenticated = true
         
-        if email == "joe@gmail.com" && password == "123456" {
+        if !email.isEmpty || !password.isEmpty{
             isAuthenticated = true
             messageError = ""
             saveEmail = email

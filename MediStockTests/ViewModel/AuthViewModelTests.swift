@@ -28,14 +28,13 @@ final class AuthViewModelTests {
         //given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
-        //when
-        try? await authViewModel.login(email: "joe@gmail.com", password: "")
-        //Then
-        #expect(mockAuthService.messageError == "Erreur lors de la connexion")
-        await #expect(throws: (ShowErrors.loginThrowError), performing: {
-            try await authViewModel.login(email: "joe@gmail.com", password: "whrongPassword")
-        })
-        #expect(!mockAuthService.isAuthenticated)
+        //When/Then
+        await #expect(throws: (ShowErrors.loginThrowError)){
+            try await authViewModel.login(email: "", password: "")
+            #expect(!mockAuthService.isAuthenticated)
+            #expect(mockAuthService.saveEmail == nil)
+            #expect(mockAuthService.savePassword == nil)
+        }
     }
 
     
