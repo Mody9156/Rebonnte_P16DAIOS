@@ -59,18 +59,24 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func autotoLogin() async throws {
-        if let email = UserDefaults.standard.string(forKey: "email"),
-           let password = UserDefaults.standard.string(forKey: "password"){
-            if email.isEmpty || password.isEmpty {
-                messageError = "Veuillez remplir tous les champs"
-                saveEmail = nil
-                savePassword = nil
-                return
-            }else{
-                saveEmail = email
-                savePassword = password
-                try await login(email: email, password: password)
-            }
+        guard let email = UserDefaults.standard.string(forKey: "email"),
+           let password = UserDefaults.standard.string(forKey: "password")else {
+            messageError = "Veuillez remplir tous les champs"
+            return
         }
+        guard !email.isEmpty, !password.isEmpty else {
+            messageError = "Veuillez remplir tous les champs"
+            saveEmail = nil
+            savePassword = nil
+            return
+        }
+        saveEmail = email
+        savePassword = password
+        
+        do {
+               try await login(email: email, password: password)
+           } catch {
+               messageError = "Erreur lors de la connexion : \(error.localizedDescription)"
+           }
     }
 }
