@@ -29,9 +29,14 @@ struct MedicineRepositoryTests {
         let mockMedicineService = MockMedicineService()
         let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
         mockMedicineService.showErrors = true
-        //When
-        
-        //Then
+        //When/Then
+        #expect(throws: MedicineError.medicineIsEmpty) {
+            medicineRepository.fetchMedicines(completion: { medicine in
+                for i in medicine {
+                    #expect(i.name.isEmpty)
+                    #expect(i.aisle.isEmpty)
+                }
+            })
+        }
     }
-
 }
