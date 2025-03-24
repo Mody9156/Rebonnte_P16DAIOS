@@ -73,6 +73,8 @@ class MockAuthViewModel : AuthViewModelProtocol{
             savePassword = ""
             return
         }
+        saveEmail = email
+        savePassword = password
 
         messageError = ""
 

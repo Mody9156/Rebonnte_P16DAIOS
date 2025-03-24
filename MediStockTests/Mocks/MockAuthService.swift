@@ -11,8 +11,9 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+
 class MockAuthService: AuthServiceProtocol {
-    
+  
     var mockUser: pack.User?
     var shouldThrowError: Bool = false
     var didAddListener : Bool = false

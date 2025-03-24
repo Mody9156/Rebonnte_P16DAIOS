@@ -183,7 +183,7 @@ final class AuthViewModelTests {
             //Then
             #expect(mockAuthService.messageError == "Erreur lors de la connexion")
             #expect(mockAuthService.savePassword == nil)
-            #expect(mockAuthService.saveEmail == nil)
+            #expect((mockAuthService.saveEmail == nil))
         }
     }
 }
