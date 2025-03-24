@@ -142,6 +142,25 @@ final class AuthViewModelTests {
         #expect(userDefault == false)
     }
     
+    @Test func autologinNothrowError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        let saveEmail = "fakeEmail@gmail.com"
+        let savePassword = "fakepassword"
+        UserDefaults.standard.set(saveEmail, forKey: "email")
+        UserDefaults.standard.set(savePassword, forKey: "password")
+        //When
+        try await authViewModel.login(email: "fake@gmail.com", password: "fakepassword")
+        try await authViewModel.autotoLogin()
+        //Then
+        #expect(mockAuthService.messageError == "")
+        #expect(mockAuthService.savePassword == savePassword)
+        #expect(mockAuthService.saveEmail == saveEmail)
+    }
+    
+    
+    
 }
 //@State var selectedAutoConnection: Bool = UserDefaults.standard.bool(forKey: "autoLogin")
 //return UserDefaults.standard.set(state, forKey: "autoLogin")

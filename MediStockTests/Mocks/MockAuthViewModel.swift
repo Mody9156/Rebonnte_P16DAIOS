@@ -12,6 +12,8 @@ class MockAuthViewModel : AuthViewModelProtocol{
     var isAuthenticated: Bool = false
     var messageError: String = ""
     var onLoginSucceed: (() -> Void)?
+    var saveEmail : String?
+    var savePassword : String?
     
     func login(email: String, password: String) async throws {
         if email == "joe@gmail.com" && password == "123456" {
@@ -57,10 +59,18 @@ class MockAuthViewModel : AuthViewModelProtocol{
     }
     
     func autotoLogin() async throws {
-        if let saveEmail = UserDefaults.standard.string(forKey: "email"),
-           let savePassword = UserDefaults.standard.string(forKey: "password"){
-            try await login(email: saveEmail, password: savePassword)
+        if let email = UserDefaults.standard.string(forKey: "email"),
+           let password = UserDefaults.standard.string(forKey: "password"){
+            if email.isEmpty || password.isEmpty {
+                messageError = "Veuillez remplir tous les champs"
+                saveEmail = nil
+                savePassword = nil
+                return
+            }else{
+                saveEmail = email
+                savePassword = password
+                try await login(email: email, password: password)
+            }
         }
     }
-    
 }
