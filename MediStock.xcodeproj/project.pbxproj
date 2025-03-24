@@ -106,7 +106,7 @@
 		23FC3B052D4773D7005A2C34 /* MediStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FD05592D43C2A20089DB5C /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
-		4F159B4E2D5BE07B00E461BE /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "pack-Info.plist"; sourceTree = "<group>"; };
+		4F159B4E2D5BE07B00E461BE /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pack-Info.plist"; sourceTree = "<group>"; };
 		4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddANewAisle.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -115,6 +115,7 @@
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
 		4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesExtension.swift; sourceTree = "<group>"; };
+		4FB7A5B92D91B86600A4978E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -362,6 +363,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
+				4FB7A5B92D91B86600A4978E /* GoogleService-Info.plist */,
 				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				23FD05682D440E490089DB5C /* MediStockTests */,
@@ -755,6 +757,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pack-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -766,7 +769,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStockTeam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -789,6 +792,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pack-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -800,7 +804,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStockTeam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rebonnte.MediStock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

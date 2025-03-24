@@ -9,9 +9,9 @@ import Foundation
 
 class ManagementAuthViewModel: AuthViewModelProtocol {
     
-    var isAuthenticated: Bool = false
-    var messageError: String = ""
-    var onLoginSucceed: (() -> Void)?
+    @Published var isAuthenticated: Bool = false
+    @Published var messageError: String = ""
+    @Published var onLoginSucceed: (() -> Void)?
     
     private var session: SessionStore
     

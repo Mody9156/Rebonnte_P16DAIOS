@@ -29,21 +29,30 @@ class AuthViewModel : ObservableObject {
     init(session : AuthViewModelProtocol = ManagementAuthViewModel(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
+        print("📢 AuthViewModel initialisé")
     }
     
     @MainActor
     func login(email:String, password:String) async throws {
+        print("📢 Début de login() avec \(email) / \(password)")
         do {
+            print("✅ Utilisateur connecté: \(email)")
              try await session.login(email: email, password: password)
+            
         }catch{
+            print("📢 Début de login() avec \(email) / \(password)")
             throw ShowErrors.loginThrowError
         }
+       
     }
     
     func createdNewUser(email: String, password: String) async throws {
+        print("📢 Début de createdNewUser() avec \(email) / \(password)")
         do{
+            print("✅ Utilisateur connecté: \(email)")
             _ = try await session.createdNewUser(email: email, password: password)
         }catch{
+            print("📢 Début de Utilisateur() avec \(email) / \(password)")
             throw ShowErrors.createdNewUserThrowError
         }
     }
@@ -70,9 +79,15 @@ class AuthViewModel : ObservableObject {
     }
     
     func autotoLogin() async throws {
+        print("📢 autotoLogin() a été appelé") // Vérifie si la fonction est bien déclenchée
+
         if let saveEmail = UserDefaults.standard.string(forKey: "email"),
            let savePassword = UserDefaults.standard.string(forKey: "password"){
+            print("📢 Tentative de connexion avec: \(saveEmail) / \(savePassword)")
+
             try await session.login(email: saveEmail, password: savePassword)
+        }else{
+         print("❌ Aucune donnée trouvée dans UserDefaults")
         }
     }
 }
