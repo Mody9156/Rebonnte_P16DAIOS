@@ -9,7 +9,8 @@ import Testing
 
 struct MedicineRepositoryTests {
 
-    @Test func <#test function name#>() async throws {
+    @Test func fetchMedicinesReturnsValidData() async throws {
+        
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
 
