@@ -17,6 +17,9 @@ class ManagementAuthViewModel: AuthViewModelProtocol {
     
     init(session: SessionStore = SessionStore()) {
         self.session = session
+        session.$session
+            .map { $0 != nil }
+            .assign(to: &$isAuthenticated)
     }
     
     @MainActor
