@@ -44,17 +44,17 @@ class MedicineRepository: ObservableObject {
             }
         }
     }
-//    
-//    func setData(user: String) async throws {
-//        do{
-//            let medicine = try await medicineService.setData(user: user)
-//            for medicines in medicine {
-//                try? await  addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
-//            }
-//        }catch{
-//            throw MedicineError.invalidSetData
-//        }
-//    }
+    //
+    //    func setData(user: String) async throws {
+    //        do{
+    //            let medicine = try await medicineService.setData(user: user)
+    //            for medicines in medicine {
+    //                try? await  addHistory(action: "Added \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Added new medicine")
+    //            }
+    //        }catch{
+    //            throw MedicineError.invalidSetData
+    //        }
+    //    }
     
     func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws {
         do{
@@ -106,9 +106,9 @@ class MedicineRepository: ObservableObject {
     func updateMedicine(_ medicine: Medicine, user: String, stock:Int) async throws {
         do{
             let medicine = try await medicineService.updateMedicine(medicine, user: user)
-//            for medicines in medicine {
-//                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details", stock: stock)
-//            }
+            //            for medicines in medicine {
+            //                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details", stock: stock)
+            //            }
         }catch{
             throw MedicineError.invalidMedicine
         }
@@ -151,6 +151,25 @@ class MedicineRepository: ObservableObject {
 
 
 enum MedicineError: Error, Equatable {
+    
+    static func == (lhs: MedicineError, rhs: MedicineError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidDelete, .invalidDelete),
+            (.invalidMedicine, .invalidMedicine),
+            (.invalidAisles, .invalidAisles),
+            (.invalidSetData, .invalidSetData),
+            (.medicineIsEmpty, .medicineIsEmpty),
+            (.aisleIsEmpty, .aisleIsEmpty):
+            return true
+            
+        case (.addHistoryThorughMedicineFailed, .addHistoryThorughMedicineFailed):
+            return false
+            
+        default:
+            return false
+        }
+    }
+    
     case invalidDelete
     case invalidMedicine
     case invalidAisles
