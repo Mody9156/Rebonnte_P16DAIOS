@@ -8,9 +8,29 @@ import XCTest
 @testable import pack
 import FirebaseFirestore
 
+
+//func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
+//    medicineService.fetchMedicines { medicine in
+//        if medicine.isEmpty {
+//            let _ = MedicineError.medicineIsEmpty
+//        }else{
+//            completion(medicine)
+//        }
+//    }
+//}
+
+
+
 class MockMedicineService: MedicineProtocol{
+    var showErrors : Bool = false
+    var medicines : [pack.Medicine] = []
+
     func fetchMedicines(completion: @escaping ([pack.Medicine]) -> Void) {
-        <#code#>
+        if showErrors {
+            medicines = []
+        }else{
+            medicines = Medicine.testMedicine
+        }
     }
 
     func fetchAisles(completion: @escaping ([String]) -> Void) {

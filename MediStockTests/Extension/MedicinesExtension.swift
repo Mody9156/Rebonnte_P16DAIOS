@@ -10,11 +10,11 @@ import Foundation
 
 
 extension pack.Medicine {
-    static var testMEdicine: Medicine{
-        return Medicine(name: "Doliprane", stock: 10, aisle: "A2")
+    static var testMedicine: [Medicine]{
+        return [Medicine(name: "Doliprane", stock: 10, aisle: "A2")]
     }
     
-    static var emptyStockMedicine: Medicine {
-        return Medicine(name: "Ibuprofen", stock: 0, aisle: "B1")
+    static var emptyStockMedicine: [Medicine] {
+        return [Medicine(name: "Ibuprofen", stock: 0, aisle: "B1")]
     }
 }
