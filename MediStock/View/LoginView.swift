@@ -52,7 +52,9 @@ struct LoginView: View {
                     Button {
                         withAnimation {
                             selectedAutoConnection.toggle()
-                            authViewModel.saveAutoConnectionState(selectedAutoConnection)
+                            Task{
+                                try? await  authViewModel.saveAutoConnectionState(selectedAutoConnection)
+                            }
                         }
                     } label: {
                         ZStack {

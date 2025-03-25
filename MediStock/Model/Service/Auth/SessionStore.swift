@@ -82,4 +82,5 @@ enum AuthError: Error {
     case disableAutoLogin
     case signInThrowError
     case signOutThrowError
+    case saveAutoConnectionState
 }

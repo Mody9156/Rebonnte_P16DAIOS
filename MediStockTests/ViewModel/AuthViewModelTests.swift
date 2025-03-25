@@ -136,11 +136,12 @@ final class AuthViewModelTests {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
-        //When
-        authViewModel.saveAutoConnectionState(true)
-        //Then
-        let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
-        #expect(userDefault == true)
+        //When/Then
+        await #expect(throws: Never.self){
+            try await authViewModel.saveAutoConnectionState(true)
+            let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
+           #expect(userDefault == true)
+         }
     }
     
     @Test
@@ -148,11 +149,12 @@ final class AuthViewModelTests {
         //Given
         let mockAuthService =  MockAuthViewModel()
         let authViewModel = AuthViewModel(session: mockAuthService)
-        //When
-        authViewModel.saveAutoConnectionState(false)
-        //Then
-        let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
-        #expect(userDefault == false)
+        //When/Then
+        await #expect(throws:ShowErrors.loginThrowError){
+            try await authViewModel.saveAutoConnectionState(false)
+            let userDefault = UserDefaults.standard.bool(forKey: "autoLogin")
+            #expect(userDefault == false)
+        }
     }
     
     @Test
@@ -167,6 +169,19 @@ final class AuthViewModelTests {
         //When/Then
         await #expect(throws: Never.self) {
             try? await authViewModel.autotoLogin()
+        }
+    }
+    
+    @Test
+    func autologinThrowºError() async throws {
+        //Given
+        let mockAuthService =  MockAuthViewModel()
+        let authViewModel = AuthViewModel(session: mockAuthService)
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        //When/Then
+        await #expect(throws: ShowErrors.loginThrowError){
+        try await authViewModel.autotoLogin()
         }
     }
 }

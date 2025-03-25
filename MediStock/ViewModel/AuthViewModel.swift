@@ -45,7 +45,7 @@ class AuthViewModel : ObservableObject {
     func createdNewUser(email: String, password: String) async throws {
         do{
             let user = try await session.signUp(email: email, password: password)
-             UserDefaults.standard.set(user.email, forKey: "email")
+            UserDefaults.standard.set(user.email, forKey: "email")
             messageError = ""
         }catch{
             messageError = "Erreur lors de la création de l'utilisateur"
@@ -70,14 +70,22 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    func saveAutoConnectionState(_ state:Bool){
-       return UserDefaults.standard.set(state, forKey: "autoLogin")
+    func saveAutoConnectionState(_ state:Bool) async throws {
+        if state {
+            UserDefaults.standard.set(state, forKey: "autoLogin")
+        }else {
+            throw ShowErrors.loginThrowError
+        }
     }
     
     func autotoLogin() async throws {
-        if let saveEmail = UserDefaults.standard.string(forKey: "email"),
-           let savePassword = UserDefaults.standard.string(forKey: "password"){
-            try await login(email: saveEmail, password: savePassword)
+        do{
+            if let saveEmail = UserDefaults.standard.string(forKey: "email"),
+               let savePassword = UserDefaults.standard.string(forKey: "password")   {
+                let _ = try await session.signIn(email: saveEmail, password: savePassword)
+            }
+        }catch{
+            throw ShowErrors.loginThrowError
         }
     }
 }
