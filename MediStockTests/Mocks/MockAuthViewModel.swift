@@ -8,80 +8,83 @@ import Testing
 @testable import pack
 import Foundation
 
-class MockAuthViewModel : AuthViewModelProtocol{
+class MockAuthViewModel: AuthViewModelProtocol {
+    var session: pack.User?
+    var error: pack.AuthError?
     var isAuthenticated: Bool = false
     var messageError: String = ""
     var onLoginSucceed: (() -> Void)?
-    var saveEmail : String?
-    var savePassword : String?
-    
-    func login(email: String, password: String) async throws {
-        isAuthenticated = true
-        
-        if email == "joe@gmail.com" && password == "123456" {
-            isAuthenticated = true
-            messageError = ""
-            saveEmail = email
-            savePassword = password
-        }else {
-            messageError = "Erreur lors de la connexion"
-            throw ShowErrors.loginThrowError
-        }
-    }
-    
-    func createdNewUser(email: String, password: String) async throws {
-        
-        if email != "joe@gmail.com" && password != "123456" {
-            messageError = ""
-        }else {
-            messageError = "Erreur lors de la création de l'utilisateur"
-            throw ShowErrors.createdNewUserThrowError
-        }
-    }
-    
-    func changeStatus() async throws {
-        if isAuthenticated {
-            messageError = "erreur lors de la persistance de donné de l'utilisateur"
-            throw ShowErrors.changeStatusThrowError
-        }
-    }
-    
+    var saveEmail: String?
+    var savePassword: String?
+
+
+
+    // Désactiver la connexion automatique
     func disableAutoLogin() async throws {
         if isAuthenticated {
-            messageError = "erreur de deconnexion"
+            messageError = "Erreur de déconnexion"
             throw ShowErrors.disableAutoLoginThrowError
         }
     }
-    
-     func saveAutoConnectionState(_ state: Bool) {
-        if state  {
-            UserDefaults.standard.set(state, forKey: "autoConnection")
+//
+//    // Sauvegarder l'état de connexion automatique
+//    func saveAutoConnectionState(_ state: Bool) {
+//        if state {
+//            UserDefaults.standard.set(state, forKey: "autoConnection")
+//        }
+//    }
+
+//    // Connexion automatique avec email et mot de passe sauvegardés
+//    func autotoLogin() async throws {
+//        guard let email = UserDefaults.standard.string(forKey: "email"),
+//              let password = UserDefaults.standard.string(forKey: "password") else {
+//            messageError = "Veuillez remplir tous les champs"
+//            return
+//        }
+//        
+//        guard !email.isEmpty, !password.isEmpty else {
+//            messageError = "Veuillez remplir tous les champs"
+//            saveEmail = ""
+//            savePassword = ""
+//            return
+//        }
+//        
+//        saveEmail = email
+//        savePassword = password
+//        messageError = ""
+//        
+//        do {
+//            try await login(email: email, password: password)
+//        } catch {
+//            messageError = "Erreur lors de la connexion (sauvegarde échouée)"
+//        }
+//    }
+
+    // Implémentation de la méthode pour signUp
+    func signUp(email: String, password: String) async throws -> pack.User {
+        if email == "joe@gmail.com" && password == "123456" {
+            let user = pack.User(uid: "12345", email: email)
+            self.session = user
+            return user
+        } else {
+            throw ShowErrors.createdNewUserThrowError
         }
     }
-    
-    func autotoLogin() async throws {
 
-        guard let email = UserDefaults.standard.string(forKey: "email"),
-              let password = UserDefaults.standard.string(forKey: "password") else {
-            messageError = "Veuillez remplir tous les champs"
-            return
+    // Implémentation de la méthode pour signIn
+    func signIn(email: String, password: String) async throws -> pack.User {
+        if email == "joe@gmail.com" && password == "123456" {
+            let user = pack.User(uid: "12345", email: email)
+            self.session = user
+            return user
+        } else {
+            throw ShowErrors.loginThrowError
         }
-      
-        guard !email.isEmpty, !password.isEmpty else {
-            messageError = "Veuillez remplir tous les champs"
-            saveEmail = ""
-            savePassword = ""
-            return
-        }
-        saveEmail = email
-        savePassword = password
+    }
 
-        messageError = ""
 
-        do {
-            try await login(email: email, password: password)
-        } catch {
-            messageError = "Erreur lors de la connexion (sauvegarde echouée)"
-        }
+    // Simuler la méthode listen() (aucune action ici, juste pour faire passer les tests)
+    func listen() async throws {
+        // Aucune action spécifique ici
     }
 }
