@@ -4,9 +4,9 @@
 //
 //  Created by Modibo on 24/03/2025.
 //
-
 import Testing
 @testable import pack
+import XCTest
 struct MedicineRepositoryTests {
 
     @Test func fetchMedicinesReturnsValidData() async throws {
@@ -14,13 +14,10 @@ struct MedicineRepositoryTests {
         let mockMedicineService = MockMedicineService()
         let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
         //When/Then
-        medicineRepository.fetchMedicines(completion: { medicine in
-            for i in medicine {
-                #expect(i.stock == 10)
-                #expect(i.name == "Doliprane")
-                #expect(i.aisle == "A2")
-            }
-        })
+        await #expect(throws: Never.self) {
+           let user = try await  medicineRepository.fetchMedicines()
+            #expect(!user.isEmpty)
+        }
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
     
@@ -29,14 +26,35 @@ struct MedicineRepositoryTests {
         let mockMedicineService = MockMedicineService()
         let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
         mockMedicineService.showErrors = true
+        //When
+        await #expect(throws:  MedicineError.medicineIsEmpty) {
+            let medicine = try await  medicineRepository.fetchMedicines()
+            #expect(medicine == [])
+        }
+    }
+    
+    @Test
+    func fetchAislesNoThrowError() async throws {
+        //Given
+        let mockMedicineService = MockMedicineService()
+        let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
         //When/Then
-        #expect(throws: MedicineError.medicineIsEmpty) {
-            medicineRepository.fetchMedicines(completion: { medicine in
-                for i in medicine {
-                    #expect(i.name.isEmpty)
-                    #expect(i.aisle.isEmpty)
-                }
-            })
+        
+        await #expect(throws: Never.self){
+          let medicine = try await  medicineRepository.fetchAisles()
+            #expect(!medicine.isEmpty)
+        }
+    }
+    
+    @Test func fetAislesReturnsEmptyData() async throws {
+        //Given
+        let mockMedicineService = MockMedicineService()
+        let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
+        mockMedicineService.showErrors = true
+        //When/Then
+         #expect(throws:  MedicineError.aisleIsEmpty) {
+            let user = try await  medicineRepository.fetchAisles()
+             #expect(user == [])
         }
     }
 }

@@ -13,20 +13,22 @@ class MockMedicineService: MedicineProtocol{
     var medicines : [pack.Medicine] = []
     var updateName : String = ""
     var historyEntry : [pack.HistoryEntry] = []
-    
-    func fetchMedicines(completion: @escaping ([pack.Medicine]) -> Void) {
+    var testAisles: [String] = ["A1", "B2", "C3"]
+    func fetchMedicines() async throws -> [Medicine] {
         if showErrors {
-            medicines = Medicine.emptyMedicine
+             Medicine.emptyMedicine
+            throw MedicineError.medicineIsEmpty
         }else{
-            medicines = Medicine.testMedicine
+            Medicine.testMedicine
+           
         }
     }
 
-    func fetchAisles(completion: @escaping ([String]) -> Void) {
+    func fetchAisles() async throws -> [String] {
         if showErrors {
-            medicines = Medicine.emptyMedicine
+            throw MedicineError.aisleIsEmpty
         }else{
-            medicines = Medicine.testMedicine
+            return testAisles
         }
     }
 
@@ -55,12 +57,13 @@ class MockMedicineService: MedicineProtocol{
         if showErrors {
             throw MedicineError.invalidDelete
         }else{
-            var mutableMedicine = medicines
+            var mutableMedicine = aisles
             for index in offsets.sorted(by:>) {
                 if index < mutableMedicine.count {
                     mutableMedicine.remove(at: index)
                 }
             }
+            return mutableMedicine
         }
     }
 
@@ -80,6 +83,7 @@ class MockMedicineService: MedicineProtocol{
     func updateStock(_ medicine: pack.Medicine, by amount: Int, user: String) -> [pack.Medicine] {
         if showErrors {
             historyEntry = []
+            return medicines
         }else {
             if let index = medicines.firstIndex(where: { $0.id == medicine.id }){
                 medicines[index].stock = amount

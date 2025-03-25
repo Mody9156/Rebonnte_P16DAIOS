@@ -29,33 +29,33 @@ class MedicineService: MedicineProtocol, ObservableObject{
     private var db : Firestore = Firestore.firestore()
     
     // Récupérer l'intégralité des 💊
-    func fetchMedicines(completion: @escaping ([Medicine]) -> Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if error != nil {
-                completion([])
-            } else {
-                let medicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                completion(medicines)
+    func fetchMedicines() async throws -> [Medicine] {
+        return try await withCheckedThrowingContinuation { continuation in
+            db.collection("medicines").getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    continuation.resume(throwing: error) // Si erreur, on la renvoie
+                } else {
+                    let medicines = querySnapshot?.documents.compactMap { document in
+                        try? document.data(as: Medicine.self)
+                    } ?? []
+                    continuation.resume(returning: medicines) // Retourne la liste des médicaments
+                }
             }
         }
     }
     
     // Récupérer la liste des allées disponibles
-    func fetchAisles(completion: @escaping ([String]) -> Void) {
-        db.collection("medicines").addSnapshotListener { (querySnapshot, error) in
-            if error != nil {
-                completion([])
-            } else {
-                let allMedicines = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Medicine.self)
-                } ?? []
-                let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
-                completion(aisles)
-            }
+    func fetchAisles() async throws -> [String] {
+        let snapshot = try await db.collection("medicines").getDocuments()
+        
+        let allMedicines = snapshot.documents.compactMap { document in
+            try? document.data(as: Medicine.self)
         }
+        
+        let aisles = Array(Set(allMedicines.map { $0.aisle })).sorted()
+        return aisles
     }
+
     
 //    // Ajouter un médicament aléatoire
 //    func setData(user: String) async throws -> [Medicine] {

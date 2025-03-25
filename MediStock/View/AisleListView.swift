@@ -63,7 +63,9 @@ struct AisleListView: View {
             }
         }
         .onAppear {
-            medicineStockViewModel.observeAisles()
+            Task{
+                try? await  medicineStockViewModel.observeAisles()
+            }
         }
         .accessibilityElement(children: .contain)
     }

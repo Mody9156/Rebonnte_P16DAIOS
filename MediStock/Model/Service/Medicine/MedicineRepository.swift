@@ -25,24 +25,23 @@ class MedicineRepository: ObservableObject {
         self.medicineService = medicineService
     }
     
-    func fetchMedicines(completion:@escaping([Medicine]) -> Void) {
-        medicineService.fetchMedicines { medicine in
-            if medicine.isEmpty {
-                completion([])
-            }else{
-                completion(medicine)
-            }
+    func fetchMedicines() async throws -> [Medicine] {
+        do {
+            let user = try await  medicineService.fetchMedicines()
+            return user
+        }catch {
+            throw MedicineError.medicineIsEmpty
         }
     }
     
-    func fetchAisles(completion:@escaping( [String])->Void) {
-        medicineService.fetchAisles { aisles in
-            if aisles.isEmpty {
-                completion([])
-            }else{
-                completion(aisles)
-            }
+    func fetchAisles() async throws -> [String]  {
+        do{
+            let medicine = try await medicineService.fetchAisles()
+            return medicine
+        }catch{
+            throw MedicineError.aisleIsEmpty
         }
+
     }
     //
     //    func setData(user: String) async throws {

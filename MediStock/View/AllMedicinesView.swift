@@ -69,7 +69,7 @@ struct AllMedicinesView: View {
         }
         .onAppear {
             Task{
-                medicineStockViewModel.observeMedicines()
+              try? await  medicineStockViewModel.observeMedicines()
             }
         }
     }

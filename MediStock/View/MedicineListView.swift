@@ -69,7 +69,10 @@ struct MedicineListView: View {
             .accessibilityLabel("List of medicines in \(aisle)")
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
-                medicineStockViewModel.observeMedicines()
+                Task{
+                    try? await medicineStockViewModel.observeMedicines()
+                }
+                
             }
             
             .padding()

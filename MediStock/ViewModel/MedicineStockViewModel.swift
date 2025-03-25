@@ -29,15 +29,21 @@ class MedicineStockViewModel: ObservableObject {
 
     }
     
-    func observeMedicines()  {
-        self.medicineRepository.fetchMedicines{ [weak self]  medicines in
-             self?.medicines = medicines
+    func observeMedicines() async throws {
+        do{
+            let medicine = try await medicineRepository.fetchMedicines()
+            medicines = medicine
+        }catch{
+            throw MedicineError.medicineIsEmpty
         }
     }
     
-    func observeAisles() {
-        medicineRepository.fetchAisles { [weak self]  aisles in
-            self?.aisles = aisles
+    func observeAisles() async throws {
+        do{
+            let medicine =  try await medicineRepository.fetchAisles()
+            aisles = medicine
+        }catch{
+            throw MedicineError.aisleIsEmpty
         }
     }
     
