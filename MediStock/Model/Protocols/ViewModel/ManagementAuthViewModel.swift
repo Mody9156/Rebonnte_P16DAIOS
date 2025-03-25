@@ -50,7 +50,7 @@ class ManagementAuthViewModel: AuthViewModelProtocol, ObservableObject {
     @MainActor
     func changeStatus() async throws {
         do {
-            try await session.listen()
+           try await session.listen()
             _isAuthenticated =  session.session != nil
         } catch {
             throw ShowErrors.changeStatusThrowError

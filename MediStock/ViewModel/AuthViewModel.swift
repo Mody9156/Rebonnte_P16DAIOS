@@ -44,8 +44,7 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func createdNewUser(email: String, password: String) async throws {
         do{
-            _ = try await authViewModelProtocol
-                .createdNewUser(email: email, password: password)
+           try await authViewModelProtocol.createdNewUser(email: email,password: password)
             messageError = ""
         }catch{
             messageError = "Erreur lors de la création de l'utilisateur"
@@ -56,8 +55,7 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func changeStatus() async throws {
         do{
-            try await session.listen()
-         
+            try await authViewModelProtocol.changeStatus()
         }catch{
             throw ShowErrors.changeStatusThrowError
         }
@@ -66,7 +64,6 @@ class AuthViewModel : ObservableObject {
     func disableAutoLogin() async throws {
         do{
             try await authViewModelProtocol.disableAutoLogin()
-
         }catch{
             throw ShowErrors.disableAutoLoginThrowError
         }
@@ -77,7 +74,6 @@ class AuthViewModel : ObservableObject {
     }
     
     func autotoLogin() async throws {
-
         if let saveEmail = UserDefaults.standard.string(forKey: "email"),
            let savePassword = UserDefaults.standard.string(forKey: "password"){
 
