@@ -382,9 +382,17 @@ struct MedicineRepositoryTests {
         mockMedicineService.showErrors = true
         
         //When/Then
-        await #expect(throws: MedicineError.addHistoryThorughMedicineFailed) {
-             try await  medicineRepository
-                .addHistory(action: "", user: "Josh", medicineId: "", details: "update +21", stock: 120)
-        }
+        do {
+             try await medicineRepository.addHistory(action: "", user: "", medicineId: "", details: "", stock: -1)
+             XCTFail("Expected error to be thrown")
+         } catch let error {
+             if let medicineError = error as? MedicineError {
+                 XCTAssertEqual(medicineError, MedicineError.addHistoryThorughMedicineFailed)
+             } else {
+                 XCTFail("Expected MedicineError.addHistoryThorughMedicineFailed but got \(error)")
+             }
+             XCTAssertNil(mockMedicineService.historyEntry)
+         }
+       
     }
 }
