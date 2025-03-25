@@ -10,15 +10,13 @@ enum ShowErrors : Error {
 
 class AuthViewModel : ObservableObject {
     @Published var session: SessionStore
-    var authViewModelProtocol : AuthViewModelProtocol
     @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
     
-    init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ,authViewModelProtocol : AuthViewModelProtocol = ManagementAuthViewModel()){
+    init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-        self.authViewModelProtocol = authViewModelProtocol
         session.$session
             .map { $0 != nil }
             .assign(to: &$isAuthenticated)
@@ -27,10 +25,9 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func login(email:String, password:String) async throws {
         do {
-           try await authViewModelProtocol.login(
-                email: email,
-                password: password
-            )
+            
+            let user = try await session.signIn(email: email, password: password)
+            UserDefaults.standard.set(user.email, forKey: "email")
             messageError = ""
             isAuthenticated = true
             onLoginSucceed?()
@@ -44,7 +41,8 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func createdNewUser(email: String, password: String) async throws {
         do{
-           try await authViewModelProtocol.createdNewUser(email: email,password: password)
+            let user = try await session.signUp(email: email, password: password)
+             UserDefaults.standard.set(user.email, forKey: "email")
             messageError = ""
         }catch{
             messageError = "Erreur lors de la création de l'utilisateur"
@@ -52,9 +50,10 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    @MainActor
     func changeStatus() async throws {
         do{
-            try await authViewModelProtocol.changeStatus()
+            try await session.listen()
         }catch{
             throw ShowErrors.changeStatusThrowError
         }
@@ -62,7 +61,7 @@ class AuthViewModel : ObservableObject {
     
     func disableAutoLogin() async throws {
         do{
-            try await authViewModelProtocol.disableAutoLogin()
+            try await session.disableAutoLogin()
         }catch{
             throw ShowErrors.disableAutoLoginThrowError
         }

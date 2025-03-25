@@ -14,8 +14,8 @@ final class AuthViewModelTests {
     @Test
     func loginWithRighValues() async throws {
         //given
-        let mockAuthService =  MockAuthViewModel( )
-        let authViewModel = AuthViewModel(authViewModelProtocol: mockAuthService)
+        var mockAuthService: MockAuthService!
+        let authViewModel = AuthViewModel(session: mockAuthService)
         //when
         try? await authViewModel.login(email: "joe@gmail.com", password: "123456")
         //Then

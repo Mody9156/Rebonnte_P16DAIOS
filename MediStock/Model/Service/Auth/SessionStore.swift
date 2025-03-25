@@ -36,7 +36,6 @@ public class SessionStore: ObservableObject {
             }
         }
     }
-      
     
     func signUp(email: String, password: String) async throws -> User  {
         do{
