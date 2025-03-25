@@ -11,7 +11,9 @@ import FirebaseFirestore
 class MockMedicineService: MedicineProtocol{
     var showErrors : Bool = false
     var medicines : [pack.Medicine] = []
-
+    var updateName : String = ""
+    var historyEntry : [pack.HistoryEntry] = []
+    
     func fetchMedicines(completion: @escaping ([pack.Medicine]) -> Void) {
         if showErrors {
             medicines = Medicine.emptyMedicine
@@ -63,34 +65,67 @@ class MockMedicineService: MedicineProtocol{
     }
 
     func updateMedicine(_ medicine: pack.Medicine, user: String) async throws -> [pack.Medicine] {
-        <#code#>
+        if showErrors {
+            throw MedicineError.invalidMedicine
+        }else {
+            if let index = medicines.firstIndex(where: { $0.id == medicine.id }){
+                medicines[index].name = updateName
+            }else{
+                throw MedicineError.invalidMedicine
+            }
+            return [medicine]
+        }
     }
 
     func updateStock(_ medicine: pack.Medicine, by amount: Int, user: String) -> [pack.Medicine] {
-        <#code#>
+        if showErrors {
+            historyEntry = []
+        }else {
+            if let index = medicines.firstIndex(where: { $0.id == medicine.id }){
+                medicines[index].stock = amount
+            }
+            historyEntry = pack.HistoryEntry.testHistoryEntry
+            return [medicine]
+        }
     }
 
-    func fetchHistory(
-        for medicine: pack.Medicine,
-        completion: @escaping ([pack.HistoryEntry]) -> Void
-    ) {
-        <#code#>
+    func fetchHistory(for medicine: pack.Medicine,completion: @escaping ([pack.HistoryEntry]) -> Void) {
+        if showErrors {
+            completion(historyEntry)
+        }else{
+            completion([])
+        }
     }
 
     func trieByName(completion: @escaping ([pack.Medicine]) -> Void) {
-        <#code#>
+        if showErrors {
+            completion(medicines)
+        }else{
+            completion([])
+        }
     }
 
     func trieByStock(completion: @escaping ([pack.Medicine]) -> Void) {
-        <#code#>
+        if showErrors {
+            completion(medicines)
+        }else{
+            completion([])
+        }
     }
 
     func getAllElements(completion: @escaping ([pack.Medicine]) -> Void) {
-        <#code#>
+        if showErrors {
+            completion(medicines)
+        }else{
+            completion([])
+        }
     }
 
     func setDataToAisle(name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
-        <#code#>
+        if showErrors && name.isEmpty && stock <= 0 && aisle.isEmpty{
+            return medicines
+        }else{
+            return pack.Medicine.testMedicine
+        }
     }
-
 }
