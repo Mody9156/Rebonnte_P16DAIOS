@@ -31,7 +31,6 @@ class AuthViewModel : ObservableObject {
                 email: email,
                 password: password
             )
-          
             messageError = ""
             isAuthenticated = true
             onLoginSucceed?()
@@ -57,7 +56,7 @@ class AuthViewModel : ObservableObject {
     @MainActor
     func changeStatus() async throws {
         do{
-            try await authViewModelProtocol.changeStatus()
+            try await session.listen()
          
         }catch{
             throw ShowErrors.changeStatusThrowError
@@ -83,7 +82,6 @@ class AuthViewModel : ObservableObject {
            let savePassword = UserDefaults.standard.string(forKey: "password"){
 
             try await login(email: saveEmail, password: savePassword)
-        }else{
         }
     }
 }
