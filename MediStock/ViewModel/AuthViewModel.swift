@@ -77,7 +77,6 @@ class AuthViewModel : ObservableObject {
     func autotoLogin() async throws {
         if let saveEmail = UserDefaults.standard.string(forKey: "email"),
            let savePassword = UserDefaults.standard.string(forKey: "password"){
-
             try await login(email: saveEmail, password: savePassword)
         }
     }

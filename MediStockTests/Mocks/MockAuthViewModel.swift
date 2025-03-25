@@ -16,75 +16,53 @@ class MockAuthViewModel: AuthViewModelProtocol {
     var onLoginSucceed: (() -> Void)?
     var saveEmail: String?
     var savePassword: String?
-
-
-
-    // Désactiver la connexion automatique
+    
     func disableAutoLogin() async throws {
         if isAuthenticated {
             messageError = "Erreur de déconnexion"
             throw ShowErrors.disableAutoLoginThrowError
+        }else{
+            messageError = ""
         }
     }
-//
-//    // Sauvegarder l'état de connexion automatique
-//    func saveAutoConnectionState(_ state: Bool) {
-//        if state {
-//            UserDefaults.standard.set(state, forKey: "autoConnection")
-//        }
-//    }
-
-//    // Connexion automatique avec email et mot de passe sauvegardés
-//    func autotoLogin() async throws {
-//        guard let email = UserDefaults.standard.string(forKey: "email"),
-//              let password = UserDefaults.standard.string(forKey: "password") else {
-//            messageError = "Veuillez remplir tous les champs"
-//            return
-//        }
-//        
-//        guard !email.isEmpty, !password.isEmpty else {
-//            messageError = "Veuillez remplir tous les champs"
-//            saveEmail = ""
-//            savePassword = ""
-//            return
-//        }
-//        
-//        saveEmail = email
-//        savePassword = password
-//        messageError = ""
-//        
-//        do {
-//            try await login(email: email, password: password)
-//        } catch {
-//            messageError = "Erreur lors de la connexion (sauvegarde échouée)"
-//        }
-//    }
-
-    // Implémentation de la méthode pour signUp
+    
     func signUp(email: String, password: String) async throws -> pack.User {
-        if email == "joe@gmail.com" && password == "123456" {
-            let user = pack.User(uid: "12345", email: email)
-            self.session = user
-            return user
+        guard email != "joe@gmail.com" else {
+            throw ShowErrors.createdNewUserThrowError
+        }
+        
+        if email == "joe_3@gmail.com" && password == "123456" {
+            isAuthenticated = true
+            saveEmail = email
+            savePassword = password
+            messageError = ""
+            return pack.User.testUser_3
         } else {
+            messageError = "Erreur lors de la création de l'utilisateur"
+            isAuthenticated = false
             throw ShowErrors.createdNewUserThrowError
         }
     }
-
-    // Implémentation de la méthode pour signIn
+    
     func signIn(email: String, password: String) async throws -> pack.User {
-        if email == "joe@gmail.com" && password == "123456" {
-            let user = pack.User(uid: "12345", email: email)
-            self.session = user
-            return user
+        
+        if email == "joe@gmail.com" && password == "123456"{
+            isAuthenticated = true
+            saveEmail = email
+            savePassword = password
+            return pack.User.testUser_2
         } else {
+            isAuthenticated = false
             throw ShowErrors.loginThrowError
         }
     }
-
-
-    // Simuler la méthode listen() (aucune action ici, juste pour faire passer les tests)
+    
     func listen() async throws {
-        // Aucune action spécifique ici
+        if isAuthenticated {
+            messageError = "erreur de deconnexion"
+            throw ShowErrors.disableAutoLoginThrowError
+        }else {
+            messageError = ""
+        }
     }
 }

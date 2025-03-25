@@ -37,6 +37,15 @@ extension pack.User {
     static var testUser: [User] {
         return [User(uid: "fakeUid", email: "fakeEmail@gmail.com")]
     }
+    
+    static var testUser_2: User {
+        return User(uid: "fakeUid", email: "joe@gmail.com")
+    }
+    
+    static var testUser_3: User {
+        return User(uid: "fake_2Uid", email: "joe_3@gmail.com")
+    }
+    
     static var emptyUser: [User] {
         return []
     }
