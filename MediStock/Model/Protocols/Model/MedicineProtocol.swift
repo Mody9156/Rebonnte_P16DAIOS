@@ -21,5 +21,6 @@ protocol MedicineProtocol{
     func trieByStock(completion:@escaping([Medicine]) ->Void)
     func getAllElements(completion:@escaping([Medicine]) -> Void)
     func setDataToAisle(name:String, stock:Int, aisle:String) async throws -> [Medicine]
+    func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws
 
 }

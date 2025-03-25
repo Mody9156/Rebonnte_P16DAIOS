@@ -14,9 +14,14 @@ class MockMedicineService: MedicineProtocol{
     var updateName : String = ""
     var historyEntry : [pack.HistoryEntry] = []
     var testAisles: [String] = ["A1", "B2", "C3"]
+    var testMedicines: [pack.Medicine] = [
+           pack.Medicine(id: "1", name: "Doliprane", stock: 10, aisle: "A2"),
+           pack.Medicine(id: "2", name: "Aspirine", stock: 5, aisle: "B3"),
+           pack.Medicine(id: "3", name: "Paracétamol", stock: 8, aisle: "C1")
+       ]
+ 
     func fetchMedicines() async throws -> [Medicine] {
         if showErrors {
-             Medicine.emptyMedicine
             throw MedicineError.medicineIsEmpty
         }else{
             Medicine.testMedicine
@@ -33,7 +38,7 @@ class MockMedicineService: MedicineProtocol{
     }
 
     func setDataToList(user: String, name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
-        if name == "Doliprane" && stock == 10 && aisle == "A2" && !user.isEmpty {
+        if name == "Doliprane" && stock == 10 && aisle == "A2" && !user.isEmpty{
             pack.Medicine.testMedicine
         }else{
             throw MedicineError.invalidSetData
@@ -44,10 +49,9 @@ class MockMedicineService: MedicineProtocol{
         if showErrors {
             throw MedicineError.invalidDelete
         }else{
-            var mutableMedicine = medicines
             for index in offsets.sorted(by:>) {
-                if index < mutableMedicine.count {
-                    mutableMedicine.remove(at: index)
+                if index < testMedicines.count {
+                    testMedicines.remove(at: index)
                 }
             }
         }
@@ -57,27 +61,25 @@ class MockMedicineService: MedicineProtocol{
         if showErrors {
             throw MedicineError.invalidDelete
         }else{
-            var mutableMedicine = aisles
             for index in offsets.sorted(by:>) {
-                if index < mutableMedicine.count {
-                    mutableMedicine.remove(at: index)
+                if index < testAisles.count {
+                    testAisles.remove(at: index)
                 }
             }
-            return mutableMedicine
+            return testAisles
         }
     }
 
     func updateMedicine(_ medicine: pack.Medicine, user: String) async throws -> [pack.Medicine] {
         if showErrors {
-            throw MedicineError.invalidMedicine
-        }else {
-            if let index = medicines.firstIndex(where: { $0.id == medicine.id }){
-                medicines[index].name = updateName
-            }else{
-                throw MedicineError.invalidMedicine
-            }
-            return [medicine]
-        }
+                  throw MedicineError.invalidMedicine
+              }
+              if let index = testMedicines.firstIndex(where: { $0.id == medicine.id }) {
+                  testMedicines[index].name = updateName
+                  return [testMedicines[index]]
+              } else {
+                  throw MedicineError.invalidMedicine
+              }
     }
 
     func updateStock(_ medicine: pack.Medicine, by amount: Int, user: String) -> [pack.Medicine] {
@@ -85,51 +87,70 @@ class MockMedicineService: MedicineProtocol{
             historyEntry = []
             return medicines
         }else {
-            if let index = medicines.firstIndex(where: { $0.id == medicine.id }){
-                medicines[index].stock = amount
+            var array : [Medicine] = []
+            if let index = testMedicines.firstIndex(where: { $0.id == medicine.id }){
+                testMedicines[index].stock = amount
+                historyEntry = pack.HistoryEntry.testHistoryEntry
+                array = [testMedicines[index]]
             }
-            historyEntry = pack.HistoryEntry.testHistoryEntry
-            return [medicine]
+            return array
         }
     }
 
     func fetchHistory(for medicine: pack.Medicine,completion: @escaping ([pack.HistoryEntry]) -> Void) {
         if showErrors {
-            completion(historyEntry)
-        }else{
             completion([])
+        }else{
+            completion(historyEntry)
         }
     }
 
     func trieByName(completion: @escaping ([pack.Medicine]) -> Void) {
         if showErrors {
-            completion(medicines)
-        }else{
             completion([])
+        }else{
+            completion(medicines)
         }
     }
 
     func trieByStock(completion: @escaping ([pack.Medicine]) -> Void) {
         if showErrors {
-            completion(medicines)
-        }else{
             completion([])
+        }else{
+            completion(medicines)
         }
     }
 
     func getAllElements(completion: @escaping ([pack.Medicine]) -> Void) {
         if showErrors {
-            completion(medicines)
-        }else{
             completion([])
+        }else{
+            completion(medicines)
         }
     }
 
     func setDataToAisle(name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
         if showErrors && name.isEmpty && stock <= 0 && aisle.isEmpty{
-            return medicines
+            throw MedicineError.invalidSetData  
         }else{
             return pack.Medicine.testMedicine
+        }
+    }
+    
+    func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
+        if showErrors  {
+            throw MedicineError.addHistoryThorughMedicineFailed
+        }else{
+            let newEntry = pack.HistoryEntry(
+                            id: UUID().uuidString,
+                            medicineId: action,
+                            user: user,
+                            action: medicineId,
+                            details: details,
+                            timestamp: Date.now,
+                            stock:stock
+                        )
+            historyEntry.append(newEntry)
         }
     }
 }

@@ -250,4 +250,13 @@ class MedicineService: MedicineProtocol, ObservableObject{
             }
         }
     }
+    
+     func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
+        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details, stock: stock)
+        do {
+            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
+        } catch let error {
+            throw MedicineError.addHistoryThorughMedicineFailed
+        }
+    }
 }

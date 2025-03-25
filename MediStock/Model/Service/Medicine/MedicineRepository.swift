@@ -95,13 +95,13 @@ class MedicineRepository: ObservableObject {
         
     }
     
-    private func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
-        let history = HistoryEntry(medicineId: medicineId, user: user, action: action, details: details, stock: stock)
-        do {
-            try db.collection("history").document(history.id ?? UUID().uuidString).setData(from: history)
-        } catch let error {
-            throw MedicineError.addHistoryThorughMedicineFailed(result:error)
-        }
+     func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
+         do{
+             try await medicineService
+                 .addHistory(action: action, user: user, medicineId: medicineId, details: details, stock: stock)
+         }catch{
+             throw MedicineError.addHistoryThorughMedicineFailed
+         }
     }
     
     func updateMedicine(_ medicine: Medicine, user: String, stock:Int) async throws {
@@ -172,7 +172,7 @@ enum MedicineError: Error, Equatable {
     case invalidMedicine
     case invalidAisles
     case invalidSetData
-    case addHistoryThorughMedicineFailed(result:Error)
+    case addHistoryThorughMedicineFailed
     case medicineIsEmpty
     case aisleIsEmpty
 }
