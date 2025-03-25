@@ -107,10 +107,7 @@ class MedicineRepository: ObservableObject {
     
     func updateMedicine(_ medicine: Medicine, user: String, stock:Int) async throws {
         do{
-            let medicine = try await medicineService.updateMedicine(medicine, user: user)
-            //            for medicines in medicine {
-            //                try? await addHistory(action: "Updated \(medicines.name)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Updated medicine details", stock: stock)
-            //            }
+            let _ = try await medicineService.updateMedicine(medicine, user: user)
         }catch{
             throw MedicineError.invalidMedicine
         }
