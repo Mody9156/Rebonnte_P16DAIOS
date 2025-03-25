@@ -47,7 +47,6 @@
 		4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */; };
 		4FC3B8352D8DC9F700918ABF /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */; };
 		4FC3B8372D8DD29300918ABF /* MockAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8362D8DD29300918ABF /* MockAuthViewModel.swift */; };
-		4FC3B8392D8DDD8500918ABF /* ManagementAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3B8382D8DDD8500918ABF /* ManagementAuthViewModel.swift */; };
 		4FC3E2AA2D89C2FB0066841D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2A92D89C2FB0066841D /* HistoryView.swift */; };
 		4FC3E2AC2D89DC810066841D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC3E2AB2D89DC810066841D /* LoadingView.swift */; };
 		4FCFC79C2D8C5913006835D2 /* NewMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */; };
@@ -122,7 +121,6 @@
 		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
 		4FC3B8362D8DD29300918ABF /* MockAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthViewModel.swift; sourceTree = "<group>"; };
-		4FC3B8382D8DDD8500918ABF /* ManagementAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementAuthViewModel.swift; sourceTree = "<group>"; };
 		4FC3E2A92D89C2FB0066841D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		4FC3E2AB2D89DC810066841D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicineView.swift; sourceTree = "<group>"; };
@@ -348,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */,
-				4FC3B8382D8DDD8500918ABF /* ManagementAuthViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -548,7 +545,6 @@
 				53E0D8DE2C0609A800DE1134 /* MedicineStockViewModel.swift in Sources */,
 				23FD055A2D43C2A20089DB5C /* AuthServiceProtocol.swift in Sources */,
 				237E0A892D300FBB00EEC056 /* AuthViewModel.swift in Sources */,
-				4FC3B8392D8DDD8500918ABF /* ManagementAuthViewModel.swift in Sources */,
 				53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */,
 				237E0A872D300A4F00EEC056 /* User.swift in Sources */,
 				230CD2052D4BC144009C3F05 /* FirestoreQueryDocumentAdapter.swift in Sources */,
