@@ -4,7 +4,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
-public class SessionStore: ObservableObject {
+public class SessionStore: AuthViewModelProtocol, ObservableObject {
     @Published var session: User?
     @Published var error: AuthError?
     
@@ -13,7 +13,7 @@ public class SessionStore: ObservableObject {
     var isAuthenticated : Bool {
         session != nil
     }
-    
+  
     init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User? = nil, handle: AuthStateDidChangeListenerHandle? = nil) {
         self.authService = authService
         self.session = session

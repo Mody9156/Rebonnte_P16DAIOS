@@ -9,17 +9,20 @@ enum ShowErrors : Error {
 }
 
 class AuthViewModel : ObservableObject {
-    @Published var session: SessionStore
+    @Published var session: AuthViewModelProtocol
     @Published var messageError : String = ""
     @Published var onLoginSucceed : (()-> Void)?
     @Published var isAuthenticated : Bool = false
     
-    init(session : SessionStore = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
+    init(session : AuthViewModelProtocol = SessionStore(),onLoginSucceed : (()-> Void)? = nil ){
         self.session = session
         self.onLoginSucceed = onLoginSucceed
-        session.$session
-            .map { $0 != nil }
-            .assign(to: &$isAuthenticated)
+        if let sessionStore = session as? SessionStore {
+            sessionStore.$session
+                .map { $0 != nil }
+                .assign(to: &$isAuthenticated)
+        }
+        
     }
     
     @MainActor
