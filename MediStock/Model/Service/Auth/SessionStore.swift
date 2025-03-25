@@ -29,22 +29,10 @@ public class SessionStore: ObservableObject {
     }
     
     func listen() async throws {
-        try await withCheckedThrowingContinuation { (continuation:CheckedContinuation<Void, Error>)
-        in
-            authService.addDidChangeListenerHandle { [weak self] user in
-                guard let self = self else {
-                    continuation
-                        .resume(throwing: ShowErrors.disableAutoLoginThrowError)
-                    return
-                }
-                
-                self.session = user
-                
-                if user == nil {
-                    continuation.resume(throwing: ShowErrors.disableAutoLoginThrowError) 
-                } else {
-                    continuation.resume()
-                }
+        authService.addDidChangeListenerHandle { [weak self] user in
+            self?.session = user
+            if user == nil {
+                self?.error = .userIsEmpty
             }
         }
     }
