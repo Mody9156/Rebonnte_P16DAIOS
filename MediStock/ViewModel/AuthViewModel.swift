@@ -52,10 +52,9 @@ class AuthViewModel : ObservableObject {
         }
     }
     
-    @MainActor
     func changeStatus() async throws {
         do{
-            try await session.listen()
+            try await authViewModelProtocol.changeStatus()
         }catch{
             throw ShowErrors.changeStatusThrowError
         }
