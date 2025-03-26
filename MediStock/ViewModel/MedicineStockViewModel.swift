@@ -19,19 +19,18 @@ class MedicineStockViewModel: ObservableObject {
         case updateStockThrowsError
         case updateMedicineThrowsError
     }
-//    MedicineProtocol
+
     @Published var filterOption : FilterOption? = .noFilter
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []
     @Published var history: [HistoryEntry] = []
-    @Published var medicineRepository = MedicineRepository()
+    @Published var medicineRepository : MedicineManagementProtocol
     @Published var messageEror : String? = nil
-//    MedicineRepository()
     @Published var medicineListed: MedicationsData? = ModelData.chargement("Source.json")
     
-    init(medicines: [Medicine] = MedicineRepository().medicines) {
+    init(medicines: [Medicine] = MedicineRepository().medicines, medicineRepository : MedicineManagementProtocol = MedicineRepository()) {
         self.medicines = medicines
-        
+        self.medicineRepository = medicineRepository
     }
     
     func observeMedicines() async throws {
