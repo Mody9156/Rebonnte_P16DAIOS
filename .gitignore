@@ -13,32 +13,21 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-## APi
-<<<<<<< HEAD
-<<<<<<< HEAD
-pack-Info.plist
-GoogleService-Info.plist
-=======
-*pack-Info.plist
-*GoogleService-Info.plist
->>>>>>> View
-=======
 ## API
+# Ignorer les fichiers de configuration Google
 GoogleService-Info.plist
 pack-Info.plist
-<<<<<<< HEAD
->>>>>>> View
-=======
-**/pack-Info.plist
+
+# Ignorer tous les fichiers Info.plist dans les sous-dossiers
 **/GoogleService-Info.plist
->>>>>>> a8b306ef072bb8b27d866013c72706c0356541ad
+**/pack-Info.plist
+
+# Ignorer tous les fichiers qui se terminent par -Info.plist
 *-Info.plist
-=======
-**/Info.plist
->>>>>>> View
 
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 
+# Ignorer les fichiers de sauvegarde
 *.save
