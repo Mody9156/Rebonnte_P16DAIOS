@@ -1,34 +1,34 @@
 name: CI
 
 on:
-    pull_request:
+  pull_request:
     branches: [ main ]
 
 jobs:
-    build-and-test:
+  build-and-test:
     runs-on: macos-14
     timeout-minutes: 10
-    
+
     steps:
-        - name: Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-        
-        - name: Select Xcode
+
+      - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_15.2.app
-        
-        - name: Xcode version
+
+      - name: Xcode version
         run: /usr/bin/xcodebuild -version
-        
-        - name: List Available Simulators
+
+      - name: List Available Simulators
         run: xcrun simctl list devices
-        
-        - name: Restore GoogleService-Info.plist
+
+      - name: Restore GoogleService-Info.plist
         run: echo "${{ secrets.GOOGLE_SERVICE_INFO_PLIST }}" | base64 --decode > MediStock/GoogleService-Info.plist
-        
-        - name: Resolve Swift Package Dependencies
+
+      - name: Resolve Swift Package Dependencies
         run: xcodebuild -resolvePackageDependencies -project MediStock.xcodeproj
-        
-        - name: Build and Test
+
+      - name: Build and Test
         run: |
           xcodebuild clean build test \
           -project MediStock.xcodeproj \
@@ -37,6 +37,6 @@ jobs:
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
           ONLY_ACTIVE_ARCH=YES
-        
-        - name: xcresulttool
-    uses: kishikawakatsumi/xcresulttool@v1.7.1
+
+      - name: xcresulttool
+        uses: kishikawakatsumi/xcresulttool@v1.7.1
