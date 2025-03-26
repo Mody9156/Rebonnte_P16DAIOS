@@ -26,9 +26,15 @@ GoogleService-Info.plist
 ## API
 GoogleService-Info.plist
 pack-Info.plist
+<<<<<<< HEAD
 >>>>>>> View
 *-Info.plist
+=======
+**/Info.plist
+>>>>>>> View
 
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
+
+*.save
