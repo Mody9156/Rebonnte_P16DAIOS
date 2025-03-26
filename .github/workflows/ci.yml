@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -30,7 +30,6 @@ jobs:
 
       - name: Build and Test
         run: |
-          mkdir -p TestResults
           xcodebuild clean build test \
           -project MediStock.xcodeproj \
           -scheme "pack" \
@@ -38,13 +37,20 @@ jobs:
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
           ONLY_ACTIVE_ARCH=YES \
-          -resultBundlePath TestResults/TestResults.xcresult | tee TestResults/xcodebuild.log | xcpretty --color && exit ${PIPESTATUS[0]}
-
-      - name: Check if TestResults.xcresult exists
-        run: ls -R TestResults || echo "No TestResults found!"
+          -resultBundlePath TestResults.xcresult
 
       - name: Process Test Results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: TestResults/TestResults.xcresult
+          path: TestResults.xcresult
+          show-passed-tests: true
+          show-code-coverage: true
+          upload-bundles: always
         if: success() || failure()
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestResults
+          path: TestResults.xcresult
+          retention-days: 7
