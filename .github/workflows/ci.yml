@@ -36,19 +36,5 @@ jobs:
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
-          ONLY_ACTIVE_ARCH=YES \
-          -resultBundlePath result.xcresult  # Générer un fichier .xcresult
+          ONLY_ACTIVE_ARCH=YES
 
-      - name: Check if xcresult file exists
-        run: |
-          if [ -f ./result.xcresult ]; then echo "File exists"; else echo "File does not exist"; exit 1; fi
-
-      - name: Parse test results with xcresulttool
-        uses: kishikawakatsumi/xcresulttool@v1.7.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Xcode Test Results"
-          path: './result.xcresult'  # Indiquer le chemin vers le fichier .xcresult généré
-          show-passed-tests: true
-          show-code-coverage: true
-          upload-bundles: always
