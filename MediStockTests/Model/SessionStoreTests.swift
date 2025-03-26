@@ -9,7 +9,6 @@ import XCTest
 @testable import pack
 import FirebaseAuth
 import FirebaseFirestore
-import Testing
 
 class SessionStoreTests: XCTestCase {
     var sessionStore: SessionStore!
