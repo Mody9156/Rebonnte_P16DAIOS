@@ -13,20 +13,9 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-<<<<<<< HEAD
 ## APi
-<<<<<<< HEAD
 pack-Info.plist
 GoogleService-Info.plist
-=======
-*pack-Info.plist
-*GoogleService-Info.plist
->>>>>>> View
-=======
-## API
-GoogleService-Info.plist
-pack-Info.plist
->>>>>>> View
 *-Info.plist
 
 ### Xcode Patch ###
