@@ -183,5 +183,6 @@ final class AuthViewModelTests {
         await #expect(throws: ShowErrors.loginThrowError){
         try await authViewModel.autotoLogin()
         }
+      
     }
 }

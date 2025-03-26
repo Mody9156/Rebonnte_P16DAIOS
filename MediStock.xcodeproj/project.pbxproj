@@ -59,6 +59,7 @@
 		4FD6DAE32D661571006E7FE5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041582D53666100BA4690 /* FirebaseFirestore */; };
 		4FD6DAE42D661571006E7FE5 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90415A2D53666100BA4690 /* FirebaseFirestoreSwift */; };
 		4FD6DAE52D661571006E7FE5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90415C2D53666100BA4690 /* FirebaseStorage */; };
+		4FE4CD502D93FB3C008E17AA /* MedicineStockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */; };
 		53E0D8972C06084700DE1134 /* MediStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8962C06084700DE1134 /* MediStockApp.swift */; };
 		53E0D8992C06084700DE1134 /* AuthenticationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */; };
 		53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E0D89A2C06084900DE1134 /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		4FC3E2AB2D89DC810066841D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicineView.swift; sourceTree = "<group>"; };
 		4FCFC79D2D8C8339006835D2 /* NewAislesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAislesView.swift; sourceTree = "<group>"; };
+		4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTests.swift; sourceTree = "<group>"; };
 		53E0D8962C06084700DE1134 /* MediStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediStockApp.swift; sourceTree = "<group>"; };
 		53E0D8982C06084700DE1134 /* AuthenticationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerView.swift; sourceTree = "<group>"; };
 		53E0D89A2C06084900DE1134 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */,
+				4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FE4CD502D93FB3C008E17AA /* MedicineStockViewModelTests.swift in Sources */,
 				4FC3B8372D8DD29300918ABF /* MockAuthViewModel.swift in Sources */,
 				2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,

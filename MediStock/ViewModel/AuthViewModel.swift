@@ -84,10 +84,7 @@ class AuthViewModel : ObservableObject {
                throw ShowErrors.loginThrowError 
            }
 
-           do {
-               let _ = try await session.signIn(email: saveEmail, password: savePassword)
-           } catch {
-               throw ShowErrors.loginThrowError
-           }
+           let _ = try await session.signIn(email: saveEmail, password: savePassword)
+           
     }
 }
