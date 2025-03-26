@@ -7,7 +7,7 @@
 
 import Foundation
 @testable import pack
-
+import XCTest
 
 extension pack.Medicine {
     static var testMedicine: [Medicine]{
