@@ -22,31 +22,38 @@ class SessionStoreTests: XCTestCase {
     
     
     func testSignInSuccess() async throws {
-        //give
-        mockAuthService.shouldThrowError = false
-        //When
-        _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
-        let user = try await sessionStore.signIn(email: "test@example.com", password: "password")
-        //Then
-        XCTAssertEqual(user.email, "test@example.com")
-        XCTAssertEqual(user.uid, "mockUID")
-        XCTAssertNotNil(sessionStore.session)
-        print("session \(String(describing: sessionStore.session))")
-        XCTAssertNoThrow(user)
+        //given
+          mockAuthService.shouldThrowError = false
+          //When
+          let user = try await sessionStore.signIn(email: "test@example.com", password: "password")
+          
+          //Then
+          XCTAssertEqual(user.email, "test@example.com")
+          XCTAssertEqual(user.uid, "mockUID")
+          XCTAssertNotNil(sessionStore.session)
+          print("session \(String(describing: sessionStore.session))")
+          
+
     }
     
     func testSignInFailure() async {
-        //give
-        mockAuthService.shouldThrowError = true
-        do {
-            //When
-            _ = try await sessionStore.signIn(email: "test@example.com", password: "password")
-            //Then
-            XCTFail("Expected an error but did not get one")
-        } catch {
-            //Then
-            XCTAssertEqual(error as? AuthError, AuthError.signInThrowError)
-        }
+        // Given
+          mockAuthService.shouldThrowError = true
+          
+          // When
+          do {
+              // Tentative de connexion avec des informations incorrectes
+             let _ = try await sessionStore.signIn(email: "test@example.com", password: "password")
+              
+              // Si on arrive ici, c'est qu'il n'y a pas eu d'erreur, donc le test échoue
+              XCTFail("Expected an error but did not get one")
+          } catch let error as AuthError {
+              // Vérifier que l'erreur est bien celle attendue
+              XCTAssertEqual(error, AuthError.signInThrowError)
+          } catch {
+              // C'est un bloc catch générique qui attrape d'autres erreurs non spécifiées
+              XCTFail("Unexpected error occurred: \(error)")
+          }
     }
     
     func testSignUpSuccess() async throws {
@@ -61,17 +68,17 @@ class SessionStoreTests: XCTestCase {
     }
     
     func testSignUpFailure() async throws {
-        //give
-        mockAuthService.shouldThrowError = true
-        do{
-            //When
-            _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
-            //Then
-            XCTFail("Expected an error but did not get one")
-        }catch{
-            //Then
-            XCTAssertEqual(error as? AuthError, AuthError.userCreationFailed)
-        }
+        //given
+           mockAuthService.shouldThrowError = true
+           do {
+               // Tentative d'inscription
+               _ = try await sessionStore.signUp(email: "test@example.com", password: "password")
+               // Si on arrive ici, le test échoue
+               XCTFail("Expected an error but did not get one")
+           } catch let error as AuthError {
+               // Vérification que l'erreur levée est celle attendue
+               XCTAssertEqual(error, AuthError.userCreationFailed)
+           }
     }
     
     

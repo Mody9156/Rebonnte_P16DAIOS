@@ -51,6 +51,9 @@
 		4FD6DAE32D661571006E7FE5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9041582D53666100BA4690 /* FirebaseFirestore */; };
 		4FD6DAE42D661571006E7FE5 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90415A2D53666100BA4690 /* FirebaseFirestoreSwift */; };
 		4FD6DAE52D661571006E7FE5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4F90415C2D53666100BA4690 /* FirebaseStorage */; };
+		4FDBDFCD2D9448BA001F9C6E /* MedicineRepositoryTestss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDFCC2D9448BA001F9C6E /* MedicineRepositoryTestss.swift */; };
+		4FDBDFCF2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDFCE2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift */; };
+		4FDBDFD12D944BA3001F9C6E /* AuthViewModelTestss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDFD02D944BA3001F9C6E /* AuthViewModelTestss.swift */; };
 		4FE4CD502D93FB3C008E17AA /* MedicineStockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */; };
 		4FE4CD522D93FE39008E17AA /* MedicineManagementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4CD512D93FE39008E17AA /* MedicineManagementProtocol.swift */; };
 		4FE4CD542D94002A008E17AA /* MockMedicineServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4CD532D94002A008E17AA /* MockMedicineServiceViewModel.swift */; };
@@ -113,6 +116,9 @@
 		4FC3E2AB2D89DC810066841D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4FCFC79B2D8C5913006835D2 /* NewMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicineView.swift; sourceTree = "<group>"; };
 		4FCFC79D2D8C8339006835D2 /* NewAislesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAislesView.swift; sourceTree = "<group>"; };
+		4FDBDFCC2D9448BA001F9C6E /* MedicineRepositoryTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTestss.swift; sourceTree = "<group>"; };
+		4FDBDFCE2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTestss.swift; sourceTree = "<group>"; };
+		4FDBDFD02D944BA3001F9C6E /* AuthViewModelTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTestss.swift; sourceTree = "<group>"; };
 		4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTests.swift; sourceTree = "<group>"; };
 		4FE4CD512D93FE39008E17AA /* MedicineManagementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineManagementProtocol.swift; sourceTree = "<group>"; };
 		4FE4CD532D94002A008E17AA /* MockMedicineServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMedicineServiceViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 			children = (
 				4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */,
 				4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */,
+				4FDBDFCE2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift */,
+				4FDBDFD02D944BA3001F9C6E /* AuthViewModelTestss.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			children = (
 				23BAC50C2D442059006BD481 /* SessionStoreTests.swift */,
 				4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */,
+				4FDBDFCC2D9448BA001F9C6E /* MedicineRepositoryTestss.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -494,12 +503,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FE4CD502D93FB3C008E17AA /* MedicineStockViewModelTests.swift in Sources */,
+				4FDBDFCF2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift in Sources */,
 				4FC3B8372D8DD29300918ABF /* MockAuthViewModel.swift in Sources */,
 				2301D67D2D4A44850032B5DF /* MockMedicineService.swift in Sources */,
 				23BAC50D2D442059006BD481 /* SessionStoreTests.swift in Sources */,
 				4FB7A5B02D91870300A4978E /* MedicineRepositoryTests.swift in Sources */,
 				4FB7A5B42D91888F00A4978E /* MedicinesExtension.swift in Sources */,
 				4FE4CD542D94002A008E17AA /* MockMedicineServiceViewModel.swift in Sources */,
+				4FDBDFD12D944BA3001F9C6E /* AuthViewModelTestss.swift in Sources */,
+				4FDBDFCD2D9448BA001F9C6E /* MedicineRepositoryTestss.swift in Sources */,
 				4FC3B8312D8DC63100918ABF /* AuthViewModelTests.swift in Sources */,
 				23BAC5112D442D49006BD481 /* MockAuthService.swift in Sources */,
 			);
@@ -563,7 +575,7 @@
 				DEVELOPMENT_TEAM = 99UMC25BBL;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Eventorias.MediStockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -584,7 +596,7 @@
 				DEVELOPMENT_TEAM = 99UMC25BBL;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Eventorias.MediStockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -737,7 +749,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -772,7 +784,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
