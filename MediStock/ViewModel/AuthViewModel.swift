@@ -79,13 +79,15 @@ class AuthViewModel : ObservableObject {
     }
     
     func autotoLogin() async throws {
-        do{
-            if let saveEmail = UserDefaults.standard.string(forKey: "email"),
-               let savePassword = UserDefaults.standard.string(forKey: "password")   {
-                let _ = try await session.signIn(email: saveEmail, password: savePassword)
-            }
-        }catch{
-            throw ShowErrors.loginThrowError
-        }
+        guard let saveEmail = UserDefaults.standard.string(forKey: "email"),
+                 let savePassword = UserDefaults.standard.string(forKey: "password") else {
+               throw ShowErrors.loginThrowError 
+           }
+
+           do {
+               let _ = try await session.signIn(email: saveEmail, password: savePassword)
+           } catch {
+               throw ShowErrors.loginThrowError
+           }
     }
 }
