@@ -17,6 +17,8 @@ xcuserdata/
 ## APi
 *-GoogleService-Info.plist
 *-pack-Info.plist
+GoogleService-Info.plist
+pack-Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
