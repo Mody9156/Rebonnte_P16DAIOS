@@ -13,8 +13,8 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-<<<<<<< HEAD
 ## APi
+<<<<<<< HEAD
 <<<<<<< HEAD
 pack-Info.plist
 GoogleService-Info.plist
@@ -28,6 +28,10 @@ GoogleService-Info.plist
 pack-Info.plist
 <<<<<<< HEAD
 >>>>>>> View
+=======
+**/pack-Info.plist
+**/GoogleService-Info.plist
+>>>>>>> a8b306ef072bb8b27d866013c72706c0356541ad
 *-Info.plist
 =======
 **/Info.plist
