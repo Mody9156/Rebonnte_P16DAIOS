@@ -32,15 +32,17 @@ class MedicineStockViewModel: ObservableObject {
         self.medicineRepository = medicineRepository
     }
     
+    @MainActor
     func observeMedicines() async throws {
         do{
             let medicine = try await medicineRepository.fetchMedicines()
+           
             medicines = medicine
         }catch{
             throw MedicineError.medicineIsEmpty
         }
     }
-    
+    @MainActor
     func observeAisles() async throws {
         do{
             let medicine =  try await medicineRepository.fetchAisles()

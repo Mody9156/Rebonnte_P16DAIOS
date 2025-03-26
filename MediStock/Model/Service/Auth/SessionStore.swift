@@ -12,6 +12,7 @@ public class SessionStore: AuthViewModelProtocol, ObservableObject {
     private var authService : AuthServiceProtocol
     var isAuthenticated : Bool {
         session != nil
+        
     }
   
     init(authService: AuthServiceProtocol = FirebaseAuthService(),session: User? = nil, handle: AuthStateDidChangeListenerHandle? = nil) {

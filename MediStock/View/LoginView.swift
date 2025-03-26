@@ -53,7 +53,7 @@ struct LoginView: View {
                         withAnimation {
                             selectedAutoConnection.toggle()
                             Task{
-                                try? await  authViewModel.saveAutoConnectionState(selectedAutoConnection)
+                                try? await authViewModel.saveAutoConnectionState(selectedAutoConnection)
                             }
                         }
                     } label: {

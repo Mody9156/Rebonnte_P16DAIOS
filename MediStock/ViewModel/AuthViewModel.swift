@@ -22,7 +22,6 @@ class AuthViewModel : ObservableObject {
                 .map { $0 != nil }
                 .assign(to: &$isAuthenticated)
         }
-        
     }
     
     @MainActor
@@ -33,6 +32,7 @@ class AuthViewModel : ObservableObject {
             UserDefaults.standard.set(user.email, forKey: "email")
             messageError = ""
             isAuthenticated = true
+            print("greate job ")
             onLoginSucceed?()
         }catch{
             messageError = "Erreur lors de la connexion de l'utilisateur"
