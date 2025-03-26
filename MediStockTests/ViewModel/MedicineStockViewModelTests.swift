@@ -6,10 +6,12 @@
 //
 
 import Testing
+import XCTest
 
 struct MedicineStockViewModelTests {
 
-    @Test func <#test function name#>() async throws {
+    @Test func showFetchMedicines() async throws {
+        
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
 
