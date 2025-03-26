@@ -11,7 +11,8 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 
-class MedicineRepository: ObservableObject {
+class MedicineRepository: ObservableObject, MedicineManagementProtocol {
+   
     private var db : Firestore
     @Published var medicines: [Medicine]
     @Published var historyEntry: [HistoryEntry]
@@ -55,7 +56,7 @@ class MedicineRepository: ObservableObject {
     //        }
     //    }
     
-    func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws -> [Medicine]{
+    func setDataToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws -> [Medicine] {
         do{
             let medicine = try await medicineService.setDataToList(user: user, name:name, stock:stock, aisle:aisle)
             for medicines in medicine {

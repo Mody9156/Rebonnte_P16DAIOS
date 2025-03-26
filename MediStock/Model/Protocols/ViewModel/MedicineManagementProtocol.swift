@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MedicineProtocol {
+protocol MedicineManagementProtocol {
     func fetchMedicines() async throws -> [Medicine]
     func fetchAisles() async throws -> [String]
     func setDataToList(user: String, name: String, stock: Int, aisle: String, stockValue: Int) async throws -> [Medicine]
@@ -16,7 +16,7 @@ protocol MedicineProtocol {
     func deleteAisle(aisles: [String], at offsets: IndexSet) async throws -> [String]
     func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws
     func updateMedicine(_ medicine: Medicine, user: String, stock: Int) async throws
-    func updateStock(_ medicine: Medicine, by amount: Int, user: String, stock: Int) async throws -> [Medicine]
+    func updateStock(_ medicine: Medicine, by amount: Int, user: String, stock: Int) async throws
     func fetchHistory(for medicine: Medicine, completion: @escaping ([HistoryEntry]) -> Void)
     func trieByName(completion: @escaping ([Medicine]) -> Void)
     func trieByStock(completion: @escaping ([Medicine]) -> Void)
