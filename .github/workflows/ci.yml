@@ -38,5 +38,4 @@ jobs:
           -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
           ONLY_ACTIVE_ARCH=YES
 
-      - name: xcresulttool
-        uses: kishikawakatsumi/xcresulttool@v1.7.1
+     
