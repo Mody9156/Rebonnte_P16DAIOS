@@ -6,7 +6,6 @@
 ## User settings
 xcuserdata/
 
-
 ## Build generated
 build/
 DerivedData/
@@ -14,9 +13,9 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-## APi
-*pack-Info.plist
-*GoogleService-Info.plist
+## API
+GoogleService-Info.plist
+pack-Info.plist
 *-Info.plist
 
 ### Xcode Patch ###
