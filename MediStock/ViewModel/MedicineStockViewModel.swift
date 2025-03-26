@@ -13,6 +13,11 @@ class MedicineStockViewModel: ObservableObject {
         case addRandomAisleThrowsError
         case insertAisleThrowsError
         case insertMedicineToListThrowError
+        case deleteMedicinesThrowsError
+        case deleteAisleThrowsError
+        case changeStockThrowsError
+        case updateStockThrowsError
+        case updateMedicineThrowsError
     }
     
     @Published var filterOption : FilterOption? = .noFilter
@@ -26,7 +31,7 @@ class MedicineStockViewModel: ObservableObject {
     
     init(medicines: [Medicine] = MedicineRepository().medicines) {
         self.medicines = medicines
-
+        
     }
     
     func observeMedicines() async throws {
@@ -66,7 +71,7 @@ class MedicineStockViewModel: ObservableObject {
             throw ThrowsErrorReason.insertAisleThrowsError
         }
     }
-   
+    
     @MainActor
     func insertMedicineToList(user: String,name:String, stock:Int, aisle:String, stockValue:Int) async throws {
         guard aisle.isEmpty == false else {
@@ -78,7 +83,7 @@ class MedicineStockViewModel: ObservableObject {
         }
         
         do{
-            try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle, stockValue: stockValue)
+            let _ = try await medicineRepository.setDataToList(user: user,name:name, stock:stock, aisle:aisle, stockValue: stockValue)
             messageEror = nil
         }catch{
             messageEror = "An error occurred while adding a new medicine. Please check that it is not already present."
@@ -87,7 +92,11 @@ class MedicineStockViewModel: ObservableObject {
     }
     
     func deleteMedicines(at offsets: IndexSet) async throws {
-        try await  medicineRepository.delete(medicines: medicines, at: offsets)
+        do{
+            try await  medicineRepository.delete(medicines: medicines, at: offsets)
+        }catch{
+            throw  ThrowsErrorReason.deleteMedicinesThrowsError
+        }
     }
     
     func deleteAisle(at offsets: IndexSet) async throws {
@@ -97,21 +106,32 @@ class MedicineStockViewModel: ObservableObject {
                 self.aisles = updateAisle
             }
         }catch{
-            print("erreur lors de la suppression")
+            throw  ThrowsErrorReason.deleteMedicinesThrowsError
         }
-        
     }
     
     func changeStock(_ medicine: Medicine, user: String, stocks:Int,stockValue:Int) async throws {
-        try await updateStock(medicine, by: stocks, user: user, stock: stockValue)
+        do{
+            try await updateStock(medicine, by: stocks, user: user, stock: stockValue)
+        }catch{
+            throw  ThrowsErrorReason.changeStockThrowsError
+        }
     }
     
     private func updateStock(_ medicine: Medicine, by amount: Int, user: String, stock:Int) async throws {
-        try await medicineRepository.updateStock(medicine, by: amount, user: user, stock: stock)
+        do{
+            try await medicineRepository.updateStock(medicine, by: amount, user: user, stock: stock)
+        }catch{
+            throw  ThrowsErrorReason.updateStockThrowsError
+        }
     }
-
+    
     func updateMedicine(_ medicine: Medicine, user: String,stock:Int) async throws {
-        try await medicineRepository.updateMedicine(medicine, user: user, stock: stock)
+        do{
+            try await medicineRepository.updateMedicine(medicine, user: user, stock: stock)
+        }catch{
+            throw  ThrowsErrorReason.updateMedicineThrowsError
+        }
     }
     
     func fetchHistory(for medicine: Medicine) {
@@ -120,11 +140,11 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-//    func triByName(){
-//        medicineRepository.trieByName { medicines in
-//            self.medicines = medicines
-//        }
-//    }
+    //    func triByName(){
+    //        medicineRepository.trieByName { medicines in
+    //            self.medicines = medicines
+    //        }
+    //    }
     
     @MainActor
     func trieElements(option:FilterOption) async throws {
@@ -135,20 +155,14 @@ class MedicineStockViewModel: ObservableObject {
         case .noFilter :
             medicineRepository.getAllElements{ medicines in
                 self.medicines = medicines
-                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
-                print("Données : \(self.medicines)")  // Affiche les données récupérées
             }
         case .name :
             medicineRepository.trieByName { medicines in
                 self.medicines = medicines
-                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
-                print("Données : \(self.medicines)")  // Affiche les données récupérées
             }
         case .stock :
             medicineRepository.trieByStock { medicines in
                 self.medicines = medicines
-                print("Produits récupérés sans filtre. Nombre de produits : \(self.medicines.count)")
-                print("Données : \(self.medicines)")  // Affiche les données récupérées
             }
         }
     }
