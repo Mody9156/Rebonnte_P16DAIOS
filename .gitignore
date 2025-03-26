@@ -16,8 +16,10 @@ xcuserdata/
 ## API
 GoogleService-Info.plist
 pack-Info.plist
-*-Info.plist
+**/Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
+
+*.save
