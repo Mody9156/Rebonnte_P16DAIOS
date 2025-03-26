@@ -1,6 +1,16 @@
 import Foundation
 import Firebase
 
+enum ThrowsErrorReason: Error {
+    case addRandomAisleThrowsError
+    case insertAisleThrowsError
+    case insertMedicineToListThrowError
+    case deleteMedicinesThrowsError
+    case deleteAisleThrowsError
+    case changeStockThrowsError
+    case updateStockThrowsError
+    case updateMedicineThrowsError
+}
 
 class MedicineStockViewModel: ObservableObject {
     enum FilterOption: String, CaseIterable {
@@ -9,17 +19,6 @@ class MedicineStockViewModel: ObservableObject {
         case stock
     }
     
-    enum ThrowsErrorReason: Error {
-        case addRandomAisleThrowsError
-        case insertAisleThrowsError
-        case insertMedicineToListThrowError
-        case deleteMedicinesThrowsError
-        case deleteAisleThrowsError
-        case changeStockThrowsError
-        case updateStockThrowsError
-        case updateMedicineThrowsError
-    }
-
     @Published var filterOption : FilterOption? = .noFilter
     @Published var medicines: [Medicine]
     @Published var aisles: [String] = []

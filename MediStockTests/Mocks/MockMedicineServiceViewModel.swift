@@ -26,26 +26,26 @@ class MockMedicineServiceViewModel : MedicineManagementProtocol{
     }
     
     func setDataToList(user: String, name: String, stock: Int, aisle: String, stockValue: Int) async throws -> [pack.Medicine] {
-        if shouldThrowError { throw MedicineError.invalidSetData }
+        if shouldThrowError { throw ThrowsErrorReason.insertMedicineToListThrowError }
         let newMedicine = Medicine(id: UUID().uuidString, name: name, stock: stock, aisle: aisle)
         mockMedicines.append(newMedicine)
         return mockMedicines
     }
     
     func setDataToAisle(name: String, stock: Int, aisle: String) async throws -> [pack.Medicine] {
-        if shouldThrowError { throw MedicineError.invalidSetData }
+        if shouldThrowError { throw ThrowsErrorReason.insertAisleThrowsError }
         let newMedicine = Medicine(id: UUID().uuidString, name: name, stock: stock, aisle: aisle)
         mockMedicines.append(newMedicine)
         return mockMedicines
     }
     
     func delete(medicines: [pack.Medicine], at offsets: IndexSet) async throws {
-        if shouldThrowError { throw MedicineError.invalidDelete }
+        if shouldThrowError { throw ThrowsErrorReason.deleteMedicinesThrowsError }
         mockMedicines.remove(atOffsets: offsets)
     }
     
     func deleteAisle(aisles: [String], at offsets: IndexSet) async throws -> [String] {
-        if shouldThrowError { throw MedicineError.invalidDelete }
+        if shouldThrowError { throw ThrowsErrorReason.deleteMedicinesThrowsError}
         mockAisles.remove(atOffsets: offsets)
         return mockAisles
     }
@@ -64,23 +64,21 @@ class MockMedicineServiceViewModel : MedicineManagementProtocol{
     }
     
     func updateMedicine(_ medicine: pack.Medicine, user: String, stock: Int) async throws {
-        if shouldThrowError { throw MedicineError.invalidMedicine }
+        if shouldThrowError { throw ThrowsErrorReason.updateMedicineThrowsError }
         if let index = mockMedicines.firstIndex(where: { $0.id == medicine.id }) {
             mockMedicines[index] = medicine
         }
     }
     
     func updateStock(_ medicine: pack.Medicine, by amount: Int, user: String, stock: Int) async throws {
-        if shouldThrowError { throw MedicineError.invalidMedicine }
+        if shouldThrowError { throw ThrowsErrorReason.changeStockThrowsError}
         if let index = mockMedicines.firstIndex(where: { $0.id == medicine.id }) {
             mockMedicines[index].stock += amount
         }
     }
     
-    func fetchHistory(
-        for medicine: pack.Medicine,
-        completion: @escaping ([pack.HistoryEntry]) -> Void
-    ) {
+    func fetchHistory(for medicine: pack.Medicine,
+        completion: @escaping ([pack.HistoryEntry]) -> Void) {
         let filteredHistory = mockHistory.filter { $0.medicineId == medicine.id }
         completion(filteredHistory)
     }
