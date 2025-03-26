@@ -28,6 +28,14 @@ jobs:
       - name: Resolve Swift Package Dependencies
         run: xcodebuild -resolvePackageDependencies -project MediStock.xcodeproj
 
+      - name: Add Firebase Strip Frameworks Script
+        run: |
+          echo 'Adding Firebase Strip Frameworks Script'
+          mkdir -p "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestore"
+          echo '#!/bin/sh' > "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestore/strip-frameworks.sh"
+          echo 'echo "Stripping unnecessary architectures from Firebase frameworks..."' >> "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestore/strip-frameworks.sh"
+          chmod +x "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestore/strip-frameworks.sh"
+
       - name: Build and Test
         run: |
           xcodebuild clean build test \
@@ -36,5 +44,5 @@ jobs:
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
-          ONLY_ACTIVE_ARCH=YES
-
+          ONLY_ACTIVE_ARCH=YES \
+          OTHER_LDFLAGS="$(inherited) -force_load ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestore/strip-frameworks.sh"
