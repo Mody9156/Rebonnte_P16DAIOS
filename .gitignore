@@ -14,8 +14,8 @@ DerivedData/
 xcuserdata/
 
 ## APi
-pack-Info.plist
-GoogleService-Info.plist
+**/pack-Info.plist
+**/GoogleService-Info.plist
 *-Info.plist
 
 ### Xcode Patch ###
