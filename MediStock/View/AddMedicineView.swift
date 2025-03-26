@@ -117,6 +117,6 @@ struct AddMedicineView: View {
     }
 }
 
-#Preview {
-    AddMedicineView(nameInAisle: "Onocology")
-}
+//#Preview {
+//    AddMedicineView(nameInAisle: "Onocology")
+//}

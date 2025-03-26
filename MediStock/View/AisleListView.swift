@@ -71,6 +71,6 @@ struct AisleListView: View {
     }
 }
 
-#Preview{
-    AisleListView(medicineStockViewModel: MedicineStockViewModel())
-}
+//#Preview{
+//    AisleListView(medicineStockViewModel: MedicineStockViewModel())
+//}

@@ -45,14 +45,14 @@ struct NewMedicineView: View {
     }
 }
 
-#Preview {
-    struct NEwPreviewWrapper : View {
-        @State var nameInAisle : String = ""
-        @State var nameInAisleMEdicine : String = ""
-        var body: some View {
-            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
-        }
-    }
-    return NEwPreviewWrapper()
-
-}
+//#Preview {
+//    struct NEwPreviewWrapper : View {
+//        @State var nameInAisle : String = ""
+//        @State var nameInAisleMEdicine : String = ""
+//        var body: some View {
+//            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
+//        }
+//    }
+//    return NEwPreviewWrapper()
+//
+//}
