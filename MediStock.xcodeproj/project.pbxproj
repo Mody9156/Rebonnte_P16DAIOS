@@ -215,6 +215,7 @@
 				237E0A862D300A4F00EEC056 /* User.swift */,
 				4F8F687F2D8ACCE000486DBF /* ModelData.swift */,
 				4F8F68832D8AD20300486DBF /* MedicationsData.swift */,
+				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
 				4FB7A5B92D91B86600A4978E /* GoogleService-Info 2.plist */,
 			);
 			path = Model;
@@ -336,7 +337,6 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
-				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				23FD05682D440E490089DB5C /* MediStockTests */,
 				237E0A6E2D2FFE4500EEC056 /* Frameworks */,
