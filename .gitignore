@@ -10,10 +10,10 @@ xcuserdata/
 build/
 DerivedData/
 
-# Ignorer le fichier spécifique
-./MediStock/Model/GoogleService-Info.plist
-./MediStock/Model/pack-Info.plist
+# Ignorer tous les fichiers .plist SAUF ceux explicitement suivis
 *.plist
+!./MediStock/Model/GoogleService-Info.plist
+!./MediStock/Model/pack-Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
@@ -21,7 +21,6 @@ DerivedData/
 
 # Ignorer les fichiers de sauvegarde
 *.save
-
 
 # CocoaPods (si utilisé)
 Pods/
