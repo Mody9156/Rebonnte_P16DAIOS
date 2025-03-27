@@ -60,7 +60,11 @@ struct MedicineListView: View {
                         .foregroundColor(.white)
                 }
             }
-            .sheet(isPresented: $activeView) {
+            .sheet(isPresented: $activeView, onDismiss: {
+                Task{
+                    try await medicineStockViewModel.observeMedicines()
+                }
+            }) {
                 AddMedicineView(nameInAisle: aisle)
             }
             .padding()
@@ -70,7 +74,7 @@ struct MedicineListView: View {
             .accessibilityHint("Displays all medicines available in \(aisle).")
             .onAppear {
                 Task{
-                    try? await medicineStockViewModel.observeMedicines()
+                    try await medicineStockViewModel.observeMedicines()
                 }
                 
             }
