@@ -20,8 +20,7 @@
 		23FD055D2D43C5A80089DB5C /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD055C2D43C5A80089DB5C /* FirebaseAuthService.swift */; };
 		4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */; };
 		4F3BBAC92D82E8BA0077F9DD /* AddANewAisle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */; };
-		4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */; };
-
+		4F8A5E5A2D958CAC00DA95C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */; };
 		4F8F68802D8ACCE000486DBF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F687F2D8ACCE000486DBF /* ModelData.swift */; };
 		4F8F68822D8ACE6400486DBF /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F68812D8ACE6400486DBF /* Source.json */; };
 		4F8F68842D8AD20300486DBF /* MedicationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F68832D8AD20300486DBF /* MedicationsData.swift */; };
@@ -96,7 +95,6 @@
 		4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddANewAisle.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-
 		4F8F687F2D8ACCE000486DBF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 				4F8F68832D8AD20300486DBF /* MedicationsData.swift */,
 				4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */,
 				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
-
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -475,12 +472,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F8A5E5A2D958CAC00DA95C2 /* GoogleService-Info.plist in Resources */,
 				53E0D89E2C06084900DE1134 /* Preview Assets.xcassets in Resources */,
 				53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */,
 				4F8F68822D8ACE6400486DBF /* Source.json in Resources */,
 				4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */,
-				4F8A5E572D958AE500DA95C2 /* GoogleService-Info.plist in Resources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
