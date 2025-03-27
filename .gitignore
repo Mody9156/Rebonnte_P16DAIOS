@@ -10,13 +10,11 @@ xcuserdata/
 build/
 DerivedData/
 
-## User settings
-xcuserdata/
-
 # Ignorer le fichier spécifique
 ./MediStock/Model/GoogleService-Info.plist
 ./MediStock/Model/pack-Info.plist
 
+## Ignorer tous les fichiers .plist
 *.plist
 
 ### Xcode Patch ###
@@ -25,3 +23,22 @@ xcuserdata/
 
 # Ignorer les fichiers de sauvegarde
 *.save
+
+# CocoaPods (si utilisé)
+Pods/
+*.xcworkspace
+
+# Archives et symboles de crash
+*.xcarchive
+*.dSYM.zip
+*.dSYM
+
+# Carthage (si utilisé)
+Carthage/
+
+# Swift Package Manager (SPM)
+.swiftpm/
+Package.resolved
+
+# Fichiers système macOS
+.DS_Store
