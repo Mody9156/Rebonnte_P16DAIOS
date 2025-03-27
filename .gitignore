@@ -11,9 +11,9 @@ build/
 DerivedData/
 
 # Ignorer tous les fichiers .plist SAUF ceux explicitement suivis
-*.plist
 !./MediStock/Model/GoogleService-Info.plist
 !./MediStock/Model/pack-Info.plist
+*.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
