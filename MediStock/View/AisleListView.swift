@@ -53,7 +53,11 @@ struct AisleListView: View {
                             .foregroundColor(.white)
                     }
                 }
-                .sheet(isPresented: $activeView) {
+                .sheet(isPresented: $activeView, onDismiss: {
+                    Task{
+                        try await medicineStockViewModel.observeAisles()
+                    }
+                }) {
                     AddANewAisle()
                 }
                 .padding()
@@ -64,13 +68,13 @@ struct AisleListView: View {
         }
         .onAppear {
             Task{
-                try? await  medicineStockViewModel.observeAisles()
+                try await medicineStockViewModel.observeAisles()
             }
         }
         .accessibilityElement(children: .contain)
     }
 }
 
-//#Preview{
-//    AisleListView(medicineStockViewModel: MedicineStockViewModel())
-//}
+#Preview{
+    AisleListView(medicineStockViewModel: MedicineStockViewModel())
+}
