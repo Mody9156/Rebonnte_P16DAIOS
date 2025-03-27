@@ -21,6 +21,7 @@
 		4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */; };
 		4F3BBAC92D82E8BA0077F9DD /* AddANewAisle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */; };
 		4F3FF56E2D67AB3E003EB6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */; };
+		4F8A5E572D958AE500DA95C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */; };
 		4F8F68802D8ACCE000486DBF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F687F2D8ACCE000486DBF /* ModelData.swift */; };
 		4F8F68822D8ACE6400486DBF /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F68812D8ACE6400486DBF /* Source.json */; };
 		4F8F68842D8AD20300486DBF /* MedicationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F68832D8AD20300486DBF /* MedicationsData.swift */; };
@@ -94,12 +95,12 @@
 		4F159B4F2D5BE0F300E461BE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddANewAisle.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F8F687F2D8ACCE000486DBF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
 		4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesExtension.swift; sourceTree = "<group>"; };
-		4FB7A5B92D91B86600A4978E /* GoogleService-Info 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info 2.plist"; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -215,8 +216,8 @@
 				237E0A862D300A4F00EEC056 /* User.swift */,
 				4F8F687F2D8ACCE000486DBF /* ModelData.swift */,
 				4F8F68832D8AD20300486DBF /* MedicationsData.swift */,
+				4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */,
 				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
-				4FB7A5B92D91B86600A4978E /* GoogleService-Info 2.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -477,6 +478,7 @@
 				53E0D89B2C06084900DE1134 /* Assets.xcassets in Resources */,
 				4F8F68822D8ACE6400486DBF /* Source.json in Resources */,
 				4F159B502D5BE0F300E461BE /* Launch Screen.storyboard in Resources */,
+				4F8A5E572D958AE500DA95C2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
