@@ -56,7 +56,12 @@ struct AllMedicinesView: View {
                     Button(action: {
                         activeView = true
                     }) {
-                        Image(systemName: "plus")
+                        ZStack {
+                            Circle()
+                            Image(systemName: "plus")
+                                .foregroundStyle(.white)
+                                .padding(10)
+                        }
                     }
                     .sheet(isPresented: $activeView) {
                         AddANewAisle()

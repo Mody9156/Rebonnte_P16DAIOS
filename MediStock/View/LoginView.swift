@@ -88,15 +88,15 @@ struct LoginView: View {
     }
 }
 
-//#Preview {
-//    struct PreviewWrapper: View {
-//        @State var selected: Bool = false
-//        var body: some View {
-//            LoginView(selectedAutoConnection: $selected).environmentObject(SessionStore())
-//        }
-//    }
-//    return PreviewWrapper()
-//}
+#Preview {
+    struct PreviewWrapper: View {
+        @State var selected: Bool = false
+        var body: some View {
+            LoginView(selectedAutoConnection: $selected).environmentObject(SessionStore())
+        }
+    }
+    return PreviewWrapper()
+}
 
 struct ButtonForUpdateSession: View {
     @Binding var email: String
