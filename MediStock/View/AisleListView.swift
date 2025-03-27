@@ -53,7 +53,11 @@ struct AisleListView: View {
                             .foregroundColor(.white)
                     }
                 }
-                .sheet(isPresented: $activeView) {
+                .sheet(isPresented: $activeView, onDismiss: {
+                    Task{
+                        try await medicineStockViewModel.observeAisles()
+                    }
+                }) {
                     AddANewAisle()
                 }
                 .padding()
