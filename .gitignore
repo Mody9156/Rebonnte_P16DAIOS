@@ -13,10 +13,11 @@ DerivedData/
 ## User settings
 xcuserdata/
 
-## API
+# Ignorer le fichier spécifique
 ./MediStock/Model/GoogleService-Info.plist
 ./MediStock/Model/pack-Info.plist
-**/Info.plist
+
+*.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
