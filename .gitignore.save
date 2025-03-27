@@ -6,21 +6,39 @@
 ## User settings
 xcuserdata/
 
-
 ## Build generated
 build/
 DerivedData/
 
-## User settings
-xcuserdata/
-
 # Ignorer le fichier spécifique
-../MediStock/GoogleService-Info.plist
-MediStock/GoogleService-Info.plist
-**/GoogleService-Info.plist
-			 
+./MediStock/Model/GoogleService-Info.plist
+./MediStock/Model/pack-Info.plist
+
+## Ignorer tous les fichiers .plist
+*.plist
+
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 
-			
+# Ignorer les fichiers de sauvegarde
+*.save
+
+# CocoaPods (si utilisé)
+Pods/
+*.xcworkspace
+
+# Archives et symboles de crash
+*.xcarchive
+*.dSYM.zip
+*.dSYM
+
+# Carthage (si utilisé)
+Carthage/
+
+# Swift Package Manager (SPM)
+.swiftpm/
+Package.resolved
+
+# Fichiers système macOS
+.DS_Store
