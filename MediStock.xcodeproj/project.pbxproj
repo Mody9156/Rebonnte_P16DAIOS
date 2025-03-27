@@ -99,7 +99,7 @@
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
 		4FB7A5AF2D91870300A4978E /* MedicineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTests.swift; sourceTree = "<group>"; };
 		4FB7A5B32D91888F00A4978E /* MedicinesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesExtension.swift; sourceTree = "<group>"; };
-		4FB7A5B92D91B86600A4978E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FB7A5B92D91B86600A4978E /* GoogleService-Info 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info 2.plist"; sourceTree = "<group>"; };
 		4FBE3D072D84716B00D1BC23 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		4FC3B8302D8DC63100918ABF /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		4FC3B8342D8DC9F700918ABF /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -215,6 +215,7 @@
 				237E0A862D300A4F00EEC056 /* User.swift */,
 				4F8F687F2D8ACCE000486DBF /* ModelData.swift */,
 				4F8F68832D8AD20300486DBF /* MedicationsData.swift */,
+				4FB7A5B92D91B86600A4978E /* GoogleService-Info 2.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,7 +336,6 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
-				4FB7A5B92D91B86600A4978E /* GoogleService-Info.plist */,
 				4F159B4E2D5BE07B00E461BE /* pack-Info.plist */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				23FD05682D440E490089DB5C /* MediStockTests */,
