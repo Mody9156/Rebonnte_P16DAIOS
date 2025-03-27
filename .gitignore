@@ -16,6 +16,7 @@ xcuserdata/
 ## API
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /GoogleService-Info.plist
 /pack-Info.plist
 /save
@@ -26,6 +27,10 @@ save
 =======
 ../GoogleService-Info.plist
 ../pack-Info.plist
+>>>>>>> View
+=======
+./MediStock/Model/GoogleService-Info.plist
+./MediStock/Model/pack-Info.plist
 >>>>>>> View
 **/Info.plist
 >>>>>>> View
