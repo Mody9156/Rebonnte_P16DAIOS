@@ -12,7 +12,7 @@ struct Profile: View {
     @AppStorage("email") var identity : String = "email"
     var use : User
     @AppStorage("toggleDarkMode") private var toggleDarkMode : Bool = false
-    @State var hasUserChosenMode : Bool = false
+    @AppStorage("hasUserChosenMode") private var hasUserChosenMode : Bool = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -79,9 +79,11 @@ struct Profile: View {
             }
             .padding()
         }
-        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : colorScheme)
+//        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : nil)
         .animation(.easeInOut, value: toggleDarkMode)
     }
+   
+
 }
 
 #Preview{
