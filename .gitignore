@@ -18,8 +18,6 @@ DerivedData/
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
-
-# Ignorer les fichiers de sauvegarde
 *.save
 
 # CocoaPods (si utilisé)
