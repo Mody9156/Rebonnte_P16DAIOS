@@ -10,12 +10,15 @@ xcuserdata/
 build/
 DerivedData/
 
+# Ignorer le dossier Screenshots
+./Screenshots
+
 # Ignorer tous les fichiers .plist
 *.plist
 
 # Mais inclure ces fichiers spécifiques
 !./MediStock/Model/GoogleService-Info.plist
-!./MediStock/Model/pack-Info.plist
+!./pack-Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
