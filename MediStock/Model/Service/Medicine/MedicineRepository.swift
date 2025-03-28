@@ -118,24 +118,7 @@ class MedicineRepository: ObservableObject, MedicineManagementProtocol {
         
         for medicines in medicine {
             let newStock = medicines.stock  + amount
-            let actionType = amount > 0 ? "Increased" : "Decreased"
-            
-            // Construire un message de détails plus détaillé
-                let details = """
-                \(actionType) stock of \(medicines.name) by \(amount).
-                Previous stock: \(medicines.stock)
-                Change applied: \(amount > 0 ? "Added \(amount)" : "Removed \(abs(amount))")
-                New stock: \(newStock)
-                Action performed by user: \(user)
-                """
-
-                try? await addHistory(
-                    action: "\(actionType) stock of \(medicines.name) by \(amount)",
-                    user: self.identity,
-                    medicineId: medicines.id ?? "Unknown",
-                    details: details,
-                    stock: newStock
-                )
+            try? await addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock) to \( medicines.stock - stock )", stock: stock)
         }
     }
     
