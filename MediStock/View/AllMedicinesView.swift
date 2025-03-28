@@ -13,9 +13,7 @@ struct AllMedicinesView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                Color(.gray)
-                    .ignoresSafeArea()
-                    .opacity(0.1)
+                
                 
                 VStack(alignment: .leading){
                     // Filtrage et Tri
@@ -49,32 +47,39 @@ struct AllMedicinesView: View {
                     ListView(medicineStockViewModel: medicineStockViewModel, filterText:$filterText)
                 }
                 
+                Button(action: {
+                    activeView = true
+                }) {
+                    ZStack {
+                        Circle()
+                            .frame(height: 60)
+                            .foregroundStyle(.blue)
+                            .opacity(0.9)
+                            .shadow(radius: 10)
+                        
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+                    }
+                }
+                .sheet(isPresented: $activeView, onDismiss: {
+                    Task{
+                        try await medicineStockViewModel.observeAisles()
+                    }
+                }) {
+                    AddANewAisle()
+                }
+                .padding()
+                .accessibilityLabel("Aisle List")
+                .accessibilityHint("Displays a list of aisles containing medicines.")
+                
             }
             .navigationTitle("All Medicines")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        activeView = true
-                    }) {
-                        ZStack {
-                            Circle()
-                            Image(systemName: "plus")
-                                .foregroundStyle(.white)
-                                .padding(10)
-                        }
-                    }
-                    .sheet(isPresented: $activeView) {
-                        AddANewAisle()
-                    }
-                    .padding()
-                    .accessibilityLabel("Aisle List")
-                    .accessibilityHint("Displays a list of aisles containing medicines.")
-                }
-            }
         }
         .onAppear {
             Task{
-              try? await  medicineStockViewModel.observeMedicines()
+                try? await  medicineStockViewModel.observeMedicines()
             }
         }
     }
