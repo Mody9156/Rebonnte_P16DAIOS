@@ -196,7 +196,7 @@ extension MedicineDetailView {
                                         HStack {
                                             Image(systemName: "circle.fill")
                                                 .foregroundColor(.blue)
-                                            Text(entry.stock == 0 ? "Details Updated" : entry.action)
+                                            Text(entry.stock == 0 ? "Changes Applied to Medication" : entry.action)
                                                 .font(.headline)
                                                 .fontWeight(.bold)
                                                 .foregroundColor(entry.stock == 0 ? .blue :(entry.stock > 0 ? .green : .red))
@@ -204,14 +204,15 @@ extension MedicineDetailView {
                                         
                                         TextForShowDetails(value: entry.user, text: "User:")
                                         TextForShowDetails(value: entry.timestamp.formatted(), text: "Date:")
-                                        TextForShowDetails(value: entry.details, text: "Details:")
+                                        
+                                        TextForShowDetails(value: entry.stock == 0 ? "Details Updated" : entry.details, text: "Details:")
                                         
                                         HStack {
                                             Text("Stock:")
                                                 .fontWeight(.bold)
-                                            Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
+                                            Text("\(entry.stock == 0 ? "Stock unchanged " : (entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
                                                 .font(.subheadline)
-                                                .foregroundStyle(entry.stock > 0 ? .green : .red)
+                                                .foregroundStyle(entry.stock == 0 ? .blue : (entry.stock > 0 ? .green : .red))
                                         }
                                     }
                                         .padding()

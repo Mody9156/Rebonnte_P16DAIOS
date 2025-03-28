@@ -55,7 +55,13 @@ struct Profile: View {
                         .padding()
                     }
                     
-                    Toggle(isOn: $toggleDarkMode) {
+                    Toggle(isOn: Binding(
+                        get: { toggleDarkMode },
+                        set:{newValue in
+                            toggleDarkMode = newValue
+                            hasUserChosenMode = true
+                        }
+                    ) ) {
                         Label(toggleDarkMode ? "Light Mode" : "Dark Mode", systemImage: toggleDarkMode ? "sun.max.fill" : "moon.fill")
                             .foregroundColor(.gray)
                     }

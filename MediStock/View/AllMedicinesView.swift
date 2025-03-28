@@ -13,7 +13,9 @@ struct AllMedicinesView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-               
+                Color
+                    .gray
+                    .opacity(0.1)
                 
                 VStack(alignment: .leading){
                     // Filtrage et Tri

@@ -29,7 +29,7 @@ struct HistoryView: View {
                             }
                             
                             VStack(alignment: .leading,spacing: 5) {
-                                Text(entry.stock == 0 ? "Details Updated" : entry.action)
+                                Text(entry.stock == 0 ? "Changes Applied to Medication" : entry.action)
                                     .foregroundColor(entry.stock == 0 ? .blue : (entry.stock > 0 ? .green : .red) )
                                     .font(.headline)
                                     .fontWeight(.bold)
@@ -47,9 +47,9 @@ struct HistoryView: View {
                                 HStack {
                                     Text("Stock:")
                                         .fontWeight(.bold)
-                                    Text("\(String(entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
+                                    Text("\(entry.stock == 0 ? "Stock unchanged " : (entry.stock > 0 ? "Added +" : "Removed "))\(abs(entry.stock))")
                                         .font(.subheadline)
-                                        .foregroundStyle(entry.stock > 0 ? .green : .red)
+                                        .foregroundStyle(entry.stock == 0 ? .blue :(entry.stock > 0 ? .green : .red))
                                         .accessibilityLabel("Stock: \(String(entry.stock))")
                                 }
                             }
