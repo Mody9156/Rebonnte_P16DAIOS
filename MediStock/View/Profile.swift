@@ -27,23 +27,28 @@ struct Profile: View {
                         .padding()
                     
                     ZStack{
-                        RoundedRectangle(cornerRadius: 12)
-                            .frame(height: 110)
-                            .foregroundStyle(.gray)
-                        
+                       
                         HStack {
-                            Image(systemName: "person.crop.circle.fill")
+                            Image("stethoscope")
                                 .resizable()
-                                .frame(width: 101, height: 101)
-                                .foregroundStyle(.black)
+                                    .scaledToFit()
+                                    .frame(width: 101, height: 101)
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
                             
                             Spacer()
                             
                             VStack(alignment: .leading){
-                                Text("Email Adresse: ")
-                                    .foregroundColor(Color("RectangleDarkMode"))
+                                Text("Email Address:")
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(.bottom, 5)
+                                
                                 Text(identity)
-                                    .foregroundColor(Color("RectangleDarkMode"))
+                                    .foregroundColor(Color("TextColor"))
+                                    .fontWeight(.bold)
                             }
                             Spacer()
                         }
@@ -54,6 +59,7 @@ struct Profile: View {
                         Label(toggleDarkMode ? "Light Mode" : "Dark Mode", systemImage: toggleDarkMode ? "sun.max.fill" : "moon.fill")
                             .foregroundColor(.gray)
                     }
+                    .tint(.accentColor)
                     .padding()
                 }
                 
