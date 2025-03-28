@@ -13,8 +13,7 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-         
-            
+          
             VStack {
                 List {
                     ForEach(filterMedicines, id: \.id) { medicine in

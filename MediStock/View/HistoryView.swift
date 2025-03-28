@@ -13,7 +13,7 @@ struct HistoryView: View {
 
     var body: some View {
         ZStack {
-         
+           
             ScrollView {
                 VStack (alignment:.leading){
                     ForEach(filterMedicine) { entry in
@@ -29,8 +29,8 @@ struct HistoryView: View {
                             }
                             
                             VStack(alignment: .leading,spacing: 5) {
-                                Text(entry.action)
-                                    .foregroundColor(Color("TextColor"))
+                                Text(entry.stock == 0 ? "Details Updated" : entry.action)
+                                    .foregroundColor(entry.stock == 0 ? .blue : (entry.stock > 0 ? .green : .red) )
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .accessibilityLabel("Action: \(entry.action)")
@@ -40,7 +40,7 @@ struct HistoryView: View {
                                 TextForShowDetails(value: entry.timestamp.formatted(),text: "Date:")
                                     .accessibilityLabel("Date: \(entry.timestamp.formatted())")
                                 
-                                TextForShowDetails(value: entry.details,text: "Details")
+                                TextForShowDetails(value:entry.stock == 0 ? "Details Updated" : entry.details,text: "Details")
                                     .accessibilityLabel("Details: \(entry.details)")
                                 
                                 

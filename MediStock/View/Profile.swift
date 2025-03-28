@@ -17,7 +17,7 @@ struct Profile: View {
     
     var body: some View {
         ZStack {
-            
+       
             VStack (alignment: .center){
                 VStack{
                     Text("Account")

@@ -23,6 +23,7 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
+           
             ScrollView {
                 ZStack {
                     ScrollView {
@@ -195,10 +196,10 @@ extension MedicineDetailView {
                                         HStack {
                                             Image(systemName: "circle.fill")
                                                 .foregroundColor(.blue)
-                                            Text(entry.action)
+                                            Text(entry.stock == 0 ? "Details Updated" : entry.action)
                                                 .font(.headline)
                                                 .fontWeight(.bold)
-                                                .foregroundColor(.green)
+                                                .foregroundColor(entry.stock == 0 ? .blue :(entry.stock > 0 ? .green : .red))
                                         }
                                         
                                         TextForShowDetails(value: entry.user, text: "User:")
