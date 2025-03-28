@@ -1,5 +1,7 @@
 <p align="center"> <img src="Screenshots/icone.png" img width="100" > </p>
-# MediStock - Gestion des Stocks de Médicaments ![Statut du workflow](https://github.com/Mody9156/Rebonnte_P16DAIOS/actions/workflows/ci.yml/badge.svg)
+# MediStock - Gestion des Stocks de Médicaments
+
+![Statut du workflow](https://github.com/Mody9156/Rebonnte_P16DAIOS/actions/workflows/ci.yml/badge.svg)
 
 ## Description
 MediStock est une application iOS développée pour l'entreprise **Rebonnté**, un grand groupe pharmaceutique européen. L'objectif est de moderniser et d'internaliser la gestion des stocks de médicaments en remplaçant les solutions existantes par une application iOS plus flexible et adaptée aux besoins du pôle **Supply Chain**.
@@ -41,25 +43,29 @@ Le projet a été initié par l'équipe IT & Development, composée principaleme
 ## Screenshots
 | <p align="center"><img src="Screenshots/Home.png" width="200" alt="home"></p> | <p align="center"><img src="Screenshots/Aisle.png" width="200" alt="details"></p> | <p align="center"><img src="Screenshots/AllMedicines.png" width="200" alt="AddUsers"></p> | <p align="center"><img src="Screenshots/Profile.png" width="200" alt="AddUsers"></p> |
 |:--:|:--:|:--:|:--:|
-| **Home** | **Aisle** | **All Medicines** | **Profile** |
 
-![Home Screen](path_to_screenshot_home)  
-*Affichage de la liste des médicaments en stock.*
+### **Home**
+- **Vue d'accueil** présentant une liste des médicaments en stock, avec des options pour consulter ou modifier chaque médicament.
 
-![Details Screen](path_to_screenshot_details)  
-*Affichage des détails d’un médicament, y compris son stock et son historique.*
+### **Aisle**
+- **Vue des rayons**, permettant de gérer et de suivre les médicaments présents dans chaque rayon.
 
-![Stock Management](path_to_screenshot_stock)  
-*Ajout et modification du stock d’un médicament.*
+### **All Medicines**
+- **Vue de tous les médicaments**, avec la possibilité de filtrer, rechercher et gérer le stock de chaque médicament.
+
+### **Profile**
+- **Vue de profil utilisateur**, permettant de consulter les informations personnelles et d'effectuer des réglages liés au compte.
+
 
 ## Demo Video
-[Inclure un lien vers une vidéo de démonstration, si disponible]
+
 <div align="center">
 <img src="Screenshots/test.gif" alt="" width="500">
 </div>
 <div align="center">
 <img src="Screenshots/test_2.gif" alt="" width="500">
 </div>
+
 ## Technologies Utilisées
 - **Langage** : Swift
 - **Framework** : SwiftUI
