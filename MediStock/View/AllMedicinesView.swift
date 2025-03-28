@@ -66,6 +66,7 @@ struct AllMedicinesView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .navigationTitle("All Medicines")
                 .sheet(isPresented: $activeView, onDismiss: {
                     Task{
                         try await medicineStockViewModel.observeAisles()
@@ -78,7 +79,7 @@ struct AllMedicinesView: View {
                 .accessibilityHint("Displays a list of aisles containing medicines.")
                 
             }
-            .navigationTitle("All Medicines")
+            
         }
         .onAppear {
             Task{
