@@ -53,6 +53,7 @@ struct MedicineListView: View {
                         .frame(height: 60)
                         .foregroundStyle(.blue)
                         .opacity(0.9)
+                        .shadow(radius: 10)
                     
                     Image(systemName: "plus")
                         .resizable()
