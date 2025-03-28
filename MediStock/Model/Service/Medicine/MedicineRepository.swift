@@ -117,7 +117,6 @@ class MedicineRepository: ObservableObject, MedicineManagementProtocol {
         let medicine = medicineService.updateStock(medicine, by: amount, user: user)
         
         for medicines in medicine {
-            let newStock = medicines.stock  + amount
             try? await addHistory(action: "\(amount > 0 ? "Increased" : "Decreased") stock of \(medicines.name) by \(amount)", user: self.identity, medicineId: medicines.id ?? "Unknow", details: "Stock changed from \(medicines.stock) to \( medicines.stock - stock )", stock: stock)
         }
     }

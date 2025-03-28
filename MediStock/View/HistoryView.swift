@@ -62,7 +62,7 @@ struct HistoryView: View {
                         }
                     }
                 }
-                .padding(.top)
+                .padding()
             }
         }
     }
