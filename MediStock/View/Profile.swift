@@ -52,7 +52,7 @@ struct Profile: View {
                     
                     Toggle(isOn: $toggleDarkMode) {
                         Label(toggleDarkMode ? "Light Mode" : "Dark Mode", systemImage: toggleDarkMode ? "sun.max.fill" : "moon.fill")
-                            .foregroundColor(toggleDarkMode ? .yellow : .gray)
+                            .foregroundColor(.gray)
                     }
                     .padding()
                 }
