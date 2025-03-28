@@ -13,7 +13,7 @@ struct HistoryView: View {
 
     var body: some View {
         ZStack {
-            
+         
             ScrollView {
                 VStack (alignment:.leading){
                     ForEach(filterMedicine) { entry in

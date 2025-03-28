@@ -34,7 +34,7 @@ struct Profile: View {
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
-                                .frame(width: 101,height: 101)
+                                .frame(width: 101, height: 101)
                                 .foregroundStyle(.black)
                             
                             Spacer()
@@ -50,13 +50,10 @@ struct Profile: View {
                         .padding()
                     }
                     
-                    Toggle(toggleDarkMode ? "Light Mode":"Dark Mode", isOn: Binding(
-                        get: { toggleDarkMode },
-                        set:{newValue in
-                            toggleDarkMode = newValue
-                            hasUserChosenMode = true
-                        }
-                    ))
+                    Toggle(isOn: $toggleDarkMode) {
+                        Label(toggleDarkMode ? "Light Mode" : "Dark Mode", systemImage: toggleDarkMode ? "sun.max.fill" : "moon.fill")
+                            .foregroundColor(toggleDarkMode ? .yellow : .gray)
+                    }
                     .padding()
                 }
                 
@@ -79,11 +76,11 @@ struct Profile: View {
             }
             .padding()
         }
-//        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : nil)
+        //        .preferredColorScheme(hasUserChosenMode ? (toggleDarkMode ? .dark : .light) : nil)
         .animation(.easeInOut, value: toggleDarkMode)
     }
-   
-
+    
+    
 }
 
 #Preview{

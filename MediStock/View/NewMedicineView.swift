@@ -14,7 +14,6 @@ struct NewMedicineView: View {
     @State var search : String = ""
     
     var body: some View {
-        
         VStack {
             if nameInAisle.isEmpty {
                 Text("Aucun médicament sélectionné. Veuillez choisir une allée.")
@@ -45,14 +44,14 @@ struct NewMedicineView: View {
     }
 }
 
-//#Preview {
-//    struct NEwPreviewWrapper : View {
-//        @State var nameInAisle : String = ""
-//        @State var nameInAisleMEdicine : String = ""
-//        var body: some View {
-//            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
-//        }
-//    }
-//    return NEwPreviewWrapper()
-//
-//}
+#Preview {
+    struct NEwPreviewWrapper : View {
+        @State var nameInAisle : String = ""
+        @State var nameInAisleMEdicine : String = ""
+        var body: some View {
+            NewMedicineView(nameInAisle: $nameInAisle, nameInAisleMEdicine: $nameInAisleMEdicine)
+        }
+    }
+    return NEwPreviewWrapper()
+
+}

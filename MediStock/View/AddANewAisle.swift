@@ -19,6 +19,7 @@ struct AddANewAisle: View {
     var body: some View {
         NavigationStack {
             ZStack {
+               
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Aisle")

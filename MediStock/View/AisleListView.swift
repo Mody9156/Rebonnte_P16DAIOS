@@ -12,8 +12,7 @@ struct AisleListView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                Color("BackgroundColor_LD")
-                    .ignoresSafeArea()
+                
                 VStack {
                     List {
                         ForEach(aisles, id: \.self) { aisle in

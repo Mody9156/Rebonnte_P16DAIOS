@@ -21,7 +21,6 @@ struct AddMedicineView: View {
     var body: some View {
         NavigationStack {
                     VStack{
-                     
                         VStack(alignment: .leading) {
                             
                             Text("Stock")
@@ -111,8 +110,6 @@ struct AddMedicineView: View {
                     }
                     .navigationTitle("New Medicine")
                     .padding()
-                
-            
         }
     }
 }

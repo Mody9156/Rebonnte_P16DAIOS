@@ -23,7 +23,6 @@ struct MedicineDetailView: View {
     
     var body: some View {
         ZStack {
-            
             ScrollView {
                 ZStack {
                     ScrollView {

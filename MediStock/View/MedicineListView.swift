@@ -13,8 +13,7 @@ struct MedicineListView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color("BackgroundColor_LD")
-                .ignoresSafeArea()
+         
             
             VStack {
                 List {

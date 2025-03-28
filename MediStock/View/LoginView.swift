@@ -9,7 +9,6 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-       
             VStack(alignment: .leading) {
                 
                 Text("Sign In")

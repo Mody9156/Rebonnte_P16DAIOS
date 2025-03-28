@@ -16,12 +16,6 @@ struct NewAislesView: View {
         let medicine = medicineStockViewModel.medicineListed?.medicaments.keys.sorted() ?? []
         return search.isEmpty  ? medicine : medicine.filter{$0.localizedStandardContains(search)}
     }
-    
-//    var grouped : [String:[String]] {
-//        Dictionary(grouping: filter) { element in
-//            String(element.prefix(1))
-//        }
-//    }
 
     var body: some View {
         VStack {
@@ -40,14 +34,14 @@ struct NewAislesView: View {
    
   
 }
-//
-//#Preview {
-//    struct NEwPreviewWrapper : View {
-//        @State var nameInAisle : String = ""
-//        @State var nameInAisleMEdicine : String = ""
-//        var body: some View {
-//            NewAislesView(nameInAisle: $nameInAisle)
-//        }
-//    }
-//    return NEwPreviewWrapper()
-//}
+
+#Preview {
+    struct NEwPreviewWrapper : View {
+        @State var nameInAisle : String = ""
+        @State var nameInAisleMEdicine : String = ""
+        var body: some View {
+            NewAislesView(nameInAisle: $nameInAisle)
+        }
+    }
+    return NEwPreviewWrapper()
+}
