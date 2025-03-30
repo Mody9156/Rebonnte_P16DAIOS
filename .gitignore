@@ -18,7 +18,7 @@ Rebonnte_P16DAIOS/Screenshots/
 # Ignorer tous les fichiers .plist sauf ceux spécifiquement mentionnés
 *.plist
 ./MediStock/Model/GoogleService-Info.plist
-!pack-Info.plist
+./pack-Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
