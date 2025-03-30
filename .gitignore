@@ -11,9 +11,7 @@ build/
 DerivedData/
 
 # Ignorer le dossier Screenshots
-Rebonnte_P16DAIOS/Screenshots/
-
-
+Screenshots/
 
 # Ignorer tous les fichiers .plist sauf ceux spécifiquement mentionnés
 *.plist
