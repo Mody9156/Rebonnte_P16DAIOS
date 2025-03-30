@@ -11,11 +11,13 @@ build/
 DerivedData/
 
 # Ignorer le dossier Screenshots
-./Screenshots/
+Rebonnte_P16DAIOS/Screenshots/
+
+
 
 # Ignorer tous les fichiers .plist sauf ceux spécifiquement mentionnés
-*GoogleService-Info.plist
-*pack-Info.plist
+Rebonnte_P16DAIOS/GoogleService-Info.plist
+./pack-Info.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*
