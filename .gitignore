@@ -16,19 +16,8 @@ Rebonnte_P16DAIOS/Screenshots/
 
 
 # Ignorer tous les fichiers .plist sauf ceux spécifiquement mentionnés
-<<<<<<< HEAD
-<<<<<<< HEAD
-*.plist
-!GoogleService-Info.plist
-!pack-Info.plist
-=======
-*GoogleService-Info.plist
-*pack-Info.plist
->>>>>>> Designe
-=======
 Rebonnte_P16DAIOS/GoogleService-Info.plist
 ./pack-Info.plist
->>>>>>> Designe
 
 ### Xcode Patch ###
 *.xcodeproj/*
