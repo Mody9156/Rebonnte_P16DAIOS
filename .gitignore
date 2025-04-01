@@ -14,7 +14,7 @@ DerivedData/
 ./MediStock/Model/GoogleService-Info.plist
 ./pack-Info.plist
 *.plist
- ./MediStock/Model/GoogleService-Info.plist
+ /MediStock/Model/GoogleService-Info.plist
  ./pack-Info.plist
 
 
@@ -41,4 +41,3 @@ Package.resolved
 
 # Fichiers système macOS
 .DS_Store
-pack-Info.plist
