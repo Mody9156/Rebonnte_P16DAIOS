@@ -140,12 +140,6 @@ class MedicineStockViewModel: ObservableObject {
         }
     }
     
-    //    func triByName(){
-    //        medicineRepository.trieByName { medicines in
-    //            self.medicines = medicines
-    //        }
-    //    }
-    
     @MainActor
     func trieElements(option:FilterOption) async throws {
         
