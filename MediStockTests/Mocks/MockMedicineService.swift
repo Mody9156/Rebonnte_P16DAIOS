@@ -138,7 +138,7 @@ class MockMedicineService: MedicineProtocol{
     }
     
     func addHistory(action: String, user: String, medicineId: String, details: String, stock: Int) async throws{
-        if showErrors &&  action.isEmpty{
+        if showErrors{
             throw MedicineError.addHistoryThorughMedicineFailed
         }else{
             let newEntry = pack.HistoryEntry(

@@ -247,11 +247,11 @@ extension MedicineDetailView {
     }
 }
 
-#Preview {
-    let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
-    let sampleViewModel = MedicineStockViewModel()
-    MedicineDetailView(medicine: Medicine(name: "Paracetamol", stock: 44, aisle: "Anti-inflammatory"), medicineStockViewModel: MedicineStockViewModel()).environmentObject(SessionStore())
-}
+//#Preview {
+//    let sampleMedicine = Medicine(name: "Sample", stock: 10, aisle: "Aisle 1")
+//    let sampleViewModel = MedicineStockViewModel()
+//    MedicineDetailView(medicine: Medicine(name: "Paracetamol", stock: 44, aisle: "Anti-inflammatory"), medicineStockViewModel: MedicineStockViewModel()).environmentObject(SessionStore())
+//}
 
 
 struct TextForShowDetails:View {
