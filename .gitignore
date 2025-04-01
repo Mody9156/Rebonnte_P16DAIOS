@@ -14,6 +14,8 @@ DerivedData/
 ./MediStock/Model/GoogleService-Info.plist
 ./pack-Info.plist
 *.plist
+ ./MediStock/Model/GoogleService-Info.plist
+ ./pack-Info.plist
 
 
 ### Xcode Patch ###
