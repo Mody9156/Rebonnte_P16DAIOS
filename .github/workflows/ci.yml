@@ -10,8 +10,8 @@ jobs:
     timeout-minutes: 8
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_16.2.app
@@ -19,12 +19,38 @@ jobs:
       - name: Xcode version
         run: /usr/bin/xcodebuild -version
 
-      - name: Build and Test
+      - name: Clean project
         run: |
-          xcodebuild clean build test \
+          xcodebuild clean \
+          -project MediStock.xcodeproj \
+          -scheme "pack" -quiet
+
+      - name: Build project
+        run: |
+          xcodebuild build \
           -project MediStock.xcodeproj \
           -scheme "pack" \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.2" \
-          ONLY_ACTIVE_ARCH=YES
+          ONLY_ACTIVE_ARCH=YES -quiet | xcpretty
+
+      - name: Run Tests
+        run: |
+          xcodebuild test \
+          -project MediStock.xcodeproj \
+          -scheme "pack" \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.2" \
+          ONLY_ACTIVE_ARCH=YES -quiet \
+          -resultBundlePath TestResults.xcresult
+
+      - name: Archive test results
+        if: always()
+        run: tar -czf test-results.tar.gz TestResults.xcresult
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results.tar.gz
