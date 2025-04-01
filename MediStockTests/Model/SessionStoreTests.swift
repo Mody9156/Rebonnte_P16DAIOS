@@ -128,6 +128,23 @@ class SessionStoreTests: XCTestCase {
         //Then
         XCTAssertNotNil(sessionStore.error)
     }
+<<<<<<< HEAD
+=======
+   
+    func testWhenListeninToAuthChangesFail() async throws {
+        //When
+        mockAuthService.mockUser = nil
+        //When
+        mockAuthService.addDidChangeListenerHandle { user in
+            //Then
+            XCTAssertNil(user)
+        }
+        //When
+        sessionStore.listen()
+        //Then
+        XCTAssertNotNil(sessionStore.error)
+    }
+>>>>>>> f339df8 (adding new func test)
     
     func testDisableNoThrowsErrors() async throws {
         //Given
