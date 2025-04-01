@@ -94,7 +94,6 @@
 		4F3BBAC82D82E8BA0077F9DD /* AddANewAisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddANewAisle.swift; sourceTree = "<group>"; };
 		4F3FF56C2D67AB1B003EB6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F8A5E562D958AE500DA95C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4F8A5E772D95A5EA00DA95C2 /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pack-Info.plist"; sourceTree = "<group>"; };
 		4F8F687F2D8ACCE000486DBF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F8F68812D8ACE6400486DBF /* Source.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		4F8F68832D8AD20300486DBF /* MedicationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsData.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		4FDBDFCC2D9448BA001F9C6E /* MedicineRepositoryTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRepositoryTestss.swift; sourceTree = "<group>"; };
 		4FDBDFCE2D944AE5001F9C6E /* MedicineStockViewModelTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTestss.swift; sourceTree = "<group>"; };
 		4FDBDFD02D944BA3001F9C6E /* AuthViewModelTestss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTestss.swift; sourceTree = "<group>"; };
+		4FDED40D2D9BED7C00683EF7 /* pack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pack-Info.plist"; sourceTree = "<group>"; };
 		4FE4CD4F2D93FB3C008E17AA /* MedicineStockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineStockViewModelTests.swift; sourceTree = "<group>"; };
 		4FE4CD512D93FE39008E17AA /* MedicineManagementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineManagementProtocol.swift; sourceTree = "<group>"; };
 		4FE4CD532D94002A008E17AA /* MockMedicineServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMedicineServiceViewModel.swift; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 		53E0D88A2C06084700DE1134 = {
 			isa = PBXGroup;
 			children = (
-				4F8A5E772D95A5EA00DA95C2 /* pack-Info.plist */,
+				4FDED40D2D9BED7C00683EF7 /* pack-Info.plist */,
 				53E0D8952C06084700DE1134 /* MediStock */,
 				23FD05682D440E490089DB5C /* MediStockTests */,
 				237E0A6E2D2FFE4500EEC056 /* Frameworks */,
