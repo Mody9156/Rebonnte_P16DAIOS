@@ -367,7 +367,7 @@
 //        let medicineRepository = MedicineRepository(medicineService:mockMedicineService)
 //        
 //        //When
-//        let history =  try await medicineRepository
+//        _ =  try await medicineRepository
 //            .addHistory(action: "update", user: "Josh", medicineId: "aisle", details: "update +21", stock: 120)
 //        
 //        //Then
@@ -383,7 +383,7 @@
 //        
 //        //When/Then
 //        await #expect(throws: MedicineError.addHistoryThorughMedicineFailed) {
-//            try await medicineRepository.addHistory(action: "", user: "", medicineId: "", details: "", stock: -1)
+//            try await medicineRepository.addHistory(action: "", user: "", medicineId: "", details: "", stock: 0)
 //        }
 //       
 //    }
