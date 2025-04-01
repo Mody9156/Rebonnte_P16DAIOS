@@ -32,7 +32,6 @@ class AuthViewModel : ObservableObject {
             UserDefaults.standard.set(user.email, forKey: "email")
             messageError = ""
             isAuthenticated = true
-            print("greate job ")
             onLoginSucceed?()
         }catch{
             messageError = "Erreur lors de la connexion de l'utilisateur"
